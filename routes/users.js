@@ -2,15 +2,17 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 
+const queryGenerator = require("../db/query-helpers");
+
 module.exports = (db) => {
+  const { getUserByEmail, createNewUser } = queryGenerator(db);
+
   router.post("/login", async (req, res) => {
 
     try {
       const { email, password } = req.body;
-      const values = [email];
-      const queryString = `SELECT * FROM users WHERE email = $1;`
 
-      const data = await db.query(queryString, values);
+      const data = await getUserByEmail(email);
       const user = data.rows[0];
 
       if (!user) return res.status(400).json({ error: "email doesn't exist" });
@@ -32,25 +34,16 @@ module.exports = (db) => {
   router.post("/register", async (req, res) => {
 
     try {
-      const { email, password, username, firstName, lastName } = req.body;
-      const values1 = [email];
-      const queryString1 = `SELECT * FROM users WHERE email = $1;`;
-      const data1 = await db.query(queryString1, values1);
+      const { email, password } = req.body;
 
-      const user = data1.rows[0];
+      const user = await getUserByEmail(email)[0];
 
       if (user) return res.status(400).json({ error: "email is already registered" });
 
       const hashedPassword = await bcrypt.hash(password, 12);
+      const userInfo = { ...req.body, password: hashedPassword};
 
-      const values2 = [email, hashedPassword, username, firstName, lastName];
-      const queryString2 = `
-        INSERT INTO users (email, password, username, first_name, last_name)
-        VALUES ($1, $2, $3, $4, $5)
-        RETURNING *;
-        `;
-
-      const user = await db.query(queryString2, values2);
+      const user = await createNewUser(userInfo);
 
       req.session.user_id = user.id;
       res.json(user);
