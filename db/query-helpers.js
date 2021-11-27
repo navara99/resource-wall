@@ -7,8 +7,8 @@ const queryGenerator = (db) => {
   };
 
   const createNewUser = async (userInfo) => {
-    const { email, hashedPassword, username, firstName, lastName } = userInfo;
-    const values = [email, hashedPassword, username, firstName, lastName];
+    const { email, password, username, firstName, lastName } = userInfo;
+    const values = [email, password, username, firstName, lastName];
     const queryString = `
       INSERT INTO users (email, password, username, first_name, last_name)
       VALUES ($1, $2, $3, $4, $5)
@@ -17,9 +17,6 @@ const queryGenerator = (db) => {
 
     return await db.query(queryString, values);
   }
-
-
-
 
   return { getUserByEmail, createNewUser };
 }
