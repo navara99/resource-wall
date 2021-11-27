@@ -1,5 +1,8 @@
 ## To do list
 
+### edit page (stretch)
+- edit url, description, title, categories
+
 ### home page
 - display all the resources
 - users should be able to like any resource
