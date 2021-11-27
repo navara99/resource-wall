@@ -32,9 +32,8 @@ module.exports = (db) => {
   });
 
   router.post("/register", async (req, res) => {
-    console.log("TEST-35")
+    
     try {
-      console.log("TEST-37")
       const { email, password } = req.body;
 
       const user = await getUserByEmail(email)[0];
