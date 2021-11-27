@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 
 const queryGenerator = require("../db/query-helpers");
 
@@ -32,8 +32,9 @@ module.exports = (db) => {
   });
 
   router.post("/register", async (req, res) => {
-
+    console.log("TEST-35")
     try {
+      console.log("TEST-37")
       const { email, password } = req.body;
 
       const user = await getUserByEmail(email)[0];
@@ -41,9 +42,12 @@ module.exports = (db) => {
       if (user) return res.status(400).json({ error: "email is already registered" });
 
       const hashedPassword = await bcrypt.hash(password, 12);
-      const userInfo = { ...req.body, password: hashedPassword};
 
-      const newUser = await createNewUser(userInfo);
+      const userInfo = { ...req.body, password: hashedPassword };
+
+      const data = await createNewUser(userInfo);
+      const { rows: newUsers } = data;
+      const newUser = newUsers[0];
 
       req.session.user_id = newUser.id;
       res.json(newUser);
