@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS categories CASCADE;
+
+CREATE TABLE categories
+(
+  id SERIAL PRIMARY KEY NOT NULL,
+  type TEXT NOT NULL
+);
+
