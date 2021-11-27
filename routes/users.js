@@ -45,14 +45,18 @@ module.exports = (db) => {
       const queryString2 = `
         INSERT INTO users (email, password, username, first_name, last_name)
         VALUES ($1, $2, $3, $4, $5)
-        RETURNING *;`;
-      const data2 = await db.query(queryString2, values2);
+        RETURNING *;
+        `;
 
-     res.json(data2);
+      const user = await db.query(queryString2, values2);
+
+      req.session.user_id = user.id;
+      res.json(user);
 
     } catch (err) {
       res.status(500).json({ error: err.message });
-    }
+    };
+
   });
 
 
