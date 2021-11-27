@@ -53,7 +53,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.sendFile(__dirname + "/views/index.html");
 });
 
 app.listen(PORT, () => {
