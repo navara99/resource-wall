@@ -3,27 +3,29 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 
 module.exports = (db) => {
-  router.post("/login", (req, res) => {
-    const { email, password } = req.body;
-    const values = [email];
-    const queryString = `SELECT * FROM users WHERE email = $1;`
+  router.post("/login", async (req, res) => {
 
-    db.query(queryString, values)
-      .then((data) => {
-        const user = data.rows[0];
+    try {
+      const { email, password } = req.body;
+      const values = [email];
+      const queryString = `SELECT * FROM users WHERE email = $1;`
 
-        if (!user) return res.status(400).json({ error: "email doesn't exist" });
+      const data = await db.query(queryString, values);
+      const user = data.rows[0];
 
-        const { hashedPassword } = user;
-        const correctPassword = bcrypt.compare(password, hashedPassword);
+      if (!user) return res.status(400).json({ error: "email doesn't exist" });
 
-        if (!correctPassword) return res.status(400).json({ error: "email doesn't match with password" });
+      const { hashedPassword } = user;
+      const correctPassword = bcrypt.compare(password, hashedPassword);
 
-        res.json(user);
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
+      if (!correctPassword) return res.status(400).json({ error: "email doesn't match with password" });
+
+      req.session.user_id = user.id;
+      res.json(user);
+
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    };
 
   });
 
