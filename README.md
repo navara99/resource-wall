@@ -4,6 +4,7 @@
 - edit url, description, title, categories
 
 ### home page
+- oembed / thum.io
 - display all the resources
 - users should be able to like any resource
 - display screenshot/embed video/images uploaded by the user
@@ -17,6 +18,7 @@
 - email(unique), password (stretch: twice, included char and number, min length: 8), username(unique)
 
 ### detail page of a single resource
+- iframely (call the api everytimes an user open the page)
 - (stretch) owner can make resource public/private
 - users should be able to comment on any resource (just comment)
 - users should be able to rate any resource (rating, plus comment)
