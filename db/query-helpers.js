@@ -81,7 +81,21 @@ const queryGenerator = (db) => {
     return userInfo;
   }
 
-  return { createNewUser, getUserByValue, updatePasswordById, updateUser };
+  const addNewResource = async ({ user_id, title, description, url, is_private }) => {
+    const values = [user_id, title, description, url, "MEDIA_URL", false, 1 , is_private];
+
+    const queryString = `
+    INSERT INTO resources (user_id, title, description, url, media_url, is_video, category_id, is_private)
+    VALUES($1, $2, $3, $4, $5, $6, $7, $8)
+    RETURNING *;
+    `
+    const result = await db.query(queryString, values);
+    console.log("RETURNED RESULT", result);
+    const resourceInfo = getFirstRecord(result);
+    return resourceInfo;
+  }
+
+  return { createNewUser, getUserByValue, updatePasswordById, updateUser, addNewResource };
 }
 
 module.exports = queryGenerator;
