@@ -10,5 +10,8 @@
 // });
 
 $(document).ready(function(){
-  $('.sidenav').sidenav();
+  console.log($('select'));
+  $('select').formSelect();
 });
+
+
