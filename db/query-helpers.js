@@ -1,5 +1,3 @@
-const { query } = require("express");
-
 const defaultProfilePicUrl = 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
 
 const queryGenerator = (db) => {
@@ -31,7 +29,7 @@ const queryGenerator = (db) => {
   }
 
   const updateUser = async (newUserInfo) => {
-    const {  firstName, lastName, username, email, bio, userId } = newUserInfo;
+    const { firstName, lastName, username, email, bio, userId } = newUserInfo;
     const values = [firstName, lastName, username, email, bio, userId];
 
     const queryString = `
