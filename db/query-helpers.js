@@ -15,22 +15,23 @@ const queryGenerator = (db) => {
   //   return await db.query(queryString, value);
   // };
 
-  const getUserByValue2 = async (columnName, value) => {
-    const values = [value];
-    const queryString = `SELECT * FROM users WHERE ${columnName} = $1;`;
-    const result = await db.query(queryString, values);
-    const userInfo = getFirstRecord(result);
-    assignProfilePic(userInfo);
-    return userInfo;
-  };
+  // const getUserByValue2 = async (columnName, value) => {
+  //   const values = [value];
+  //   const queryString = `SELECT * FROM users WHERE ${columnName} = $1;`;
+  //   const result = await db.query(queryString, values);
+  //   const userInfo = getFirstRecord(result);
+  //   assignProfilePic(userInfo);
+  //   return userInfo;
+  // };
 
 
   const getUserByValue = async (columnName, value) => {
     const values = [value];
     const queryString = `SELECT * FROM users WHERE ${columnName} = $1;`;
-    // const result = ;
-    // if (!result[0].image_url) result[0].image_url = defaultProfilePicUrl;
-    return await db.query(queryString, values);
+    const result = await db.query(queryString, values);
+    const userInfo = getFirstRecord(result);
+    if (userInfo) assignProfilePic(userInfo);
+    return userInfo;
   };
 
   const createNewUser = async (userInfo) => {
@@ -41,8 +42,10 @@ const queryGenerator = (db) => {
       VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
       `;
-
-    return await db.query(queryString, values);
+    const result = await db.query(queryString, values);
+    const newUserInfo = getFirstRecord(result);
+    assignProfilePic(newUserInfo);
+    return newUserInfo;
   }
 
   const updateUser = async (newUserInfo) => {
@@ -60,7 +63,10 @@ const queryGenerator = (db) => {
     RETURNING *;
     `;
 
-    return await db.query(queryString, values);
+    const result = await db.query(queryString, values);
+    const userInfo = getFirstRecord(result);
+    assignProfilePic(userInfo);
+    return userInfo;
   }
 
   const updatePasswordById = async (id, password) => {
@@ -75,7 +81,7 @@ const queryGenerator = (db) => {
     return userInfo;
   }
 
-  return { createNewUser, getUserByValue, updatePasswordById, getUserByValue2, updateUser };
+  return { createNewUser, getUserByValue, updatePasswordById, updateUser };
 }
 
 module.exports = queryGenerator;

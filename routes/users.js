@@ -6,15 +6,15 @@ const salt = 12;
 const queryGenerator = require("../db/query-helpers");
 
 module.exports = (db) => {
-  const { createNewUser, getUserByValue, getUserByValue2, updatePasswordById, updateUser } = queryGenerator(db);
+  const { createNewUser, getUserByValue, updatePasswordById, updateUser } = queryGenerator(db);
 
   router.post("/login", async (req, res) => {
 
     try {
       const { email, password } = req.body;
 
-      const data = await getUserByValue('email', email);
-      const user = data.rows[0];
+      const user = await getUserByValue('email', email);
+      // const c = data.rows[0];
 
       if (!user) return res.status(400).json({ error: "email doesn't exist" });
 
@@ -39,16 +39,18 @@ module.exports = (db) => {
       const { username, email } = req.body;
 
       const userWithSameUsername = await getUserByValue("username", username);
-      if (userWithSameUsername.rows[0]) return res.status(400).json({ error: "This username is already taken." });
+      const { id: idWithSameUsername} = userWithSameUsername;
+      if (userWithSameUsername && idWithSameUsername !== userId) return res.status(400).json({ error: "This username is already taken." });
 
       const userWithSameEmail = await getUserByValue("email", email);
-      if (userWithSameEmail.rows[0]) return res.status(400).json({ error: "This email is already taken." });
+      const { id: idWithSameEmail} = userWithSameEmail;
+      if (userWithSameEmail && idWithSameEmail !== userId) return res.status(400).json({ error: "This email is already taken." });
 
       const newUserInfo = { userId, ...req.body };
 
       const updatedInfo = await updateUser(newUserInfo);
 
-      res.json(updatedInfo.rows[0]);
+      res.json(updatedInfo);
 
     } catch (err) {
       res.status(500).json({ error: err.message });
@@ -61,7 +63,7 @@ module.exports = (db) => {
       const { user_id } = req.session;
       const { current_password, new_password, confirm_new_password } = req.body;
 
-      const user = await getUserByValue2('id', user_id);
+      const user = await getUserByValue('id', user_id);
 
       const { password: hashedPassword } = user;
 
@@ -93,19 +95,21 @@ module.exports = (db) => {
   router.post("/register", async (req, res) => {
 
     try {
-      const { email, password } = req.body;
+      const { email, password, username } = req.body;
 
-      const user = await getUserByValue('email', email)[0];
+      const userWithSameUsername = await getUserByValue("username", username);
 
-      if (user) return res.status(400).json({ error: "email is already registered" });
+      if (userWithSameUsername) return res.status(400).json({ error: "This username is already taken." });
+
+      const userWithSameEmail = await getUserByValue("email", email);
+
+      if (userWithSameEmail) return res.status(400).json({ error: "This email is already taken." });
 
       const hashedPassword = await bcrypt.hash(password, salt);
 
       const userInfo = { ...req.body, password: hashedPassword };
 
-      const data = await createNewUser(userInfo);
-      const { rows: newUsers } = data;
-      const newUser = newUsers[0];
+      const newUser = await createNewUser(userInfo);
 
       req.session.user_id = newUser.id;
       res.json(newUser);
