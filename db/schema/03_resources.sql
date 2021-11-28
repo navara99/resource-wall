@@ -10,7 +10,7 @@ CREATE TABLE resources
   media_url TEXT NOT NULL,
   is_video BOOLEAN NOT NULL,
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
-  is_public BOOLEAN NOT NULL,
+  is_private BOOLEAN NOT NULL,
   timestamp DATE DEFAULT NOW()
 );
 
