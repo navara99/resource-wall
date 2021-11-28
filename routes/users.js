@@ -1,18 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+const salt = 12;
 
 const queryGenerator = require("../db/query-helpers");
 
 module.exports = (db) => {
-  const { getUserByEmail, createNewUser } = queryGenerator(db);
+  const { createNewUser, getUserByValue } = queryGenerator(db);
 
   router.post("/login", async (req, res) => {
 
     try {
       const { email, password } = req.body;
 
-      const data = await getUserByEmail(email);
+      const data = await getUserByValue('email', email);
       const user = data.rows[0];
 
       if (!user) return res.status(400).json({ error: "email doesn't exist" });
@@ -31,6 +32,14 @@ module.exports = (db) => {
 
   });
 
+  router.post("/update-profile", async (req, res) => {
+
+  });
+
+  router.post("/change-password", async (req, res) => {
+
+  });
+
   router.post("/logout", (req, res) => {
     req.session = null;
     res.redirect("/");
@@ -41,11 +50,11 @@ module.exports = (db) => {
     try {
       const { email, password } = req.body;
 
-      const user = await getUserByEmail(email)[0];
+      const user = await getUserByValue('email', email)[0];
 
       if (user) return res.status(400).json({ error: "email is already registered" });
 
-      const hashedPassword = await bcrypt.hash(password, 12);
+      const hashedPassword = await bcrypt.hash(password, salt);
 
       const userInfo = { ...req.body, password: hashedPassword };
 

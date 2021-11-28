@@ -29,25 +29,23 @@
   <body>
     <header>
       <nav>
-        <div class="nav-wrapper navbar-fixed">
-          <a href="#!" class="brand-logo"
-            ><i class="material-icons">cloud</i>Logo</a
-          >
-          <ul class="tabs tabs-transparent">
-            <li class="tab"><a href="#test1">Home</a></li>
-            <li class="tab">
-              <a class="active" href="#test2"><i class="fas fa-heart"></i></a>
-            </li>
-          </ul>
-          <form>
-            <div class="input-field">
-              <input id="search" type="search" required />
-              <label class="label-icon" for="search"
-                ><i class="material-icons">search</i></label
-              >
-            </div>
-          </form>
-          <ul class="right hide-on-med-and-down"></ul>
+        <div class="nav-wrapper" style="display: flex; flex-wrap: no-wrap; align-items: center; justify-content: space-between; max-width: 100vw;">
+            <div>LOGO LOGO LOG</div>
+            <ul>
+              <li><a href=""><i class="fas fa-home"></i></a></li>
+              <li><a href=""><i class="fas fa-heart"></i></a></li>
+            </ul>
+
+
+              <div class="input-field" style="flex: 1">
+                <input id="search" type="search" required>
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
+              <ul>
+                <li><a href="">My profile</a></li>
+                <li><a href="">Logout</a></li>
+              </ul>
         </div>
       </nav>
     </header>
@@ -153,5 +151,74 @@
         LOGOUT
       </button>
     </form>
+
+    <div>
+      <form class="col s12" action="/api/users/update-profile" method="POST">
+        <div class="row">
+          <div class="input-field col s6">
+            <input
+              id="update_first_name"
+              type="text"
+              class="validate"
+              name="firstName"
+              required
+            />
+            <label for="update_first_name">First Name</label>
+          </div>
+          <div class="input-field col s6">
+            <input
+              id="update_last_name"
+              type="text"
+              class="validate"
+              name="lastName"
+              required
+            />
+            <label for="update_last_name">Last Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input
+              id="update_username"
+              type="text"
+              class="validate"
+              name="username"
+              required
+            />
+            <label for="update_username">Username</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input
+              id="update_email"
+              type="email"
+              class="validate"
+              name="email"
+              required
+            />
+            <label for="update_email">Email</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea
+              id="bio"
+              class="materialize-textarea"
+              data-length="120"
+            ></textarea>
+            <label for="bio">Bio</label>
+          </div>
+        </div>
+        <button
+          class="btn waves-effect waves-light"
+          type="submit"
+          name="action"
+        >
+          Submit
+          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        </button>
+      </form>
+    </div>
   </body>
 </html>

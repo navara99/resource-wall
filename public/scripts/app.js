@@ -1,10 +1,14 @@
 // Client facing scripts here
 
 
-$(document).ready(() => {
+// $(document).ready(() => {
 
-  const updateDOM = () => {
-    let $header = $("header");
-    updateHeader($header);
-  }
+//   const updateDOM = () => {
+//     let $header = $("header");
+//     updateHeader($header);
+//   }
+// });
+
+$(document).ready(function(){
+  $('.sidenav').sidenav();
 });
