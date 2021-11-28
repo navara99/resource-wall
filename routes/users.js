@@ -6,7 +6,7 @@ const salt = 12;
 const queryGenerator = require("../db/query-helpers");
 
 module.exports = (db) => {
-  const { createNewUser, getUserByValue, updateUser } = queryGenerator(db);
+  const { createNewUser, getUserByValue, getUserByValue2, updatePasswordById, updateUser } = queryGenerator(db);
 
   router.post("/login", async (req, res) => {
 
@@ -55,7 +55,33 @@ module.exports = (db) => {
     }
   });
 
-  router.post("/change-password", async (req, res) => {
+  router.post("/password", async (req, res) => {
+
+    try {
+      const { user_id } = req.session;
+      const { current_password, new_password, confirm_new_password } = req.body;
+
+      const user = await getUserByValue2('id', user_id);
+
+      const { password: hashedPassword } = user;
+
+      const correctPassword = await bcrypt.compare(current_password, hashedPassword);
+
+      if (!correctPassword) return res.status(400).json({ error: "current password is incorrect." });
+
+      const newPasswordIsConfirmed = new_password === confirm_new_password;
+
+      if (!newPasswordIsConfirmed) return res.status(400).json({ error: "different inputs for new password." });
+
+      const newHashedPassword = await bcrypt.hash(new_password, salt);
+
+      const newUserInfo = await updatePasswordById(user_id, newHashedPassword);
+
+      res.json(newUserInfo);
+
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    };
 
   });
 
