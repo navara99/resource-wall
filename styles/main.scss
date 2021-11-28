@@ -1,7 +1,6 @@
 body {
   overflow-x: hidden;
-  color: black;
-  min-height: 100vh;
+  color: #111111;
 }
 
 .logo {
@@ -44,4 +43,63 @@ img.profile {
 
 .hidden {
   display: none;
+}
+
+.resource-deails-container {
+  display: flex;
+  border-radius: 32px;
+  box-shadow: 0 0 3px #ccc;
+  align-items: flex-start;
+}
+
+.details {
+  width: 50%;
+  margin: 2em;
+}
+
+.media {
+  margin: 1.5em;
+  width: 50%;
+  overflow: hidden;
+  border-radius: 16px;
+  position: relative;
+}
+
+.media * {
+  max-width: 100%;
+  color: #111111;
+}
+
+.media a {
+  position: absolute;
+  left: 1em;
+  top: 1em;
+  border-radius: 200px;
+  background-color: white;
+  padding: 0.6em;
+  opacity: 0.9;
+  color: #282828;
+}
+
+.details a {
+  text-decoration: underline;
+  color: #111111;
+}
+
+.icon {
+  font-size: 2.3em;
+  padding: 0.2em;
+}
+
+#liked {
+  float: right;
+}
+
+.details h3 {
+  margin: 0.4em 0 0.1em;
+}
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
 }
