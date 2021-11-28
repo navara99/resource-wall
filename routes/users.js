@@ -6,7 +6,7 @@ const salt = 12;
 const queryGenerator = require("../db/query-helpers");
 
 module.exports = (db) => {
-  const { createNewUser, getUserByValue } = queryGenerator(db);
+  const { createNewUser, getUserByValue, updateUser } = queryGenerator(db);
 
   router.post("/login", async (req, res) => {
 
@@ -32,8 +32,27 @@ module.exports = (db) => {
 
   });
 
-  router.post("/update-profile", async (req, res) => {
+  router.post("/edit", async (req, res) => {
 
+    try {
+      const userId = req.session.user_id;
+      const { username, email } = req.body;
+
+      const userWithSameUsername = await getUserByValue("username", username);
+      if (userWithSameUsername.rows[0]) return res.status(400).json({ error: "This username is already taken." });
+
+      const userWithSameEmail = await getUserByValue("email", email);
+      if (userWithSameEmail.rows[0]) return res.status(400).json({ error: "This email is already taken." });
+
+      const newUserInfo = { userId, ...req.body };
+
+      const updatedInfo = await updateUser(newUserInfo);
+
+      res.json(updatedInfo.rows[0]);
+
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
   });
 
   router.post("/change-password", async (req, res) => {
