@@ -139,7 +139,7 @@
       </button>
     </form>
 
-    <form class="col s12 container" action="/api/users/login" method="POST">
+    <form class="col s12 container" action="/api/users/edit" method="POST">
       <div class="row">
         <div class="input-field col s12">
           <input
@@ -178,7 +178,7 @@
     </form>
 
     <div>
-      <form class="col s12 container" action="/api/users/update-profile" method="POST">
+      <form class="col s12 container" action="/api/users/edit" method="POST">
         <div class="row">
           <div class="input-field col s6">
             <input
@@ -231,6 +231,7 @@
               id="bio"
               class="materialize-textarea"
               data-length="120"
+              name="bio"
             ></textarea>
             <label for="bio">Bio</label>
           </div>
