@@ -1,103 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Home Page</title>
 
-<head>
-  <title>Home Page</title>
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/header.js"></script>
+  </head>
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/header.js"></script>
-</head>
-
-<body>
-  <header>
-    <nav>
-      <div class="nav-wrapper navbar-fixed">
-        <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Logo</a>
-        <ul class="tabs tabs-transparent">
-          <li class="tab"><a href="#test1">Home</a></li>
-          <li class="tab"><a class="active" href="#test2"><i class="fas fa-heart"></i></a></li>
-        </ul>
-        <form>
-          <div class="input-field">
-            <input id="search" type="search" required>
-            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-          </div>
-        </form>
-        <ul class="right hide-on-med-and-down">
-        </ul>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-wrapper navbar-fixed">
+          <a href="#!" class="brand-logo"
+            ><i class="material-icons">cloud</i>Logo</a
+          >
+          <ul class="tabs tabs-transparent">
+            <li class="tab"><a href="#test1">Home</a></li>
+            <li class="tab">
+              <a class="active" href="#test2"><i class="fas fa-heart"></i></a>
+            </li>
+          </ul>
+          <form>
+            <div class="input-field">
+              <input id="search" type="search" required />
+              <label class="label-icon" for="search"
+                ><i class="material-icons">search</i></label
+              >
+            </div>
+          </form>
+          <ul class="right hide-on-med-and-down"></ul>
+        </div>
+      </nav>
+    </header>
+    <form class="col s12" action="/api/users/register" method="POST">
+      <div class="row">
+        <div class="input-field col s6">
+          <input
+            id="first_name"
+            type="text"
+            class="validate"
+            name="firstName"
+            required
+          />
+          <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input
+            id="last_name"
+            type="text"
+            class="validate"
+            name="lastName"
+            required
+          />
+          <label for="last_name">Last Name</label>
+        </div>
       </div>
-    </nav>
-  </header>
-  <form class="col s12" action="/api/users/register" method="POST">
-    <div class="row">
-      <div class="input-field col s6">
-        <input id="first_name" type="text" class="validate" name="firstName" required>
-        <label for="first_name">First Name</label>
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            id="username"
+            type="text"
+            class="validate"
+            name="username"
+            required
+          />
+          <label for="username">Username</label>
+        </div>
       </div>
-      <div class="input-field col s6">
-        <input id="last_name" type="text" class="validate" name="lastName" required>
-        <label for="last_name">Last Name</label>
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            id="register-password"
+            type="password"
+            class="validate"
+            name="password"
+            required
+          />
+          <label for="register-password">Password</label>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input id="username" type="text" class="validate" name="username" required>
-        <label for="username">Username</label>
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            id="register-email"
+            type="email"
+            class="validate"
+            name="email"
+            required
+          />
+          <label for="register-email">Email</label>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input id="register-password" type="password" class="validate" name="password" required>
-        <label for="register-password">Password</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input id="register-email" type="email" class="validate" name="email" required>
-        <label for="register-email">Email</label>
-      </div>
-    </div>
-    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-      <i class="fa fa-paper-plane" aria-hidden="true"></i>
-    </button>
-  </form>
+      <button class="btn waves-effect waves-light" type="submit" name="action">
+        Submit
+        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+      </button>
+    </form>
 
-  <form class="col s12" action="/api/users/login" method="POST">
-    <div class="row">
-      <div class="input-field col s12">
-        <input id="login-email" type="email" class="validate" name="email" required>
-        <label for="login-email">Email</label>
+    <form class="col s12" action="/api/users/login" method="POST">
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            id="login-email"
+            type="email"
+            class="validate"
+            name="email"
+            required
+          />
+          <label for="login-email">Email</label>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input id="login-password" type="password" class="validate" name="password" required>
-        <label for="logon-password">Password</label>
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            id="login-password"
+            type="password"
+            class="validate"
+            name="password"
+            required
+          />
+          <label for="login-password">Password</label>
+        </div>
       </div>
-    </div>
 
-    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-      <i class="fa fa-paper-plane" aria-hidden="true"></i>
-    </button>
-  </form>
+      <button class="btn waves-effect waves-light" type="submit" name="action">
+        Submit
+        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+      </button>
+    </form>
 
-  <form class="col s12" action="/api/users/logout" method="POST">
-    <button class="btn waves-effect waves-light" type="submit" name="action">
-      LOGOUT
-    </button>
-  </form>
-
-
-</body>
-
+    <form class="col s12" action="/api/users/logout" method="POST">
+      <button class="btn waves-effect waves-light" type="submit" name="action">
+        LOGOUT
+      </button>
+    </form>
+  </body>
 </html>
