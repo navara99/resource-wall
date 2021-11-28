@@ -1,9 +1,19 @@
+const defaultProfilePicUrl = 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
+
 const queryGenerator = (db) => {
 
-  const getUserByEmail = async (email) => {
-    const value = [email];
-    const queryString = `SELECT * FROM users WHERE email = $1;`
-    return await db.query(queryString, value);
+  // const getUserByEmail = async (email) => {
+  //   const value = [email];
+  //   const queryString = `SELECT * FROM users WHERE email = $1;`
+  //   return await db.query(queryString, value);
+  // };
+
+  const getUserByValue = async (columnName, value) => {
+    const values = [columnName, value];
+    const queryString = `SELECT * FROM users WHERE $1 = $2;`
+    const result = await db.query(queryString, values);
+    if (!result.image_url) result.image_url = defaultProfilePicUrl;
+    return result;
   };
 
   const createNewUser = async (userInfo) => {
@@ -18,7 +28,7 @@ const queryGenerator = (db) => {
     return await db.query(queryString, values);
   }
 
-  return { getUserByEmail, createNewUser };
+  return { createNewUser, getUserByValue };
 }
 
 module.exports = queryGenerator;
