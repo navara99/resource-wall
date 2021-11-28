@@ -17,8 +17,8 @@ module.exports = (db) => {
 
       if (!user) return res.status(400).json({ error: "email doesn't exist" });
 
-      const { hashedPassword } = user;
-      const correctPassword = bcrypt.compare(password, hashedPassword);
+      const { password: hashedPassword } = user;
+      const correctPassword = await bcrypt.compare(password, hashedPassword);
 
       if (!correctPassword) return res.status(400).json({ error: "email doesn't match with password" });
 
@@ -31,8 +31,13 @@ module.exports = (db) => {
 
   });
 
+  router.post("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/");
+  });
+
   router.post("/register", async (req, res) => {
-    
+
     try {
       const { email, password } = req.body;
 
