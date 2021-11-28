@@ -81,16 +81,58 @@
         <img src="https://blog.hubspot.com/hubfs/Google%20Drive%20Integration/How%20to%20Start%20Coding%20The%20Ultimate%20Guide%20for%20Beginner%20Programmers.jpeg" />
       </div>
       <div class="details">
-        <div class="title-container">
-          <i class="far fa-heart icon liked"></i>
+        <div>
+          <div  style="float: right">
+            <i class="far fa-heart icon liked"></i>
+          </div>
           <h3>Umami before they sold out poutine chillwave</h3>
         </div>
-
         <a href="wwww.google.com" class="paragraph">wwww.google.com</a>
-          <p>Enamel pin skateboard shaman forage fashion axe vinyl. Crucifix raclette air plant coloring book four dollar toast fixie narwhal, lyft brooklyn 3 wolf moon franzen. Literally raclette meh butcher post-ironic kickstarter, slow-carb helvetica kinfolk bespoke live-edge four dollar toast meditation keytar kitsch. Blog sustainable health goth locavore, pinterest kombucha cred pabst four dollar toast. Bicycle rights paleo tilde post-ironic. Forage cornhole salvia, venmo affogato coloring book irony health goth normcore poke aesthetic knausgaard neutra.</p>
+        <h5>Rate it <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></h5>
+        <h6><i class="fas fa-star show-rating"></i> Avg Rating: 4.50 (Based on 5 ratings)</h6>
+        <p>Enamel pin skateboard shaman forage fashion axe vinyl. Crucifix raclette air plant coloring book four dollar toast fixie narwhal, lyft brooklyn 3 wolf moon franzen. Literally raclette meh butcher post-ironic kickstarter, slow-carb helvetica kinfolk bespoke live-edge four dollar toast meditation keytar kitsch. Blog sustainable health goth locavore, pinterest kombucha cred pabst four dollar toast. Bicycle rights paleo tilde post-ironic. Forage cornhole salvia, venmo affogato coloring book irony health goth normcore poke aesthetic knausgaard neutra.</p>
 
-          <i class="fas fa-comment icon"></i>
-        </div>
+        <h5><i class="fas fa-comment-alt"></i> Comments</h5>
+
+  <ul class="collection comments">
+    <li class="collection-item avatar new-comment-container">
+      <i class="material-icons circle">folder</i>
+      <div class="input-field comment">
+        <textarea id="comment" class="materialize-textarea"></textarea>
+        <label class="label-icon" for="comment"></label>
+        <i class="fas fa-chevron-circle-right send-comment"></i>
+      </div>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle">folder</i>
+      <span class="title">@username</span>
+      <p>Hashtag ennui taxidermy af PBR&B austin squid. Listicle viral ugh,
+      </p>
+      <p class="secondary-content">timestamp</p>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle red">play_arrow</i>
+      <span class="title">@username</span>
+      <p>vinyl man bun twee four loko woke. Distillery synth gochujang chicharrones YOLO, scenester banjo. Normcore semiotics cliche bespoke
+      </p>
+      <p class="secondary-content">timestamp</p>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle green">insert_chart</i>
+      <span class="title">@username</span>
+      <p>comment
+      </p>
+      <p class="secondary-content">timestamp</p>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle red">play_arrow</i>
+      <span class="title">@username</span>
+      <p>blue bottle hoodie chia. activated charcoal vape butcher blog squid seitan
+      </p>
+      <p class="secondary-content">timestamp</p>
+    </li>
+  </ul>
+      </div>
     </div>
     <form class="col s12 container" action="/api/users/register" method="POST">
       <div class="row">

@@ -4,7 +4,7 @@ body {
 }
 
 .logo {
- margin: 0 0.7em;
+  margin: 0 0.7em;
 }
 
 .search-bar {
@@ -91,6 +91,11 @@ img.profile {
   padding: 0.2em;
 }
 
+.send-comment {
+  font-size: 1.5em;
+  padding-bottom: 0.5em;
+}
+
 #liked {
   float: right;
 }
@@ -99,7 +104,43 @@ img.profile {
   margin: 0.4em 0 0.1em;
 }
 
-.title-container {
+ul.comments {
+  border: none;
+}
+
+ul.collection .collection-item.avatar .secondary-content {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+}
+
+ul.collection li.collection-item.avatar {
+  min-height: 0;
+  border: none;
+  padding-left: 59px;
+}
+
+ul.collection .collection-item.avatar:not(.circle-clipper)>.circle {
+  left: 2px;
+}
+
+.show-rating {
+  color: #FFB840;
+}
+
+.comment {
   display: flex;
-  justify-content: space-between;
+  align-items: flex-end;
+}
+
+li textarea.materialize-textarea {
+  min-height: 0;
+  padding: 0;
+  height: auto;
+  margin: 0;
+}
+
+.collection .collection-item.new-comment-container {
+  padding: 0;
+  margin: 0;
 }
