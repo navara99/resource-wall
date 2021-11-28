@@ -227,12 +227,8 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <textarea
-              id="bio"
-              class="materialize-textarea"
-              data-length="120"
-            ></textarea>
-            <label for="bio">Bio</label>
+            <textarea id="textarea2" class="materialize-textarea" data-length="120"></textarea>
+            <label for="textarea2">Textarea</label>
           </div>
         </div>
         <button
@@ -244,6 +240,55 @@
           <i class="fa fa-paper-plane" aria-hidden="true"></i>
         </button>
       </form>
+
+      <div>
+        <form class="col s12" action="/api/users/change-password" method="POST">
+          <div class="row">
+            <div class="input-field col s12">
+              <input
+                id="current-password"
+                type="password"
+                class="validate"
+                name="current_password"
+                required
+              />
+              <label for="current-password">Current Password</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <input
+                id="new-password"
+                type="password"
+                class="validate"
+                name="new_password"
+                required
+              />
+              <label for="new-password">New Password</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input
+                id="confirm-new-password"
+                type="password"
+                class="validate"
+                name="confirm_new_password"
+                required
+              />
+              <label for="confirm-new-password">Confirm new password</label>
+            </div>
+          </div>
+          <button
+            class="btn waves-effect waves-light"
+            type="submit"
+            name="action"
+          >
+            Submit
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          </button>
+        </form>
     </div>
   </body>
 </html>
