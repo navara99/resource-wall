@@ -52,6 +52,8 @@ img.profile {
 div.hidden.resource-details-container.container {
   display: none;
   margin-top: 3em;
+  display: flex;
+  align-items: flex-start;
 }
 
 div.hidden {
@@ -68,10 +70,6 @@ form {
   margin: inherit;
 }
 
-div.resource-details-container {
-  display: flex;
-  align-items: flex-start;
-}
 
 .margin-container {
   margin: 3em;
