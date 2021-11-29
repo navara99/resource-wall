@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const validUrl = require("valid-url");
+const axios = require("axios");
 const queryGenerator = require("../db/query-helpers");
 
 module.exports = (db) => {
@@ -10,13 +12,33 @@ module.exports = (db) => {
   });
 
   router.post("/", async (req, res) => {
+    const user_id = req.session.user_id;
+    let { is_private, category, url } = req.body;
+    let media_url;
+    let is_video;
+
+    if (!validUrl.isUri(url)) return res.status(400).json({ error: "This url is not valid." });
+
     try {
-      const user_id = req.session.user_id;
-      let { is_private, category } = req.body;
-      
+      const encodedURI = encodeURIComponent(url);
+      const videoData = await axios.get(`https://www.youtube.com/oembed?url=${encodedURI}&format=json`);
+      const source = videoData.data.html
+        .split(" ")
+        .filter((attribute) => attribute.includes("src"))[0]
+        .slice(4)
+        .replace(`"`, "");
+      media_url = source;
+      is_video = true;
+    } catch (e) {
+      console.log(e)
+      media_url = `//image.thum.io/get/${url}`;
+      is_video = false;
+    }
+
+    try {
       is_private = is_private ? true : false;
       const category_id = await getIdFromCategory(category);
-      const newResourceInput = { ...req.body, is_private, user_id, category_id }
+      const newResourceInput = { ...req.body, is_private, user_id, category_id, is_video, media_url }
       const newResource = await addNewResource(newResourceInput);
       res.json(newResource);
     } catch (err) {
