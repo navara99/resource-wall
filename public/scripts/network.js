@@ -43,3 +43,9 @@ const submitResource = (data) => {
     data,
   });
 };
+
+const getAllResources = () => {
+  return $.ajax({
+    url: "/api/resources"
+  });
+};
