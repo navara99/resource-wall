@@ -605,11 +605,16 @@
           </div>
         </div>
       </div>
-      <div id="edit-profile" class="container hidden">
+      <div id="update-profile-page" class="container hidden">
         <div class="margin-container">
           <div class="content-container">
             <h3 class="title">Update Profile</h3>
-            <form class="col s12" action="/api/users/edit" method="POST">
+            <form
+              id="update-profile-form"
+              class="col s12"
+              action="/api/users/edit"
+              method="POST"
+            >
               <div class="row">
                 <div class="input-field col s6">
                   <input
@@ -845,7 +850,15 @@
     <script type="text/javascript" src="/scripts/network.js"></script>
     <script type="text/javascript" src="/scripts/view.js"></script>
     <script type="text/javascript" src="/scripts/components/header.js"></script>
+    <script
+      type="text/javascript"
+      src="/scripts/components/change-password.js"
+    ></script>
     <script type="text/javascript" src="/scripts/components/login.js"></script>
+    <script
+      type="text/javascript"
+      src="/scripts/components/update-profile.js"
+    ></script>
     <script
       type="text/javascript"
       src="/scripts/components/register.js"

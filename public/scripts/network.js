@@ -20,7 +20,6 @@ const logout = () => {
 };
 
 const register = (data) => {
-  console.log(data);
   return $.ajax({
     method: "POST",
     url: "api/users/register",

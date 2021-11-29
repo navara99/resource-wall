@@ -2,13 +2,19 @@ $(() => {
   console.log($("select"));
   $("select").formSelect();
 
-  updateUserInfo()
+  updateUserInfo();
+  eventListeners();
+  updateView("resources");
+});
+
+const eventListeners = () => {
   headerButtonsEventListener();
   loginEventListener();
   registerEventListener();
   newResourceEventListener();
-  updateView("resources");
-});
+  changePasswordEventListener();
+  updateProfileEventListener();
+};
 
 const updateUserInfo = async (userInfo) => {
   if (!userInfo) userInfo = await getMyDetails();
@@ -20,7 +26,7 @@ const updateView = (nextView, userInfo) => {
   const $resources = $("#resources");
   const $registerPage = $("#register-page");
   const $loginPage = $("#login-page");
-  const $editProfile = $("#edit-profile");
+  const $updateProfilePage = $("#update-profile-page");
   const $changePasswordPage = $("#change-password-page");
   const $newResourcePage = $("#new-resource-page");
   const $resourceDetails = $("#resource-details");
@@ -30,7 +36,7 @@ const updateView = (nextView, userInfo) => {
   $resources.hide();
   $registerPage.hide();
   $loginPage.hide();
-  $editProfile.hide();
+  $updateProfilePage.hide();
   $changePasswordPage.hide();
   $resourceDetails.hide();
   $errorPage.hide();
@@ -40,7 +46,7 @@ const updateView = (nextView, userInfo) => {
       $resources.show();
       break;
     case "updateProfile":
-      $editProfile.show();
+      $updateProfilePage.show();
       break;
     case "register":
       $registerPage.show();
