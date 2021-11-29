@@ -5,7 +5,7 @@ $(() => {
   $("select").formSelect();
 
   headerButtonsOnClick();
-  updateView('resources');
+  updateView("resources");
 });
 
 const updateView = (nextView) => {
@@ -16,7 +16,9 @@ const updateView = (nextView) => {
   const $loginForm = $("#login-form");
   const $editProfile = $("#edit-profile");
   const $changePassword = $("#change-password");
+  const $newResourceForm = $("#new-resource-form");
 
+  $newResourceForm.hide();
   $resources.hide();
   $registerForm.hide();
   $loginForm.hide();
@@ -35,6 +37,9 @@ const updateView = (nextView) => {
       break;
     case "login":
       $loginForm.show();
+      break;
+    case "newResource":
+      $newResourceForm.show();
       break;
   }
 };

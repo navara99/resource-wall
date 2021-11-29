@@ -1,11 +1,3 @@
-// Client facing scripts here
-
-$(() => {
-
-
-
-});
-
 const updateHeader = async () => {
   $userButtons = $("#user-buttons");
   $noUserButtons = $("#no-user-buttons");
@@ -31,6 +23,16 @@ const headerButtonsOnClick = () => {
   const $loginButton = $("#login-button");
   const $registerButton = $("#register-button");
   const $likedResourcesButton = $("#liked-resources-button");
+  const $createResourceButton = $("#create-resource-button");
+  const $floatingCreateResourceButton = $("#floating-create-resource-button");
+
+  $floatingCreateResourceButton.on("click", () => {
+    updateView("newResource");
+  });
+
+  $createResourceButton.on("click", () => {
+    updateView("newResource");
+  });
 
   $likedResourcesButton.on("click", () => {
     updateView("resources");
