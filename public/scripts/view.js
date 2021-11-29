@@ -2,10 +2,10 @@ $(() => {
   console.log($("select"));
   $("select").formSelect();
 
-  updateUserInfo().
-    then(() => {
-      updateHeader();
-    });
+  updateUserInfo()
+  // .then(() => {
+  //     updateHeader();
+  //   });
   headerButtonsEventListener();
   loginEventListener();
   registerEventListener();
@@ -17,9 +17,8 @@ let currentUserInfo;
 
 const updateUserInfo = async (userInfo) => {
   if (!userInfo) currentUserInfo = await getMyDetails();
-  console.log(currentUserInfo);
   if (userInfo) currentUserInfo = userInfo;
-  return;
+  updateHeader(currentUserInfo);
 };
 
 const updateView = (nextView) => {

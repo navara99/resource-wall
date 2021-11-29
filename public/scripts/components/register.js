@@ -11,7 +11,7 @@ const registerEventListener = () => {
       const userInfo = await register(data);
 
       updateUserInfo(userInfo);
-      updateHeader();
+      // updateHeader();
       updateView("resources");
 
       return $registerForm.trigger("reset");

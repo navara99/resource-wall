@@ -1,4 +1,4 @@
-const updateHeader = () => {
+const updateHeader = (userInfo) => {
   const $userButtons = $("#user-buttons");
   const $noUserButtons = $("#no-user-buttons");
   const $floatingCreateResourceButton = $("#floating-create-resource-button");
@@ -7,7 +7,7 @@ const updateHeader = () => {
   $noUserButtons.hide();
   $floatingCreateResourceButton.hide();
 
-  const { id, image_url } = currentUserInfo;
+  const { id, image_url } = userInfo;
 
   if (!id) return $noUserButtons.show();
 
@@ -31,7 +31,6 @@ const headerButtonsEventListener = () => {
   $logoutButton.on("click", () => {
     logout();
     updateUserInfo({});
-    updateHeader();
     updateView("resources");
   });
 
