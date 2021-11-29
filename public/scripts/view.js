@@ -3,9 +3,6 @@ $(() => {
   $("select").formSelect();
 
   updateUserInfo()
-  // .then(() => {
-  //     updateHeader();
-  //   });
   headerButtonsEventListener();
   loginEventListener();
   registerEventListener();
@@ -13,21 +10,18 @@ $(() => {
   updateView("resources");
 });
 
-let currentUserInfo;
-
 const updateUserInfo = async (userInfo) => {
-  if (!userInfo) currentUserInfo = await getMyDetails();
-  if (userInfo) currentUserInfo = userInfo;
-  updateHeader(currentUserInfo);
+  if (!userInfo) userInfo = await getMyDetails();
+  updateHeader(userInfo);
 };
 
-const updateView = (nextView) => {
-
+const updateView = (nextView, userInfo) => {
+  updateUserInfo(userInfo);
   const $resources = $("#resources");
   const $registerPage = $("#register-page");
   const $loginPage = $("#login-page");
   const $editProfile = $("#edit-profile");
-  const $changePassword = $("#change-password");
+  const $changePasswordPage = $("#change-password-page");
   const $newResourcePage = $("#new-resource-page");
   const $resourceDetails = $("#resource-details");
   const $errorPage = $("#error-page");
@@ -37,7 +31,7 @@ const updateView = (nextView) => {
   $registerPage.hide();
   $loginPage.hide();
   $editProfile.hide();
-  $changePassword.hide();
+  $changePasswordPage.hide();
   $resourceDetails.hide();
   $errorPage.hide();
 

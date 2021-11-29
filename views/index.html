@@ -693,11 +693,16 @@
         </div>
       </div>
 
-      <div id="change-password" class="container hidden">
+      <div id="change-password-page" class="container hidden">
         <div class="margin-container">
           <div class="content-container">
             <h3 class="title">Change Password</h3>
-            <form class="col s12" action="/api/users/password" method="POST">
+            <form
+              id="change-password-form"
+              class="col s12"
+              action="/api/users/password"
+              method="POST"
+            >
               <div class="row">
                 <div class="input-field col s12">
                   <input

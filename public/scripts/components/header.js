@@ -3,17 +3,19 @@ const updateHeader = (userInfo) => {
   const $noUserButtons = $("#no-user-buttons");
   const $floatingCreateResourceButton = $("#floating-create-resource-button");
 
-  $userButtons.hide();
-  $noUserButtons.hide();
-  $floatingCreateResourceButton.hide();
-
   const { id, image_url } = userInfo;
 
-  if (!id) return $noUserButtons.show();
+  if (!id) {
+    $userButtons.hide();
+    $floatingCreateResourceButton.hide();
+    return $noUserButtons.show();
+  }
 
   $profilePicture = $("#profile-picture");
 
   $profilePicture.attr("src", image_url);
+
+  $noUserButtons.hide();
   $userButtons.show();
   $floatingCreateResourceButton.show();
 };
@@ -30,8 +32,7 @@ const headerButtonsEventListener = () => {
 
   $logoutButton.on("click", () => {
     logout();
-    updateUserInfo({});
-    updateView("resources");
+    updateView("resources", {});
   });
 
   $floatingCreateResourceButton.on("click", () => {

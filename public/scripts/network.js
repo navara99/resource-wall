@@ -36,6 +36,14 @@ const updateProfile = (data) => {
   });
 };
 
+const changePassword = (data) => {
+  return $.ajax({
+    method: "POST",
+    url: "/api/users/password",
+    data,
+  });
+};
+
 const submitResource = (data) => {
   return $.ajax({
     method: "POST",
@@ -43,3 +51,5 @@ const submitResource = (data) => {
     data,
   });
 };
+
+

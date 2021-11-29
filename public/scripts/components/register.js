@@ -10,8 +10,7 @@ const registerEventListener = () => {
 
       const userInfo = await register(data);
 
-      updateUserInfo(userInfo);
-      // updateHeader();
+      // updateUserInfo(userInfo);
       updateView("resources");
 
       return $registerForm.trigger("reset");
