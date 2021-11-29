@@ -89,8 +89,8 @@ const queryGenerator = (db) => {
     return category_id;
   }
 
-  const addNewResource = async ({ user_id, title, description, url, is_private, category_id }) => {
-    const values = [user_id, title, description, url, "MEDIA_URL", false, category_id, is_private];
+  const addNewResource = async ({ user_id, title, description, url, is_private, category_id, media_url, is_video }) => {
+    const values = [user_id, title, description, url, media_url, is_video, category_id, is_private];
     const queryString = `
     INSERT INTO resources (user_id, title, description, url, media_url, is_video, category_id, is_private)
     VALUES($1, $2, $3, $4, $5, $6, $7, $8)
