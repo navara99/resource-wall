@@ -2,12 +2,18 @@ const loginEventListener = () => {
   const $loginForm = $("#login-form");
 
   $loginForm.submit(async (event) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
 
-    const data = $loginForm.serialize();
+      const data = $loginForm.serialize();
 
-    const userInfo = await login(data);
+      const userInfo = await login(data);
 
-    updateView("resources", userInfo);
+      $loginForm.trigger("reset");
+
+      updateView("resources", userInfo);
+    } catch (err) {
+      updateView(err);
+    }
   });
 };

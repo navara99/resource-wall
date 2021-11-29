@@ -15,12 +15,12 @@ module.exports = (db) => {
 
       const user = await getUserByValue('email', email);
 
-      if (!user) return res.json({ error: "email doesn't exist" });
+      if (!user) return res.status(400).json({ error: "email doesn't exist" });
 
       const { password: hashedPassword } = user;
       const correctPassword = await bcrypt.compare(password, hashedPassword);
 
-      if (!correctPassword) return res.json({ error: "email doesn't match with password" });
+      if (!correctPassword) return res.status(400).json({ error: "email doesn't match with password" });
 
       req.session.user_id = user.id;
       res.json(user);

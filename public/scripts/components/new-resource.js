@@ -6,8 +6,13 @@ const newResourceEventListener = () => {
 
     const data = $newResourceForm.serialize();
 
-    submitResource(data);
-
-    updateView("resourceDetails");
+    submitResource(data)
+      .then(() => {
+        $newResourceForm.trigger("reset");
+        updateView("resourceDetails");
+      })
+      .catch((err) => {
+        updateView(err);
+      });
   });
 };

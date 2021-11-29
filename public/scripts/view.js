@@ -19,6 +19,7 @@ const updateView = (nextView, userInfo) => {
   const $changePassword = $("#change-password");
   const $newResourcePage = $("#new-resource-page");
   const $resourceDetails = $("#resource-details");
+  const $errorPage = $("#error-page");
 
   $newResourcePage.hide();
   $resources.hide();
@@ -27,6 +28,7 @@ const updateView = (nextView, userInfo) => {
   $editProfile.hide();
   $changePassword.hide();
   $resourceDetails.hide();
+  $errorPage.hide();
 
   switch (nextView) {
     case "resources":
@@ -46,6 +48,9 @@ const updateView = (nextView, userInfo) => {
       break;
     case "resourceDetails":
       $resourceDetails.show();
+      break;
+    default:
+      $errorPage.show();
       break;
   }
 };
