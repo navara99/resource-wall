@@ -4,31 +4,12 @@ $(() => {
   console.log($("select"));
   $("select").formSelect();
 
+  headerButtonsOnClick();
   updateView('resources');
 });
 
-const updateUser = async () => {
-  $userButtons = $("#user-buttons");
-  $noUserButtons = $("#no-user-buttons");
-
-  $userButtons.hide();
-  $noUserButtons.hide();
-
-  const userInfo = await getMyDetails();
-  const { id, image_url } = userInfo;
-  console.log(id);
-
-  if (!id) return $noUserButtons.show();
-
-  $profilePicture = $("#profile-picture");
-
-  $profilePicture.attr('src', image_url);
-  $userButtons.show();
-
-};
-
 const updateView = (nextView) => {
-  updateUser();
+  updateHeader();
 
   const $resources = $("#resources");
   const $registerForm = $("#register-form");

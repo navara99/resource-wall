@@ -1,6 +1,5 @@
-const getMyDetails = async () => {
-  console.log("getMyDetails");
-  return await $.ajax({
+const getMyDetails = () => {
+  return $.ajax({
     url: "/api/users/me",
   });
 }
