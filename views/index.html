@@ -55,15 +55,7 @@
               </a>
             </li>
             <li>
-              <form class="col s12" action="/api/users/logout" method="POST">
-                <button
-                  class="btn waves-effect waves-light"
-                  type="submit"
-                  name="action"
-                >
-                  <a><i class="fas fa-sign-out-alt"></i></a>
-                </button>
-              </form>
+              <a id="logout-button"><i class="fas fa-sign-out-alt"></i></a>
             </li>
           </ul>
 
@@ -254,7 +246,12 @@
         <div class="margin-container">
           <div class="content-container">
             <h3 class="title">Login</h3>
-            <form id="login-form" class="col s12" action="/api/users/login" method="POST">
+            <form
+              id="login-form"
+              class="col s12"
+              action="/api/users/login"
+              method="POST"
+            >
               <div class="row">
                 <div class="input-field col s12">
                   <input
@@ -280,9 +277,7 @@
                 </div>
               </div>
 
-              <button
-                class="btn waves-effect waves-light"
-              >
+              <button class="btn waves-effect waves-light">
                 Submit
                 <i class="fa fa-paper-plane" aria-hidden="true"></i>
               </button>

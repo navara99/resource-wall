@@ -14,20 +14,19 @@ module.exports = (db) => {
       const { email, password } = req.body;
 
       const user = await getUserByValue('email', email);
-      // const c = data.rows[0];
 
-      if (!user) return res.send({ error: "email doesn't exist" });
+      if (!user) return res.json({ error: "email doesn't exist" });
 
       const { password: hashedPassword } = user;
       const correctPassword = await bcrypt.compare(password, hashedPassword);
 
-      if (!correctPassword) return res.send({ error: "email doesn't match with password" });
+      if (!correctPassword) return res.json({ error: "email doesn't match with password" });
 
       req.session.user_id = user.id;
-      res.send(user);
+      res.json(user);
 
     } catch (err) {
-      res.status(500).send({ error: err.message });
+      res.status(500).json({ error: err.message });
     };
 
   });
@@ -89,7 +88,7 @@ module.exports = (db) => {
 
   router.post("/logout", (req, res) => {
     req.session = null;
-    res.redirect("/");
+    res.json({});
   });
 
   router.post("/register", async (req, res) => {
@@ -123,10 +122,10 @@ module.exports = (db) => {
   router.get("/me", async (req, res) => {
     try {
       const { user_id } = req.session;
-      if (!user_id) return res.send({});
+      if (!user_id) return res.json({});
       const userInfo = await getUserByValue("id", user_id);
 
-      res.send(userInfo);
+      res.json(userInfo);
 
     } catch (err) {
       res.status(500).json({ error: err.message });

@@ -29,6 +29,12 @@ const headerButtonsEventListener = () => {
   const $likedResourcesButton = $("#liked-resources-button");
   const $createResourceButton = $("#create-resource-button");
   const $floatingCreateResourceButton = $("#floating-create-resource-button");
+  const $logoutButton = $("#logout-button");
+
+  $logoutButton.on("click", () => {
+    logout();
+    updateView("resources", {});
+  });
 
   $floatingCreateResourceButton.on("click", () => {
     updateView("newResource");

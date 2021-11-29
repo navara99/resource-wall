@@ -5,10 +5,16 @@ const getMyDetails = () => {
 };
 
 const login = (data) => {
-  console.log("function login: data -", data);
   return $.ajax({
     method: "POST",
     url: "api/users/login",
     data,
+  });
+};
+
+const logout = () => {
+  return $.ajax({
+    method: "POST",
+    url: "api/users/logout"
   });
 };
