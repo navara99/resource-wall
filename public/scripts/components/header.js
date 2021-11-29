@@ -1,6 +1,6 @@
 // Client facing scripts here
 
-$(document).ready(function () {
+$(() => {
 
   const $homeButton = $("#home-button");
   const $profileButton = $("#profile-button");
@@ -22,4 +22,5 @@ $(document).ready(function () {
   $registerButton.on("click", () => {
     updateView("register");
   });
+
 });

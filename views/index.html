@@ -20,8 +20,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <script type="text/javascript" src="/scripts/app.js"></script>
-    <script type="text/javascript" src="/scripts/header.js"></script>
   </head>
 
   <body>
@@ -41,38 +39,36 @@
               ><i class="fas fa-search"></i
             ></label>
           </div>
-          <ul id="logged-in" class="hidden">
+          <ul id="user-buttons" class="hidden">
             <li>
               <a><i class="fas fa-heart"></i></a>
             </li>
             <li id="profile-button">
               <a class="profile">
                 <div class="profile">
-                  <img
-                    src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
-                    alt=""
-                    class="circle profile"
-                  />
+                  <!-- <img
+                    src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" -->
+                  <img alt="" id="profile-picture" class="circle profile" />
                 </div>
               </a>
             </li>
             <li>
-              <a
-                ><i class="fas fa-sign-out-alt"></i>
+
                 <form class="col s12" action="/api/users/logout" method="POST">
                   <button
                     class="btn waves-effect waves-light"
                     type="submit"
                     name="action"
                   >
-                    LOGOUT
+                  <a
+                  ><i class="fas fa-sign-out-alt"></i></a
+                  >
                   </button>
-                </form></a
-              >
+                </form>
             </li>
           </ul>
 
-          <ul id="not-logged-in">
+          <ul id="no-user-buttons">
             <li id="login-button">
               <a>LOGIN</a>
             </li>
@@ -84,13 +80,10 @@
       </nav>
     </header>
 
-
     <main>
       <div id="resources" class="container">
-        <div class="margin-container">
-          RESOURCES PAGE
-          </div>
-        </div>
+        <div class="margin-container">RESOURCES PAGE</div>
+      </div>
       <div
         id="resource-details"
         class="resource-details-container container hidden"
@@ -499,5 +492,8 @@
         </div>
       </div>
     </main>
+    <script type="text/javascript" src="/scripts/network.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/components/header.js"></script>
   </body>
 </html>

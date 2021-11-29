@@ -9,22 +9,6 @@ const assignProfilePic = (userInfo) => {
 
 const queryGenerator = (db) => {
 
-  // const getUserByEmail = async (email) => {
-  //   const value = [email];
-  //   const queryString = `SELECT * FROM users WHERE email = $1;`
-  //   return await db.query(queryString, value);
-  // };
-
-  // const getUserByValue2 = async (columnName, value) => {
-  //   const values = [value];
-  //   const queryString = `SELECT * FROM users WHERE ${columnName} = $1;`;
-  //   const result = await db.query(queryString, values);
-  //   const userInfo = getFirstRecord(result);
-  //   assignProfilePic(userInfo);
-  //   return userInfo;
-  // };
-
-
   const getUserByValue = async (columnName, value) => {
     const values = [value];
     const queryString = `SELECT * FROM users WHERE ${columnName} = $1;`;

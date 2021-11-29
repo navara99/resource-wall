@@ -120,6 +120,19 @@ module.exports = (db) => {
 
   });
 
+  router.get("/me", async (req, res) => {
+    try {
+      const { user_id } = req.session;
+      if (!user_id) return res.send({});
+      const userInfo = await getUserByValue("id", user_id);
+
+      res.send(userInfo);
+
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+});
+
 
   return router;
 };
