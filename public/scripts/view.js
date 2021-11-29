@@ -7,6 +7,7 @@ $(() => {
   headerButtonsEventListener();
   loginEventListener();
   registerEventListener();
+  newResourceEventListener();
   updateView("resources");
 });
 
@@ -19,14 +20,16 @@ const updateView = (nextView, userInfo) => {
   const $loginPage = $("#login-page");
   const $editProfile = $("#edit-profile");
   const $changePassword = $("#change-password");
-  const $newResourceForm = $("#new-resource-form");
+  const $newResourcePage = $("#new-resource-page");
+  const $resourceDetails = $("#resource-details");
 
-  $newResourceForm.hide();
+  $newResourcePage.hide();
   $resources.hide();
   $registerPage.hide();
   $loginPage.hide();
   $editProfile.hide();
   $changePassword.hide();
+  $resourceDetails.hide();
 
   switch (nextView) {
     case "resources":
@@ -42,7 +45,10 @@ const updateView = (nextView, userInfo) => {
       $loginPage.show();
       break;
     case "newResource":
-      $newResourceForm.show();
+      $newResourcePage.show();
+      break;
+    case "resourceDetails":
+      $resourceDetails.show();
       break;
   }
 };
