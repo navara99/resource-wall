@@ -15,10 +15,9 @@ const updateHeader = async (userInfo) => {
 
   $profilePicture = $("#profile-picture");
 
-  $profilePicture.attr('src', image_url);
+  $profilePicture.attr("src", image_url);
   $userButtons.show();
   $floatingCreateResourceButton.show();
-
 };
 
 const headerButtonsEventListener = () => {
@@ -63,4 +62,4 @@ const headerButtonsEventListener = () => {
   $registerButton.on("click", () => {
     updateView("register");
   });
-}
+};

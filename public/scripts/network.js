@@ -15,7 +15,7 @@ const login = (data) => {
 const logout = () => {
   return $.ajax({
     method: "POST",
-    url: "api/users/logout"
+    url: "api/users/logout",
   });
 };
 
@@ -26,7 +26,7 @@ const register = (data) => {
     url: "api/users/register",
     data,
   });
-}
+};
 
 const updateProfile = (data) => {
   return $.ajax({
@@ -43,4 +43,3 @@ const submitResource = (data) => {
     data,
   });
 };
-

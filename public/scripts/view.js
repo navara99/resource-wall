@@ -1,5 +1,3 @@
-// Client facing scripts here
-
 $(() => {
   console.log($("select"));
   $("select").formSelect();
@@ -12,7 +10,6 @@ $(() => {
 });
 
 const updateView = (nextView, userInfo) => {
-
   updateHeader(userInfo);
 
   const $resources = $("#resources");
