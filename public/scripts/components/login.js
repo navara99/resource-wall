@@ -1,11 +1,11 @@
 const loginEventListener = () => {
 
-  const $loginForm2 = $("#login-form2");
+  const $loginForm = $("#login-form");
 
-  $loginForm2.submit( async (event) => {
+  $loginForm.submit( async (event) => {
     event.preventDefault();
 
-    const data = $loginForm2.serialize();
+    const data = $loginForm.serialize();
 
     const userInfo = await login(data);
 

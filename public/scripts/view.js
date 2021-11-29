@@ -15,7 +15,7 @@ const updateView = (nextView, userInfo) => {
 
   const $resources = $("#resources");
   const $registerForm = $("#register-form");
-  const $loginForm = $("#login-form");
+  const $loginPage = $("#login-page");
   const $editProfile = $("#edit-profile");
   const $changePassword = $("#change-password");
   const $newResourceForm = $("#new-resource-form");
@@ -23,7 +23,7 @@ const updateView = (nextView, userInfo) => {
   $newResourceForm.hide();
   $resources.hide();
   $registerForm.hide();
-  $loginForm.hide();
+  $loginPage.hide();
   $editProfile.hide();
   $changePassword.hide();
 
@@ -38,7 +38,7 @@ const updateView = (nextView, userInfo) => {
       $registerForm.show();
       break;
     case "login":
-      $loginForm.show();
+      $loginPage.show();
       break;
     case "newResource":
       $newResourceForm.show();
