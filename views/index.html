@@ -166,11 +166,11 @@
         </div>
       </div>
 
-      <div id="register-form" class="container hidden">
+      <div id="register-page" class="container hidden">
         <div class="margin-container">
           <div class="content-container">
             <h3 class="title">Register</h3>
-            <form class="col s12" action="/api/users/register" method="POST">
+            <form id="register-form" class="col s12">
               <div class="row">
                 <div class="input-field col s6">
                   <input
@@ -246,12 +246,7 @@
         <div class="margin-container">
           <div class="content-container">
             <h3 class="title">Login</h3>
-            <form
-              id="login-form"
-              class="col s12"
-              action="/api/users/login"
-              method="POST"
-            >
+            <form id="login-form" class="col s12">
               <div class="row">
                 <div class="input-field col s12">
                   <input
@@ -515,5 +510,6 @@
     <script type="text/javascript" src="/scripts/view.js"></script>
     <script type="text/javascript" src="/scripts/components/header.js"></script>
     <script type="text/javascript" src="/scripts/components/login.js"></script>
+    <script type="text/javascript" src="/scripts/components/register.js"></script>
   </body>
 </html>

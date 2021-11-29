@@ -6,6 +6,7 @@ $(() => {
 
   headerButtonsEventListener();
   loginEventListener();
+  registerEventListener();
   updateView("resources");
 });
 
@@ -14,7 +15,7 @@ const updateView = (nextView, userInfo) => {
   updateHeader(userInfo);
 
   const $resources = $("#resources");
-  const $registerForm = $("#register-form");
+  const $registerPage = $("#register-page");
   const $loginPage = $("#login-page");
   const $editProfile = $("#edit-profile");
   const $changePassword = $("#change-password");
@@ -22,7 +23,7 @@ const updateView = (nextView, userInfo) => {
 
   $newResourceForm.hide();
   $resources.hide();
-  $registerForm.hide();
+  $registerPage.hide();
   $loginPage.hide();
   $editProfile.hide();
   $changePassword.hide();
@@ -35,7 +36,7 @@ const updateView = (nextView, userInfo) => {
       $editProfile.show();
       break;
     case "register":
-      $registerForm.show();
+      $registerPage.show();
       break;
     case "login":
       $loginPage.show();
