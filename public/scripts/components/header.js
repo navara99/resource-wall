@@ -22,13 +22,18 @@ const updateHeader = (userInfo) => {
 
 const headerButtonsEventListener = () => {
   const $homeButton = $("#home-button");
-  const $profileButton = $("#profile-button");
+  const $updateProfileButton = $("#update-profile-button");
   const $loginButton = $("#login-button");
   const $registerButton = $("#register-button");
   const $likedResourcesButton = $("#liked-resources-button");
   const $createResourceButton = $("#create-resource-button");
   const $floatingCreateResourceButton = $("#floating-create-resource-button");
   const $logoutButton = $("#logout-button");
+  const $myResourcesButton = $("#my-resources-button");
+
+  $myResourcesButton.on("click", () => {
+    updateView("resources");
+  });
 
   $logoutButton.on("click", () => {
     logout();
@@ -51,7 +56,7 @@ const headerButtonsEventListener = () => {
     updateView("resources");
   });
 
-  $profileButton.on("click", () => {
+  $updateProfileButton.on("click", () => {
     updateView("updateProfile");
   });
 
