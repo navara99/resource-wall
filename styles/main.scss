@@ -41,6 +41,10 @@ img.profile {
   justify-content: space-between;
 }
 
+.unselected {
+  color: grey;
+}
+
 .hidden {
   display: none;
 }
@@ -94,6 +98,7 @@ img.profile {
 .send-comment {
   font-size: 1.5em;
   padding-bottom: 0.5em;
+  color: #51A45A
 }
 
 #liked {
