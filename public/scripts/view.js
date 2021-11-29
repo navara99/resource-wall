@@ -4,12 +4,14 @@ $(() => {
   console.log($("select"));
   $("select").formSelect();
 
-  headerButtonsOnClick();
+  headerButtonsEventListener();
+  loginEventListener();
   updateView("resources");
 });
 
-const updateView = (nextView) => {
-  updateHeader();
+const updateView = (nextView, userInfo) => {
+
+  updateHeader(userInfo);
 
   const $resources = $("#resources");
   const $registerForm = $("#register-form");
