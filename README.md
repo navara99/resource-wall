@@ -11,11 +11,12 @@
 - diplsay title, rating, number of likes, part of desciption, username
 
 ### login
-- email, password
+^ email, password
 - (stretch) verify email
 
 ### register
-- email(unique), password (stretch: twice, included char and number, min length: 8), username(unique)
+^ email(unique), password , username(unique)
+- (stretch: twice, included char and number, min length: 8)
 
 ### detail page of a single resource
 - iframely (call the api everytimes an user open the page)
@@ -24,10 +25,12 @@
 - users should be able to rate any resource (rating, plus comment)
 - users should be able to like any resource
 
+### liked resources
+- users should be able to view all their own and all liked resources on one page ("My resources")
+
 ### my page
 - (stretch) owner can change public/private for all resources
-- users should be able to view all their own and all liked resources on one page ("My resources")
-- users should be able to update their profile (username, email, password[twice], profile picture)
+^ users should be able to update their profile (username, email, password[twice], profile picture)
 
 ### new resource
 - save an external URL along with a title and description (optional: upload image)
