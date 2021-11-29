@@ -2,6 +2,10 @@ $(() => {
   console.log($("select"));
   $("select").formSelect();
 
+  updateUserInfo().
+    then(() => {
+      updateHeader();
+    });
   headerButtonsEventListener();
   loginEventListener();
   registerEventListener();
@@ -9,8 +13,16 @@ $(() => {
   updateView("resources");
 });
 
-const updateView = (nextView, userInfo) => {
-  updateHeader(userInfo);
+let currentUserInfo;
+
+const updateUserInfo = async (userInfo) => {
+  if (!userInfo) currentUserInfo = await getMyDetails();
+  console.log(currentUserInfo);
+  if (userInfo) currentUserInfo = userInfo;
+  return;
+};
+
+const updateView = (nextView) => {
 
   const $resources = $("#resources");
   const $registerPage = $("#register-page");
