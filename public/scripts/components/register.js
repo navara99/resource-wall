@@ -2,12 +2,19 @@ const registerEventListener = () => {
   const $registerForm = $("#register-form");
 
   $registerForm.submit(async (event) => {
-    event.preventDefault();
 
-    const data = $registerForm.serialize();
+    try {
+      event.preventDefault();
 
-    const userInfo = await register(data);
+      const data = $registerForm.serialize();
 
-    updateView("resources", userInfo);
+      const userInfo = await register(data);
+
+      updateView("resources", userInfo);
+
+      return $registerForm.trigger("reset");
+    } catch (err) {
+      updateView(err);
+    }
   });
 };

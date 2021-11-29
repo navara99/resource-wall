@@ -9,9 +9,9 @@ const loginEventListener = () => {
 
       const userInfo = await login(data);
 
-      $loginForm.trigger("reset");
-
       updateView("resources", userInfo);
+
+      return $loginForm.trigger("reset");
     } catch (err) {
       updateView(err);
     }
