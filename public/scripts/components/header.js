@@ -1,9 +1,11 @@
 const updateHeader = async () => {
-  $userButtons = $("#user-buttons");
-  $noUserButtons = $("#no-user-buttons");
+  const $userButtons = $("#user-buttons");
+  const $noUserButtons = $("#no-user-buttons");
+  const $floatingCreateResourceButton = $("#floating-create-resource-button");
 
   $userButtons.hide();
   $noUserButtons.hide();
+  $floatingCreateResourceButton.hide();
 
   const userInfo = await getMyDetails();
   const { id, image_url } = userInfo;
@@ -14,6 +16,7 @@ const updateHeader = async () => {
 
   $profilePicture.attr('src', image_url);
   $userButtons.show();
+  $floatingCreateResourceButton.show();
 
 };
 

@@ -132,6 +132,11 @@ div.resource-details-container {
   margin: 0.4em 0 0.1em;
 }
 
+h3.title {
+  margin: 0;
+  padding: 0;
+}
+
 ul.comments {
   border: none;
 }
@@ -177,4 +182,12 @@ a.circle-container {
   position: fixed;
   bottom: 1em;
   right: 1em;
+}
+
+form {
+  margin: initial;
+}
+
+.content-container {
+  margin: 2.5em 0;
 }
