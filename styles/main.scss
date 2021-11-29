@@ -121,7 +121,7 @@ div.resource-details-container {
 .send-comment {
   font-size: 1.5em;
   padding-bottom: 0.5em;
-  color: #51A45A
+  color: #51a45a;
 }
 
 #liked {
@@ -148,12 +148,12 @@ ul.collection li.collection-item.avatar {
   padding-left: 59px;
 }
 
-ul.collection .collection-item.avatar:not(.circle-clipper)>.circle {
+ul.collection .collection-item.avatar:not(.circle-clipper) > .circle {
   left: 2px;
 }
 
 .show-rating {
-  color: #FFB840;
+  color: #ffb840;
 }
 
 .comment {
@@ -171,4 +171,101 @@ li textarea.materialize-textarea {
 .collection .collection-item.new-comment-container {
   padding: 0;
   margin: 0;
+}
+
+// HOME PAGE
+
+#columns {
+  column-count: 4;
+  column-gap: 0.5em;
+  margin: 25px auto;
+  width: 90%;
+  figure {
+    margin: 5px;
+    height: auto;
+    max-width: 100%;
+    overflow: hidden;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+
+@media (max-width: 800px) {
+  #columns {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 600px) {
+  #columns {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 500px) {
+  #columns {
+    column-count: 1;
+  }
+}
+
+//Card
+
+.card {
+  box-shadow: none;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    transition: box-shadow 0.2s;
+  }
+}
+
+.card-image {
+  position: relative;
+
+  .url-wrapper {
+    background-color: black;
+    opacity: 0.6;
+    border-radius: 200px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 70%;
+    z-index: 2;
+
+    &:hover {
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .card-url {
+      color: white;
+    }
+  }
+
+  .card-heart {
+    font-size: 3em;
+    cursor: pointer;
+    color: red;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+  }
+}
+
+.card-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.card-summary {
+  display: flex;
+  align-items: center;
+}
+
+.card-icon {
+  font-size: 2em;
+  padding-right: 0.25em;
 }
