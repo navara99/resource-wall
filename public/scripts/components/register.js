@@ -2,7 +2,6 @@ const registerEventListener = () => {
   const $registerForm = $("#register-form");
 
   $registerForm.submit(async (event) => {
-
     try {
       event.preventDefault();
 

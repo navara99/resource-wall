@@ -50,5 +50,3 @@ const submitResource = (data) => {
     data,
   });
 };
-
-
