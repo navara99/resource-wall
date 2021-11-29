@@ -30,8 +30,8 @@
         <div class="nav-wrapper blue">
           <div class="logo">LOGO LOGO LOG</div>
           <ul>
-            <li>
-              <a href=""><i class="fas fa-home"></i></a>
+            <li id="home-button">
+              <a><i class="fas fa-home"></i></a>
             </li>
           </ul>
 
@@ -43,10 +43,10 @@
           </div>
           <ul id="logged-in" class="hidden">
             <li>
-              <a href=""><i class="fas fa-heart"></i></a>
+              <a><i class="fas fa-heart"></i></a>
             </li>
-            <li>
-              <a href="" class="profile">
+            <li id="profile-button">
+              <a class="profile">
                 <div class="profile">
                   <img
                     src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
@@ -57,24 +57,44 @@
               </a>
             </li>
             <li>
-              <a href=""><i class="fas fa-sign-out-alt"></i></a>
+              <a
+                ><i class="fas fa-sign-out-alt"></i>
+                <form class="col s12" action="/api/users/logout" method="POST">
+                  <button
+                    class="btn waves-effect waves-light"
+                    type="submit"
+                    name="action"
+                  >
+                    LOGOUT
+                  </button>
+                </form></a
+              >
             </li>
           </ul>
 
           <ul id="not-logged-in">
-            <li>
-              <a href="">LOGIN</a>
+            <li id="login-button">
+              <a>LOGIN</a>
             </li>
-            <li>
-              <a href="">REGISTER</a>
+            <li id="register-button">
+              <a>REGISTER</a>
             </li>
           </ul>
         </div>
       </nav>
     </header>
 
+
     <main>
-      <div class="resource-deails-container container">
+      <div id="resources" class="container">
+        <div class="margin-container">
+          RESOURCES PAGE
+          </div>
+        </div>
+      <div
+        id="resource-details"
+        class="resource-details-container container hidden"
+      >
         <div class="media">
           <a href="wwww.google.com"
             ><i class="fas fa-external-link-alt"></i> wwww.google.com</a
@@ -162,325 +182,321 @@
         </div>
       </div>
 
-      <form
-        class="col s12 container"
-        action="/api/users/register"
-        method="POST"
-      >
-        <div class="row">
-          <div class="input-field col s6">
-            <input
-              id="first_name"
-              type="text"
-              class="validate"
-              name="firstName"
-              required
-            />
-            <label for="first_name">First Name</label>
-          </div>
-          <div class="input-field col s6">
-            <input
-              id="last_name"
-              type="text"
-              class="validate"
-              name="lastName"
-              required
-            />
-            <label for="last_name">Last Name</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input
-              id="username"
-              type="text"
-              class="validate"
-              name="username"
-              required
-            />
-            <label for="username">Username</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input
-              id="register-password"
-              type="password"
-              class="validate"
-              name="password"
-              required
-            />
-            <label for="register-password">Password</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input
-              id="register-email"
-              type="email"
-              class="validate"
-              name="email"
-              required
-            />
-            <label for="register-email">Email</label>
-          </div>
-        </div>
-        <button
-          class="btn waves-effect waves-light"
-          type="submit"
-          name="action"
-        >
-          Submit
-          <i class="fa fa-paper-plane" aria-hidden="true"></i>
-        </button>
-      </form>
-
-      <form class="col s12 container" action="/api/users/login" method="POST">
-        <div class="row">
-          <div class="input-field col s12">
-            <input
-              id="login-email"
-              type="email"
-              class="validate"
-              name="email"
-              required
-            />
-            <label for="login-email">Email</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input
-              id="login-password"
-              type="password"
-              class="validate"
-              name="password"
-              required
-            />
-            <label for="login-password">Password</label>
-          </div>
-        </div>
-
-        <button
-          class="btn waves-effect waves-light"
-          type="submit"
-          name="action"
-        >
-          Submit
-          <i class="fa fa-paper-plane" aria-hidden="true"></i>
-        </button>
-      </form>
-
-      <form class="col s12" action="/api/users/logout" method="POST">
-        <button
-          class="btn waves-effect waves-light"
-          type="submit"
-          name="action"
-        >
-          LOGOUT
-        </button>
-      </form>
-
-      <div>
-        <form class="col s12 container" action="/api/users/edit" method="POST">
-          <div class="row">
-            <div class="input-field col s6">
-              <input
-                id="update_first_name"
-                type="text"
-                class="validate"
-                name="firstName"
-                required
-              />
-              <label for="update_first_name">First Name</label>
+      <div id="register-form" class="container hidden">
+        <div class="margin-container">
+          <form class="col s12" action="/api/users/register" method="POST">
+            <div class="row">
+              <div class="input-field col s6">
+                <input
+                  id="first_name"
+                  type="text"
+                  class="validate"
+                  name="firstName"
+                  required
+                />
+                <label for="first_name">First Name</label>
+              </div>
+              <div class="input-field col s6">
+                <input
+                  id="last_name"
+                  type="text"
+                  class="validate"
+                  name="lastName"
+                  required
+                />
+                <label for="last_name">Last Name</label>
+              </div>
             </div>
-            <div class="input-field col s6">
-              <input
-                id="update_last_name"
-                type="text"
-                class="validate"
-                name="lastName"
-                required
-              />
-              <label for="update_last_name">Last Name</label>
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  id="username"
+                  type="text"
+                  class="validate"
+                  name="username"
+                  required
+                />
+                <label for="username">Username</label>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input
-                id="update_username"
-                type="text"
-                class="validate"
-                name="username"
-                required
-              />
-              <label for="update_username">Username</label>
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  id="register-password"
+                  type="password"
+                  class="validate"
+                  name="password"
+                  required
+                />
+                <label for="register-password">Password</label>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input
-                id="update_email"
-                type="email"
-                class="validate"
-                name="email"
-                required
-              />
-              <label for="update_email">Email</label>
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  id="register-email"
+                  type="email"
+                  class="validate"
+                  name="email"
+                  required
+                />
+                <label for="register-email">Email</label>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <textarea
-                id="bio"
-                class="materialize-textarea"
-                data-length="120"
-                name="bio"
-              ></textarea>
-              <label for="bio">Bio</label>
-            </div>
-          </div>
-          <button
-            class="btn waves-effect waves-light"
-            type="submit"
-            name="action"
-          >
-            Submit
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-          </button>
-        </form>
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+            >
+              Submit
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </button>
+          </form>
+        </div>
       </div>
 
-      <div>
-        <form
-          class="col s12 container"
-          action="/api/users/password"
-          method="POST"
-        >
-          <div class="row">
-            <div class="input-field col s12">
-              <input
-                id="current-password"
-                type="password"
-                class="validate"
-                name="current_password"
-                required
-              />
-              <label for="current-password">Current Password</label>
+      <div id="login-form" class="container hidden">
+        <div class="margin-container">
+          <form class="col s12" action="/api/users/login" method="POST">
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  id="login-email"
+                  type="email"
+                  class="validate"
+                  name="email"
+                  required
+                />
+                <label for="login-email">Email</label>
+              </div>
             </div>
-          </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  id="login-password"
+                  type="password"
+                  class="validate"
+                  name="password"
+                  required
+                />
+                <label for="login-password">Password</label>
+              </div>
+            </div>
 
-          <div class="row">
-            <div class="input-field col s12">
-              <input
-                id="new-password"
-                type="password"
-                class="validate"
-                name="new_password"
-                required
-              />
-              <label for="new-password">New Password</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input
-                id="confirm-new-password"
-                type="password"
-                class="validate"
-                name="confirm_new_password"
-                required
-              />
-              <label for="confirm-new-password">Confirm new password</label>
-            </div>
-          </div>
-          <button
-            class="btn waves-effect waves-light"
-            type="submit"
-            name="action"
-          >
-            Submit
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-          </button>
-        </form>
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+            >
+              Submit
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </button>
+          </form>
+        </div>
       </div>
 
-      <div>
-        <form class="col s12 container" action="/api/resources" method="POST">
-          <div class="row">
-            <div class="input-field col s12">
-              <input
-                id="title"
-                type="text"
-                class="validate"
-                name="title"
-                required
-              />
-              <label for="title">Title</label>
+      <div id="edit-profile" class="container hidden">
+        <div class="margin-container">
+          <form class="col s12" action="/api/users/edit" method="POST">
+            <div class="row">
+              <div class="input-field col s6">
+                <input
+                  id="update_first_name"
+                  type="text"
+                  class="validate"
+                  name="firstName"
+                  required
+                />
+                <label for="update_first_name">First Name</label>
+              </div>
+              <div class="input-field col s6">
+                <input
+                  id="update_last_name"
+                  type="text"
+                  class="validate"
+                  name="lastName"
+                  required
+                />
+                <label for="update_last_name">Last Name</label>
+              </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input
-                id="url"
-                type="text"
-                class="validate"
-                name="url"
-                required
-              />
-              <label for="url">URL</label>
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  id="update_username"
+                  type="text"
+                  class="validate"
+                  name="username"
+                  required
+                />
+                <label for="update_username">Username</label>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input
-                id="description"
-                type="text"
-                class="validate"
-                name="description"
-                required
-              />
-              <label for="description">Description</label>
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  id="update_email"
+                  type="email"
+                  class="validate"
+                  name="email"
+                  required
+                />
+                <label for="update_email">Email</label>
+              </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <select class="icons" id="category" name="category">
-                <option value="" disabled selected>Category</option>
-                <option value="Art/DIY">Art/DIY</option>
-                <option value="Auto and Vehicles">Auto and Vehicles</option>
-                <option value="Entertainment">Entertainment</option>
-                <option value="Film and Animation">Film and Animation</option>
-                <option value="Gaming">Gaming</option>
-                <option value="Music">Music</option>
-                <option value="News and Politics">News and Politics</option>
-                <option value="Sports">Sports</option>
-                <option value="Technology">Technology</option>
-                <option value="Travelling">Travelling</option>
-                <option value="Other">Other</option>
-              </select>
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea
+                  id="bio"
+                  class="materialize-textarea"
+                  data-length="120"
+                  name="bio"
+                ></textarea>
+                <label for="bio">Bio</label>
+              </div>
             </div>
-          </div>
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+            >
+              Submit
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </button>
+          </form>
+        </div>
+      </div>
 
-          <div class="switch">
-            <label>
-              <input type="checkbox" name="is_private" required />
-              <span class="lever"></span>
-              Private
-            </label>
-          </div>
+      <div id="change-password" class="container hidden">
+        <div class="margin-container">
+          <form class="col s12" action="/api/users/password" method="POST">
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  id="current-password"
+                  type="password"
+                  class="validate"
+                  name="current_password"
+                  required
+                />
+                <label for="current-password">Current Password</label>
+              </div>
+            </div>
 
-          <button
-            class="btn waves-effect waves-light"
-            type="submit"
-            name="action"
-          >
-            Submit
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-          </button>
-        </form>
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  id="new-password"
+                  type="password"
+                  class="validate"
+                  name="new_password"
+                  required
+                />
+                <label for="new-password">New Password</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  id="confirm-new-password"
+                  type="password"
+                  class="validate"
+                  name="confirm_new_password"
+                  required
+                />
+                <label for="confirm-new-password">Confirm new password</label>
+              </div>
+            </div>
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+            >
+              Submit
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div id="new-resource-form" class="container hidden">
+        <div class="margin-container">
+          <form class="col s12" action="/api/resources" method="POST">
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  id="title"
+                  type="text"
+                  class="validate"
+                  name="title"
+                  required
+                />
+                <label for="title">Title</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  id="url"
+                  type="text"
+                  class="validate"
+                  name="url"
+                  required
+                />
+                <label for="url">URL</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  id="description"
+                  type="text"
+                  class="validate"
+                  name="description"
+                  required
+                />
+                <label for="description">Description</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <select class="icons" id="category" name="category">
+                  <option value="" disabled selected>Category</option>
+                  <option value="Art/DIY">Art/DIY</option>
+                  <option value="Auto and Vehicles">Auto and Vehicles</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Film and Animation">Film and Animation</option>
+                  <option value="Gaming">Gaming</option>
+                  <option value="Music">Music</option>
+                  <option value="News and Politics">News and Politics</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Travelling">Travelling</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="switch">
+              <label>
+                <input type="checkbox" name="is_private" required />
+                <span class="lever"></span>
+                Private
+              </label>
+            </div>
+
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+            >
+              Submit
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </button>
+          </form>
+        </div>
       </div>
     </main>
   </body>

@@ -1,17 +1,35 @@
 // Client facing scripts here
 
+$(document).ready(function () {
+  console.log($("select"));
+  $("select").formSelect();
 
-// $(document).ready(() => {
+  const updateView = (nextView) => {
+    const $resources = $("#resources");
+    const $registerForm = $("#register-form");
+    const $loginForm = $("#login-form");
+    const $editProfile = $("#edit-profile");
+    const $changePassword = $("#change-password");
 
-//   const updateDOM = () => {
-//     let $header = $("header");
-//     updateHeader($header);
-//   }
-// });
+    $resources.hide();
+    $registerForm.hide();
+    $loginForm.hide();
+    $editProfile.hide();
+    $changePassword.hide();
 
-$(document).ready(function(){
-  console.log($('select'));
-  $('select').formSelect();
+    switch (nextView) {
+      case "resources":
+        $resources.show();
+        break;
+      case "updateProfile":
+        $editProfile.show();
+        break;
+      case "register":
+        $registerForm.show();
+        break;
+      case "login":
+        $loginForm.show();
+        break;
+    }
+  };
 });
-
-

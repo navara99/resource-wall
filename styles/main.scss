@@ -49,11 +49,34 @@ img.profile {
   display: none;
 }
 
-.resource-deails-container {
-  display: flex;
+div.hidden.resource-details-container.container {
+  display: none;
+  margin-top: 3em;
+}
+
+div.hidden {
+  display: none;
+  margin-top: 3em;
+}
+
+.container {
   border-radius: 32px;
   box-shadow: 0 0 3px #ccc;
+}
+
+form {
+  margin: inherit;
+}
+
+div.resource-details-container {
+  display: flex;
   align-items: flex-start;
+}
+
+.margin-container {
+  margin: 3em;
+  display: flex;
+  flex-direction: column;
 }
 
 .details {
