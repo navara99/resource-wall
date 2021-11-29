@@ -1,294 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Home Page</title>
 
-<head>
-  <title>Home Page</title>
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+  <body>
+    <header class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper blue">
+          <div class="logo">LOGO LOGO LOG</div>
+          <ul>
+            <li id="home-button">
+              <a><i class="fas fa-home"></i></a>
+            </li>
+          </ul>
 
-<body>
-  <header class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper blue">
-        <div class="logo">LOGO LOGO LOG</div>
-        <ul>
-          <li id="home-button">
-            <a><i class="fas fa-home"></i></a>
-          </li>
-        </ul>
-
-        <div class="input-field search-bar">
-          <input id="search" type="search" />
-          <label class="label-icon" for="search"><i class="fas fa-search"></i></label>
+          <div class="input-field search-bar">
+            <input id="search" type="search" />
+            <label class="label-icon" for="search"
+              ><i class="fas fa-search"></i
+            ></label>
+          </div>
+          <ul id="user-buttons" class="hidden">
+            <li id="create-resource-button">
+              <a><i class="fas fa-plus-circle"></i></a>
+            </li>
+            <li id="liked-resources-button">
+              <a><i class="fas fa-heart"></i></a>
+            </li>
+            <li>
+              <a><i class="fas fa-cog"></i></a>
+            </li>
+            <li id="profile-button">
+              <a class="profile">
+                <div class="profile">
+                  <img alt="" id="profile-picture" class="circle profile" />
+                </div>
+              </a>
+            </li>
+            <li>
+              <a id="logout-button"><i class="fas fa-sign-out-alt"></i></a>
+            </li>
+          </ul>
+          <ul id="no-user-buttons">
+            <li id="login-button">
+              <a>LOGIN</a>
+            </li>
+            <li id="register-button">
+              <a>REGISTER</a>
+            </li>
+          </ul>
         </div>
-        <ul id="user-buttons" class="hidden">
-          <li id="liked-resources-button">
-            <a><i class="fas fa-heart"></i></a>
-          </li>
-          <li id="profile-button">
-            <a class="profile">
-              <div class="profile">
-                <!-- <img
-                    src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" -->
-                <img alt="" id="profile-picture" class="circle profile" />
+      </nav>
+    </header>
+
+    <main>
+      <div id="resources">
+        <div id="columns">
+          <figure>
+            <div class="card">
+              <div class="card-image">
+                <div class="url-wrapper truncate">
+                  <a href="wwww.google.com" class="card-url btn-flat"
+                    >https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a
+                  >
+                </div>
+                <i class="fas fa-heart card-heart"></i>
+                <img
+                  class="resource-image"
+                  src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80"
+                />
+                <span class="card-title">Card Title</span>
               </div>
-            </a>
-          </li>
-          <li>
-            <form class="col s12" action="/api/users/logout" method="POST">
-              <button class="btn waves-effect waves-light" type="submit" name="action">
-                <a><i class="fas fa-sign-out-alt"></i></a>
-              </button>
-            </form>
-          </li>
-        </ul>
-        <ul id="no-user-buttons">
-          <li id="login-button">
-            <a>LOGIN</a>
-          </li>
-          <li id="register-button">
-            <a>REGISTER</a>
-          </li>
-        </ul>
+              <div class="card-content">
+                <p>
+                  I am a very simple card. I am good at containing small bits of
+                  information. I am convenient because I require little markup
+                  to use effectively.
+                </p>
+              </div>
+              <div class="card-action">
+                <div class="card-summary">
+                  <i class="fas fa-star card-icon"></i>4.5
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-heart card-icon"></i>100
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-comment-alt card-icon"></i>30
+                </div>
+              </div>
+            </div>
+          </figure>
+
+          <figure>
+            <div class="card">
+              <div class="card-image">
+                <div class="url-wrapper truncate">
+                  <a href="wwww.google.com" class="card-url btn-flat"
+                    >https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a
+                  >
+                </div>
+                <i class="fas fa-heart card-heart"></i>
+                <img
+                  class="resource-image"
+                  src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/matching-replacing-mixing-colors/jcr_content/main-pars/before_and_after/image-after/match-outcome3.png"
+                />
+                <span class="card-title">Card Title</span>
+              </div>
+              <div class="card-content">
+                <p>
+                  I am a very simple card. I am good at containing small bits of
+                  information. I am convenient because I require little markup
+                  to use effectively.
+                </p>
+              </div>
+              <div class="card-action">
+                <div class="card-summary">
+                  <i class="fas fa-star card-icon"></i>4.5
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-heart card-icon"></i>100
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-comment-alt card-icon"></i>30
+                </div>
+              </div>
+            </div>
+          </figure>
+
+          <figure>
+            <div class="card">
+              <div class="card-image">
+                <div class="url-wrapper truncate">
+                  <a href="wwww.google.com" class="card-url btn-flat"
+                    >https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a
+                  >
+                </div>
+                <i class="fas fa-heart card-heart"></i>
+                <img
+                  class="resource-image"
+                  src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGhvdG9ncmFwaHl8ZW58MHx8MHx8&w=1000&q=80"
+                />
+                <span class="card-title">Card Title</span>
+              </div>
+              <div class="card-content">
+                <p>
+                  I am a very simple card. I am good at containing small bits of
+                  information. I am convenient because I require little markup
+                  to use effectively.
+                </p>
+              </div>
+              <div class="card-action">
+                <div class="card-summary">
+                  <i class="fas fa-star card-icon"></i>4.5
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-heart card-icon"></i>100
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-comment-alt card-icon"></i>30
+                </div>
+              </div>
+            </div>
+          </figure>
+
+          <figure>
+            <div class="card">
+              <div class="card-image">
+                <div class="url-wrapper truncate">
+                  <a href="wwww.google.com" class="card-url btn-flat"
+                    >https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a
+                  >
+                </div>
+                <i class="fas fa-heart card-heart"></i>
+                <img
+                  class="resource-image"
+                  src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80"
+                />
+                <span class="card-title">Card Title</span>
+              </div>
+              <div class="card-content">
+                <p>
+                  I am a very simple card. I am good at containing small bits of
+                  information. I am convenient because I require little markup
+                  to use effectively.
+                </p>
+              </div>
+              <div class="card-action">
+                <div class="card-summary">
+                  <i class="fas fa-star card-icon"></i>4.5
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-heart card-icon"></i>100
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-comment-alt card-icon"></i>30
+                </div>
+              </div>
+            </div>
+          </figure>
+
+          <figure>
+            <div class="card">
+              <div class="card-image">
+                <div class="url-wrapper truncate">
+                  <a href="wwww.google.com" class="card-url btn-flat"
+                    >https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a
+                  >
+                </div>
+                <i class="fas fa-heart card-heart"></i>
+                <img
+                  class="resource-image"
+                  src="https://media.istockphoto.com/photos/picturesque-morning-in-plitvice-national-park-colorful-spring-scene-picture-id1093110112?k=20&m=1093110112&s=612x612&w=0&h=3OhKOpvzOSJgwThQmGhshfOnZTvMExZX2R91jNNStBY="
+                />
+                <span class="card-title">Card Title</span>
+              </div>
+              <div class="card-content">
+                <p>
+                  I am a very simple card. I am good at containing small bits of
+                  information. I am convenient because I require little markup
+                  to use effectively.
+                </p>
+              </div>
+              <div class="card-action">
+                <div class="card-summary">
+                  <i class="fas fa-star card-icon"></i>4.5
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-heart card-icon"></i>100
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-comment-alt card-icon"></i>30
+                </div>
+              </div>
+            </div>
+          </figure>
+
+          <figure>
+            <div class="card">
+              <div class="card-image">
+                <div class="url-wrapper truncate">
+                  <a href="wwww.google.com" class="card-url btn-flat"
+                    >https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a
+                  >
+                </div>
+                <i class="fas fa-heart card-heart"></i>
+                <img
+                  class="resource-image"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Ateles_fusciceps_Colombia.JPG/1200px-Ateles_fusciceps_Colombia.JPG"
+                />
+                <span class="card-title">Card Title</span>
+              </div>
+              <div class="card-content">
+                <p>
+                  I am a very simple card. I am good at containing small bits of
+                  information. I am convenient because I require little markup
+                  to use effectively.
+                </p>
+              </div>
+              <div class="card-action">
+                <div class="card-summary">
+                  <i class="fas fa-star card-icon"></i>4.5
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-heart card-icon"></i>100
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-comment-alt card-icon"></i>30
+                </div>
+              </div>
+            </div>
+          </figure>
+
+          <figure>
+            <div class="card">
+              <div class="card-image">
+                <div class="url-wrapper truncate">
+                  <a href="wwww.google.com" class="card-url btn-flat"
+                    >https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a
+                  >
+                </div>
+                <i class="fas fa-heart card-heart"></i>
+                <img
+                  class="resource-image"
+                  src="https://upload.wikimedia.org/wikipedia/commons/4/4e/%E9%95%BF%E5%BE%81%E4%BA%94%E5%8F%B7%E9%81%A5%E4%BA%8C%E7%81%AB%E7%AE%AD%E8%BD%AC%E5%9C%BA.jpg"
+                />
+                <span class="card-title">Card Title</span>
+              </div>
+              <div class="card-content">
+                <p>
+                  I am a very simple card. I am good at containing small bits of
+                  information. I am convenient because I require little markup
+                  to use effectively.
+                </p>
+              </div>
+              <div class="card-action">
+                <div class="card-summary">
+                  <i class="fas fa-star card-icon"></i>4.5
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-heart card-icon"></i>100
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-comment-alt card-icon"></i>30
+                </div>
+              </div>
+            </div>
+          </figure>
+
+          <figure>
+            <div class="card">
+              <div class="card-image">
+                <div class="url-wrapper truncate">
+                  <a href="wwww.google.com" class="card-url btn-flat"
+                    >https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a
+                  >
+                </div>
+                <i class="fas fa-heart card-heart"></i>
+                <img
+                  class="resource-image"
+                  src="https://upload.wikimedia.org/wikipedia/commons/4/4e/%E9%95%BF%E5%BE%81%E4%BA%94%E5%8F%B7%E9%81%A5%E4%BA%8C%E7%81%AB%E7%AE%AD%E8%BD%AC%E5%9C%BA.jpg"
+                />
+                <span class="card-title">Card Title</span>
+              </div>
+              <div class="card-content">
+                <p>
+                  I am a very simple card. I am good at containing small bits of
+                  information. I am convenient because I require little markup
+                  to use effectively.
+                </p>
+              </div>
+              <div class="card-action">
+                <div class="card-summary">
+                  <i class="fas fa-star card-icon"></i>4.5
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-heart card-icon"></i>100
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-comment-alt card-icon"></i>30
+                </div>
+              </div>
+            </div>
+          </figure>
+
+          <figure>
+            <div class="card">
+              <div class="card-image">
+                <div class="url-wrapper truncate">
+                  <a href="wwww.google.com" class="card-url btn-flat"
+                    >https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a
+                  >
+                </div>
+                <i class="fas fa-heart card-heart"></i>
+                <img
+                  class="resource-image"
+                  src="https://www.mediastorehouse.com/p/172/proboscis-long-nosed-monkey-chief-male-showing-11156286.jpg.webp"
+                />
+                <span class="card-title">Card Title</span>
+              </div>
+              <div class="card-content">
+                <p>
+                  I am a very simple card. I am good at containing small bits of
+                  information. I am convenient because I require little markup
+                  to use effectively.
+                </p>
+              </div>
+              <div class="card-action">
+                <div class="card-summary">
+                  <i class="fas fa-star card-icon"></i>4.5
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-heart card-icon"></i>100
+                </div>
+                <div class="card-summary">
+                  <i class="fas fa-comment-alt card-icon"></i>30
+                </div>
+              </div>
+            </div>
+          </figure>
+        </div>
       </div>
-    </nav>
-  </header>
-
-  <main>
-    <div id="resources">
-      <div id="columns">
-        <!-- <figure> -->
-        <figure>
-          <div class="card">
-            <div class="card-image">
-              <div class="url-wrapper truncate">
-                <a href="wwww.google.com"
-                  class="card-url btn-flat">https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a>
-              </div>
-              <i class="fas fa-heart card-heart"></i>
-              <img class="resource-image"
-                src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80" />
-              <span class="card-title">Card Title</span>
-            </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.
-                I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <div class="card-summary"><i class="fas fa-star card-icon"></i>4.5</div>
-              <div class="card-summary"><i class="fas fa-heart card-icon"></i>100</div>
-              <div class="card-summary"><i class="fas fa-comment-alt card-icon"></i>30</div>
-            </div>
-          </div>
-        </figure>
-
-        <figure>
-          <div class="card">
-            <div class="card-image">
-              <div class="url-wrapper truncate">
-                <a href="wwww.google.com"
-                  class="card-url btn-flat">https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a>
-              </div>
-              <i class="fas fa-heart card-heart"></i>
-              <img class="resource-image"
-                src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/matching-replacing-mixing-colors/jcr_content/main-pars/before_and_after/image-after/match-outcome3.png" />
-              <span class="card-title">Card Title</span>
-            </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.
-                I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <div class="card-summary"><i class="fas fa-star card-icon"></i>4.5</div>
-              <div class="card-summary"><i class="fas fa-heart card-icon"></i>100</div>
-              <div class="card-summary"><i class="fas fa-comment-alt card-icon"></i>30</div>
-            </div>
-          </div>
-        </figure>
-
-        <figure>
-          <div class="card">
-            <div class="card-image">
-              <div class="url-wrapper truncate">
-                <a href="wwww.google.com"
-                  class="card-url btn-flat">https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a>
-              </div>
-              <i class="fas fa-heart card-heart"></i>
-              <img class="resource-image"
-                src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGhvdG9ncmFwaHl8ZW58MHx8MHx8&w=1000&q=80" />
-              <span class="card-title">Card Title</span>
-            </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.
-                I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <div class="card-summary"><i class="fas fa-star card-icon"></i>4.5</div>
-              <div class="card-summary"><i class="fas fa-heart card-icon"></i>100</div>
-              <div class="card-summary"><i class="fas fa-comment-alt card-icon"></i>30</div>
-            </div>
-          </div>
-        </figure>
-
-        <figure>
-          <div class="card">
-            <div class="card-image">
-              <div class="url-wrapper truncate">
-                <a href="wwww.google.com"
-                  class="card-url btn-flat">https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a>
-              </div>
-              <i class="fas fa-heart card-heart"></i>
-              <img class="resource-image"
-                src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80" />
-              <span class="card-title">Card Title</span>
-            </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.
-                I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <div class="card-summary"><i class="fas fa-star card-icon"></i>4.5</div>
-              <div class="card-summary"><i class="fas fa-heart card-icon"></i>100</div>
-              <div class="card-summary"><i class="fas fa-comment-alt card-icon"></i>30</div>
-            </div>
-          </div>
-        </figure>
-
-        <figure>
-          <div class="card">
-            <div class="card-image">
-              <div class="url-wrapper truncate">
-                <a href="wwww.google.com"
-                  class="card-url btn-flat">https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a>
-              </div>
-              <i class="fas fa-heart card-heart"></i>
-              <img class="resource-image"
-                src="https://media.istockphoto.com/photos/picturesque-morning-in-plitvice-national-park-colorful-spring-scene-picture-id1093110112?k=20&m=1093110112&s=612x612&w=0&h=3OhKOpvzOSJgwThQmGhshfOnZTvMExZX2R91jNNStBY=" />
-              <span class="card-title">Card Title</span>
-            </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.
-                I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <div class="card-summary"><i class="fas fa-star card-icon"></i>4.5</div>
-              <div class="card-summary"><i class="fas fa-heart card-icon"></i>100</div>
-              <div class="card-summary"><i class="fas fa-comment-alt card-icon"></i>30</div>
-            </div>
-          </div>
-        </figure>
-
-        <figure>
-          <div class="card">
-            <div class="card-image">
-              <div class="url-wrapper truncate">
-                <a href="wwww.google.com"
-                  class="card-url btn-flat">https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a>
-              </div>
-              <i class="fas fa-heart card-heart"></i>
-              <img class="resource-image"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Ateles_fusciceps_Colombia.JPG/1200px-Ateles_fusciceps_Colombia.JPG" />
-              <span class="card-title">Card Title</span>
-            </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.
-                I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <div class="card-summary"><i class="fas fa-star card-icon"></i>4.5</div>
-              <div class="card-summary"><i class="fas fa-heart card-icon"></i>100</div>
-              <div class="card-summary"><i class="fas fa-comment-alt card-icon"></i>30</div>
-            </div>
-          </div>
-        </figure>
-
-        <figure>
-          <div class="card">
-            <div class="card-image">
-              <div class="url-wrapper truncate">
-                <a href="wwww.google.com"
-                  class="card-url btn-flat">https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a>
-              </div>
-              <i class="fas fa-heart card-heart"></i>
-              <img class="resource-image"
-                src="https://upload.wikimedia.org/wikipedia/commons/4/4e/%E9%95%BF%E5%BE%81%E4%BA%94%E5%8F%B7%E9%81%A5%E4%BA%8C%E7%81%AB%E7%AE%AD%E8%BD%AC%E5%9C%BA.jpg" />
-              <span class="card-title">Card Title</span>
-            </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.
-                I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <div class="card-summary"><i class="fas fa-star card-icon"></i>4.5</div>
-              <div class="card-summary"><i class="fas fa-heart card-icon"></i>100</div>
-              <div class="card-summary"><i class="fas fa-comment-alt card-icon"></i>30</div>
-            </div>
-          </div>
-        </figure>
-
-        <figure>
-          <div class="card">
-            <div class="card-image">
-              <div class="url-wrapper truncate">
-                <a href="wwww.google.com"
-                  class="card-url btn-flat">https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a>
-              </div>
-              <i class="fas fa-heart card-heart"></i>
-              <img class="resource-image"
-                src="https://upload.wikimedia.org/wikipedia/commons/4/4e/%E9%95%BF%E5%BE%81%E4%BA%94%E5%8F%B7%E9%81%A5%E4%BA%8C%E7%81%AB%E7%AE%AD%E8%BD%AC%E5%9C%BA.jpg" />
-              <span class="card-title">Card Title</span>
-            </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.
-                I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <div class="card-summary"><i class="fas fa-star card-icon"></i>4.5</div>
-              <div class="card-summary"><i class="fas fa-heart card-icon"></i>100</div>
-              <div class="card-summary"><i class="fas fa-comment-alt card-icon"></i>30</div>
-            </div>
-          </div>
-        </figure>
-
-        <figure>
-          <div class="card">
-            <div class="card-image">
-              <div class="url-wrapper truncate">
-                <a href="wwww.google.com"
-                  class="card-url btn-flat">https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a>
-              </div>
-              <i class="fas fa-heart card-heart"></i>
-              <img class="resource-image"
-                src="https://www.mediastorehouse.com/p/172/proboscis-long-nosed-monkey-chief-male-showing-11156286.jpg.webp" />
-              <span class="card-title">Card Title</span>
-            </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.
-                I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <div class="card-summary"><i class="fas fa-star card-icon"></i>4.5</div>
-              <div class="card-summary"><i class="fas fa-heart card-icon"></i>100</div>
-              <div class="card-summary"><i class="fas fa-comment-alt card-icon"></i>30</div>
-            </div>
-          </div>
-        </figure>
-
-
-        <!-- </figure> -->
-      </div>
-    </div>
-    <!-- <div
+      <div
         id="resource-details"
         class="resource-details-container container hidden"
       >
@@ -307,276 +419,447 @@
             </div>
             <h3>Umami before they sold out poutine chillwave</h3>
           </div>
-          <a href="wwww.google.com" class="paragraph">wwww.google.com</a>
-          <h5>
-            Rate it <i class="fas fa-star unselected"></i
-            ><i class="fas fa-star unselected"></i
-            ><i class="fas fa-star unselected"></i
-            ><i class="fas fa-star unselected"></i
-            ><i class="fas fa-star unselected"></i>
-          </h5>
-          <h6>
-            <i class="fas fa-star show-rating"></i> Avg Rating: 4.50 (Based on 5
-            ratings)
-          </h6>
-          <p>
-            Enamel pin skateboard shaman forage fashion axe vinyl. Crucifix
-            raclette air plant coloring book four dollar toast fixie narwhal,
-            lyft brooklyn 3 wolf moon franzen. Literally raclette meh butcher
-            post-ironic kickstarter, slow-carb helvetica kinfolk bespoke
-            live-edge four dollar toast meditation keytar kitsch. Blog
-            sustainable health goth locavore, pinterest kombucha cred pabst four
-            dollar toast. Bicycle rights paleo tilde post-ironic. Forage
-            cornhole salvia, venmo affogato coloring book irony health goth
-            normcore poke aesthetic knausgaard neutra.
-          </p>
-
-          <h5><i class="fas fa-comment-alt"></i> Comments(4)</h5>
-          <ul class="collection comments">
-            <li class="collection-item avatar new-comment-container">
-              <i class="material-icons circle">folder</i>
-              <div class="input-field comment">
-                <textarea id="comment" class="materialize-textarea"></textarea>
-                <label class="label-icon" for="comment"></label>
-                <i class="fas fa-chevron-circle-right send-comment"></i>
+          <div class="details">
+            <div>
+              <div style="float: right">
+                <i class="far fa-heart icon liked"></i>
               </div>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle">folder</i>
-              <span class="title">@username</span>
-              <p>
-                Hashtag ennui taxidermy af PBR&B austin squid. Listicle viral
-                ugh,
-              </p>
-              <p class="secondary-content">timestamp</p>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle red">play_arrow</i>
-              <span class="title">@username</span>
-              <p>
-                vinyl man bun twee four loko woke. Distillery synth gochujang
-                chicharrones YOLO, scenester banjo. Normcore semiotics cliche
-                bespoke
-              </p>
-              <p class="secondary-content">timestamp</p>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle green">insert_chart</i>
-              <span class="title">@username</span>
-              <p>comment</p>
-              <p class="secondary-content">timestamp</p>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle red">play_arrow</i>
-              <span class="title">@username</span>
-              <p>
-                blue bottle hoodie chia. activated charcoal vape butcher blog
-                squid seitan
-              </p>
-              <p class="secondary-content">timestamp</p>
-            </li>
-          </ul>
-        </div> -->
-    <!-- </div> -->
+              <h3 class="title">
+                Umami before they sold out poutine chillwave
+              </h3>
+            </div>
+            <a href="wwww.google.com" class="paragraph">wwww.google.com</a>
+            <h5>
+              Rate it <i class="fas fa-star unselected"></i
+              ><i class="fas fa-star unselected"></i
+              ><i class="fas fa-star unselected"></i
+              ><i class="fas fa-star unselected"></i
+              ><i class="fas fa-star unselected"></i>
+            </h5>
+            <h6>
+              <i class="fas fa-star show-rating"></i> Avg Rating: 4.50 (Based on
+              5 ratings)
+            </h6>
+            <p>
+              Enamel pin skateboard shaman forage fashion axe vinyl. Crucifix
+              raclette air plant coloring book four dollar toast fixie narwhal,
+              lyft brooklyn 3 wolf moon franzen. Literally raclette meh butcher
+              post-ironic kickstarter, slow-carb helvetica kinfolk bespoke
+              live-edge four dollar toast meditation keytar kitsch. Blog
+              sustainable health goth locavore, pinterest kombucha cred pabst
+              four dollar toast. Bicycle rights paleo tilde post-ironic. Forage
+              cornhole salvia, venmo affogato coloring book irony health goth
+              normcore poke aesthetic knausgaard neutra.
+            </p>
 
-    <div id="register-form" class="container hidden">
-      <div class="margin-container">
-        <form class="col s12" action="/api/users/register" method="POST">
-          <div class="row">
-            <div class="input-field col s6">
-              <input id="first_name" type="text" class="validate" name="firstName" required />
-              <label for="first_name">First Name</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="last_name" type="text" class="validate" name="lastName" required />
-              <label for="last_name">Last Name</label>
-            </div>
+            <h5><i class="fas fa-comment-alt"></i> Comments(4)</h5>
+            <ul class="collection comments">
+              <li class="collection-item avatar new-comment-container">
+                <i class="material-icons circle">folder</i>
+                <div class="input-field comment">
+                  <textarea
+                    id="comment"
+                    class="materialize-textarea"
+                  ></textarea>
+                  <label class="label-icon" for="comment"></label>
+                  <i class="fas fa-chevron-circle-right send-comment"></i>
+                </div>
+              </li>
+              <li class="collection-item avatar">
+                <i class="material-icons circle">folder</i>
+                <span class="title">@username</span>
+                <p>
+                  Hashtag ennui taxidermy af PBR&B austin squid. Listicle viral
+                  ugh,
+                </p>
+                <p class="secondary-content">timestamp</p>
+              </li>
+              <li class="collection-item avatar">
+                <i class="material-icons circle red">play_arrow</i>
+                <span class="title">@username</span>
+                <p>
+                  vinyl man bun twee four loko woke. Distillery synth gochujang
+                  chicharrones YOLO, scenester banjo. Normcore semiotics cliche
+                  bespoke
+                </p>
+                <p class="secondary-content">timestamp</p>
+              </li>
+              <li class="collection-item avatar">
+                <i class="material-icons circle green">insert_chart</i>
+                <span class="title">@username</span>
+                <p>comment</p>
+                <p class="secondary-content">timestamp</p>
+              </li>
+              <li class="collection-item avatar">
+                <i class="material-icons circle red">play_arrow</i>
+                <span class="title">@username</span>
+                <p>
+                  blue bottle hoodie chia. activated charcoal vape butcher blog
+                  squid seitan
+                </p>
+                <p class="secondary-content">timestamp</p>
+              </li>
+            </ul>
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="username" type="text" class="validate" name="username" required />
-              <label for="username">Username</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="register-password" type="password" class="validate" name="password" required />
-              <label for="register-password">Password</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="register-email" type="email" class="validate" name="email" required />
-              <label for="register-email">Email</label>
-            </div>
-          </div>
-          <button class="btn waves-effect waves-light" type="submit" name="action">
-            Submit
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <div id="login-form" class="container hidden">
-      <div class="margin-container">
-        <form class="col s12" action="/api/users/login" method="POST">
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="login-email" type="email" class="validate" name="email" required />
-              <label for="login-email">Email</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="login-password" type="password" class="validate" name="password" required />
-              <label for="login-password">Password</label>
-            </div>
-          </div>
-
-          <button class="btn waves-effect waves-light" type="submit" name="action">
-            Submit
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <div id="edit-profile" class="container hidden">
-      <div class="margin-container">
-        <form class="col s12" action="/api/users/edit" method="POST">
-          <div class="row">
-            <div class="input-field col s6">
-              <input id="update_first_name" type="text" class="validate" name="firstName" required />
-              <label for="update_first_name">First Name</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="update_last_name" type="text" class="validate" name="lastName" required />
-              <label for="update_last_name">Last Name</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="update_username" type="text" class="validate" name="username" required />
-              <label for="update_username">Username</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="update_email" type="email" class="validate" name="email" required />
-              <label for="update_email">Email</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <textarea id="bio" class="materialize-textarea" data-length="120" name="bio"></textarea>
-              <label for="bio">Bio</label>
-            </div>
-          </div>
-          <button class="btn waves-effect waves-light" type="submit" name="action">
-            Submit
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <div id="change-password" class="container hidden">
-      <div class="margin-container">
-        <form class="col s12" action="/api/users/password" method="POST">
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="current-password" type="password" class="validate" name="current_password" required />
-              <label for="current-password">Current Password</label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="new-password" type="password" class="validate" name="new_password" required />
-              <label for="new-password">New Password</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="confirm-new-password" type="password" class="validate" name="confirm_new_password" required />
-              <label for="confirm-new-password">Confirm new password</label>
-            </div>
-          </div>
-          <button class="btn waves-effect waves-light" type="submit" name="action">
-            Submit
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <div id="new-resource-form" class="container hidden">
-      <div class="margin-container">
-        <form class="col s12" action="/api/resources" method="POST">
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="title" type="text" class="validate" name="title" required />
-              <label for="title">Title</label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="url" type="text" class="validate" name="url" required />
-              <label for="url">URL</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="description" type="text" class="validate" name="description" required />
-              <label for="description">Description</label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <select class="icons" id="category" name="category">
-                <option value="" disabled selected>Category</option>
-                <option value="Art/DIY">Art/DIY</option>
-                <option value="Auto and Vehicles">Auto and Vehicles</option>
-                <option value="Entertainment">Entertainment</option>
-                <option value="Film and Animation">Film and Animation</option>
-                <option value="Gaming">Gaming</option>
-                <option value="Music">Music</option>
-                <option value="News and Politics">News and Politics</option>
-                <option value="Sports">Sports</option>
-                <option value="Technology">Technology</option>
-                <option value="Travelling">Travelling</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-          </div>
+        </div>
       </div>
 
-      <div class="switch">
-        <label>
-          <input type="checkbox" name="is_private">
-          <span class="lever"></span>
-          Private
-        </label>
+      <div id="register-page" class="container hidden">
+        <div class="margin-container">
+          <div class="content-container">
+            <h3 class="title">Register</h3>
+            <form id="register-form" class="col s12">
+              <div class="row">
+                <div class="input-field col s6">
+                  <input
+                    id="first_name"
+                    type="text"
+                    class="validate"
+                    name="firstName"
+                    required
+                  />
+                  <label for="first_name">First Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input
+                    id="last_name"
+                    type="text"
+                    class="validate"
+                    name="lastName"
+                    required
+                  />
+                  <label for="last_name">Last Name</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="username"
+                    type="text"
+                    class="validate"
+                    name="username"
+                    required
+                  />
+                  <label for="username">Username</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="register-password"
+                    type="password"
+                    class="validate"
+                    name="password"
+                    required
+                  />
+                  <label for="register-password">Password</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="register-email"
+                    type="email"
+                    class="validate"
+                    name="email"
+                    required
+                  />
+                  <label for="register-email">Email</label>
+                </div>
+              </div>
+              <button
+                class="btn waves-effect waves-light"
+                type="submit"
+                name="action"
+              >
+                Submit
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
 
-      <button class="btn waves-effect waves-light" type="submit">
-        Submit
-        <i class="fa fa-paper-plane" aria-hidden="true"></i>
-      </button>
-      <button class="btn waves-effect waves-light" type="submit" name="action">
-        Submit
-        <i class="fa fa-paper-plane" aria-hidden="true"></i>
-      </button>
-      </form>
-    </div>
-    </div>
-  </main>
-  <script type="text/javascript" src="/scripts/network.js"></script>
-  <script type="text/javascript" src="/scripts/view.js"></script>
-  <script type="text/javascript" src="/scripts/components/header.js"></script>
-</body>
+      <div id="login-page" class="container hidden">
+        <div class="margin-container">
+          <div class="content-container">
+            <h3 class="title">Login</h3>
+            <form id="login-form" class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="login-email"
+                    type="email"
+                    class="validate"
+                    name="email"
+                    required
+                  />
+                  <label for="login-email">Email</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="login-password"
+                    type="password"
+                    class="validate"
+                    name="password"
+                    required
+                  />
+                  <label for="login-password">Password</label>
+                </div>
+              </div>
 
+              <button class="btn waves-effect waves-light">
+                Submit
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div id="edit-profile" class="container hidden">
+        <div class="margin-container">
+          <div class="content-container">
+            <h3 class="title">Update Profile</h3>
+            <form class="col s12" action="/api/users/edit" method="POST">
+              <div class="row">
+                <div class="input-field col s6">
+                  <input
+                    id="update_first_name"
+                    type="text"
+                    class="validate"
+                    name="firstName"
+                    required
+                  />
+                  <label for="update_first_name">First Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input
+                    id="update_last_name"
+                    type="text"
+                    class="validate"
+                    name="lastName"
+                    required
+                  />
+                  <label for="update_last_name">Last Name</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="update_username"
+                    type="text"
+                    class="validate"
+                    name="username"
+                    required
+                  />
+                  <label for="update_username">Username</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="update_email"
+                    type="email"
+                    class="validate"
+                    name="email"
+                    required
+                  />
+                  <label for="update_email">Email</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea
+                    id="bio"
+                    class="materialize-textarea"
+                    data-length="120"
+                    name="bio"
+                  ></textarea>
+                  <label for="bio">Bio</label>
+                </div>
+              </div>
+              <button
+                class="btn waves-effect waves-light"
+                type="submit"
+                name="action"
+              >
+                Submit
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="change-password" class="container hidden">
+        <div class="margin-container">
+          <div class="content-container">
+            <h3 class="title">Change Password</h3>
+            <form class="col s12" action="/api/users/password" method="POST">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="current-password"
+                    type="password"
+                    class="validate"
+                    name="current_password"
+                    required
+                  />
+                  <label for="current-password">Current Password</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="new-password"
+                    type="password"
+                    class="validate"
+                    name="new_password"
+                    required
+                  />
+                  <label for="new-password">New Password</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="confirm-new-password"
+                    type="password"
+                    class="validate"
+                    name="confirm_new_password"
+                    required
+                  />
+                  <label for="confirm-new-password">Confirm new password</label>
+                </div>
+              </div>
+              <button
+                class="btn waves-effect waves-light"
+                type="submit"
+                name="action"
+              >
+                Submit
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="new-resource-page" class="container hidden">
+        <div class="margin-container">
+          <div class="content-container">
+            <h3 class="title">Create New Resource</h3>
+            <form class="col s12" id="new-resource-form">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="title"
+                    type="text"
+                    class="validate"
+                    name="title"
+                    required
+                  />
+                  <label for="title">Title</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="url"
+                    type="text"
+                    class="validate"
+                    name="url"
+                    required
+                  />
+                  <label for="url">URL</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="description"
+                    type="text"
+                    class="validate"
+                    name="description"
+                    required
+                  />
+                  <label for="description">Description</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <select class="icons" id="category" name="category">
+                    <option value="" disabled selected>Category</option>
+                    <option value="Art/DIY">Art/DIY</option>
+                    <option value="Auto and Vehicles">Auto and Vehicles</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Film and Animation">
+                      Film and Animation
+                    </option>
+                    <option value="Gaming">Gaming</option>
+                    <option value="Music">Music</option>
+                    <option value="News and Politics">News and Politics</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Travelling">Travelling</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="switch">
+                <label>
+                  <input type="checkbox" name="is_private" />
+                  <span class="lever"></span>
+                  Private
+                </label>
+              </div>
+
+              <button
+                class="btn waves-effect waves-light"
+                type="submit"
+                name="action"
+              >
+                Submit
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div id="error-page" class="container hidden">
+        <div class="margin-container">
+          <div class="content-container">ERROR</div>
+        </div>
+      </div>
+      <a
+        id="floating-create-resource-button"
+        class="
+          hidden
+          circle-container
+          btn-floating btn-large
+          waves-effect waves-light
+          red
+        "
+        ><i class="fas fa-plus"></i
+      ></a>
+    </main>
+    <script type="text/javascript" src="/scripts/network.js"></script>
+    <script type="text/javascript" src="/scripts/view.js"></script>
+    <script type="text/javascript" src="/scripts/components/header.js"></script>
+    <script type="text/javascript" src="/scripts/components/login.js"></script>
+    <script
+      type="text/javascript"
+      src="/scripts/components/register.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/scripts/components/new-resource.js"
+    ></script>
+  </body>
 </html>

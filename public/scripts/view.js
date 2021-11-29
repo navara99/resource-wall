@@ -1,27 +1,34 @@
-// Client facing scripts here
-
 $(() => {
   console.log($("select"));
   $("select").formSelect();
 
-  headerButtonsOnClick();
-  updateView('resources');
+  headerButtonsEventListener();
+  loginEventListener();
+  registerEventListener();
+  newResourceEventListener();
+  updateView("resources");
 });
 
-const updateView = (nextView) => {
-  updateHeader();
+const updateView = (nextView, userInfo) => {
+  updateHeader(userInfo);
 
   const $resources = $("#resources");
-  const $registerForm = $("#register-form");
-  const $loginForm = $("#login-form");
+  const $registerPage = $("#register-page");
+  const $loginPage = $("#login-page");
   const $editProfile = $("#edit-profile");
   const $changePassword = $("#change-password");
+  const $newResourcePage = $("#new-resource-page");
+  const $resourceDetails = $("#resource-details");
+  const $errorPage = $("#error-page");
 
+  $newResourcePage.hide();
   $resources.hide();
-  $registerForm.hide();
-  $loginForm.hide();
+  $registerPage.hide();
+  $loginPage.hide();
   $editProfile.hide();
   $changePassword.hide();
+  $resourceDetails.hide();
+  $errorPage.hide();
 
   switch (nextView) {
     case "resources":
@@ -31,10 +38,19 @@ const updateView = (nextView) => {
       $editProfile.show();
       break;
     case "register":
-      $registerForm.show();
+      $registerPage.show();
       break;
     case "login":
-      $loginForm.show();
+      $loginPage.show();
+      break;
+    case "newResource":
+      $newResourcePage.show();
+      break;
+    case "resourceDetails":
+      $resourceDetails.show();
+      break;
+    default:
+      $errorPage.show();
       break;
   }
 };
