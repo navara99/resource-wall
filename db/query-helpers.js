@@ -85,7 +85,22 @@ const queryGenerator = (db) => {
     return resourceInfo;
   }
 
-  return { createNewUser, getUserByValue, updatePasswordById, updateUser, addNewResource, getIdFromCategory };
+  const getAllResources = async () => {
+    const value = [false];
+    const queryString = `SELECT * FROM resources WHERE is_private = $1;`
+    const result = await db.query(queryString, value);
+    return result.rows;
+  }
+
+  return {
+    createNewUser,
+    getUserByValue,
+    updatePasswordById,
+    updateUser,
+    addNewResource,
+    getIdFromCategory,
+    getAllResources
+   };
 }
 
 module.exports = queryGenerator;
