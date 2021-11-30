@@ -49,8 +49,20 @@ const getUrlLink = (url) => {
   `);
 };
 
+const registerLikeListener = () => {
+  const $like = $(".like-link");
+
+  $like.on("click", function (e) {
+    $figure = $(this).closest("figure");
+    const resourceId = $figure.attr("id");
+    likeResource(resourceId, user_id);
+    displayResources();
+  });
+
+};
+
 const getLikeLink = () => {
-  return $(`<i class="fas fa-heart card-heart"></i>`);
+  return $(`<a class="like-link"><i class="fas fa-heart card-heart"></i></a>`);
 };
 
 const clearResources = () => {
@@ -68,7 +80,7 @@ const displayResources = async () => {
 
     const $card = $("<div>").addClass("card");
     const $resourceMedia = is_video ? createEmbedVideo(media_url) : createScreenshot(media_url);
-    const $figure = $("<figure>");
+    const $figure = $("<figure>").attr("id", id);
 
     const $cardAction = getCardAction();
     const $cardContent = getCardContent(description);
@@ -81,5 +93,8 @@ const displayResources = async () => {
     $column.prepend($item);
 
     $("#resources-page").prepend($column);
+
   });
+
+  registerLikeListener();
 };
