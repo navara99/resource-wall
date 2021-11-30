@@ -332,3 +332,28 @@ div.left-navbar div.tab:hover {
 .switch {
   margin-bottom: 3em;
 }
+
+.resource-thumnail {
+  display: flex;
+  margin: 1em 0;
+  justify-content: space-between;
+}
+
+.resource-thumnail img {
+  max-height: 10em;
+  min-height: 10em;
+}
+
+.resource-thumnail * {
+  margin: 0 0.5em;
+}
+
+.thumbnail-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resource-thumnail .text {
+  flex: 1;
+}

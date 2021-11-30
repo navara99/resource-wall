@@ -15,10 +15,7 @@ const profilePageHandler = () => {
 
   const profileButtonsEventListener = () => {
     $updateProfileButton.on("click", () => {
-      $passwordButtonBorder.hide();
-      $changePasswordPage.hide();
-      $profileButtonBorder.show();
-      $updateProfilePage.show();
+      resetProfilePage();
     });
 
     $changePasswordButton.on("click", () => {

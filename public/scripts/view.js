@@ -9,6 +9,7 @@ $(() => {
 
 const eventListeners = () => {
   const { profileButtonsEventListener } = profilePageHandler();
+  const { resourcesButtonsEventListener } = myResourcesPageHandler();
   headerButtonsEventListener();
   loginEventListener();
   registerEventListener();
@@ -16,6 +17,7 @@ const eventListeners = () => {
   changePasswordEventListener();
   updateProfileEventListener();
   profileButtonsEventListener();
+  resourcesButtonsEventListener();
 };
 
 const updateTitleURL = (title, url) => {
@@ -40,6 +42,7 @@ const viewHandler = () => {
   const $errorPage = $("#error-page");
   const $myResourcePage = $("#my-resources-page");
   const { resetProfilePage } = profilePageHandler();
+  const { showMyResources, showLikedResources } = myResourcesPageHandler();
 
   const updateView = (nextView, userInfo) => {
     updateUserInfo(userInfo);
@@ -59,8 +62,14 @@ const viewHandler = () => {
         updateTitleURL("Home", "");
         break;
       case "myResources":
+        showMyResources();
         $myResourcePage.show();
-        updateTitleURL("Resources", "resources");
+        updateTitleURL("My resources", "my-resources");
+        break;
+      case "likedResources":
+        showLikedResources();
+        $myResourcePage.show();
+        updateTitleURL("Liked resources", "liked-resources");
         break;
       case "updateProfile":
         resetProfilePage();

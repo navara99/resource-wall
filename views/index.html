@@ -844,11 +844,100 @@
           <div class="content-container">ERROR</div>
         </div>
       </div>
+
       <div id="my-resources-page" class="container hidden">
         <div class="margin-container">
-          <div class="content-container">MY RESOURCES PAGE</div>
+          <div class="content-container settings-container">
+            <div class="left-navbar">
+              <div id="side-my-resources-button" class="tab">
+                My Resources
+                <div id="my-button-border" class="active"></div>
+              </div>
+              <div id="side-liked-resources-button" class="tab">
+                <i class="fas fa-heart"></i> Resources
+                <div id="liked-button-border" class="active hidden"></div>
+              </div>
+            </div>
+            <div id="my-resources-details" class="settings">
+              <h3 class="title">My Resources</h3>
+              <ul class="collection comments">
+                <li>
+                  <div class="resource-thumnail">
+                    <div class="thumbnail-container">
+                      <img
+                        alt=""
+                        src="https://i.redd.it/jeuusd992wd41.jpg"
+                        class="thumnail"
+                      />
+                    </div>
+
+                    <div class="text">
+                      <h6>aclette lomo tattooed</h6>
+                      <div>chartreuse schlitz meggings activated charcoal. Cardigan hammock single-origin coffee, tbh lyft cray blog viral hot chicken chicharrones before they sold out chillwave gochujang butcher ennui.</div>
+                    </div>
+                    <div>timestamp</div>
+                  </div>
+                </li>
+                <li>
+                  <div class="resource-thumnail">
+                    <div class="thumbnail-container">
+                      <img
+                        alt=""
+                        src="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
+                        class="thumnail"
+                      />
+                    </div>
+
+                    <div class="text">
+                      <h6>Title</h6>
+                      <div>comment</div>
+                    </div>
+                    <div>timestamp</div>
+                  </div>
+                </li>
+                <li>
+                  <div class="resource-thumnail">
+                    <div class="thumbnail-container">
+                      <img
+                        alt=""
+                        src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F13%2F2015%2F04%2F05%2Ffeatured.jpg&q=85"
+                        class="thumnail"
+                      />
+                    </div>
+
+                    <div class="text">
+                      <h6>Title</h6>
+                      <div>comment</div>
+                    </div>
+                    <div>timestamp</div>
+                  </div>
+                </li>
+                <li>
+                  <div class="resource-thumnail">
+                    <div class="thumbnail-container">
+                      <img
+                        alt=""
+                        src="https://i.redd.it/jeuusd992wd41.jpg"
+                        class="thumnail"
+                      />
+                    </div>
+
+                    <div class="text">
+                      <h6>Title</h6>
+                      <div>comment</div>
+                    </div>
+                    <div>timestamp</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div id="liked-resources-details" class="settings hidden">
+              <h3 class="title"><i class="fas fa-heart"></i> Resources</h3>
+            </div>
+          </div>
         </div>
       </div>
+
       <a
         id="floating-create-resource-button"
         class="
@@ -876,6 +965,10 @@
     <script
       type="text/javascript"
       src="/scripts/components/new-resource.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/scripts/components/my-resources.js"
     ></script>
   </body>
 </html>

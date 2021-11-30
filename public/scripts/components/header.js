@@ -49,7 +49,7 @@ const headerButtonsEventListener = () => {
   });
 
   $likedResourcesButton.on("click", () => {
-    viewHandler()("resources");
+    viewHandler()("likedResources");
   });
 
   $homeButton.on("click", () => {
