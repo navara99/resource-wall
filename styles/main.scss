@@ -253,13 +253,20 @@ li textarea.materialize-textarea {
     z-index: 2;
     .card-heart {
       font-size: 3em;
-      color: rgba(128, 128, 128, 0.657);
       &:hover {
         color: red;
         transition: color 0.3s;
       }
     }
   }
+}
+
+.not-liked {
+  color: rgba(128, 128, 128, 0.657);
+}
+
+.liked {
+  color: red;
 }
 
 .card-action {
