@@ -55,7 +55,7 @@ const registerLikeListener = () => {
   $like.on("click", function (e) {
     $figure = $(this).closest("figure");
     const resourceId = $figure.attr("id");
-    likeResource(resourceId, user_id);
+    likeResource(resourceId);
     displayResources();
   });
 
