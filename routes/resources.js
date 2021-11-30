@@ -22,6 +22,22 @@ module.exports = (db) => {
 
   });
 
+  router.get("/:id", async (req, res) => {
+
+    try {
+      const { id } = req.params;
+      const allResources = await getAllResources();
+      console.log(allResources);
+      res.json({
+        status: "success",
+        allResources
+      })
+    } catch (e) {
+      res.status(500).json({ error: err.message });
+    }
+
+  });
+
 
   router.post("/", async (req, res) => {
     const user_id = req.session.user_id;
