@@ -50,7 +50,7 @@ const viewHandler = () => {
   const $errorPage = $("#error-page");
   const $myResourcesPage = $("#my-resources-page");
 
-  const updateView = (nextView, userInfo) => {
+  const updateView = (nextView, userInfo, resourceDetails) => {
     updateUserInfo(userInfo);
     $newResourcePage.hide();
     $resourcesPage.hide();
@@ -101,6 +101,7 @@ const viewHandler = () => {
         updateTitleURL("Create New Resource", "create-resource");
         break;
       case "resourceDetails":
+        updateResourceDeailsPage(resourceDetails);
         $resourceDetails.show();
         updateTitleURL("Resource Details", "resource-details");
         break;
@@ -123,3 +124,5 @@ const {
   showLikedResources
 } =
   profilePageHandler();
+
+const updateResourceDeailsPage = updateResourceDeails();
