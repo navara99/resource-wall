@@ -15,11 +15,16 @@ const profilePageHandler = () => {
   const prefillProfileForm = async () => {
     const userInfo = await getMyDetails();
     const { first_name, last_name, username, email, bio } = userInfo
-    $firstNameInput.val(first_name);
     $LastNameInput.val(last_name);
+    $LastNameInput.focus();
     $usernameInput.val(username);
+    $usernameInput.focus();
     $emailInput.val(email);
+    $emailInput.focus();
     $bioInput.val(bio);
+    $bioInput.focus();
+    $firstNameInput.val(first_name);
+    $firstNameInput.focus();
   };
 
   const resetProfilePage = () => {
