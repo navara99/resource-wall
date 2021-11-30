@@ -1,19 +1,21 @@
-const updateHeader = () => {
+const updateHeader = (userInfo) => {
   const $userButtons = $("#user-buttons");
   const $noUserButtons = $("#no-user-buttons");
   const $floatingCreateResourceButton = $("#floating-create-resource-button");
 
-  $userButtons.hide();
-  $noUserButtons.hide();
-  $floatingCreateResourceButton.hide();
+  const { id, image_url } = userInfo;
 
-  const { id, image_url } = currentUserInfo;
-
-  if (!id) return $noUserButtons.show();
+  if (!id) {
+    $userButtons.hide();
+    $floatingCreateResourceButton.hide();
+    return $noUserButtons.show();
+  }
 
   $profilePicture = $("#profile-picture");
 
   $profilePicture.attr("src", image_url);
+
+  $noUserButtons.hide();
   $userButtons.show();
   $floatingCreateResourceButton.show();
 };
@@ -27,12 +29,15 @@ const headerButtonsEventListener = () => {
   const $createResourceButton = $("#create-resource-button");
   const $floatingCreateResourceButton = $("#floating-create-resource-button");
   const $logoutButton = $("#logout-button");
+  const $myResourcesButton = $("#my-resources-button");
+
+  $myResourcesButton.on("click", () => {
+    updateView("myResources");
+  });
 
   $logoutButton.on("click", () => {
     logout();
-    updateUserInfo({});
-    updateHeader();
-    updateView("resources");
+    updateView("resources", {});
   });
 
   $floatingCreateResourceButton.on("click", () => {
@@ -44,7 +49,7 @@ const headerButtonsEventListener = () => {
   });
 
   $likedResourcesButton.on("click", () => {
-    updateView("resources");
+    updateView("likedResources");
   });
 
   $homeButton.on("click", () => {

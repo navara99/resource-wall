@@ -33,14 +33,14 @@
 ^ users should be able to update their profile (username, email, password[twice], profile picture)
 
 ### new resource
-- save an external URL along with a title and description (optional: upload image)
-- users should be able to categorize any resource under a topic
+^ save an external URL along with a title and description (optional: upload image)
+^ users should be able to categorize any resource under a topic
 
 ### header
 - users should be able to search for already-saved resources created by any user
 - (stretch) search user
 - (stretch) search by catergory
-- logout button / login link
+^ logout button / login link
 
 # LHL Node Skeleton
 

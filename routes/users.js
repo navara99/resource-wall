@@ -38,11 +38,11 @@ module.exports = (db) => {
       const { username, email } = req.body;
 
       const userWithSameUsername = await getUserByValue("username", username);
-      // const { id: idWithSameUsername } = userWithSameUsername;
+
       if (userWithSameUsername && userWithSameUsername.id !== userId) return res.status(400).json({ error: "This username is already taken." });
 
       const userWithSameEmail = await getUserByValue("email", email);
-      // const { id: idWithSameEmail} = userWithSameEmail;
+
       if (userWithSameEmail && userWithSameEmail.email !== userId) return res.status(400).json({ error: "This email is already taken." });
 
       const newUserInfo = { userId, ...req.body };
