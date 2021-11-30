@@ -25,9 +25,11 @@ const profilePageHandler = () => {
     $bioInput.focus();
     $firstNameInput.val(first_name);
     $firstNameInput.focus();
+    $firstNameInput.blur();
   };
 
   const resetProfilePage = () => {
+    prefillProfileForm();
     $passwordButtonBorder.hide();
     $changePasswordPage.hide();
     $profileButtonBorder.show();
