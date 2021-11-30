@@ -5,13 +5,12 @@ const axios = require("axios");
 const queryGenerator = require("../db/query-helpers");
 
 module.exports = (db) => {
-  const { addNewResource, getIdFromCategory, getAllResources } = queryGenerator(db);
+  const { addNewResource, getIdFromCategory, getAllResources, addLikeToResource } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
 
     try {
       const allResources = await getAllResources();
-      console.log(allResources);
       res.json({
         status: "success",
         allResources
@@ -21,7 +20,6 @@ module.exports = (db) => {
     }
 
   });
-
 
   router.post("/", async (req, res) => {
     const user_id = req.session.user_id;
@@ -56,7 +54,23 @@ module.exports = (db) => {
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
-  })
+  });
+
+  router.post("/:id/like", async (req, res) => {
+    const { id } = req.params;
+    const { user_id } = req.session;
+    console.log(id, user_id);
+
+    if (!user_id) return res.status(500).json({ error: "You must be logged in to like resources." });
+
+    try {
+      const likes = await addLikeToResource(id, user_id);
+      res.json(likes);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    };
+
+  });
 
   return router;
 };
