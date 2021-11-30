@@ -83,34 +83,3 @@ const displayResources = async () => {
     $("#resources").prepend($column);
   });
 };
-
-{/* <figure>
-<div class="card">
-  <div class="card-image">
-    <div class="url-wrapper truncate">
-      <a href="wwww.google.com" class="card-url btn-flat">https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwf</a>
-    </div>
-    <i class="fas fa-heart card-heart"></i>
-    <img src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80"/>
-    <span class="card-title">Card Title</span>
-  </div>
-  <div class="card-content">
-    <p>
-      I am a very simple card. I am good at containing small bits of
-      information. I am convenient because I require little markup
-      to use effectively.
-    </p>
-  </div>
-  <div class="card-action">
-    <div class="card-summary">
-      <i class="fas fa-star card-icon"></i>4.5
-    </div>
-    <div class="card-summary">
-      <i class="fas fa-heart card-icon"></i>100
-    </div>
-    <div class="card-summary">
-      <i class="fas fa-comment-alt card-icon"></i>30
-    </div>
-  </div>
-</div>
-</figure> */}
