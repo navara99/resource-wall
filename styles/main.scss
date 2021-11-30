@@ -382,11 +382,12 @@ div.resource-thumbnail div.stat span.stat-column {
   display: flex;
   flex-direction: column;
   margin: 0;
+  text-align: center;
 }
 
-div.resource-thumbnail div.stat span.stat-column span {
+div.resource-thumbnail div.stat span.stat-column * {
   margin: 0;
-  text-align: center;
+  display: block;
 }
 
 #liked-resources-details {
