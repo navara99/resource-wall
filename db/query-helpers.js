@@ -85,8 +85,8 @@ const queryGenerator = (db) => {
     return resourceInfo;
   }
 
-  const getAllResources = async () => {
-    const value = [false];
+  const getAllResources = async (user_id) => {
+    const value = [user_id, false];
     const queryString = `
     SELECT
     resources.id,
@@ -96,12 +96,15 @@ const queryGenerator = (db) => {
     title,
     is_video,
     created_on,
-    user_id,
+    resources.user_id,
     media_url,
     categories.type AS category,
-    category_id
-    FROM resources JOIN categories ON resources.category_id = categories.id
-    WHERE is_private = $1;`
+    category_id,
+    (SELECT COUNT(likes.*) FROM likes WHERE resource_id = resources.id) AS likes,
+    (SELECT COUNT(likes.*) FROM likes WHERE user_id = $1 AND resource_id = resources.id) AS is_liked
+    FROM resources
+    JOIN categories ON resources.category_id = categories.id
+    WHERE is_private = $2;`;
 
     const result = await db.query(queryString, value);
     return result.rows;

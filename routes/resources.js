@@ -8,14 +8,15 @@ module.exports = (db) => {
   const { addNewResource, getIdFromCategory, getAllResources, addLikeToResource } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
-
+    const user_id = req.session.user_id;
     try {
-      const allResources = await getAllResources();
+      const allResources = await getAllResources(user_id);
       res.json({
         status: "success",
         allResources
-      })
-    } catch (e) {
+      });
+    } catch (err) {
+      console.log(err.message);
       res.status(500).json({ error: err.message });
     }
 
