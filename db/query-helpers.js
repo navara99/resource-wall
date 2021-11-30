@@ -107,6 +107,13 @@ const queryGenerator = (db) => {
     return result.rows;
   }
 
+  const addLikeToResource = async (id, user_id) => {
+    const values = [user_id, id];
+    const queryString = `INSERT into likes (user_id, resource_id) VALUES ($1, $2) RETURNING *;`;
+    const result = await db.query(queryString, values);
+    return result.rows;
+  };
+
   return {
     createNewUser,
     getUserByValue,
@@ -114,7 +121,8 @@ const queryGenerator = (db) => {
     updateUser,
     addNewResource,
     getIdFromCategory,
-    getAllResources
+    getAllResources,
+    addLikeToResource
   };
 }
 
