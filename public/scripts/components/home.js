@@ -52,17 +52,19 @@ const getUrlLink = (url) => {
 const registerLikeListener = () => {
   const $like = $(".like-link");
 
-  $like.on("click", function (e) {
+  $like.on("click", async function (e) {
     $figure = $(this).closest("figure");
     const resourceId = $figure.attr("id");
-    likeResource(resourceId);
-    displayResources();
+    const result = await likeResource(resourceId);
+    const { resource_id } = result[0];
+    $likedHeart = $(`#${resource_id}`).find(".card-heart");
+    $likedHeart.removeClass("not-liked").addClass("liked");
   });
 
 };
 
 const getLikeLink = () => {
-  return $(`<a class="like-link"><i class="fas fa-heart card-heart"></i></a>`);
+  return $(`<a class="like-link"><i class="fas fa-heart card-heart not-liked"></i></a>`);
 };
 
 const clearResources = () => {
