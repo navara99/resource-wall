@@ -32,7 +32,7 @@ const headerButtonsEventListener = () => {
   const $myResourcesButton = $("#my-resources-button");
 
   $myResourcesButton.on("click", () => {
-    viewHandler()("resources");
+    viewHandler()("myResources");
   });
 
   $logoutButton.on("click", () => {

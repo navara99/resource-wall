@@ -30,7 +30,7 @@ const updateUserInfo = async (userInfo) => {
 };
 
 const viewHandler = () => {
-  const $resources = $("#resources");
+  const $resourcesPage = $("#resources-page");
   const $registerPage = $("#register-page");
   const $loginPage = $("#login-page");
   const $profilePage = $("#profile-page");
@@ -38,22 +38,28 @@ const viewHandler = () => {
   const $newResourcePage = $("#new-resource-page");
   const $resourceDetails = $("#resource-details");
   const $errorPage = $("#error-page");
+  const $myResourcePage = $("#my-resources-page");
   const { resetProfilePage } = profilePageHandler();
 
   const updateView = (nextView, userInfo) => {
     updateUserInfo(userInfo);
     $newResourcePage.hide();
-    $resources.hide();
+    $resourcesPage.hide();
     $registerPage.hide();
     $loginPage.hide();
     $profilePage.hide();
     $changePasswordPage.hide();
     $resourceDetails.hide();
     $errorPage.hide();
+    $myResourcePage.hide();
 
     switch (nextView) {
       case "resources":
-        $resources.show();
+        $resourcesPage.show();
+        updateTitleURL("Home", "");
+        break;
+      case "myResources":
+        $myResourcePage.show();
         updateTitleURL("Resources", "resources");
         break;
       case "updateProfile":

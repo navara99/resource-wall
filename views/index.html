@@ -46,15 +46,16 @@
             <li id="liked-resources-button">
               <a><i class="fas fa-heart"></i></a>
             </li>
-            <li id="profile-button">
-              <a><i class="fas fa-cog"></i></a>
-            </li>
+
             <li id="my-resources-button">
               <a class="profile">
                 <div class="profile">
                   <img alt="" id="profile-picture" class="circle profile" />
                 </div>
               </a>
+            </li>
+            <li id="profile-button">
+              <a><i class="fas fa-cog"></i></a>
             </li>
             <li>
               <a id="logout-button"><i class="fas fa-sign-out-alt"></i></a>
@@ -73,7 +74,7 @@
     </header>
 
     <main>
-      <div id="resources">
+      <div id="resources-page">
         <div id="columns">
           <figure>
             <div class="card">
@@ -689,7 +690,6 @@
                   name="action"
                 >
                   Submit
-                  <i class="fa fa-paper-plane" aria-hidden="true"></i>
                 </button>
               </form>
             </div>
@@ -842,6 +842,11 @@
       <div id="error-page" class="container hidden">
         <div class="margin-container">
           <div class="content-container">ERROR</div>
+        </div>
+      </div>
+      <div id="my-resources-page" class="container hidden">
+        <div class="margin-container">
+          <div class="content-container">MY RESOURCES PAGE</div>
         </div>
       </div>
       <a
