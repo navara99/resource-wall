@@ -58,7 +58,7 @@ const getAllResources = () => {
 };
 
 const likeResource = (id) => {
-  $.ajax({
+  return $.ajax({
     method: "POST",
     url: `/api/resources/${id}/like`,
   });
