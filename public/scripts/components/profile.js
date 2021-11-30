@@ -1,10 +1,17 @@
 const profilePageHandler = () => {
-  const $updateProfileButton = $("#update-profile-button");
+  const $updateProfileButton = $("#side-update-profile-button");
   const $profileButtonBorder = $("#profile-button-border");
   const $updateProfilePage = $("#update-profile-page");
-  const $changePasswordButton = $("#change-password-button");
+  const $changePasswordButton = $("#side-change-password-button");
   const $passwordButtonBorder = $("#password-button-border");
   const $changePasswordPage = $("#change-password-page");
+
+  const $myResoucesButton = $("#side-my-resources-button");
+  const $myButtonBorder = $("#my-button-border");
+  const $myResourcesPage = $("#my-resources-details");
+  const $likedResourcesButton = $("#side-liked-resources-button");
+  const $likedButtonBorder = $("#liked-button-border");
+  const $likedResourcesPage = $("#liked-resources-details");
 
   const $firstNameInput = $("#update_first_name");
   const $LastNameInput = $("#update_last_name");
@@ -12,44 +19,84 @@ const profilePageHandler = () => {
   const $emailInput = $("#update_email");
   const $bioInput = $("#bio");
 
-  const prefillProfileForm = async () => {
-    const userInfo = await getMyDetails();
-    const { first_name, last_name, username, email, bio } = userInfo
-    $LastNameInput.val(last_name);
-    $LastNameInput.focus();
-    $usernameInput.val(username);
-    $usernameInput.focus();
-    $emailInput.val(email);
-    $emailInput.focus();
-    $bioInput.val(bio);
-    $bioInput.focus();
-    $firstNameInput.val(first_name);
-    $firstNameInput.focus();
-    $firstNameInput.blur();
-  };
-
-  const resetProfilePage = () => {
-    prefillProfileForm();
+  const hideAllPages = () => {
+    $likedButtonBorder.hide();
+    $likedResourcesPage.hide();
     $passwordButtonBorder.hide();
     $changePasswordPage.hide();
+    $profileButtonBorder.hide();
+    $updateProfilePage.hide();
+    $myButtonBorder.hide();
+    $myResourcesPage.hide();
+  };
+
+  const showMyResources = () => {
+    hideAllPages();
+    $myButtonBorder.show();
+    $myResourcesPage.show();
+  };
+
+  const showLikedResources = () => {
+    hideAllPages();
+    $likedButtonBorder.show();
+    $likedResourcesPage.show();
+  };
+
+  const showUpdateProfilePage = () => {
+    prefillProfileForm();
+    hideAllPages();
     $profileButtonBorder.show();
     $updateProfilePage.show();
   };
 
+  const showChangePasswordPage = () => {
+    hideAllPages();
+    $passwordButtonBorder.show();
+    $changePasswordPage.show();
+  };
+
+  const putInValAndFocus = ($elm, val) => {
+    $elm.val(val);
+    $elm.focus();
+  };
+
+  const prefillProfileForm = async () => {
+    const userInfo = await getMyDetails();
+    const { first_name, last_name, username, email, bio } = userInfo;
+    putInValAndFocus($LastNameInput, last_name);
+    putInValAndFocus($usernameInput, username);
+    putInValAndFocus($emailInput, email);
+    putInValAndFocus($bioInput, bio);
+    putInValAndFocus($firstNameInput, first_name);
+    $firstNameInput.blur();
+  };
+
   const profileButtonsEventListener = () => {
+    $likedResourcesButton.on("click", () => {
+      showLikedResources();
+    });
+
+    $myResoucesButton.on("click", () => {
+      showMyResources();
+    });
+
     $updateProfileButton.on("click", () => {
-      resetProfilePage();
+      showUpdateProfilePage();
     });
 
     $changePasswordButton.on("click", () => {
-      $profileButtonBorder.hide();
-      $updateProfilePage.hide();
-      $passwordButtonBorder.show();
-      $changePasswordPage.show();
+      showChangePasswordPage();
     });
   };
 
-  return { resetProfilePage, profileButtonsEventListener, prefillProfileForm };
+  return {
+    showUpdateProfilePage,
+    profileButtonsEventListener,
+    prefillProfileForm,
+    showChangePasswordPage,
+    showMyResources,
+    showLikedResources,
+  };
 };
 
 const updateProfileEventListener = () => {

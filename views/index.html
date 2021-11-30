@@ -42,11 +42,7 @@
             <li id="create-resource-button">
               <a><i class="fas fa-plus-circle"></i></a>
             </li>
-            <li id="liked-resources-button">
-              <a><i class="fas fa-heart"></i></a>
-            </li>
-
-            <li id="my-resources-button profile-picture">
+            <li id="profile-button" class="profile-picture">
               <a class="profile profile-picture">
                 <div class="profile profile-picture">
                   <img
@@ -56,22 +52,19 @@
                   />
                 </div>
               </a>
-              <div
-                class="hidden dropdown"
-                id="dropdown"
-              >
-                <a>link1</a>
+              <div class="hidden dropdown" id="dropdown">
+                <a id="my-resources-button">My Resources</a>
                 <a class="divider"></a>
-                <a>link2ggggggggg</a>
+                <a id="liked-resources-button"
+                  ><i class="fas fa-heart"></i> Resources</a
+                >
+                <a class="divider"></a>
+                <a id="update-profile-button">Update Profile</a>
+                <a class="divider"></a>
+                <a id="change-password-button">Change Password</a>
                 <a class="divider"></a>
                 <a id="logout-button">Logout</a>
               </div>
-            </li>
-            <li id="profile-button">
-              <a><i class="fas fa-cog"></i></a>
-            </li>
-            <li>
-              <a><i class="fas fa-sign-out-alt"></i></a>
             </li>
           </ul>
           <ul id="no-user-buttons">
@@ -320,153 +313,6 @@
           </div>
         </div>
       </div>
-      <div id="profile-page" class="container hidden">
-        <div class="margin-container">
-          <div class="content-container settings-container">
-            <div class="left-navbar">
-              <div id="update-profile-button" class="tab">
-                Update Profile
-                <div id="profile-button-border" class="active"></div>
-              </div>
-              <div id="change-password-button" class="tab">
-                Change Password
-                <div id="password-button-border" class="active hidden"></div>
-              </div>
-            </div>
-            <div id="update-profile-page" class="settings">
-              <h3 class="title">Update Profile</h3>
-              <form
-                id="update-profile-form"
-                class="col s12"
-                action="/api/users/edit"
-                method="POST"
-              >
-                <div class="row">
-                  <div class="input-field col s6">
-                    <input
-                      id="update_first_name"
-                      type="text"
-                      class="validate"
-                      name="firstName"
-                      required
-                    />
-                    <label for="update_first_name">First Name</label>
-                  </div>
-                  <div class="input-field col s6">
-                    <input
-                      id="update_last_name"
-                      type="text"
-                      class="validate"
-                      name="lastName"
-                      required
-                    />
-                    <label for="update_last_name">Last Name</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input
-                      id="update_username"
-                      type="text"
-                      class="validate"
-                      name="username"
-                      required
-                    />
-                    <label for="update_username">Username</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input
-                      id="update_email"
-                      type="email"
-                      class="validate"
-                      name="email"
-                      required
-                    />
-                    <label for="update_email">Email</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <textarea
-                      id="bio"
-                      class="materialize-textarea"
-                      data-length="120"
-                      name="bio"
-                    ></textarea>
-                    <label for="bio">Bio</label>
-                  </div>
-                </div>
-                <button
-                  class="btn waves-effect waves-light"
-                  type="submit"
-                  name="action"
-                >
-                  Submit
-                </button>
-              </form>
-            </div>
-            <div id="change-password-page" class="settings hidden">
-              <h3 class="title">Change Password</h3>
-              <form
-                id="change-password-form"
-                class="col s12"
-                action="/api/users/password"
-                method="POST"
-              >
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input
-                      id="current-password"
-                      type="password"
-                      class="validate"
-                      name="current_password"
-                      required
-                    />
-                    <label for="current-password">Current Password</label>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input
-                      id="new-password"
-                      type="password"
-                      class="validate"
-                      name="new_password"
-                      required
-                    />
-                    <label for="new-password">New Password</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input
-                      id="confirm-new-password"
-                      type="password"
-                      class="validate"
-                      name="confirm_new_password"
-                      required
-                    />
-                    <label for="confirm-new-password"
-                      >Confirm new password</label
-                    >
-                  </div>
-                </div>
-                <button
-                  class="btn waves-effect waves-light"
-                  type="submit"
-                  name="action"
-                >
-                  Submit
-                  <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div id="new-resource-page" class="container hidden">
         <div class="margin-container">
@@ -557,7 +403,13 @@
           <span id="error-message"></span>
         </div>
       </div>
-
+      <div id="profile-page" class="container hidden">
+        <div class="margin-container">
+          <div class="content-container settings-container">
+            <div class="left-navbar"></div>
+          </div>
+        </div>
+      </div>
       <div id="my-resources-page" class="container hidden">
         <div class="margin-container">
           <div class="content-container settings-container">
@@ -569,6 +421,14 @@
               <div id="side-liked-resources-button" class="tab">
                 <i class="fas fa-heart"></i> Resources
                 <div id="liked-button-border" class="active hidden"></div>
+              </div>
+              <div id="side-update-profile-button" class="tab">
+                Update Profile
+                <div id="profile-button-border" class="active"></div>
+              </div>
+              <div id="side-change-password-button" class="tab">
+                Change Password
+                <div id="password-button-border" class="active hidden"></div>
               </div>
             </div>
             <div id="my-resources-details" class="settings">
@@ -886,6 +746,137 @@
                 </li>
               </ul>
             </div>
+            <div id="update-profile-page" class="settings">
+              <h3 class="title">Update Profile</h3>
+              <form
+                id="update-profile-form"
+                class="col s12"
+                action="/api/users/edit"
+                method="POST"
+              >
+                <div class="row">
+                  <div class="input-field col s6">
+                    <input
+                      id="update_first_name"
+                      type="text"
+                      class="validate"
+                      name="firstName"
+                      required
+                    />
+                    <label for="update_first_name">First Name</label>
+                  </div>
+                  <div class="input-field col s6">
+                    <input
+                      id="update_last_name"
+                      type="text"
+                      class="validate"
+                      name="lastName"
+                      required
+                    />
+                    <label for="update_last_name">Last Name</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input
+                      id="update_username"
+                      type="text"
+                      class="validate"
+                      name="username"
+                      required
+                    />
+                    <label for="update_username">Username</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input
+                      id="update_email"
+                      type="email"
+                      class="validate"
+                      name="email"
+                      required
+                    />
+                    <label for="update_email">Email</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <textarea
+                      id="bio"
+                      class="materialize-textarea"
+                      data-length="120"
+                      name="bio"
+                    ></textarea>
+                    <label for="bio">Bio</label>
+                  </div>
+                </div>
+                <button
+                  class="btn waves-effect waves-light"
+                  type="submit"
+                  name="action"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+            <div id="change-password-page" class="settings hidden">
+              <h3 class="title">Change Password</h3>
+              <form
+                id="change-password-form"
+                class="col s12"
+                action="/api/users/password"
+                method="POST"
+              >
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input
+                      id="current-password"
+                      type="password"
+                      class="validate"
+                      name="current_password"
+                      required
+                    />
+                    <label for="current-password">Current Password</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input
+                      id="new-password"
+                      type="password"
+                      class="validate"
+                      name="new_password"
+                      required
+                    />
+                    <label for="new-password">New Password</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input
+                      id="confirm-new-password"
+                      type="password"
+                      class="validate"
+                      name="confirm_new_password"
+                      required
+                    />
+                    <label for="confirm-new-password"
+                      >Confirm new password</label
+                    >
+                  </div>
+                </div>
+                <button
+                  class="btn waves-effect waves-light"
+                  type="submit"
+                  name="action"
+                >
+                  Submit
+                  <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -918,10 +909,6 @@
     <script
       type="text/javascript"
       src="/scripts/components/new-resource.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="/scripts/components/my-resources.js"
     ></script>
     <script type="text/javascript" src="/scripts/view.js"></script>
   </body>

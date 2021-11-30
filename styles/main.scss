@@ -400,13 +400,10 @@ div#dropdown.dropdown {
   bottom: -0.0000000001;
   margin: 0;
   right: 0;
-  z-index: 12222;
+  border: 0.1em solid #E5E5E5;
 }
 
 div#dropdown.hidden.dropdown a{
   color: #111111;
-}
-
-#my-resources-button {
-  position: relative;
+  text-align: center;
 }
