@@ -6,6 +6,22 @@ const profilePageHandler = () => {
   const $passwordButtonBorder = $("#password-button-border");
   const $changePasswordPage = $("#change-password-page");
 
+  const $firstNameInput = $("#update_first_name");
+  const $LastNameInput = $("#update_last_name");
+  const $usernameInput = $("#update_username");
+  const $emailInput = $("#update_email");
+  const $bioInput = $("#bio");
+
+  const prefillProfileForm = async () => {
+    const userInfo = await getMyDetails();
+    const { first_name, last_name, username, email, bio } = userInfo
+    $firstNameInput.val(first_name);
+    $LastNameInput.val(last_name);
+    $usernameInput.val(username);
+    $emailInput.val(email);
+    $bioInput.val(bio);
+  };
+
   const resetProfilePage = () => {
     $passwordButtonBorder.hide();
     $changePasswordPage.hide();
@@ -26,7 +42,7 @@ const profilePageHandler = () => {
     });
   };
 
-  return { resetProfilePage, profileButtonsEventListener };
+  return { resetProfilePage, profileButtonsEventListener, prefillProfileForm };
 };
 
 const updateProfileEventListener = () => {
@@ -40,11 +56,11 @@ const updateProfileEventListener = () => {
 
       const userInfo = await updateProfile(data);
 
-      viewHandler()("resources", userInfo);
+      updateView("resources", userInfo);
 
       return $updateProfileForm.trigger("reset");
     } catch (err) {
-      viewHandler()(err);
+      updateView(err);
     }
   });
 };
@@ -60,11 +76,11 @@ const changePasswordEventListener = () => {
 
       const userInfo = await changePassword(data);
 
-      viewHandler()("resources", userInfo);
+      updateView("resources", userInfo);
 
       return $changePasswordForm.trigger("reset");
     } catch (err) {
-      viewHandler()(err);
+      updateView(err);
     }
   });
 };

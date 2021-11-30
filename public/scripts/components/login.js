@@ -9,11 +9,11 @@ const loginEventListener = () => {
 
       const userInfo = await login(data);
 
-      viewHandler()("resources", userInfo);
+      updateView("resources", userInfo);
 
       return $loginForm.trigger("reset");
     } catch (err) {
-      viewHandler()(err);
+      updateView(err);
     }
   });
 };

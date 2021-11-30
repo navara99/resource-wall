@@ -4,11 +4,10 @@ $(() => {
 
   updateUserInfo();
   eventListeners();
-  viewHandler()("resources");
+  updateView("resources");
 });
 
 const eventListeners = () => {
-  const { profileButtonsEventListener } = profilePageHandler();
   const { resourcesButtonsEventListener } = myResourcesPageHandler();
   headerButtonsEventListener();
   loginEventListener();
@@ -31,6 +30,13 @@ const updateUserInfo = async (userInfo) => {
   updateHeader(userInfo);
 };
 
+const handleError = () => {
+  const $errorMessage = $("#error-message");
+  return (newMsg) => {
+    $errorMessage.text(newMsg);
+  };
+};
+
 const viewHandler = () => {
   const $resourcesPage = $("#resources-page");
   const $registerPage = $("#register-page");
@@ -41,7 +47,6 @@ const viewHandler = () => {
   const $resourceDetails = $("#resource-details");
   const $errorPage = $("#error-page");
   const $myResourcePage = $("#my-resources-page");
-  const { resetProfilePage } = profilePageHandler();
   const { showMyResources, showLikedResources } = myResourcesPageHandler();
 
   const updateView = (nextView, userInfo) => {
@@ -73,6 +78,7 @@ const viewHandler = () => {
         break;
       case "updateProfile":
         resetProfilePage();
+        prefillProfileForm();
         $profilePage.show();
         updateTitleURL("Update Profile", "update-profile");
         break;
@@ -100,3 +106,9 @@ const viewHandler = () => {
   };
   return updateView;
 };
+
+const updateView = viewHandler();
+const { resetProfilePage, prefillProfileForm, profileButtonsEventListener } =
+  profilePageHandler();
+const { showMyResources, showLikedResources, resourcesButtonsEventListener } =
+  myResourcesPageHandler();
