@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Home Page</title>
 
-<head>
-  <title>Home Page</title>
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-
-<body>
-  <header class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper blue">
-        <div class="logo">LOGO LOGO LOG</div>
-        <ul>
-          <li id="home-button">
-            <a><i class="fas fa-home"></i></a>
-          </li>
-        </ul>
+  <body>
+    <header class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper blue">
+          <div class="logo">LOGO LOGO LOG</div>
+          <ul>
+            <li id="home-button">
+              <a><i class="fas fa-home"></i></a>
+            </li>
+          </ul>
           <div class="input-field search-bar">
             <input id="search" type="search" />
             <label class="label-icon" for="search"
@@ -63,225 +69,241 @@
             </li>
           </ul>
         </div>
-        <ul id="user-buttons" class="hidden">
-          <li id="create-resource-button">
-            <a><i class="fas fa-plus-circle"></i></a>
-          </li>
-          <li id="liked-resources-button">
-            <a><i class="fas fa-heart"></i></a>
-          </li>
-          <li>
-            <a><i class="fas fa-cog"></i></a>
-          </li>
-          <li id="profile-button">
-            <a class="profile">
-              <div class="profile">
-                <img alt="" id="profile-picture" class="circle profile" />
-              </div>
-            </a>
-          </li>
-          <li>
-            <a id="logout-button"><i class="fas fa-sign-out-alt"></i></a>
-          </li>
-        </ul>
-        <ul id="no-user-buttons">
-          <li id="login-button">
-            <a>LOGIN</a>
-          </li>
-          <li id="register-button">
-            <a>REGISTER</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+      </nav>
+    </header>
 
-  <main>
-    <div class="row">
-      <div class="col s12">
-        <ul class="tabs">
-          <li class="tab col s1"><a class="active" href="">All</a></li>
-          <li class="tab col s1"><a href="">Art/DIY</a></li>
-          <li class="tab col s1"><a href="">Cooking</a></li>
-          <li class="tab col s1"><a href="">Design</a></li>
-          <li class="tab col s1"><a href="">Finance</a></li>
-          <li class="tab col s1"><a href="">Gardening</a></li>
-          <li class="tab col s1"><a href="">Health/Fitness</a></li>
-          <li class="tab col s1"><a href="">Language</a></li>
-          <li class="tab col s1"><a href="">Marketing</a></li>
-          <li class="tab col s1"><a href="">Music</a></li>
-          <li class="tab col s1"><a href="">Technology</a></li>
-          <li class="tab col s1"><a href="">Other</a></li>
-        </ul>
-      </div>
-      <div id="test1" class="col s12"></div>
-      <div id="test2" class="col s12"></div>
-      <div id="test3" class="col s12"></div>
-      <div id="test4" class="col s12"></div>
-    </div>
-
-      <div id="resources-page">
-        <div id="columns">
-
-        </div>
-      </div>
-      <div
-        id="resource-details"
-        class="resource-details-container container hidden"
-      >
-        <div class="media">
-          <a href="wwww.google.com"
-            ><i class="fas fa-external-link-alt"></i> wwww.google.com</a
-          >
-          <img
-            src="https://blog.hubspot.com/hubfs/Google%20Drive%20Integration/How%20to%20Start%20Coding%20The%20Ultimate%20Guide%20for%20Beginner%20Programmers.jpeg"
-          />
-        </div>
-        <div class="details">
-          <div>
-            <div style="float: right">
-              <i class="far fa-heart icon liked"></i>
-            </div>
-            <h3>Umami before they sold out poutine chillwave</h3>
-          </div>
-          <a href="wwww.google.com" class="paragraph">wwww.google.com</a>
-          <h5>
-            Rate it <i class="fas fa-star unselected"></i
-            ><i class="fas fa-star unselected"></i
-            ><i class="fas fa-star unselected"></i
-            ><i class="fas fa-star unselected"></i
-            ><i class="fas fa-star unselected"></i>
-          </h5>
-          <h6>
-            <i class="fas fa-star show-rating"></i> Avg Rating: 4.50 (Based on 5
-            ratings)
-          </h6>
-          <p>
-            Enamel pin skateboard shaman forage fashion axe vinyl. Crucifix
-            raclette air plant coloring book four dollar toast fixie narwhal,
-            lyft brooklyn 3 wolf moon franzen. Literally raclette meh butcher
-            post-ironic kickstarter, slow-carb helvetica kinfolk bespoke
-            live-edge four dollar toast meditation keytar kitsch. Blog
-            sustainable health goth locavore, pinterest kombucha cred pabst four
-            dollar toast. Bicycle rights paleo tilde post-ironic. Forage
-            cornhole salvia, venmo affogato coloring book irony health goth
-            normcore poke aesthetic knausgaard neutra.
-          </p>
-
-          <h5><i class="fas fa-comment-alt"></i> Comments(4)</h5>
-          <ul class="collection comments">
-            <li class="collection-item avatar new-comment-container">
-              <i class="material-icons circle">folder</i>
-              <div class="input-field comment">
-                <textarea id="comment" class="materialize-textarea"></textarea>
-                <label class="label-icon" for="comment"></label>
-                <i class="fas fa-chevron-circle-right send-comment"></i>
-              </div>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle">folder</i>
-              <span class="title">@username</span>
-              <p>
-                Hashtag ennui taxidermy af PBR&B austin squid. Listicle viral
-                ugh,
-              </p>
-              <p class="secondary-content">timestamp</p>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle red">play_arrow</i>
-              <span class="title">@username</span>
-              <p>
-                vinyl man bun twee four loko woke. Distillery synth gochujang
-                chicharrones YOLO, scenester banjo. Normcore semiotics cliche
-                bespoke
-              </p>
-              <p class="secondary-content">timestamp</p>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle green">insert_chart</i>
-              <span class="title">@username</span>
-              <p>comment</p>
-              <p class="secondary-content">timestamp</p>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle red">play_arrow</i>
-              <span class="title">@username</span>
-              <p>
-                blue bottle hoodie chia. activated charcoal vape butcher blog
-                squid seitan
-              </p>
-              <p class="secondary-content">timestamp</p>
-            </li>
+    <main>
+      <div class="row">
+        <div class="col s12">
+          <ul class="tabs">
+            <li class="tab col s1"><a class="active" href="">All</a></li>
+            <li class="tab col s1"><a href="">Art/DIY</a></li>
+            <li class="tab col s1"><a href="">Cooking</a></li>
+            <li class="tab col s1"><a href="">Design</a></li>
+            <li class="tab col s1"><a href="">Finance</a></li>
+            <li class="tab col s1"><a href="">Gardening</a></li>
+            <li class="tab col s1"><a href="">Health/Fitness</a></li>
+            <li class="tab col s1"><a href="">Language</a></li>
+            <li class="tab col s1"><a href="">Marketing</a></li>
+            <li class="tab col s1"><a href="">Music</a></li>
+            <li class="tab col s1"><a href="">Technology</a></li>
+            <li class="tab col s1"><a href="">Other</a></li>
           </ul>
         </div>
+        <div id="test1" class="col s12"></div>
+        <div id="test2" class="col s12"></div>
+        <div id="test3" class="col s12"></div>
+        <div id="test4" class="col s12"></div>
       </div>
-    </div>
 
-    <div id="register-page" class="container hidden">
-      <div class="margin-container">
-        <div class="content-container">
-          <h3 class="title">Register</h3>
-          <form id="register-form" class="col s12">
-            <div class="row">
-              <div class="input-field col s6">
-                <input id="first_name" type="text" class="validate" name="firstName" required />
-                <label for="first_name">First Name</label>
+      <div id="resources-page">
+        <div id="columns"></div>
+      </div>
+      <div id="resource-details" class="hidden">
+        <div class="resource-details-container container">
+          <div class="media">
+            <a href="wwww.google.com"
+              ><i class="fas fa-external-link-alt"></i> wwww.google.com</a
+            >
+            <img
+              src="https://blog.hubspot.com/hubfs/Google%20Drive%20Integration/How%20to%20Start%20Coding%20The%20Ultimate%20Guide%20for%20Beginner%20Programmers.jpeg"
+            />
+          </div>
+          <div class="details">
+            <div>
+              <div style="float: right">
+                <i class="far fa-heart icon liked"></i>
               </div>
-              <div class="input-field col s6">
-                <input id="last_name" type="text" class="validate" name="lastName" required />
-                <label for="last_name">Last Name</label>
-              </div>
+              <h3>Umami before they sold out poutine chillwave</h3>
             </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="username" type="text" class="validate" name="username" required />
-                <label for="username">Username</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="register-password" type="password" class="validate" name="password" required />
-                <label for="register-password">Password</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="register-email" type="email" class="validate" name="email" required />
-                <label for="register-email">Email</label>
-              </div>
-            </div>
-            <button class="btn waves-effect waves-light" type="submit" name="action">
-              Submit
-              <i class="fa fa-paper-plane" aria-hidden="true"></i>
-            </button>
-          </form>
+            <a href="wwww.google.com" class="paragraph">wwww.google.com</a>
+            <h5>
+              Rate it <i class="fas fa-star unselected"></i
+              ><i class="fas fa-star unselected"></i
+              ><i class="fas fa-star unselected"></i
+              ><i class="fas fa-star unselected"></i
+              ><i class="fas fa-star unselected"></i>
+            </h5>
+            <h6>
+              <i class="fas fa-star show-rating"></i> Avg Rating: 4.50 (Based on
+              5 ratings)
+            </h6>
+            <p>
+              Enamel pin skateboard shaman forage fashion axe vinyl. Crucifix
+              raclette air plant coloring book four dollar toast fixie narwhal,
+              lyft brooklyn 3 wolf moon franzen. Literally raclette meh butcher
+              post-ironic kickstarter, slow-carb helvetica kinfolk bespoke
+              live-edge four dollar toast meditation keytar kitsch. Blog
+              sustainable health goth locavore, pinterest kombucha cred pabst
+              four dollar toast. Bicycle rights paleo tilde post-ironic. Forage
+              cornhole salvia, venmo affogato coloring book irony health goth
+              normcore poke aesthetic knausgaard neutra.
+            </p>
+
+            <h5><i class="fas fa-comment-alt"></i> Comments(4)</h5>
+            <ul class="collection comments">
+              <li class="collection-item avatar new-comment-container">
+                <i class="material-icons circle">folder</i>
+                <div class="input-field comment">
+                  <textarea
+                    id="comment"
+                    class="materialize-textarea"
+                  ></textarea>
+                  <label class="label-icon" for="comment"></label>
+                  <i class="fas fa-chevron-circle-right send-comment"></i>
+                </div>
+              </li>
+              <li class="collection-item avatar">
+                <i class="material-icons circle">folder</i>
+                <span class="title">@username</span>
+                <p>
+                  Hashtag ennui taxidermy af PBR&B austin squid. Listicle viral
+                  ugh,
+                </p>
+                <p class="secondary-content">timestamp</p>
+              </li>
+              <li class="collection-item avatar">
+                <i class="material-icons circle red">play_arrow</i>
+                <span class="title">@username</span>
+                <p>
+                  vinyl man bun twee four loko woke. Distillery synth gochujang
+                  chicharrones YOLO, scenester banjo. Normcore semiotics cliche
+                  bespoke
+                </p>
+                <p class="secondary-content">timestamp</p>
+              </li>
+              <li class="collection-item avatar">
+                <i class="material-icons circle green">insert_chart</i>
+                <span class="title">@username</span>
+                <p>comment</p>
+                <p class="secondary-content">timestamp</p>
+              </li>
+              <li class="collection-item avatar">
+                <i class="material-icons circle red">play_arrow</i>
+                <span class="title">@username</span>
+                <p>
+                  blue bottle hoodie chia. activated charcoal vape butcher blog
+                  squid seitan
+                </p>
+                <p class="secondary-content">timestamp</p>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div id="login-page" class="container hidden">
-      <div class="margin-container">
-        <div class="content-container">
-          <h3 class="title">Login</h3>
-          <form id="login-form" class="col s12">
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="login-email" type="email" class="validate" name="email" required />
-                <label for="login-email">Email</label>
+      <div id="register-page" class="container hidden">
+        <div class="margin-container">
+          <div class="content-container">
+            <h3 class="title">Register</h3>
+            <form id="register-form" class="col s12">
+              <div class="row">
+                <div class="input-field col s6">
+                  <input
+                    id="first_name"
+                    type="text"
+                    class="validate"
+                    name="firstName"
+                    required
+                  />
+                  <label for="first_name">First Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input
+                    id="last_name"
+                    type="text"
+                    class="validate"
+                    name="lastName"
+                    required
+                  />
+                  <label for="last_name">Last Name</label>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="login-password" type="password" class="validate" name="password" required />
-                <label for="login-password">Password</label>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="username"
+                    type="text"
+                    class="validate"
+                    name="username"
+                    required
+                  />
+                  <label for="username">Username</label>
+                </div>
               </div>
-            </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="register-password"
+                    type="password"
+                    class="validate"
+                    name="password"
+                    required
+                  />
+                  <label for="register-password">Password</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="register-email"
+                    type="email"
+                    class="validate"
+                    name="email"
+                    required
+                  />
+                  <label for="register-email">Email</label>
+                </div>
+              </div>
+              <button
+                class="btn waves-effect waves-light"
+                type="submit"
+                name="action"
+              >
+                Submit
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
 
-            <button class="btn waves-effect waves-light">
-              Submit
-              <i class="fa fa-paper-plane" aria-hidden="true"></i>
-            </button>
-          </form>
+      <div id="login-page" class="container hidden">
+        <div class="margin-container">
+          <div class="content-container">
+            <h3 class="title">Login</h3>
+            <form id="login-form" class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="login-email"
+                    type="email"
+                    class="validate"
+                    name="email"
+                    required
+                  />
+                  <label for="login-email">Email</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="login-password"
+                    type="password"
+                    class="validate"
+                    name="password"
+                    required
+                  />
+                  <label for="login-password">Password</label>
+                </div>
+              </div>
+
+              <button class="btn waves-effect waves-light">
+                Submit
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
         </div>
       </div>
       <div id="profile-page" class="container hidden">
@@ -431,68 +453,90 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div id="new-resource-page" class="container hidden">
-      <div class="margin-container">
-        <div class="content-container">
-          <h3 class="title">Create New Resource</h3>
-          <form class="col s12" id="new-resource-form">
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="title" type="text" class="validate" name="title" required />
-                <label for="title">Title</label>
+      <div id="new-resource-page" class="container hidden">
+        <div class="margin-container">
+          <div class="content-container">
+            <h3 class="title">Create New Resource</h3>
+            <form class="col s12" id="new-resource-form">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="title"
+                    type="text"
+                    class="validate"
+                    name="title"
+                    required
+                  />
+                  <label for="title">Title</label>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="description" type="text" class="validate" name="description" required />
-                <label for="description">Description</label>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="description"
+                    type="text"
+                    class="validate"
+                    name="description"
+                    required
+                  />
+                  <label for="description">Description</label>
+                </div>
               </div>
-            </div>
 
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="url" type="text" class="validate" name="url" required />
-                <label for="url">URL</label>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    id="url"
+                    type="text"
+                    class="validate"
+                    name="url"
+                    required
+                  />
+                  <label for="url">URL</label>
+                </div>
               </div>
-            </div>
 
-
-            <div class="row">
-              <div class="input-field col s12">
-                <select class="icons" id="category" name="category">
-                  <option value="" disabled selected>Category</option>
-                  <option value="ART/DIY">Art/DIY</option>
-                  <option value="COOKING">Cooking</option>
-                  <option value="DESIGN">Design</option>
-                  <option value="FINANCE">Finance</option>
-                  <option value="GARDENING">Gardening</option>
-                  <option value="HEALTH/FITNESS">Health/Fitness</option>
-                  <option value="LANGUAGE">Language</option>
-                  <option value="MARKETING">Marketing</option>
-                  <option value="MUSIC">Music</option>
-                  <option value="TECHNOLOGY">Technology</option>
-                  <option value="OTHER">Other</option>
-                </select>
+              <div class="row">
+                <div class="input-field col s12">
+                  <select class="icons" id="category" name="category">
+                    <option value="" disabled selected>Category</option>
+                    <option value="ART/DIY">Art/DIY</option>
+                    <option value="COOKING">Cooking</option>
+                    <option value="DESIGN">Design</option>
+                    <option value="FINANCE">Finance</option>
+                    <option value="GARDENING">Gardening</option>
+                    <option value="HEALTH/FITNESS">Health/Fitness</option>
+                    <option value="LANGUAGE">Language</option>
+                    <option value="MARKETING">Marketing</option>
+                    <option value="MUSIC">Music</option>
+                    <option value="TECHNOLOGY">Technology</option>
+                    <option value="OTHER">Other</option>
+                  </select>
+                </div>
               </div>
-            </div>
 
-            <div class="switch">
-              <label>
-                <input type="checkbox" name="is_private" />
-                <span class="lever"></span>
-                Private
-              </label>
-            </div>
+              <div class="switch">
+                <label>
+                  <input type="checkbox" name="is_private" />
+                  <span class="lever"></span>
+                  Private
+                </label>
+              </div>
 
-            <button class="btn waves-effect waves-light" type="submit" name="action">
-              Submit
-              <i class="fa fa-paper-plane" aria-hidden="true"></i>
-            </button>
-          </form>
+              <button
+                class="btn waves-effect waves-light"
+                type="submit"
+                name="action"
+              >
+                Submit
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
         </div>
       </div>
+
       <div id="error-page" class="container hidden">
         <div class="margin-container">
           <div class="content-container">ERROR</div>

@@ -80,6 +80,6 @@ const displayResources = async () => {
     const $item = $figure.prepend($resourceInfo);
     $column.prepend($item);
 
-    $("#resources").prepend($column);
+    $("#resources-page").prepend($column);
   });
 };
