@@ -105,7 +105,7 @@ form {
   color: #282828;
 }
 
-.details a {
+a.paragraph {
   text-decoration: underline;
   color: #111111;
 }
@@ -333,18 +333,18 @@ div.left-navbar div.tab:hover {
   margin-bottom: 3em;
 }
 
-.resource-thumnail {
+.resource-thumbnail {
   display: flex;
   margin: 1em 0;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
-.resource-thumnail img {
+.resource-thumbnail img {
   max-height: 10em;
-  min-height: 10em;
+  max-width: 10em;
 }
 
-.resource-thumnail * {
+.resource-thumbnail * {
   margin: 0 0.5em;
 }
 
@@ -352,8 +352,43 @@ div.left-navbar div.tab:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 10em;
 }
 
-.resource-thumnail .text {
+.resource-thumbnail .text {
   flex: 1;
+}
+
+.resource-thumbnail .media {
+  overflow: hidden;
+  border-radius: 8px;
+  position: relative;
+  display: inline-flex;
+  width: initial;
+}
+
+img.thumbnail {
+  margin: 0;
+  display: inline-table;
+}
+
+div.stat {
+  display: flex;
+  margin: 0;
+  justify-content: flex-end;
+}
+
+div.resource-thumbnail div.stat span.stat-column {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+div.resource-thumbnail div.stat span.stat-column span {
+  margin: 0;
+  text-align: center;
+}
+
+#liked-resources-details {
+  margin: 0;
 }
