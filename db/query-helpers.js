@@ -87,7 +87,22 @@ const queryGenerator = (db) => {
 
   const getAllResources = async () => {
     const value = [false];
-    const queryString = `SELECT * FROM resources WHERE is_private = $1;`
+    const queryString = `
+    SELECT
+    resources.id,
+    is_private,
+    description,
+    url,
+    title,
+    is_video,
+    created_on,
+    user_id,
+    media_url,
+    categories.type AS category,
+    category_id
+    FROM resources JOIN categories ON resources.category_id = categories.id
+    WHERE is_private = $1;`
+
     const result = await db.query(queryString, value);
     return result.rows;
   }
@@ -100,7 +115,7 @@ const queryGenerator = (db) => {
     addNewResource,
     getIdFromCategory,
     getAllResources
-   };
+  };
 }
 
 module.exports = queryGenerator;
