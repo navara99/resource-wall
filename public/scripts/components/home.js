@@ -53,14 +53,16 @@ const getLikeLink = () => {
   return $(`<i class="fas fa-heart card-heart"></i>`);
 };
 
-const clearResources = ()=> {
-  $("columns").empty();
+const clearResources = () => {
+  $("#columns").remove();
 };
 
 const displayResources = async () => {
+  clearResources();
   const result = await getAllResources();
   const { allResources } = result;
-  console.log(allResources);
+  const $column = $("<div>").attr("id", "columns");
+
   allResources.forEach((resource) => {
     const { id, user_id, title, description, url, media_url, created_on, is_video } = resource;
 
@@ -76,8 +78,9 @@ const displayResources = async () => {
     const $cardImage = $("<div>").addClass("card-image").prepend($urlLink, $likeLink, $resourceMedia, $cardTitle);
     const $resourceInfo = $card.prepend($cardImage, $cardContent, $cardAction);
     const $item = $figure.prepend($resourceInfo);
+    $column.prepend($item);
 
-    $("#columns").prepend($item);
+    $("#resources").prepend($column);
   });
 };
 

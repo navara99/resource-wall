@@ -10,7 +10,6 @@ $(() => {
   loginEventListener();
   registerEventListener();
   newResourceEventListener();
-  clearResources();
   updateView("resources");
 });
 
@@ -45,7 +44,6 @@ const updateView = (nextView) => {
 
   switch (nextView) {
     case "resources":
-      clearResources();
       displayResources();
       $resources.show();
       break;
