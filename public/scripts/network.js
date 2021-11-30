@@ -56,3 +56,9 @@ const getAllResources = () => {
     url: "/api/resources"
   });
 };
+
+const getdetailsOfResources = (id) => {
+  return $.ajax({
+    url: `/api/resources/${id}`
+  });
+};

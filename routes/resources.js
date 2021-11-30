@@ -5,13 +5,12 @@ const axios = require("axios");
 const queryGenerator = require("../db/query-helpers");
 
 module.exports = (db) => {
-  const { addNewResource, getIdFromCategory, getAllResources } = queryGenerator(db);
+  const { addNewResource, getIdFromCategory, getAllResources, getAllDetailsOfResource } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
 
     try {
       const allResources = await getAllResources();
-      console.log(allResources);
       res.json({
         status: "success",
         allResources
@@ -26,13 +25,11 @@ module.exports = (db) => {
 
     try {
       const { id } = req.params;
-      const allResources = await getAllResources();
-      console.log(allResources);
-      res.json({
-        status: "success",
-        allResources
-      })
-    } catch (e) {
+      const resourceInfo = await getAllDetailsOfResource(id);
+      console.log(resourceInfo);
+      res.json(resourceInfo);
+
+    } catch (err) {
       res.status(500).json({ error: err.message });
     }
 

@@ -115,10 +115,11 @@ const queryGenerator = (db) => {
       categories.type AS catergory,
       (SELECT AVG(rating) FROM ratings WHERE resource_id = $1) AS rating,
       (SELECT COUNT(likes) FROM likes WHERE resource_id = $1) AS likes,
-      comments.comment
+      comments.comment,
+      comments.timestamp
     FROM resources
+    LEFT OUTER JOIN comments ON resources.id = comments.resource_id
     JOIN categories ON categories.id = resources.category_id
-    JOIN comments ON resources.id = comments.resource_id
     WHERE resources.id = $1;`
 
     const result = await db.query(queryString, value);
