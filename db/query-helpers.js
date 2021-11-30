@@ -116,10 +116,14 @@ const queryGenerator = (db) => {
       (SELECT AVG(rating) FROM ratings WHERE resource_id = $1) AS rating,
       (SELECT COUNT(rating) FROM ratings WHERE resource_id = $1) AS number_of_rating,
       (SELECT COUNT(likes) FROM likes WHERE resource_id = $1) AS likes,
-      comments.comment,
-      comments.timestamp
+      comment,
+      timestamp,
+      first_name,
+      last_name,
+      username
     FROM resources
     LEFT OUTER JOIN comments ON resources.id = comments.resource_id
+    LEFT OUTER JOIN users on comments.user_id = users.id
     JOIN categories ON categories.id = resources.category_id
     WHERE resources.id = $1;`
 
