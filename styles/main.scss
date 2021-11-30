@@ -70,7 +70,6 @@ form {
   margin: inherit;
 }
 
-
 .margin-container {
   margin: 3em;
   display: flex;
@@ -292,5 +291,34 @@ form {
 }
 
 .left-navbar {
-  width: 10%;
+  margin-right: 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.settings {
+  flex: 1;
+}
+
+div.left-navbar div.tab {
+  font-size: 1.2em;
+  padding: 0.4em 0.6em;
+  border-radius: 12px;
+  position: relative;
+  margin: 0.5em 0;
+}
+
+div.left-navbar div.active {
+  background-color: black;
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  height: 3px;
+  bottom: 0px;
+  border-radius: 10px;
+}
+
+div.left-navbar div.tab:hover {
+  background-color: #f0f0f0;
 }

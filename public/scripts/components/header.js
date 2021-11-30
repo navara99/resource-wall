@@ -22,7 +22,7 @@ const updateHeader = (userInfo) => {
 
 const headerButtonsEventListener = () => {
   const $homeButton = $("#home-button");
-  const $updateProfileButton = $("#update-profile-button");
+  const $profileButton = $("#profile-button");
   const $loginButton = $("#login-button");
   const $registerButton = $("#register-button");
   const $likedResourcesButton = $("#liked-resources-button");
@@ -56,7 +56,7 @@ const headerButtonsEventListener = () => {
     updateView("resources");
   });
 
-  $updateProfileButton.on("click", () => {
+  $profileButton.on("click", () => {
     updateView("updateProfile");
   });
 
