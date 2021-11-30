@@ -107,20 +107,22 @@ const queryGenerator = (db) => {
     return result.rows;
   }
 
-  const getAllDetailsOfResource = (id) => {
+  const getAllDetailsOfResource = async (id) => {
     const value = [id];
     const queryString = `
-    SELECT resources.*
+    SELECT
+      resources.*,
+      categories.type AS catergory,
+      (SELECT AVG(rating) FROM ratings WHERE resource_id = $1) AS rating,
+      (SELECT COUNT(likes) FROM likes WHERE resource_id = $1) AS likes,
+      comments.comment
     FROM resources
     JOIN categories ON categories.id = resources.category_id
-    JOIN ratings ON resources.id = ratings.resource_id
-    JOIN likes ON resources.id = likes.resource_id
     JOIN comments ON resources.id = comments.resource_id
     WHERE resources.id = $1;`
 
     const result = await db.query(queryString, value);
-    const ResourceInfo = getFirstRecord(result);
-    return ResourceInfo;
+    return result.rows;
   }
 
   return {
