@@ -30,10 +30,7 @@ const headerButtonsEventListener = () => {
   const $floatingCreateResourceButton = $("#floating-create-resource-button");
   const $logoutButton = $("#logout-button");
   const $myResourcesButton = $("#my-resources-button");
-
-  $myResourcesButton.on("click", () => {
-    updateView("myResources");
-  });
+  const $dropdown = $("#dropdown");
 
   $logoutButton.on("click", () => {
     logout();
@@ -59,6 +56,51 @@ const headerButtonsEventListener = () => {
   $profileButton.on("click", () => {
     updateView("updateProfile");
   });
+
+  // $myResourcesButton
+  //   .mouseenter(() => {
+  //     $dropdown.show();
+  //   })
+  //   .mouseleave((event) => {
+  //     if (event.target.id !== "dropdown") {
+  //       $dropdown.hide();
+  //     }
+  //   });
+
+  // $myResourcesButton.on("click", () => {
+  //   // updateView("myResources");
+  //   console.log("HI");
+  //   $dropdown.show();
+  // });
+
+  // $dropdown.mouseleave((event) => {
+  //   if (event.target.nodeName !== "DIV") {
+  //     $dropdown.hide();
+  //   }
+  // });
+
+  window.onclick = (event) => {
+    const className = $(event.target).attr("class");
+    if (!className) return $dropdown.hide();
+    // console.log();
+
+    const targetIsClicked = className.includes("profile-picture");
+
+    if (targetIsClicked) $dropdown.show();
+    if (!targetIsClicked) $dropdown.hide();
+  };
+
+  // $(window).hover((event) => {
+  //   console.log(event.target.id);
+  //   // console.log(event.target.matches("#my-resources-button"));
+
+  //   // if (!event.target.matches('.dropbtn')) {
+  //   // var myDropdown = document.getElementById("myDropdown");
+  //   //   if (myDropdown.classList.contains('show')) {
+  //   //     myDropdown.classList.remove('show');
+  //   //   }
+  //   // }
+  // });
 
   $loginButton.on("click", () => {
     updateView("login");

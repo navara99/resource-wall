@@ -1,5 +1,5 @@
 $(() => {
-  $('.tabs').tabs();
+  $(".tabs").tabs();
   $("select").formSelect();
 
   updateUserInfo();
@@ -8,10 +8,6 @@ $(() => {
 });
 
 const eventListeners = () => {
-  const { resetProfilePage, prefillProfileForm, profileButtonsEventListener } =
-  profilePageHandler();
-const { showMyResources, showLikedResources, resourcesButtonsEventListener } =
-  myResourcesPageHandler();
   headerButtonsEventListener();
   loginEventListener();
   registerEventListener();
@@ -35,7 +31,6 @@ const updateUserInfo = async (userInfo) => {
   } catch (err) {
     updateHeader({});
   }
-
 };
 
 const handleError = () => {
@@ -55,10 +50,6 @@ const viewHandler = () => {
   const $resourceDetails = $("#resource-details");
   const $errorPage = $("#error-page");
   const $myResourcesPage = $("#my-resources-page");
-  const { resetProfilePage, prefillProfileForm, profileButtonsEventListener } =
-  profilePageHandler();
-const { showMyResources, showLikedResources, resourcesButtonsEventListener } =
-  myResourcesPageHandler();
 
   const updateView = (nextView, userInfo) => {
     updateUserInfo(userInfo);
@@ -120,3 +111,7 @@ const { showMyResources, showLikedResources, resourcesButtonsEventListener } =
 };
 
 const updateView = viewHandler();
+const { resetProfilePage, prefillProfileForm, profileButtonsEventListener } =
+  profilePageHandler();
+const { showMyResources, showLikedResources, resourcesButtonsEventListener } =
+  myResourcesPageHandler();

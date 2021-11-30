@@ -393,3 +393,20 @@ div.resource-thumbnail div.stat span.stat-column * {
 #liked-resources-details {
   margin: 0;
 }
+
+div#dropdown.dropdown {
+  background-color: white;
+  position: absolute;
+  bottom: -0.0000000001;
+  margin: 0;
+  right: 0;
+  z-index: 12222;
+}
+
+div#dropdown.hidden.dropdown a{
+  color: #111111;
+}
+
+#my-resources-button {
+  position: relative;
+}
