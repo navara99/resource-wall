@@ -1,3 +1,37 @@
+const profilePageHandler = () => {
+  const $updateProfileButton = $("#update-profile-button");
+  const $profileButtonBorder = $("#profile-button-border");
+  const $updateProfilePage = $("#update-profile-page");
+  const $changePasswordButton = $("#change-password-button");
+  const $passwordButtonBorder = $("#password-button-border");
+  const $changePasswordPage = $("#change-password-page");
+
+  const resetProfilePage = () => {
+    $passwordButtonBorder.hide();
+    $changePasswordPage.hide();
+    $profileButtonBorder.show();
+    $updateProfilePage.show();
+  };
+
+  const profileButtonsEventListener = () => {
+    $updateProfileButton.on("click", () => {
+      $passwordButtonBorder.hide();
+      $changePasswordPage.hide();
+      $profileButtonBorder.show();
+      $updateProfilePage.show();
+    });
+
+    $changePasswordButton.on("click", () => {
+      $profileButtonBorder.hide();
+      $updateProfilePage.hide();
+      $passwordButtonBorder.show();
+      $changePasswordPage.show();
+    });
+  };
+
+  return { resetProfilePage, profileButtonsEventListener };
+};
+
 const updateProfileEventListener = () => {
   const $updateProfileForm = $("#update-profile-form");
 
@@ -9,11 +43,11 @@ const updateProfileEventListener = () => {
 
       const userInfo = await updateProfile(data);
 
-      updateView("resources", userInfo);
+      viewHandler()("resources", userInfo);
 
       return $updateProfileForm.trigger("reset");
     } catch (err) {
-      updateView(err);
+      viewHandler()(err);
     }
   });
 };
@@ -29,11 +63,11 @@ const changePasswordEventListener = () => {
 
       const userInfo = await changePassword(data);
 
-      updateView("resources", userInfo);
+      viewHandler()("resources", userInfo);
 
       return $changePasswordForm.trigger("reset");
     } catch (err) {
-      updateView(err);
+      viewHandler()(err);
     }
   });
 };

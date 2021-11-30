@@ -9,11 +9,11 @@ const registerEventListener = () => {
 
       const userInfo = await register(data);
 
-      updateView("resources", userInfo);
+      viewHandler()("resources", userInfo);
 
       return $registerForm.trigger("reset");
     } catch (err) {
-      updateView(err);
+      viewHandler()(err);
     }
   });
 };

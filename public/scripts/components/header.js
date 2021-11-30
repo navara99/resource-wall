@@ -32,39 +32,39 @@ const headerButtonsEventListener = () => {
   const $myResourcesButton = $("#my-resources-button");
 
   $myResourcesButton.on("click", () => {
-    updateView("resources");
+    viewHandler()("resources");
   });
 
   $logoutButton.on("click", () => {
     logout();
-    updateView("resources", {});
+    viewHandler()("resources", {});
   });
 
   $floatingCreateResourceButton.on("click", () => {
-    updateView("newResource");
+    viewHandler()("newResource");
   });
 
   $createResourceButton.on("click", () => {
-    updateView("newResource");
+    viewHandler()("newResource");
   });
 
   $likedResourcesButton.on("click", () => {
-    updateView("resources");
+    viewHandler()("resources");
   });
 
   $homeButton.on("click", () => {
-    updateView("resources");
+    viewHandler()("resources");
   });
 
   $profileButton.on("click", () => {
-    updateView("updateProfile");
+    viewHandler()("updateProfile");
   });
 
   $loginButton.on("click", () => {
-    updateView("login");
+    viewHandler()("login");
   });
 
   $registerButton.on("click", () => {
-    updateView("register");
+    viewHandler()("register");
   });
 };

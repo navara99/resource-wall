@@ -605,20 +605,20 @@
           </div>
         </div>
       </div>
-      <div id="update-profile-page" class="container hidden">
+      <div id="profile-page" class="container hidden">
         <div class="margin-container">
           <div class="content-container settings-container">
             <div class="left-navbar">
               <div id="update-profile-button" class="tab">
                 Update Profile
-                <div id="active-update-profile-button" class="active"></div>
+                <div id="profile-button-border" class="active"></div>
               </div>
               <div id="change-password-button" class="tab">
                 Change Password
-                <div id="active-change-password-button"></div>
+                <div id="password-button-border" class="active hidden"></div>
               </div>
             </div>
-            <div class="settings">
+            <div id="update-profile-page" class="settings">
               <h3 class="title">Update Profile</h3>
               <form
                 id="update-profile-form"
@@ -693,7 +693,7 @@
                 </button>
               </form>
             </div>
-            <div class="settings hidden">
+            <div id="change-password-page" class="settings hidden">
               <h3 class="title">Change Password</h3>
               <form
                 id="change-password-form"

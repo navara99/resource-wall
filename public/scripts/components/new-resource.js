@@ -9,10 +9,10 @@ const newResourceEventListener = () => {
     submitResource(data)
       .then(() => {
         $newResourceForm.trigger("reset");
-        updateView("resourceDetails");
+        viewHandler()("resourceDetails");
       })
       .catch((err) => {
-        updateView(err);
+        viewHandler()(err);
       });
   });
 };
