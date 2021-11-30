@@ -1,5 +1,5 @@
 $(() => {
-  console.log($("select"));
+  $('.tabs').tabs();
   $("select").formSelect();
 
   updateUserInfo().
@@ -10,6 +10,7 @@ $(() => {
   loginEventListener();
   registerEventListener();
   newResourceEventListener();
+  clearResources();
   updateView("resources");
 });
 
@@ -44,6 +45,8 @@ const updateView = (nextView) => {
 
   switch (nextView) {
     case "resources":
+      clearResources();
+      displayResources();
       $resources.show();
       break;
     case "updateProfile":
