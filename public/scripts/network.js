@@ -56,3 +56,10 @@ const getAllResources = () => {
     url: "/api/resources"
   });
 };
+
+const likeResource = (id) => {
+  $.ajax({
+    method: "POST",
+    url: `/api/resources/${id}/like`,
+  });
+};
