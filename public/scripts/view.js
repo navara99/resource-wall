@@ -16,6 +16,13 @@ const eventListeners = () => {
   updateProfileEventListener();
 };
 
+
+const updateTitleURL = (title, url) => {
+  const newURL = `http://localhost:8080/${url}`;
+  window.history.pushState("data", "Title", newURL);
+  document.title = title;
+};
+
 const updateUserInfo = async (userInfo) => {
   if (!userInfo) userInfo = await getMyDetails();
   updateHeader(userInfo);
@@ -44,24 +51,31 @@ const updateView = (nextView, userInfo) => {
   switch (nextView) {
     case "resources":
       $resources.show();
+      updateTitleURL("Resources", "resources");
       break;
     case "updateProfile":
       $updateProfilePage.show();
+      updateTitleURL("Update Profile", "update-profile");
       break;
     case "register":
       $registerPage.show();
+      updateTitleURL("Register", "register");
       break;
     case "login":
       $loginPage.show();
+      updateTitleURL("Login", "login");
       break;
     case "newResource":
       $newResourcePage.show();
+      updateTitleURL("Create New Resource", "create-resource");
       break;
     case "resourceDetails":
       $resourceDetails.show();
+      updateTitleURL("Resource Details", "resource-details");
       break;
     default:
       $errorPage.show();
+      updateTitleURL("Error", "error");
       break;
   }
 };
