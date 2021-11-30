@@ -21,7 +21,7 @@ const getCardAction = (likesAmount, commentsAmount, averageRating) => {
   return $(`
   <div class="card-action">
     <div class="card-summary">
-      <i class="fas fa-star card-icon"></i>4.5
+      <i class="fas fa-star card-icon"></i>${likesAmount}
     </div>
     <div class="card-summary">
       <i class="fas fa-heart card-icon"></i>100
@@ -33,12 +33,16 @@ const getCardAction = (likesAmount, commentsAmount, averageRating) => {
   `)
 };
 
-const getCardContent = (description) => {
-  return $(`<div class="card-content"><p>${description}</p></div>`);
-};
+const getCardContent = (title, description, category) => {
+  return $(`
+  <div class="card-content" style="padding-top: 0;">
+  <h5>${title}</h5>
+  <p>${description}</p>
+  <br/>
+  <p>Category: ${category[0] + category.substring(1).toLowerCase()}</p>
+  </div>
 
-const getCardTitle = (title) => {
-  return $(`<span class="card-title">${title}</span>`);
+  `);
 };
 
 const getUrlLink = (url) => {
@@ -56,15 +60,16 @@ const registerLikeListener = () => {
     $figure = $(this).closest("figure");
     const resourceId = $figure.attr("id");
     const result = await likeResource(resourceId);
-    const { resource_id } = result[0];
+    const { resource_id } = result[0]
     $likedHeart = $(`#${resource_id}`).find(".card-heart");
     $likedHeart.removeClass("not-liked").addClass("liked");
   });
 
 };
 
-const getLikeLink = () => {
-  return $(`<a class="like-link"><i class="fas fa-heart card-heart not-liked"></i></a>`);
+const getLikeLink = (is_liked) => {
+  const colorClass = Number(is_liked) ? "liked" : "not-liked";
+  return $(`<a class="like-link"><i class="fas fa-heart card-heart ${colorClass}"></i></a>`);
 };
 
 const clearResources = () => {
@@ -75,27 +80,26 @@ const displayResources = async () => {
   clearResources();
   const result = await getAllResources();
   const { allResources } = result;
+  console.log(allResources);
   const $column = $("<div>").attr("id", "columns");
 
   allResources.forEach((resource) => {
-    const { id, user_id, title, description, url, media_url, created_on, is_video } = resource;
+    const { id, user_id, title, description, url, media_url, created_on, is_video, is_liked, likes, category } = resource;
 
     const $card = $("<div>").addClass("card");
     const $resourceMedia = is_video ? createEmbedVideo(media_url) : createScreenshot(media_url);
     const $figure = $("<figure>").attr("id", id);
 
-    const $cardAction = getCardAction();
-    const $cardContent = getCardContent(description);
-    const $cardTitle = getCardTitle(title);
+    const $cardAction = getCardAction(likes);
+    const $cardContent = getCardContent(title, description, category);
     const $urlLink = getUrlLink(url);
-    const $likeLink = getLikeLink();
-    const $cardImage = $("<div>").addClass("card-image").prepend($urlLink, $likeLink, $resourceMedia, $cardTitle);
+    const $likeLink = getLikeLink(is_liked);
+    const $cardImage = $("<div>").addClass("card-image").prepend($urlLink, $likeLink, $resourceMedia);
     const $resourceInfo = $card.prepend($cardImage, $cardContent, $cardAction);
     const $item = $figure.prepend($resourceInfo);
     $column.prepend($item);
 
     $("#resources-page").prepend($column);
-
   });
 
   registerLikeListener();
