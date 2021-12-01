@@ -131,34 +131,51 @@ const updateResourceDetails = () => {
       $likeIcon.removeClass("liked");
     }
 
-    const comments = compileComments(resourceDetails);
-    $detailsComments.text("");
+    const makeComments = (resourceDetails) => {
 
-    if (current_username) $detailsComments.append(commentForm(my_profile_url));
+      const comments = compileComments(resourceDetails);
+      $detailsComments.text("");
 
-    const addComment = async (commentInfo) => {
-      const { comment, user_id, timestamp } = commentInfo;
-      const timeAgo = timestampToTimeAgo(timestamp);
-      const userInfo = await getMyDetails(user_id);
-      const { image_url, username } = userInfo;
-      const elm = makeComment(username, comment, image_url, timeAgo);
-      $("#details-comments>li:eq(0)").after(elm);
-    };
 
-    $("#submit-button").on("click", async () => {
-      const data = $("#new-comment").serialize();
-      if (data.length > 8) {
-        $("#new-comment").val("");
-        const result = await commentResource(id, data);
-        addComment(result);
-      }
-    });
 
-    comments.forEach((commentInfo) => {
-      const { comment, username, timeAgo, image_url } = commentInfo;
-      const elm = makeComment(username, comment, image_url, timeAgo);
-      $detailsComments.append(elm);
-    });
+      comments.forEach((commentInfo) => {
+        const { comment, username, timeAgo, image_url } = commentInfo;
+        const elm = makeComment(username, comment, image_url, timeAgo);
+        $detailsComments.prepend(elm);
+      });
+
+      if (current_username) $detailsComments.prepend(commentForm(my_profile_url));
+
+      $("#submit-button").on("click", async () => {
+        const data = $("#new-comment").serialize();
+        if (data.length > 8) {
+          $("#new-comment").val("");
+          const commentInfo = await commentResource(id, data);
+          const { comment, user_id, timestamp } = commentInfo;
+          const userInfo = await getMyDetails(user_id);
+          const { image_url, username } = userInfo;
+          const commentDetails = { comment, username, timestamp, image_url };
+          commentsDetails.push(commentDetails);
+          makeComments(commentsDetails);
+        }
+      });
+    }
+    let commentsDetails = [...resourceDetails];
+
+    makeComments(commentsDetails);
+
+
+    // const addComment = async (commentInfo) => {
+    //   const { comment, user_id, timestamp } = commentInfo;
+    //   const timeAgo = timestampToTimeAgo(timestamp);
+    //   const userInfo = await getMyDetails(user_id);
+    //   const { image_url, username } = userInfo;
+    //   const elm = makeComment(username, comment, image_url, timeAgo);
+    //   $("#details-comments>li:eq(0)").after(elm);
+    // };
+
+
+
     const hostname = getHostname(url);
     const ratingText = displayRating(rating, number_of_rating);
 

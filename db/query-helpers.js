@@ -156,7 +156,7 @@ const queryGenerator = (db) => {
     LEFT OUTER JOIN users y on resources.user_id = y.id
     JOIN categories ON categories.id = resources.category_id
     WHERE resources.id = $1
-    ORDER BY timestamp DESC;`
+    ORDER BY timestamp;`
 
     const result = (await db.query(queryString, value)).rows;
     result.forEach((details) => assignProfilePic(details));
