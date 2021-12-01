@@ -166,6 +166,35 @@ const queryGenerator = (db) => {
     return result.rows;
   }
 
+  const getMyResources = async (user_id) => {
+    const value = [user_id, 1];
+    const subquery1 = `(SELECT COUNT(likes.*) FROM likes WHERE resource_id = resources.id)`;
+    const subquery2 = `(SELECT COUNT(likes.*) FROM likes WHERE user_id = $1 AND resource_id = resources.id)`
+    const queryString = `
+    SELECT
+    resources.id,
+    is_private,
+    description,
+    url,
+    title,
+    is_video,
+    created_on,
+    resources.user_id,
+    media_url,
+    categories.type AS category,
+    category_id,
+    ${subquery1} AS likes,
+    ${subquery2} AS is_liked
+    FROM resources
+    JOIN categories ON resources.category_id = categories.id
+    GROUP BY resources.id, categories.type
+    HAVING user_id = $1 OR ${subquery2} = $2;
+    ;`;
+
+    const result = await db.query(queryString, value);
+    return result.rows;
+  }
+
   return {
     createNewUser,
     getUserByValue,
@@ -176,7 +205,8 @@ const queryGenerator = (db) => {
     getAllResources,
     addLikeToResource,
     getAllDetailsOfResource,
-    searchResources
+    searchResources,
+    getMyResources
   };
 }
 
