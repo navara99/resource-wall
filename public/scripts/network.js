@@ -64,6 +64,22 @@ const likeResource = (id) => {
   });
 };
 
+const commentResource = (id, data) => {
+  return $.ajax({
+    method: "POST",
+    url: `/api/resources/${id}/comment`,
+    data,
+  });
+};
+
+const rateResource = (id, data) => {
+  return $.ajax({
+    method: "POST",
+    url: `/api/resources/${id}/rating`,
+    data,
+  });
+};
+
 const getdetailsOfResources = (id) => {
   return $.ajax({
     url: `/api/resources/${id}`,
@@ -72,12 +88,18 @@ const getdetailsOfResources = (id) => {
 
 const searchResource = (searchQuery) => {
   return $.ajax({
-    url: `/api/resources/search/${searchQuery}`
-  })
+    url: `/api/resources/search/${searchQuery}`,
+  });
 };
 
 const getMyResources = () => {
   return $.ajax({
-    url: `/api/resources/me`
+    url: `/api/resources/me`,
+  });
+};
+
+const getHtmlFromAPI = (url) => {
+  return $.ajax({
+    url: `/api/resources/media/${url}`,
   });
 };

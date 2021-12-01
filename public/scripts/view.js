@@ -7,6 +7,18 @@ $(() => {
   updateView("resources");
 });
 
+
+const {
+  showUpdateProfilePage,
+  profileButtonsEventListener,
+  prefillProfileForm,
+  showChangePasswordPage,
+  showMyResources,
+  showLikedResources,
+} = profilePageHandler();
+
+const updateResourceDeailsPage = updateResourceDetails();
+
 const eventListeners = () => {
   registerSearchListener();
   headerButtonsEventListener();
@@ -21,7 +33,7 @@ const eventListeners = () => {
 const updateTitleURL = (title, url) => {
   const newURL = `http://localhost:8080/${url}`;
   window.history.pushState("data", "Title", newURL);
-  document.title = title;
+  document.title = `${title} - Resource Wall`;
 };
 
 const updateUserInfo = async (userInfo) => {
@@ -51,17 +63,19 @@ const viewHandler = () => {
   const $errorPage = $("#error-page");
   const $myResourcesPage = $("#my-resources-page");
 
-  const updateView = (nextView, userInfo, resourceDetails) => {
-    updateUserInfo(userInfo);
-    $newResourcePage.hide();
-    $resourcesPage.hide();
-    $registerPage.hide();
-    $loginPage.hide();
-    $profilePage.hide();
-    $changePasswordPage.hide();
-    $resourceDetails.hide();
-    $errorPage.hide();
-    $myResourcesPage.hide();
+  const updateView = (nextView, userInfo, resourceId) => {
+    if(nextView !== "error") {
+      updateUserInfo(userInfo);
+      $newResourcePage.hide();
+      $resourcesPage.hide();
+      $registerPage.hide();
+      $loginPage.hide();
+      $profilePage.hide();
+      $changePasswordPage.hide();
+      $resourceDetails.hide();
+      $errorPage.hide();
+      $myResourcesPage.hide();
+    }
 
     switch (nextView) {
       case "resources":
@@ -73,17 +87,17 @@ const viewHandler = () => {
         renderMyResources();
         showMyResources();
         $myResourcesPage.show();
-        updateTitleURL("My resources", "my-resources");
+        updateTitleURL("My Resources", "my-resources");
         break;
       case "likedResources":
         showLikedResources();
         $myResourcesPage.show();
-        updateTitleURL("Liked resources", "liked-resources");
+        updateTitleURL("Liked Resources", "liked-resources");
         break;
       case "changePassword":
         showChangePasswordPage();
         $myResourcesPage.show();
-        updateTitleURL("Liked resources", "liked-resources");
+        updateTitleURL("Change Password", "liked-resources");
         break;
       case "updateProfile":
         showUpdateProfilePage();
@@ -103,11 +117,14 @@ const viewHandler = () => {
         updateTitleURL("Create New Resource", "create-resource");
         break;
       case "resourceDetails":
-        updateResourceDeailsPage(resourceDetails);
-        $resourceDetails.show();
-        updateTitleURL("Resource Details", "resource-details");
+        updateResourceDeailsPage(resourceId)
+        .then((title) => {
+          $resourceDetails.show();
+          updateTitleURL(`${title} - Resource Details`, `resource/${resourceId}`);
+          updateUserInfo(userInfo);
+        });
         break;
-      default:
+      case "error":
         $errorPage.show();
         updateTitleURL("Error", "error");
         break;
@@ -116,15 +133,6 @@ const viewHandler = () => {
   return updateView;
 };
 
-const updateView = viewHandler();
-const {
-  showUpdateProfilePage,
-  profileButtonsEventListener,
-  prefillProfileForm,
-  showChangePasswordPage,
-  showMyResources,
-  showLikedResources
-} =
-  profilePageHandler();
 
-const updateResourceDeailsPage = updateResourceDeails();
+
+const updateView = viewHandler();

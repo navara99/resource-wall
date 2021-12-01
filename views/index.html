@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 
 <head>
   <title>Home Page</title>
@@ -105,6 +106,53 @@
               <i class="far fa-heart icon liked"></i>
             </div>
             <h3>Umami before they sold out poutine chillwave</h3>
+=======
+  <head>
+    <title>Home Page</title>
+    <link rel="icon" href="../public/small-logo.png" type="image/png" />
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <header class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper blue">
+          <div class="logo"><img src="../public/logo.png" />Resource Wall</div>
+          <ul>
+            <li id="home-button">
+              <a><i class="fas fa-home"></i></a>
+            </li>
+          </ul>
+          <div class="input-field search-bar">
+            <input id="search" type="search" />
+            <label class="label-icon" for="search"
+              ><i class="fas fa-search"></i
+            ></label>
+>>>>>>> resource-details
           </div>
           <a href="wwww.google.com" class="paragraph">wwww.google.com</a>
           <h5>
@@ -175,6 +223,7 @@
           </ul>
         </div>
       </div>
+<<<<<<< HEAD
     </div>
 
     <div id="register-page" class="container hidden">
@@ -190,6 +239,95 @@
               <div class="input-field col s6">
                 <input id="last_name" type="text" class="validate" name="lastName" required />
                 <label for="last_name">Last Name</label>
+=======
+      <div id="error-page" class="container hidden">
+        <div class="margin-container">
+          <div class="content-container">
+            ERROR:
+            <span id="error-message"></span>
+          </div>
+        </div>
+      </div>
+
+      <div id="resources-page">
+        <div id="columns"></div>
+      </div>
+      <div id="resource-details" class="hidden">
+        <div class="resource-details-container container">
+          <div class="media">
+            <a id="details-link-on-media" target="_blank"
+              ><i class="fas fa-external-link-alt"></i>
+              <span id="details-display-link-on-media"></span
+            ></a>
+            <div id="details-media"></div>
+          </div>
+          <div class="details">
+            <div>
+              <div class="details-heart">
+                <i id="details-like-icon" class="fas fa-heart like icon"></i>
+                <div id="details-likes-num"></div>
+              </div>
+              <h3 id="details-title"></h3>
+            </div>
+            <a id="details-link" class="paragraph" target="_blank"
+              ><i class="fas fa-external-link-alt"></i>
+              <span id="details-display-link"></span>
+            </a>
+            <h6>
+
+              <span id="details-stars">
+                <i id="five-star" class="fas fa-star not-liked"></i
+                ><i id="four-star" class="fas fa-star not-liked"></i
+                ><i id="three-star" class="fas fa-star not-liked"></i
+                ><i id="two-star" class="fas fa-star not-liked"></i
+                ><i id="one-star" class="fas fa-star not-liked"></i
+              ></span>
+              <span id="details-rating-string"></span>
+            </h6>
+            <h6>
+              <i class="fas fa-star show-rating"></i> Avg Rating:
+              <span id="details-rating"></span>
+            </h6>
+            <p id="details-desciption"></p>
+
+            <h5>
+              <i class="fas fa-comment-alt"></i> Comments(<span
+                id="details-num-of-comments"
+              ></span
+              >)
+            </h5>
+            <ul class="collection comments" id="details-comments"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="register-page" class="container hidden">
+        <div class="margin-container">
+          <div class="content-container">
+            <h3 class="title">Register</h3>
+            <form id="register-form" class="col s12">
+              <div class="row">
+                <div class="input-field col s6">
+                  <input
+                    id="first_name"
+                    type="text"
+                    class="validate"
+                    name="firstName"
+                    required
+                  />
+                  <label for="first_name">First Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input
+                    id="last_name"
+                    type="text"
+                    class="validate"
+                    name="lastName"
+                    required
+                  />
+                  <label for="last_name">Last Name</label>
+                </div>
+>>>>>>> resource-details
               </div>
             </div>
             <div class="row">
@@ -307,6 +445,7 @@
       </div>
     </div>
 
+<<<<<<< HEAD
     <div id="error-page" class="container hidden">
       <div class="margin-container">
         <div class="content-container">ERROR</div>
@@ -317,6 +456,13 @@
       <div class="margin-container">
         <div class="content-container settings-container">
           <div class="left-navbar"></div>
+=======
+      <div id="profile-page" class="container hidden">
+        <div class="margin-container">
+          <div class="content-container settings-container">
+            <div class="left-navbar"></div>
+          </div>
+>>>>>>> resource-details
         </div>
       </div>
     </div>
@@ -575,4 +721,29 @@
   <script type="text/javascript" src="/scripts/view.js"></script>
 </body>
 
+<<<<<<< HEAD
+=======
+    <script type="text/javascript" src="/scripts/components/header.js"></script>
+    <script type="text/javascript" src="/scripts/components/login.js"></script>
+    <script type="text/javascript" src="/scripts/components/home.js"></script>
+    <script type="text/javascript" src="/scripts/components/error.js"></script>
+    <script
+      type="text/javascript"
+      src="/scripts/components/resource-details.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/scripts/components/profile.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/scripts/components/register.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/scripts/components/new-resource.js"
+    ></script>
+    <script type="text/javascript" src="/scripts/view.js"></script>
+  </body>
+>>>>>>> resource-details
 </html>

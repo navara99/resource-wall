@@ -13,7 +13,8 @@ const registerEventListener = () => {
 
       return $registerForm.trigger("reset");
     } catch (err) {
-      updateView(err);
+      updateError(err.responseText);
+      updateView("error");
     }
   });
 };

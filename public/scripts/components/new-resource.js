@@ -6,17 +6,16 @@ const newResourceEventListener = () => {
       event.preventDefault();
       const data = $newResourceForm.serialize();
 
-      const resourceDetails = await submitResource(data);
-      const { id } = resourceDetails;
+      const newResourceDetails = await submitResource(data);
+      const { id } = newResourceDetails;
 
-      const allResourceDetails = await getdetailsOfResources(id);
-
-      updateView("resourceDetails", null, allResourceDetails);
+      updateView("resourceDetails", null, id);
 
       return $newResourceForm.trigger("reset");
 
     } catch (err) {
-      updateView(err);
+      updateError(err.responseText);
+      updateView("error");
     }
   });
 };

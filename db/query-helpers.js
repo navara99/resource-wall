@@ -5,7 +5,12 @@ const getFirstRecord = (result) => result.rows[0];
 const assignProfilePic = (userInfo) => {
   const { image_url } = userInfo;
   if (!image_url) userInfo.image_url = defaultProfilePicUrl;
-}
+};
+
+const assignMyProfilePic = (details) => {
+  const { my_profile_url } = details;
+  if (!my_profile_url) details.my_profile_url = defaultProfilePicUrl;
+};
 
 const queryGenerator = (db) => {
 
@@ -117,28 +122,62 @@ const queryGenerator = (db) => {
     return result.rows;
   };
 
-  const getAllDetailsOfResource = async (id) => {
-    const value = [id];
+
+  const addCommentToResource = async (id, user_id, comment) => {
+    const values = [user_id, id, comment];
+    const queryString = `INSERT into comments (user_id, resource_id, comment) VALUES ($1, $2, $3) RETURNING *;`;
+    const result = await db.query(queryString, values);
+    return getFirstRecord(result);
+  };
+
+  const addRatingToResource = async (id, user_id, rating) => {
+    const values = [user_id, id, rating];
+    const queryString = `INSERT into ratings (user_id, resource_id, rating) VALUES ($1, $2, $3) RETURNING *;`;
+    const result = await db.query(queryString, values);
+    return getFirstRecord(result);
+  };
+
+  const getAllDetailsOfResource = async (resourcesId, userId) => {
+    const value = [resourcesId, userId];
     const queryString = `
     SELECT
       resources.*,
       categories.type AS catergory,
       (SELECT AVG(rating) FROM ratings WHERE resource_id = $1) AS rating,
       (SELECT COUNT(rating) FROM ratings WHERE resource_id = $1) AS number_of_rating,
-      (SELECT COUNT(likes) FROM likes WHERE resource_id = $1) AS likes,
+      (SELECT COUNT(comment) FROM comments WHERE resource_id = $1 AND comment IS NOT NULL) AS number_of_comment,
+      (SELECT COUNT(id) FROM likes WHERE resource_id = $1) AS number_of_like,
+      (SELECT username FROM users WHERE id = $2) AS current_username,
       comment,
       timestamp,
-      first_name,
-      last_name,
-      username
+      x.username,
+      x.image_url,
+      y.first_name,
+      y.last_name,
+      y.username AS owner_username,
+      (SELECT image_url FROM users WHERE id = $2) as my_profile_url,
+      (SELECT COUNT(id) FROM likes WHERE user_id = $2 AND resource_id = $1) AS liked,
+      (SELECT rating FROM ratings WHERE user_id = $2 AND resource_id = $1 LIMIT 1) AS rated
     FROM resources
     LEFT OUTER JOIN comments ON resources.id = comments.resource_id
-    LEFT OUTER JOIN users on comments.user_id = users.id
+    LEFT OUTER JOIN users x on comments.user_id = x.id
+    LEFT OUTER JOIN users y on resources.user_id = y.id
     JOIN categories ON categories.id = resources.category_id
-    WHERE resources.id = $1;`
+    WHERE resources.id = $1
+    ORDER BY timestamp;`
 
-    const result = await db.query(queryString, value);
-    return result.rows;
+    const result = (await db.query(queryString, value)).rows;
+    result.forEach((details) => assignProfilePic(details));
+    assignMyProfilePic(result[0]);
+    return result;
+  };
+
+  const getURLById = async (id) => {
+    const values = [id];
+    const queryString = `SELECT url FROM resources WHERE id = $1;`;
+    const result = await db.query(queryString, values);
+    const { url } = getFirstRecord(result);
+    return url;
   }
 
   const searchResources = async (user_id, query) => {
@@ -206,7 +245,11 @@ const queryGenerator = (db) => {
     addLikeToResource,
     getAllDetailsOfResource,
     searchResources,
-    getMyResources
+    getMyResources,
+    addCommentToResource,
+    getAllDetailsOfResource,
+    getURLById,
+    addRatingToResource
   };
 }
 

@@ -1,5 +1,5 @@
 const createScreenshot = (media_url) => {
-  return $(`<img src = ${media_url}/>`)
+  return $(`<img src = ${media_url}/>`);
 };
 
 const createEmbedVideo = (media_url, height) => {
@@ -13,8 +13,7 @@ const createEmbedVideo = (media_url, height) => {
     gyroscope;
     picture-in-picture"
     allowfullscreen>
-    </iframe>"`
-  );
+    </iframe>"`);
 };
 
 const getCardAction = (likesAmount, commentsAmount, averageRating) => {
@@ -30,7 +29,7 @@ const getCardAction = (likesAmount, commentsAmount, averageRating) => {
       <i class="fas fa-comment-alt card-icon"></i>30
     </div>
   </div>
-  `)
+  `);
 };
 
 const getCardContent = (title, description, category) => {
@@ -48,7 +47,7 @@ const getCardContent = (title, description, category) => {
 const getUrlLink = (url) => {
   return $(`
   <div class="url-wrapper truncate">
-    <a href=${url} class="card-url btn-flat">${url}</a>
+    <a href=${url} class="card-url btn-flat" target="_blank">${url}</a>
   </div>
   `);
 };
@@ -60,16 +59,17 @@ const registerLikeListener = () => {
     $figure = $(this).closest("figure");
     const resourceId = $figure.attr("id");
     const result = await likeResource(resourceId);
-    const { resource_id } = result[0]
+    const { resource_id } = result[0];
     $likedHeart = $(`#${resource_id}`).find(".card-heart");
     $likedHeart.removeClass("not-liked").addClass("liked");
   });
-
 };
 
 const getLikeLink = (is_liked) => {
   const colorClass = Number(is_liked) ? "liked" : "not-liked";
-  return $(`<a class="like-link"><i class="fas fa-heart card-heart ${colorClass}"></i></a>`);
+  return $(
+    `<a class="like-link"><i class="fas fa-heart card-heart ${colorClass}"></i></a>`
+  );
 };
 
 const clearResources = () => {
@@ -104,9 +104,19 @@ const displayResources = async (resources) => {
     const $cardContent = getCardContent(title, description, category);
     const $urlLink = getUrlLink(url);
     const $likeLink = getLikeLink(is_liked);
-    const $cardImage = $("<div>").addClass("card-image").prepend($urlLink, $likeLink, $resourceMedia);
+    const $cardImage = $("<div>")
+      .addClass("card-image")
+      .prepend($urlLink, $likeLink, $resourceMedia);
     const $resourceInfo = $card.prepend($cardImage, $cardContent, $cardAction);
     const $item = $figure.prepend($resourceInfo);
+
+    $item.on("click", async (event) => {
+      const tagName = event.target.nodeName;
+      if (tagName !== "A" && tagName !== "I") {
+        updateView("resourceDetails", null, id);
+      }
+    });
+
     $column.prepend($item);
 
     $("#resources-page").prepend($column);

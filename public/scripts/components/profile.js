@@ -114,7 +114,8 @@ const updateProfileEventListener = () => {
 
       return $updateProfileForm.trigger("reset");
     } catch (err) {
-      updateView(err);
+      updateError(err.responseText);
+      updateView("error");
     }
   });
 };
@@ -134,7 +135,8 @@ const changePasswordEventListener = () => {
 
       return $changePasswordForm.trigger("reset");
     } catch (err) {
-      updateView(err);
+      updateError(err.responseText);
+      updateView("error");
     }
   });
 };
