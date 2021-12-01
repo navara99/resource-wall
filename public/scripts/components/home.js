@@ -2,11 +2,11 @@ const createScreenshot = (media_url) => {
   return $(`<img src = ${media_url}/>`)
 };
 
-const createEmbedVideo = (media_url) => {
+const createEmbedVideo = (media_url, height) => {
   return $(`
     <iframe
     width="100%"
-    height="250"
+    height=${height}
     src=${media_url}
     frameborder="0" allow="accelerometer; autoplay;
     clipboard-write; encrypted-media;
@@ -21,10 +21,10 @@ const getCardAction = (likesAmount, commentsAmount, averageRating) => {
   return $(`
   <div class="card-action">
     <div class="card-summary">
-      <i class="fas fa-star card-icon"></i>${likesAmount}
+      <i class="fas fa-star card-icon"></i>12
     </div>
     <div class="card-summary">
-      <i class="fas fa-heart card-icon"></i>100
+      <i class="fas fa-heart card-icon"></i>${likesAmount}
     </div>
     <div class="card-summary">
       <i class="fas fa-comment-alt card-icon"></i>30
@@ -87,7 +87,7 @@ const displayResources = async (resources) => {
   } else {
     renderedResources = resources;
   }
-
+  console.log(renderedResources);
   if (!renderedResources.length) return;
 
   const $column = $("<div>").attr("id", "columns");
@@ -96,7 +96,8 @@ const displayResources = async (resources) => {
     const { id, user_id, title, description, url, media_url, created_on, is_video, is_liked, likes, category } = resource;
 
     const $card = $("<div>").addClass("card");
-    const $resourceMedia = is_video ? createEmbedVideo(media_url) : createScreenshot(media_url);
+    const videoHeight = 250;
+    const $resourceMedia = is_video ? createEmbedVideo(media_url, videoHeight) : createScreenshot(media_url);
     const $figure = $("<figure>").attr("id", id);
 
     const $cardAction = getCardAction(likes);
