@@ -78,3 +78,9 @@ const getdetailsOfResources = (id) => {
     url: `/api/resources/${id}`,
   });
 };
+
+const getHtmlFromAPI = (url) => {
+  return $.ajax({
+    url: `/api/resources/media/${url}`,
+  });
+};

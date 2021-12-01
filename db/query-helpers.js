@@ -163,6 +163,14 @@ const queryGenerator = (db) => {
     return result;
   };
 
+  const getURLById = async (id) => {
+    const values = [id];
+    const queryString = `SELECT url FROM resources WHERE id = $1;`;
+    const result = await db.query(queryString, values);
+    const { url } = getFirstRecord(result);
+    return url;
+  }
+
   return {
     createNewUser,
     getUserByValue,
@@ -173,7 +181,8 @@ const queryGenerator = (db) => {
     getAllResources,
     addLikeToResource,
     addCommentToResource,
-    getAllDetailsOfResource
+    getAllDetailsOfResource,
+    getURLById
   };
 }
 

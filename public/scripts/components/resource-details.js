@@ -88,8 +88,9 @@ const updateResourceDeails = () => {
   const $rating = $("#details-rating");
   const $numOfComment = $("#details-num-of-comments");
   const $detailsComments = $("#details-comments");
+  const $media = $("#details-media");
 
-  return (resourceDetails) => {
+  return async (resourceDetails) => {
     const {
       id,
       description,
@@ -99,7 +100,17 @@ const updateResourceDeails = () => {
       number_of_rating,
       number_of_comment,
       my_profile_url,
+      is_video,
+      media_url
     } = resourceDetails[0];
+    try {
+      const newMedia = await getHtmlFromAPI(id);
+      $media.html(newMedia.html);
+    } catch (err) {
+      const media = is_video ? createEmbedVideo(media_url) : createScreenshot(media_url);
+      $media.html(media);
+    }
+
     const comments = compileComments(resourceDetails);
     $detailsComments.text("").append(commentForm(my_profile_url));
 
