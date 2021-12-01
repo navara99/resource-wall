@@ -142,8 +142,9 @@ const queryGenerator = (db) => {
     JOIN categories ON categories.id = resources.category_id
     WHERE resources.id = $1;`
 
-    const result = await db.query(queryString, value);
-    return result.rows;
+    const result = (await db.query(queryString, value)).rows;
+    result.forEach((details) => assignProfilePic(details));
+    return result;
   }
 
   return {

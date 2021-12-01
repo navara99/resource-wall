@@ -1,11 +1,11 @@
-const dateToTimeAgo = (timestamp) => timeago.format(timestamp);
+const timestampToTimeAgo = (timestamp) => timeago.format(new Date(timestamp));
 
 const compileComments = (resourceDetails) => {
   const comments = [];
   for (const details of resourceDetails) {
-    const { comment, username, timestamp, image_URL } = details;
+    const { comment, username, timestamp, image_url } = details;
     if (comment) {
-      comments.push({ comment, username, timeAgo: dateToTimeAgo(new Date(timestamp)), image_URL });
+      comments.push({ comment, username, timeAgo: timestampToTimeAgo(timestamp), image_url });
     }
   }
   return comments;
@@ -58,9 +58,9 @@ const updateResourceDeails = () => {
     const comments = compileComments(resourceDetails);
     $detailsComments.text("");
     comments.forEach((commentInfo) => {
-      const { comment, username, timeAgo, image_URL } = commentInfo;
-      const elm = makeComment(username, comment, image_URL, timeAgo);
-      console.log(elm);
+      const { comment, username, timeAgo, image_url } = commentInfo;
+      const elm = makeComment(username, comment, image_url, timeAgo);
+      console.log("image", image_url);
       $detailsComments.append(elm);
     })
     const hostname = getHostname(url);
