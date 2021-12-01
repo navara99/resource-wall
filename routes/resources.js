@@ -9,6 +9,7 @@ module.exports = (db) => {
     addNewResource,
     getIdFromCategory,
     getAllResources,
+    getMyResources,
     addLikeToResource,
     getAllDetailsOfResource,
     searchResources
@@ -42,7 +43,21 @@ module.exports = (db) => {
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
-  })
+  });
+
+  router.get("/me", async (req, res) => {
+    console.log("hi")
+    try {
+      const { user_id } = req.session;
+      if (!user_id) return res.json({});
+      const myResources = await getMyResources(user_id);
+      res.json(myResources);
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).json({ error: err.message });
+    }
+
+  });
 
   router.get("/:id", async (req, res) => {
 
@@ -77,8 +92,7 @@ module.exports = (db) => {
       media_url = source;
       is_video = true;
     } catch (e) {
-      console.log(e)
-      media_url = `//image.thum.io/get/${url}`;
+      media_url = `https://api.screenshotmachine.com?key=${process.env.APIKEY}&url=${url}&dimension=1024x768&zoom=200`
       is_video = false;
     }
 
