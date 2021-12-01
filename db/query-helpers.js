@@ -130,6 +130,7 @@ const queryGenerator = (db) => {
       comment,
       timestamp,
       x.username,
+      x.image_url,
       y.first_name,
       y.last_name,
       y.username AS owner_username,
