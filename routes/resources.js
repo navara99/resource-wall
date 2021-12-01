@@ -11,8 +11,6 @@ module.exports = (db) => {
     getIdFromCategory,
     getAllResources,
     getMyResources,
-    addLikeToResource,
-    getAllDetailsOfResource,
     searchResources,
     addLikeToResource,
     getAllDetailsOfResource,
