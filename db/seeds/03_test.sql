@@ -25,7 +25,7 @@ VALUES
 INSERT INTO comments (user_id, resource_id, comment)
 VALUES
   (1, 2, 'comment for id 2'),
-  (2, 1, 'comment for id 1 from user 2'),
+  (2, 1, 'comment for id 1 from user 2, comment for id 1 from user 2, comment for id 1 from user 2, comment for id 1 from user 2'),
   (3, 1, 'comment for id 1 from user 3'),
   (4, 1, 'comment for id 1 from user 4'),
   (5, 2, 'comment for id 2')

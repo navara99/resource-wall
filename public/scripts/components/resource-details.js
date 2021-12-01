@@ -33,8 +33,11 @@ const escape = (str) => {
 
 const makeComment = (username, comment, profilePicture, timeAgo) => {
   const elm = `
-  <li class="collection-item avatar" id="details-comments">
-    <img src="${escape(profilePicture)}">
+  <li class="collection-item avatar">
+  <img
+    src="${escape(profilePicture)}"
+    class="circle profile profile-picture"
+  />
     <span class="title">@${escape(username)}</span>
     <p>${escape(comment)}</p>
     <p class="secondary-content">${escape(timeAgo)}</p>

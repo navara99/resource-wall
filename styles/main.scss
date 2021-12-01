@@ -148,11 +148,7 @@ ul.collection .collection-item.avatar .secondary-content {
 ul.collection li.collection-item.avatar {
   min-height: 0;
   border: none;
-  padding-left: 59px;
-}
-
-ul.collection .collection-item.avatar:not(.circle-clipper) > .circle {
-  left: 2px;
+  padding-left: 50px;
 }
 
 .show-rating {
@@ -423,4 +419,9 @@ div#dropdown.hidden.dropdown a{
 div.dropdown a i.fas.fa-heart {
   position: relative;
   top: 0.15em;
+}
+
+li.collection-item.avatar img.profile-picture.circle.profile {
+  left: 0em;
+  top: 0.65em;
 }
