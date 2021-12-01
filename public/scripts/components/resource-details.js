@@ -131,6 +131,7 @@ const updateResourceDetails = () => {
       $likeIcon.removeClass("liked");
     }
 
+    $likeIcon.off();
     $likeIcon.on("click", async function () {
       likeResource(id);
       const numOfLike = $likesNum.text();
@@ -173,18 +174,6 @@ const updateResourceDetails = () => {
     let commentsDetails = [...resourceDetails];
 
     makeComments(commentsDetails);
-
-
-    // const addComment = async (commentInfo) => {
-    //   const { comment, user_id, timestamp } = commentInfo;
-    //   const timeAgo = timestampToTimeAgo(timestamp);
-    //   const userInfo = await getMyDetails(user_id);
-    //   const { image_url, username } = userInfo;
-    //   const elm = makeComment(username, comment, image_url, timeAgo);
-    //   $("#details-comments>li:eq(0)").after(elm);
-    // };
-
-
 
     const hostname = getHostname(url);
     const ratingText = displayRating(rating, number_of_rating);
