@@ -19,7 +19,7 @@ const getHostname = (url) => {
 
 const displayRating = (rating, numOfRating) => {
   const displayStr = rating
-    ? `${rating} (Based on ${numOfRating} ratings)`
+    ? `${toTwoDecimalPlaces(rating)} (Based on ${numOfRating} ratings)`
     : "No rating yet";
   return displayStr;
 };
@@ -43,6 +43,12 @@ const makeComment = (username, comment, profilePicture, timeAgo) => {
     <p class="secondary-content">${escape(timeAgo)}</p>
   </li>`;
   return elm;
+};
+
+const toTwoDecimalPlaces = (numString) => {
+  const float = parseFloat(numString);
+  const twoDecimal = Math.round(float * 100) / 100;
+  return twoDecimal;
 };
 
 const updateResourceDeails = () => {
