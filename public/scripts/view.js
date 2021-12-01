@@ -8,6 +8,7 @@ $(() => {
 });
 
 const eventListeners = () => {
+  registerSearchListener();
   headerButtonsEventListener();
   loginEventListener();
   registerEventListener();
