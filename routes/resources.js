@@ -5,7 +5,14 @@ const axios = require("axios");
 const queryGenerator = require("../db/query-helpers");
 
 module.exports = (db) => {
-  const { addNewResource, getIdFromCategory, getAllResources, addLikeToResource, getAllDetailsOfResource } = queryGenerator(db);
+  const {
+    addNewResource,
+    getIdFromCategory,
+    getAllResources,
+    addLikeToResource,
+    getAllDetailsOfResource,
+    searchResources
+  } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
     const user_id = req.session.user_id;
@@ -22,6 +29,21 @@ module.exports = (db) => {
 
   });
 
+  router.get("/search/:q", async (req, res) => {
+    const { q } = req.params;
+    const { user_id } = req.session;
+
+    try {
+      const allResources = await searchResources(user_id, q);
+      res.json({
+        status: "success",
+        allResources
+      });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  })
+
   router.get("/:id", async (req, res) => {
 
     try {
@@ -35,7 +57,6 @@ module.exports = (db) => {
     }
 
   });
-
 
   router.post("/", async (req, res) => {
     const user_id = req.session.user_id;
