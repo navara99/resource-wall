@@ -125,7 +125,7 @@ a.paragraph {
   cursor: pointer;
 }
 
-#liked {
+.like {
   float: right;
 }
 
@@ -266,7 +266,7 @@ li textarea.materialize-textarea {
 }
 
 .liked {
-  color: red;
+  color:#DB565B;
 }
 
 .card-action {

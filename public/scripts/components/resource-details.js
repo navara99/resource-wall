@@ -85,10 +85,13 @@ const updateResourceDetails = () => {
   const $mediaDisplayedURL = $("#details-display-link-on-media");
   const $title = $("#details-title");
   const $link = $("#details-link");
+  const $displayLink = $("#details-display-link");
   const $rating = $("#details-rating");
   const $numOfComment = $("#details-num-of-comments");
   const $detailsComments = $("#details-comments");
   const $media = $("#details-media");
+  const $likesNum = $("#details-likes-num");
+  const $likeIcon = $("#details-like-icon");
 
   return async (id) => {
     const resourceDetails = await getdetailsOfResources(id);
@@ -105,6 +108,8 @@ const updateResourceDetails = () => {
       is_video,
       media_url,
       currentUserId,
+      number_of_like,
+      liked
     } = resourceDetails[0];
 
     const newMedia = await getHtmlFromAPI(id);
@@ -116,6 +121,15 @@ const updateResourceDetails = () => {
         ? createEmbedVideo(media_url)
         : createScreenshot(media_url);
       $media.append($newMedia);
+    }
+    console.log(liked);
+    if (liked > 0) {
+      console.log("liked")
+      $likeIcon.addClass("liked");
+      $likeIcon.removeClass("not-liked");
+    } else {
+      $likeIcon.addClass("not-liked");
+      $likeIcon.removeClass("liked");
     }
 
     const comments = compileComments(resourceDetails);
@@ -141,11 +155,12 @@ const updateResourceDetails = () => {
     const hostname = getHostname(url);
     const ratingText = displayRating(rating, number_of_rating);
 
+    $likesNum.text(number_of_like);
     $mediaDisplayedURL.text(hostname);
     $descriptions.text(description);
     $mediaURL.attr("href", url);
     $link.attr("href", url);
-    $link.text(hostname);
+    $displayLink.text(hostname);
     $rating.text(ratingText);
     $title.text(title);
     $numOfComment.text(number_of_comment);

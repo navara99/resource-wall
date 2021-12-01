@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <title>Home Page</title>
-    <link rel="icon" href="../public/small-logo.png" type="image/png">
+    <link rel="icon" href="../public/small-logo.png" type="image/png" />
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -34,9 +34,7 @@
     <header class="navbar-fixed">
       <nav>
         <div class="nav-wrapper blue">
-          <div class="logo">
-            <img src="../public/logo.png"/>Resource Wall
-          </div>
+          <div class="logo"><img src="../public/logo.png" />Resource Wall</div>
           <ul>
             <li id="home-button">
               <a><i class="fas fa-home"></i></a>
@@ -136,12 +134,15 @@
           <div class="details">
             <div>
               <div class="details-heart">
-                <i class="far fa-heart icon liked"></i>
-                <div>3</div>
+                <i id="details-like-icon" class="fas fa-heart like icon"></i>
+                <div id="details-likes-num"></div>
               </div>
               <h3 id="details-title"></h3>
             </div>
-            <a id="details-link" class="paragraph" target="_blank"></a>
+            <a id="details-link" class="paragraph" target="_blank"
+              ><i class="fas fa-external-link-alt"></i>
+              <span id="details-display-link"></span>
+            </a>
             <h5>
               Rate it <i class="fas fa-star unselected"></i
               ><i class="fas fa-star unselected"></i
