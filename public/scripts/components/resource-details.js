@@ -91,6 +91,7 @@ const updateResourceDeails = () => {
   const $media = $("#details-media");
 
   return async (resourceDetails) => {
+    $media.html("");
     const {
       id,
       description,
@@ -103,13 +104,17 @@ const updateResourceDeails = () => {
       is_video,
       media_url
     } = resourceDetails[0];
-    try {
+
       const newMedia = await getHtmlFromAPI(id);
-      $media.html(newMedia.html);
-    } catch (err) {
-      const media = is_video ? createEmbedVideo(media_url) : createScreenshot(media_url);
-      $media.html(media);
-    }
+      const { html } = newMedia;
+      if (html) {
+        $media.html(newMedia.html);
+      } else {
+        const $newMedia = is_video ? createEmbedVideo(media_url) : createScreenshot(media_url);
+        $media.append($newMedia);
+      }
+
+
 
     const comments = compileComments(resourceDetails);
     $detailsComments.text("").append(commentForm(my_profile_url));

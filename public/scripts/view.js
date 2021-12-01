@@ -103,9 +103,11 @@ const viewHandler = () => {
         updateTitleURL("Create New Resource", "create-resource");
         break;
       case "resourceDetails":
-        updateResourceDeailsPage(resourceDetails);
-        $resourceDetails.show();
-        updateTitleURL("Resource Details", "resource-details");
+        updateResourceDeailsPage(resourceDetails)
+        .then(() => {
+          $resourceDetails.show();
+          updateTitleURL("Resource Details", "resource-details");
+        });
         break;
       case "error":
         $errorPage.show();
