@@ -131,6 +131,16 @@ const updateResourceDetails = () => {
       $likeIcon.removeClass("liked");
     }
 
+    $likeIcon.on("click", async function () {
+      likeResource(id);
+      const numOfLike = $likesNum.text();
+      console.log("numOfLike", numOfLike);
+      const newNumOfLike = parseInt(numOfLike) + 1;
+      console.log("newNumOfLike", newNumOfLike);
+      $likesNum.text(newNumOfLike);
+      $likeIcon.removeClass("not-liked").addClass("liked");
+    });
+
     const makeComments = (resourceDetails) => {
 
       const comments = compileComments(resourceDetails);
