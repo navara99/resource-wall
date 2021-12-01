@@ -469,13 +469,17 @@ figure:hover {
   align-items: center;
 }
 
-#details-make-rating {
+#details-stars {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
 }
 
-#details-make-rating i:hover {
+.bright {
+  color: #ffb840;
+}
+
+#details-stars i:hover {
   color: #ffb840;
 }
 

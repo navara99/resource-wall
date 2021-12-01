@@ -93,11 +93,12 @@ const updateResourceDetails = () => {
   const $likesNum = $("#details-likes-num");
   const $likeIcon = $("#details-like-icon");
   const $ratingString = $("#details-rating-string");
-  const $oneStar = $("#one-star");
-  const $twoStar = $("#two-star");
-  const $threeStar = $("#three-star");
-  const $fourStar = $("#four-star");
-  const $fiveStar = $("#five-star");
+  const $1Star = $("#one-star");
+  const $2Star = $("#two-star");
+  const $3Star = $("#three-star");
+  const $4Star = $("#four-star");
+  const $5Star = $("#five-star");
+  const $detailsStars = $("#details-stars");
 
   return async (id) => {
     const resourceDetails = await getdetailsOfResources(id);
@@ -178,14 +179,33 @@ const updateResourceDetails = () => {
 
     makeComments(commentsDetails);
 
+    const starElms = [ $1Star, $2Star, $3Star, $4Star, $5Star];
+    const addClassToStar = (rating) => {
+      for (let i = 0; i < rating; i ++) {
+        starElms[i].addClass("bright");
+      }
+      for (let i = rating; i < 5; i++) {
+        starElms[i].removeClass("bright");
+      }
+    }
+
     const updateRatingStr = (newRating) => {
       if (newRating) {
+        addClassToStar(newRating);
         $ratingString.text(`You gave ${newRating} stars.`);
       } else {
         $ratingString.text("Rate it!");
       }
     };
 
+    $detailsStars
+    .mouseenter(() => {
+      console.log("mouseenter");
+    })
+    .mouseleave(() => {
+      console.log("mouseleaves");
+    });
+    // averageRating
     const ratingOnClick = ($elm, id, newRating) => {
       $elm.unbind();
       $elm.on("click", async () => {
@@ -197,14 +217,15 @@ const updateResourceDetails = () => {
         numOfRating++;
         updateRating();
         updateRatingStr(newRating);
+
       });
     };
 
-    ratingOnClick($oneStar, id, 1);
-    ratingOnClick($twoStar, id, 2);
-    ratingOnClick($threeStar, id, 3);
-    ratingOnClick($fourStar, id, 4);
-    ratingOnClick($fiveStar, id, 5);
+    ratingOnClick($1Star, id, 1);
+    ratingOnClick($2Star, id, 2);
+    ratingOnClick($3Star, id, 3);
+    ratingOnClick($4Star, id, 4);
+    ratingOnClick($5Star, id, 5);
 
     let averageRating = parseFloat(rating);
     let numOfRating = parseInt(number_of_rating);
