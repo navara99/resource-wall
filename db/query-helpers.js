@@ -117,21 +117,22 @@ const queryGenerator = (db) => {
     return result.rows;
   };
 
-  const getAllDetailsOfResource = async (id) => {
-    const value = [id];
+  const getAllDetailsOfResource = async (resourcesId, userId) => {
+    const value = [resourcesId, userId];
     const queryString = `
     SELECT
       resources.*,
       categories.type AS catergory,
       (SELECT AVG(rating) FROM ratings WHERE resource_id = $1) AS rating,
       (SELECT COUNT(rating) FROM ratings WHERE resource_id = $1) AS number_of_rating,
-      (SELECT COUNT(likes) FROM likes WHERE resource_id = $1) AS likes,
+      (SELECT COUNT(id) FROM likes WHERE resource_id = $1) AS likes,
       comment,
       timestamp,
       x.username,
       y.first_name,
       y.last_name,
-      y.username AS owner_username
+      y.username AS owner_username,
+      (SELECT COUNT(id) FROM likes WHERE user_id = $2 AND resource_id = $1) AS liked
     FROM resources
     LEFT OUTER JOIN comments ON resources.id = comments.resource_id
     LEFT OUTER JOIN users x on comments.user_id = x.id

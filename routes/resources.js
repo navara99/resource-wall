@@ -25,8 +25,9 @@ module.exports = (db) => {
   router.get("/:id", async (req, res) => {
 
     try {
+      const { user_id } = req.session;
       const { id } = req.params;
-      const resourceInfo = await getAllDetailsOfResource(id);
+      const resourceInfo = await getAllDetailsOfResource(id, user_id);
       console.log(resourceInfo);
       res.json(resourceInfo);
 
