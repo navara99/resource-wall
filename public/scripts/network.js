@@ -74,4 +74,10 @@ const searchResource = (searchQuery) => {
   return $.ajax({
     url: `/api/resources/search/${searchQuery}`
   })
-}
+};
+
+const getMyResources = () => {
+  return $.ajax({
+    url: `/api/resources/me`
+  });
+};
