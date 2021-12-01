@@ -141,6 +141,31 @@ const queryGenerator = (db) => {
     return result.rows;
   }
 
+  const searchResources = async (user_id, query) => {
+    const value = [user_id, false, '%' + query + '%'];
+    const queryString = `
+    SELECT
+    resources.id,
+    is_private,
+    description,
+    url,
+    title,
+    is_video,
+    created_on,
+    resources.user_id,
+    media_url,
+    categories.type AS category,
+    category_id,
+    (SELECT COUNT(likes.*) FROM likes WHERE resource_id = resources.id) AS likes,
+    (SELECT COUNT(likes.*) FROM likes WHERE user_id = $1 AND resource_id = resources.id) AS is_liked
+    FROM resources
+    JOIN categories ON resources.category_id = categories.id
+    WHERE is_private = $2 AND (title LIKE $3 OR description LIKE $3);
+    `;
+    const result = await db.query(queryString, value);
+    return result.rows;
+  }
+
   return {
     createNewUser,
     getUserByValue,
@@ -150,7 +175,8 @@ const queryGenerator = (db) => {
     getIdFromCategory,
     getAllResources,
     addLikeToResource,
-    getAllDetailsOfResource
+    getAllDetailsOfResource,
+    searchResources
   };
 }
 
