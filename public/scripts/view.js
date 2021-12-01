@@ -20,7 +20,7 @@ const eventListeners = () => {
 const updateTitleURL = (title, url) => {
   const newURL = `http://localhost:8080/${url}`;
   window.history.pushState("data", "Title", newURL);
-  document.title = title;
+  document.title = `${title} - Resource Wall`;
 };
 
 const updateUserInfo = async (userInfo) => {
