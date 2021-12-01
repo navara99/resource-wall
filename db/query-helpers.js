@@ -127,7 +127,7 @@ const queryGenerator = (db) => {
     const values = [user_id, id, comment];
     const queryString = `INSERT into comments (user_id, resource_id, comment) VALUES ($1, $2, $3) RETURNING *;`;
     const result = await db.query(queryString, values);
-    return result.rows;
+    return getFirstRecord(result);
   };
 
   const getAllDetailsOfResource = async (resourcesId, userId) => {
@@ -140,6 +140,7 @@ const queryGenerator = (db) => {
       (SELECT COUNT(rating) FROM ratings WHERE resource_id = $1) AS number_of_rating,
       (SELECT COUNT(comment) FROM comments WHERE resource_id = $1 AND comment IS NOT NULL) AS number_of_comment,
       (SELECT COUNT(id) FROM likes WHERE resource_id = $1) AS number_of_like,
+      (SELECT username FROM users WHERE id = $2) AS current_username,
       comment,
       timestamp,
       x.username,

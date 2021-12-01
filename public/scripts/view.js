@@ -7,6 +7,18 @@ $(() => {
   updateView("resources");
 });
 
+
+const {
+  showUpdateProfilePage,
+  profileButtonsEventListener,
+  prefillProfileForm,
+  showChangePasswordPage,
+  showMyResources,
+  showLikedResources,
+} = profilePageHandler();
+
+const updateResourceDeailsPage = updateResourceDetails();
+
 const eventListeners = () => {
   headerButtonsEventListener();
   loginEventListener();
@@ -119,14 +131,6 @@ const viewHandler = () => {
   return updateView;
 };
 
-const updateView = viewHandler();
-const {
-  showUpdateProfilePage,
-  profileButtonsEventListener,
-  prefillProfileForm,
-  showChangePasswordPage,
-  showMyResources,
-  showLikedResources,
-} = profilePageHandler();
 
-const updateResourceDeailsPage = updateResourceDetails();
+
+const updateView = viewHandler();

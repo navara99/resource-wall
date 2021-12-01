@@ -35,7 +35,6 @@ module.exports = (db) => {
       const { user_id } = req.session;
       const { id } = req.params;
       const resourceDetails = await getAllDetailsOfResource(id, user_id);
-      resourceDetails[0].currentUserId = user_id;
       res.json(resourceDetails);
     } catch (err) {
       res.status(500).json({ error: err.message });
@@ -128,7 +127,7 @@ module.exports = (db) => {
 
     try {
       const result = await addCommentToResource(id, user_id, comment);
-      return res.json({ result });
+      return res.json(result);
     } catch (err) {
       res.status(500).json({ error: err.message });
     }

@@ -107,9 +107,9 @@ const updateResourceDetails = () => {
       my_profile_url,
       is_video,
       media_url,
-      currentUserId,
       number_of_like,
-      liked
+      liked,
+      current_username,
     } = resourceDetails[0];
 
     const newMedia = await getHtmlFromAPI(id);
@@ -122,9 +122,8 @@ const updateResourceDetails = () => {
         : createScreenshot(media_url);
       $media.append($newMedia);
     }
-    console.log(liked);
+
     if (liked > 0) {
-      console.log("liked")
       $likeIcon.addClass("liked");
       $likeIcon.removeClass("not-liked");
     } else {
@@ -133,17 +132,25 @@ const updateResourceDetails = () => {
     }
 
     const comments = compileComments(resourceDetails);
-    $detailsComments.text("")
+    $detailsComments.text("");
 
-    if (currentUserId) $detailsComments.append(commentForm(my_profile_url));
+    if (current_username) $detailsComments.append(commentForm(my_profile_url));
+
+    const addComment = async (commentInfo) => {
+      const { comment, user_id, timestamp } = commentInfo;
+      const timeAgo = timestampToTimeAgo(timestamp);
+      const userInfo = await getMyDetails(user_id);
+      const { image_url, username } = userInfo;
+      const elm = makeComment(username, comment, image_url, timeAgo);
+      $("#details-comments>li:eq(0)").after(elm);
+    };
 
     $("#submit-button").on("click", async () => {
-      const $newComment = $("#new-comment");
       const data = $("#new-comment").serialize();
       if (data.length > 8) {
-        $newComment.trigger("reset");
+        $("#new-comment").val("");
         const result = await commentResource(id, data);
-        return updateView("resourceDetails", null, id, result);
+        addComment(result);
       }
     });
 
