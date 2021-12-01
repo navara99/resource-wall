@@ -76,14 +76,23 @@ const clearResources = () => {
   $("#columns").remove();
 };
 
-const displayResources = async () => {
+const displayResources = async (resources) => {
   clearResources();
-  const result = await getAllResources();
-  const { allResources } = result;
-  console.log(allResources);
+  let renderedResources;
+
+  if (!resources) {
+    const result = await getAllResources();
+    const { allResources } = result;
+    renderedResources = allResources;
+  } else {
+    renderedResources = resources;
+  }
+
+  if (!renderedResources.length) return;
+
   const $column = $("<div>").attr("id", "columns");
 
-  allResources.forEach((resource) => {
+  renderedResources.forEach((resource) => {
     const { id, user_id, title, description, url, media_url, created_on, is_video, is_liked, likes, category } = resource;
 
     const $card = $("<div>").addClass("card");
@@ -104,3 +113,17 @@ const displayResources = async () => {
 
   registerLikeListener();
 };
+
+const registerSearchListener = () => {
+
+  const $searchBar = $(`#search`);
+
+  $searchBar.on("input", async (e) => {
+    const query = e.target.value;
+    if (!query) return displayResources();
+    const { allResources } = await searchResource(query);
+    displayResources(allResources);
+  });
+
+};
+
