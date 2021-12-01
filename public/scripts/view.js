@@ -51,16 +51,18 @@ const viewHandler = () => {
   const $myResourcesPage = $("#my-resources-page");
 
   const updateView = (nextView, userInfo, resourceDetails) => {
-    updateUserInfo(userInfo);
-    $newResourcePage.hide();
-    $resourcesPage.hide();
-    $registerPage.hide();
-    $loginPage.hide();
-    $profilePage.hide();
-    $changePasswordPage.hide();
-    $resourceDetails.hide();
-    $errorPage.hide();
-    $myResourcesPage.hide();
+    if(nextView !== "error") {
+      updateUserInfo(userInfo);
+      $newResourcePage.hide();
+      $resourcesPage.hide();
+      $registerPage.hide();
+      $loginPage.hide();
+      $profilePage.hide();
+      $changePasswordPage.hide();
+      $resourceDetails.hide();
+      $errorPage.hide();
+      $myResourcesPage.hide();
+    }
 
     switch (nextView) {
       case "resources":
@@ -105,7 +107,7 @@ const viewHandler = () => {
         $resourceDetails.show();
         updateTitleURL("Resource Details", "resource-details");
         break;
-      default:
+      case "error":
         $errorPage.show();
         updateTitleURL("Error", "error");
         break;
@@ -121,8 +123,7 @@ const {
   prefillProfileForm,
   showChangePasswordPage,
   showMyResources,
-  showLikedResources
-} =
-  profilePageHandler();
+  showLikedResources,
+} = profilePageHandler();
 
 const updateResourceDeailsPage = updateResourceDeails();

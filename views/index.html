@@ -103,6 +103,14 @@
         <div id="test3" class="col s12"></div>
         <div id="test4" class="col s12"></div>
       </div>
+      <div id="error-page" class="container hidden">
+        <div class="margin-container">
+          <div class="content-container">
+            ERROR:
+            <span id="error-message"></span>
+          </div>
+        </div>
+      </div>
 
       <div id="resources-page">
         <div id="columns"></div>
@@ -145,9 +153,7 @@
               ></span
               >)
             </h5>
-            <ul class="collection comments" id="details-comments">
-
-            </ul>
+            <ul class="collection comments" id="details-comments"></ul>
           </div>
         </div>
       </div>
@@ -350,12 +356,6 @@
         </div>
       </div>
 
-      <div id="error-page" class="container hidden">
-        <div class="margin-container">
-          <div class="content-container">ERROR</div>
-          <span id="error-message"></span>
-        </div>
-      </div>
       <div id="profile-page" class="container hidden">
         <div class="margin-container">
           <div class="content-container settings-container">
@@ -851,6 +851,7 @@
     <script type="text/javascript" src="/scripts/components/header.js"></script>
     <script type="text/javascript" src="/scripts/components/login.js"></script>
     <script type="text/javascript" src="/scripts/components/home.js"></script>
+    <script type="text/javascript" src="/scripts/components/error.js"></script>
     <script
       type="text/javascript"
       src="/scripts/components/resource-details.js"
