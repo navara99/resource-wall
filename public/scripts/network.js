@@ -65,6 +65,7 @@ const likeResource = (id) => {
 };
 
 const commentResource = (id, data) => {
+  console.log(id, data)
   return $.ajax({
     method: "POST",
     url: `/api/resources/${id}/comment`,

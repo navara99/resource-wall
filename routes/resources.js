@@ -5,7 +5,7 @@ const axios = require("axios");
 const queryGenerator = require("../db/query-helpers");
 
 module.exports = (db) => {
-  const { addNewResource, getIdFromCategory, getAllResources, addLikeToResource, getAllDetailsOfResource } = queryGenerator(db);
+  const { addNewResource, getIdFromCategory, getAllResources, addLikeToResource, getAllDetailsOfResource, addCommentToResource } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
     const user_id = req.session.user_id;
@@ -90,14 +90,13 @@ module.exports = (db) => {
   });
 
   router.post("/:id/comment", async (req, res) => {
-    const { comment } = req.params;
+    const { id } = req.params;
     const { user_id } = req.session;
-
-    if (!user_id) return res.status(500).json({ error: "You must be logged in to write comment." });
+    const { comment } = req.body;
 
     try {
-      const likes = await addLikeToResource(id, user_id);
-      res.json(likes);
+      const result = await addCommentToResource(id, user_id, comment);
+      return res.json({ result });
     } catch (err) {
       res.status(500).json({ error: err.message });
     };

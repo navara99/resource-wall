@@ -122,6 +122,14 @@ const queryGenerator = (db) => {
     return result.rows;
   };
 
+
+  const addCommentToResource = async (id, user_id, comment) => {
+    const values = [user_id, id, comment];
+    const queryString = `INSERT into comments (user_id, resource_id, comment) VALUES ($1, $2, $3) RETURNING *;`;
+    const result = await db.query(queryString, values);
+    return result.rows;
+  };
+
   const getAllDetailsOfResource = async (resourcesId, userId) => {
     const value = [resourcesId, userId];
     const queryString = `
@@ -164,6 +172,7 @@ const queryGenerator = (db) => {
     getIdFromCategory,
     getAllResources,
     addLikeToResource,
+    addCommentToResource,
     getAllDetailsOfResource
   };
 }

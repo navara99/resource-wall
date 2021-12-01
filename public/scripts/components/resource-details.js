@@ -106,10 +106,12 @@ const updateResourceDeails = () => {
     $("#submit-button").on("click", async () => {
       const $newComment = $("#new-comment");
       const data = $("#new-comment").serialize();
-      $newComment.trigger("reset");
-      commentResource(id, data);
-      const resourceDetails = await getdetailsOfResources(id);
-      return updateView("resourceDetails", null, resourceDetails);
+      if (data.length > 8) {
+        $newComment.trigger("reset");
+        commentResource(id, data);
+        const resourceDetails = await getdetailsOfResources(id);
+        return updateView("resourceDetails", null, resourceDetails);
+      }
     });
 
     comments.forEach((commentInfo) => {
