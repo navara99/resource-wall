@@ -270,7 +270,7 @@ li textarea.materialize-textarea {
 }
 
 .liked {
-  color:#DB565B;
+  color: #db565b;
 }
 
 .card-action {
@@ -416,10 +416,10 @@ div#dropdown.dropdown {
   bottom: -0.0000000001;
   margin: 0;
   right: 0;
-  border: 0.1em solid #E5E5E5;
+  border: 0.1em solid #e5e5e5;
 }
 
-div#dropdown.hidden.dropdown a{
+div#dropdown.hidden.dropdown a {
   color: #111111;
   text-align: center;
 }
@@ -446,7 +446,7 @@ li.collection-item.avatar img.profile-picture.circle.profile {
 }
 
 .logo {
-  font-family: 'Lobster', cursive;
+  font-family: "Lobster", cursive;
   font-size: 2em;
 }
 
@@ -456,7 +456,6 @@ li.collection-item.avatar img.profile-picture.circle.profile {
   top: 5px;
   padding-right: 1px;
 }
-
 
 figure:hover {
   cursor: pointer;
@@ -468,4 +467,57 @@ figure:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+#details-make-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.rated-star {
+  color: #ffb840;
+}
+
+#details-make-rating i:hover {
+  color: #ffb840;
+}
+
+#two-star:hover + #one-star {
+  color: #ffb840;
+}
+
+#three-star:hover ~ #one-star {
+  color: #ffb840;
+}
+
+#three-star:hover + #two-star {
+  color: #ffb840;
+}
+
+#four-star:hover ~ #one-star {
+  color: #ffb840;
+}
+#four-star:hover ~ #two-star {
+  color: #ffb840;
+}
+
+#four-star:hover + #three-star {
+  color: #ffb840;
+}
+
+#five-star:hover ~ #one-star {
+  color: #ffb840;
+}
+
+#five-star:hover ~ #two-star {
+  color: #ffb840;
+}
+
+#five-star:hover ~ #three-star {
+  color: #ffb840;
+}
+
+#five-star:hover + #four-star {
+  color: #ffb840;
 }
