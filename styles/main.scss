@@ -425,3 +425,14 @@ li.collection-item.avatar img.profile-picture.circle.profile {
   left: 0em;
   top: 0.65em;
 }
+
+.make-comment {
+  display: flex;
+  min-height: 50px;
+  align-items: flex-end;
+  margin-bottom: 5px;
+}
+
+.make-comment textarea {
+  flex: 1;
+}

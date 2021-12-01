@@ -45,6 +45,30 @@ const makeComment = (username, comment, profilePicture, timeAgo) => {
   return elm;
 };
 
+const commentForm = (id, imageURL) => {
+  const elm = `
+  <li
+    class="collection-item avatar new-comment-container"
+    id="make-new-comment">
+    <img
+    src="${escape(imageURL)}"
+    class="circle profile profile-picture"
+  />
+    <form class="make-comment">
+      <textarea
+        id="new-comment"
+        class="materialize-textarea"
+        name="comment"
+      ></textarea>
+      <label class="label-icon" for="comment"></label>
+      <span id="submit-button" class="fas fa-chevron-circle-right send-comment"></span>
+    </form>
+  </li>
+  `;
+
+  return elm;
+}
+
 const toTwoDecimalPlaces = (numString) => {
   const float = parseFloat(numString);
   const twoDecimal = Math.round(float * 100) / 100;
@@ -62,16 +86,20 @@ const updateResourceDeails = () => {
   const $detailsComments = $("#details-comments");
 
   return (resourceDetails) => {
-    const { description, url, title, rating, number_of_rating, number_of_comment } =
+    const { id, description, url, title, rating, number_of_rating, number_of_comment, my_profile_url } =
       resourceDetails[0];
     const comments = compileComments(resourceDetails);
-    $detailsComments.text("");
+    $detailsComments
+      .text("")
+      .append(commentForm(id, my_profile_url));
+    $("#submit-button").on("click", () => {
+      const data = $("#new-comment").serialize();
+    });
     comments.forEach((commentInfo) => {
       const { comment, username, timeAgo, image_url } = commentInfo;
       const elm = makeComment(username, comment, image_url, timeAgo);
-      console.log("image", image_url);
       $detailsComments.append(elm);
-    })
+    });
     const hostname = getHostname(url);
     const ratingText = displayRating(rating, number_of_rating);
 

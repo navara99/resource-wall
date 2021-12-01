@@ -89,5 +89,20 @@ module.exports = (db) => {
 
   });
 
+  router.post("/:id/comment", async (req, res) => {
+    const { comment } = req.params;
+    const { user_id } = req.session;
+
+    if (!user_id) return res.status(500).json({ error: "You must be logged in to write comment." });
+
+    try {
+      const likes = await addLikeToResource(id, user_id);
+      res.json(likes);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    };
+
+  });
+
   return router;
 };

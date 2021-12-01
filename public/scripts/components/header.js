@@ -3,11 +3,14 @@ const updateHeader = (userInfo) => {
   const $noUserButtons = $("#no-user-buttons");
   const $floatingCreateResourceButton = $("#floating-create-resource-button");
 
+
+  const $newComment = $("#make-new-comment");
   const { id, image_url } = userInfo;
 
   if (!id) {
     $userButtons.hide();
     $floatingCreateResourceButton.hide();
+    $newComment.hide();
     return $noUserButtons.show();
   }
 
@@ -17,6 +20,7 @@ const updateHeader = (userInfo) => {
 
   $noUserButtons.hide();
   $userButtons.show();
+  $newComment.show();
   $floatingCreateResourceButton.show();
 };
 
