@@ -79,7 +79,7 @@ const toTwoDecimalPlaces = (numString) => {
   return twoDecimal;
 };
 
-const updateResourceDeails = () => {
+const updateResourceDetails = () => {
   const $descriptions = $("#details-desciption");
   const $mediaURL = $("#details-link-on-media");
   const $mediaDisplayedURL = $("#details-display-link-on-media");
@@ -124,8 +124,8 @@ const updateResourceDeails = () => {
       const data = $("#new-comment").serialize();
       if (data.length > 8) {
         $newComment.trigger("reset");
-        commentResource(id, data);
-        const resourceDetails = await getdetailsOfResources(id);
+        const result = await commentResource(id, data);
+        const resourceDetails = await getdetailsOfResources(id, result);
         return updateView("resourceDetails", null, resourceDetails);
       }
     });

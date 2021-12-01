@@ -3,6 +3,7 @@ const router = express.Router();
 const validUrl = require("valid-url");
 const axios = require("axios");
 const queryGenerator = require("../db/query-helpers");
+const apiKey = process.env.IFRAME_KEY;
 
 module.exports = (db) => {
   const {
@@ -46,7 +47,6 @@ module.exports = (db) => {
       const { id } = req.params;
       const url = await getURLById(id);
       console.log(url);
-      const apiKey = "de2109f549c57991e32c93";
       const encodeURL = encodeURIComponent(url);
       const api = `https://iframe.ly/api/iframely?url=${encodeURL}&api_key=${apiKey}`;
       const data = await axios.get(api);

@@ -128,4 +128,4 @@ const {
   showLikedResources,
 } = profilePageHandler();
 
-const updateResourceDeailsPage = updateResourceDeails();
+const updateResourceDeailsPage = updateResourceDetails();
