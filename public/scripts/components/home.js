@@ -97,7 +97,14 @@ const displayResources = async () => {
     const $cardImage = $("<div>").addClass("card-image").prepend($urlLink, $likeLink, $resourceMedia);
     const $resourceInfo = $card.prepend($cardImage, $cardContent, $cardAction);
     const $item = $figure.prepend($resourceInfo);
+
+    $item.on("click", async () => {
+      const resourceDetails = await getdetailsOfResources(id);
+      updateView("resourceDetails", null, resourceDetails);
+    });
+
     $column.prepend($item);
+
 
     $("#resources-page").prepend($column);
   });

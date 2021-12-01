@@ -6,12 +6,12 @@ const newResourceEventListener = () => {
       event.preventDefault();
       const data = $newResourceForm.serialize();
 
-      const resourceDetails = await submitResource(data);
-      const { id } = resourceDetails;
+      const newResourceDetails = await submitResource(data);
+      const { id } = newResourceDetails;
 
-      const allResourceDetails = await getdetailsOfResources(id);
+      const resourceDetails = await getdetailsOfResources(id);
 
-      updateView("resourceDetails", null, allResourceDetails);
+      updateView("resourceDetails", null, resourceDetails);
 
       return $newResourceForm.trigger("reset");
 
