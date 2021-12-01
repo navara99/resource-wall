@@ -73,17 +73,17 @@ const viewHandler = () => {
       case "myResources":
         showMyResources();
         $myResourcesPage.show();
-        updateTitleURL("My resources", "my-resources");
+        updateTitleURL("My Resources", "my-resources");
         break;
       case "likedResources":
         showLikedResources();
         $myResourcesPage.show();
-        updateTitleURL("Liked resources", "liked-resources");
+        updateTitleURL("Liked Resources", "liked-resources");
         break;
       case "changePassword":
         showChangePasswordPage();
         $myResourcesPage.show();
-        updateTitleURL("Liked resources", "liked-resources");
+        updateTitleURL("Change Password", "liked-resources");
         break;
       case "updateProfile":
         showUpdateProfilePage();
@@ -105,8 +105,11 @@ const viewHandler = () => {
       case "resourceDetails":
         updateResourceDeailsPage(resourceDetails)
         .then(() => {
+          console.log(resourceDetails);
           $resourceDetails.show();
-          updateTitleURL("Resource Details", "resource-details");
+          const { title, id } = resourceDetails[0];
+          const titleSmall = title.toLowerCase();
+          updateTitleURL(`${title} - Resource Details`, `resource/${id}`);
         });
         break;
       case "error":
