@@ -93,6 +93,11 @@ const updateResourceDetails = () => {
   const $likesNum = $("#details-likes-num");
   const $likeIcon = $("#details-like-icon");
   const $ratingString = $("#details-rating-string");
+  const $oneStar = $("#one-star");
+  const $twoStar = $("#two-star");
+  const $threeStar = $("#three-star");
+  const $fourStar = $("#four-star");
+  const $fiveStar = $("#five-star");
 
   return async (id) => {
     const resourceDetails = await getdetailsOfResources(id);
@@ -113,12 +118,6 @@ const updateResourceDetails = () => {
       current_username,
       rated,
     } = resourceDetails[0];
-
-    if (rated) {
-      $ratingString.text(`You gave ${rated} stars.`);
-    } else {
-      $ratingString.text("Rate it!");
-    }
 
     const newMedia = await getHtmlFromAPI(id);
     const { html } = newMedia;
@@ -179,16 +178,52 @@ const updateResourceDetails = () => {
 
     makeComments(commentsDetails);
 
-    const hostname = getHostname(url);
-    const ratingText = displayRating(rating, number_of_rating);
+    const updateRatingStr = (newRating) => {
+      if (newRating) {
+        $ratingString.text(`You gave ${newRating} stars.`);
+      } else {
+        $ratingString.text("Rate it!");
+      }
+    };
 
+    const ratingOnClick = ($elm, id, newRating) => {
+      $elm.unbind();
+      $elm.on("click", async () => {
+        const newRatingInfo = await rateResource(id, `rating=${newRating}`);
+        const { rating } = newRatingInfo;
+        const floatRating = parseFloat(rating);
+        averageRating =
+          (averageRating * numOfRating + floatRating) / (numOfRating + 1);
+        numOfRating++;
+        updateRating();
+        updateRatingStr(newRating);
+      });
+    };
+
+    ratingOnClick($oneStar, id, 1);
+    ratingOnClick($twoStar, id, 2);
+    ratingOnClick($threeStar, id, 3);
+    ratingOnClick($fourStar, id, 4);
+    ratingOnClick($fiveStar, id, 5);
+
+    let averageRating = parseFloat(rating);
+    let numOfRating = parseInt(number_of_rating);
+
+    const updateRating = () => {
+      const ratingText = displayRating(averageRating, numOfRating);
+      $rating.text(ratingText);
+    };
+    updateRatingStr(rated);
+    updateRating();
+
+    const hostname = getHostname(url);
     $likesNum.text(number_of_like);
     $mediaDisplayedURL.text(hostname);
     $descriptions.text(description);
     $mediaURL.attr("href", url);
     $link.attr("href", url);
     $displayLink.text(hostname);
-    $rating.text(ratingText);
+
     $title.text(title);
     $numOfComment.text(number_of_comment);
 

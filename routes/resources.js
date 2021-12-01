@@ -13,7 +13,8 @@ module.exports = (db) => {
     addLikeToResource,
     getAllDetailsOfResource,
     addCommentToResource,
-    getURLById
+    getURLById,
+    addRatingToResource
   } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
@@ -127,6 +128,19 @@ module.exports = (db) => {
 
     try {
       const result = await addCommentToResource(id, user_id, comment);
+      return res.json(result);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  router.post("/:id/rating", async (req, res) => {
+    const { id } = req.params;
+    const { user_id } = req.session;
+    const { rating } = req.body;
+
+    try {
+      const result = await addRatingToResource(id, user_id, rating);
       return res.json(result);
     } catch (err) {
       res.status(500).json({ error: err.message });

@@ -72,6 +72,14 @@ const commentResource = (id, data) => {
   });
 };
 
+const rateResource = (id, data) => {
+  return $.ajax({
+    method: "POST",
+    url: `/api/resources/${id}/rating`,
+    data
+  });
+};
+
 const getdetailsOfResources = (id) => {
   return $.ajax({
     url: `/api/resources/${id}`,

@@ -130,6 +130,13 @@ const queryGenerator = (db) => {
     return getFirstRecord(result);
   };
 
+  const addRatingToResource = async (id, user_id, rating) => {
+    const values = [user_id, id, rating];
+    const queryString = `INSERT into ratings (user_id, resource_id, rating) VALUES ($1, $2, $3) RETURNING *;`;
+    const result = await db.query(queryString, values);
+    return getFirstRecord(result);
+  };
+
   const getAllDetailsOfResource = async (resourcesId, userId) => {
     const value = [resourcesId, userId];
     const queryString = `
@@ -184,7 +191,8 @@ const queryGenerator = (db) => {
     addLikeToResource,
     addCommentToResource,
     getAllDetailsOfResource,
-    getURLById
+    getURLById,
+    addRatingToResource
   };
 }
 
