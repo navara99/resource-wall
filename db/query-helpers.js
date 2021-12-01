@@ -128,12 +128,14 @@ const queryGenerator = (db) => {
       (SELECT COUNT(likes) FROM likes WHERE resource_id = $1) AS likes,
       comment,
       timestamp,
-      first_name,
-      last_name,
-      username
+      x.username,
+      y.first_name,
+      y.last_name,
+      y.username AS owner_username
     FROM resources
     LEFT OUTER JOIN comments ON resources.id = comments.resource_id
-    LEFT OUTER JOIN users on comments.user_id = users.id
+    LEFT OUTER JOIN users x on comments.user_id = x.id
+    LEFT OUTER JOIN users y on resources.user_id = y.id
     JOIN categories ON categories.id = resources.category_id
     WHERE resources.id = $1;`
 

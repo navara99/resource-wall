@@ -102,6 +102,7 @@ const viewHandler = () => {
         break;
       case "resourceDetails":
         updateResourceDeailsPage(resourceDetails);
+        console.log(resourceDetails);
         $resourceDetails.show();
         updateTitleURL("Resource Details", "resource-details");
         break;
