@@ -70,6 +70,7 @@ const viewHandler = () => {
         updateTitleURL("Home", "");
         break;
       case "myResources":
+        renderMyResources();
         showMyResources();
         $myResourcesPage.show();
         updateTitleURL("My resources", "my-resources");
