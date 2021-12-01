@@ -149,7 +149,8 @@ const queryGenerator = (db) => {
       y.last_name,
       y.username AS owner_username,
       (SELECT image_url FROM users WHERE id = $2) as my_profile_url,
-      (SELECT COUNT(id) FROM likes WHERE user_id = $2 AND resource_id = $1) AS liked
+      (SELECT COUNT(id) FROM likes WHERE user_id = $2 AND resource_id = $1) AS liked,
+      (SELECT rating FROM ratings WHERE user_id = $2 AND resource_id = $1 LIMIT 1) AS rated
     FROM resources
     LEFT OUTER JOIN comments ON resources.id = comments.resource_id
     LEFT OUTER JOIN users x on comments.user_id = x.id

@@ -92,6 +92,7 @@ const updateResourceDetails = () => {
   const $media = $("#details-media");
   const $likesNum = $("#details-likes-num");
   const $likeIcon = $("#details-like-icon");
+  const $ratingString = $("#details-rating-string");
 
   return async (id) => {
     const resourceDetails = await getdetailsOfResources(id);
@@ -110,7 +111,14 @@ const updateResourceDetails = () => {
       number_of_like,
       liked,
       current_username,
+      rated,
     } = resourceDetails[0];
+
+    if (rated) {
+      $ratingString.text(`You gave ${rated} stars.`);
+    } else {
+      $ratingString.text("Rate it!");
+    }
 
     const newMedia = await getHtmlFromAPI(id);
     const { html } = newMedia;
@@ -141,11 +149,8 @@ const updateResourceDetails = () => {
     });
 
     const makeComments = (resourceDetails) => {
-
       const comments = compileComments(resourceDetails);
       $detailsComments.text("");
-
-
 
       comments.forEach((commentInfo) => {
         const { comment, username, timeAgo, image_url } = commentInfo;
@@ -153,7 +158,8 @@ const updateResourceDetails = () => {
         $detailsComments.prepend(elm);
       });
 
-      if (current_username) $detailsComments.prepend(commentForm(my_profile_url));
+      if (current_username)
+        $detailsComments.prepend(commentForm(my_profile_url));
 
       $("#submit-button").on("click", async () => {
         const data = $("#new-comment").serialize();
@@ -168,7 +174,7 @@ const updateResourceDetails = () => {
           makeComments(commentsDetails);
         }
       });
-    }
+    };
     let commentsDetails = [...resourceDetails];
 
     makeComments(commentsDetails);
