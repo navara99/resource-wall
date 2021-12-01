@@ -69,3 +69,9 @@ const getdetailsOfResources = (id) => {
     url: `/api/resources/${id}`,
   });
 };
+
+const searchResource = (searchQuery) => {
+  return $.ajax({
+    url: `/api/resources/search/${searchQuery}`
+  })
+}
