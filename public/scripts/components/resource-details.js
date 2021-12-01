@@ -90,10 +90,11 @@ const updateResourceDetails = () => {
   const $detailsComments = $("#details-comments");
   const $media = $("#details-media");
 
-  return async (resourceDetails) => {
+  return async (id) => {
+    const resourceDetails = await getdetailsOfResources(id);
+
     $media.html("");
     const {
-      id,
       description,
       url,
       title,
@@ -102,22 +103,25 @@ const updateResourceDetails = () => {
       number_of_comment,
       my_profile_url,
       is_video,
-      media_url
+      media_url,
+      currentUserId,
     } = resourceDetails[0];
 
-      const newMedia = await getHtmlFromAPI(id);
-      const { html } = newMedia;
-      if (html) {
-        $media.html(newMedia.html);
-      } else {
-        const $newMedia = is_video ? createEmbedVideo(media_url) : createScreenshot(media_url);
-        $media.append($newMedia);
-      }
-
-
+    const newMedia = await getHtmlFromAPI(id);
+    const { html } = newMedia;
+    if (html) {
+      $media.html(newMedia.html);
+    } else {
+      const $newMedia = is_video
+        ? createEmbedVideo(media_url)
+        : createScreenshot(media_url);
+      $media.append($newMedia);
+    }
 
     const comments = compileComments(resourceDetails);
-    $detailsComments.text("").append(commentForm(my_profile_url));
+    $detailsComments.text("")
+
+    if (currentUserId) $detailsComments.append(commentForm(my_profile_url));
 
     $("#submit-button").on("click", async () => {
       const $newComment = $("#new-comment");
@@ -125,8 +129,7 @@ const updateResourceDetails = () => {
       if (data.length > 8) {
         $newComment.trigger("reset");
         const result = await commentResource(id, data);
-        const resourceDetails = await getdetailsOfResources(id, result);
-        return updateView("resourceDetails", null, resourceDetails);
+        return updateView("resourceDetails", null, id, result);
       }
     });
 
@@ -146,5 +149,7 @@ const updateResourceDetails = () => {
     $rating.text(ratingText);
     $title.text(title);
     $numOfComment.text(number_of_comment);
+
+    return title;
   };
 };

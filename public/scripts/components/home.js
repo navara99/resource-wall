@@ -99,8 +99,7 @@ const displayResources = async () => {
     const $item = $figure.prepend($resourceInfo);
 
     $item.on("click", async () => {
-      const resourceDetails = await getdetailsOfResources(id);
-      updateView("resourceDetails", null, resourceDetails);
+      updateView("resourceDetails", null, id);
     });
 
     $column.prepend($item);

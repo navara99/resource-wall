@@ -34,9 +34,9 @@ module.exports = (db) => {
     try {
       const { user_id } = req.session;
       const { id } = req.params;
-      const resourceInfo = await getAllDetailsOfResource(id, user_id);
-      console.log(resourceInfo);
-      res.json(resourceInfo);
+      const resourceDetails = await getAllDetailsOfResource(id, user_id);
+      resourceDetails[0].currentUserId = user_id;
+      res.json(resourceDetails);
     } catch (err) {
       res.status(500).json({ error: err.message });
     }

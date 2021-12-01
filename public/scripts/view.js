@@ -50,7 +50,7 @@ const viewHandler = () => {
   const $errorPage = $("#error-page");
   const $myResourcesPage = $("#my-resources-page");
 
-  const updateView = (nextView, userInfo, resourceDetails) => {
+  const updateView = (nextView, userInfo, resourceId) => {
     if(nextView !== "error") {
       updateUserInfo(userInfo);
       $newResourcePage.hide();
@@ -103,11 +103,10 @@ const viewHandler = () => {
         updateTitleURL("Create New Resource", "create-resource");
         break;
       case "resourceDetails":
-        updateResourceDeailsPage(resourceDetails)
-        .then(() => {
+        updateResourceDeailsPage(resourceId)
+        .then((title) => {
           $resourceDetails.show();
-          const { title, id } = resourceDetails[0];
-          updateTitleURL(`${title} - Resource Details`, `resource/${id}`);
+          updateTitleURL(`${title} - Resource Details`, `resource/${resourceId}`);
           updateUserInfo(userInfo);
         });
         break;

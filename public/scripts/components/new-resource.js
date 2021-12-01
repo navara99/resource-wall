@@ -9,9 +9,7 @@ const newResourceEventListener = () => {
       const newResourceDetails = await submitResource(data);
       const { id } = newResourceDetails;
 
-      const resourceDetails = await getdetailsOfResources(id);
-
-      updateView("resourceDetails", null, resourceDetails);
+      updateView("resourceDetails", null, id);
 
       return $newResourceForm.trigger("reset");
 
