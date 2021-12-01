@@ -105,11 +105,10 @@ const viewHandler = () => {
       case "resourceDetails":
         updateResourceDeailsPage(resourceDetails)
         .then(() => {
-          console.log(resourceDetails);
           $resourceDetails.show();
           const { title, id } = resourceDetails[0];
-          const titleSmall = title.toLowerCase();
           updateTitleURL(`${title} - Resource Details`, `resource/${id}`);
+          updateUserInfo(userInfo);
         });
         break;
       case "error":
