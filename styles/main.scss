@@ -457,3 +457,11 @@ li.collection-item.avatar img.profile-picture.circle.profile {
 figure:hover {
   cursor: pointer;
 }
+
+.details-heart {
+  float: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
