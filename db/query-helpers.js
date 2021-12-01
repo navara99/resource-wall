@@ -125,6 +125,7 @@ const queryGenerator = (db) => {
       categories.type AS catergory,
       (SELECT AVG(rating) FROM ratings WHERE resource_id = $1) AS rating,
       (SELECT COUNT(rating) FROM ratings WHERE resource_id = $1) AS number_of_rating,
+      (SELECT COUNT(comment) FROM comments WHERE resource_id = $1 AND comment IS NOT NULL) AS number_of_comment,
       (SELECT COUNT(id) FROM likes WHERE resource_id = $1) AS likes,
       comment,
       timestamp,

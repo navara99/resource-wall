@@ -29,9 +29,10 @@ const updateResourceDeails = () => {
   const $title = $("#details-title");
   const $link = $("#details-link");
   const $rating = $("#details-rating");
+  const $numOfComment = $("details-num-of-comments");
 
   return (resourceDetails) => {
-    const { description, url, title, rating, number_of_rating } =
+    const { description, url, title, rating, number_of_rating, number_of_comment } =
       resourceDetails[0];
     const comments = compileComments(resourceDetails);
     const hostname = getHostname(url);
@@ -44,5 +45,6 @@ const updateResourceDeails = () => {
     $link.text(hostname);
     $rating.text(ratingText);
     $title.text(title);
+    $numOfComment.text(number_of_comment);
   };
 };
