@@ -5,7 +5,12 @@ const compileComments = (resourceDetails) => {
   for (const details of resourceDetails) {
     const { comment, username, timestamp, image_url } = details;
     if (comment) {
-      comments.push({ comment, username, timeAgo: timestampToTimeAgo(timestamp), image_url });
+      comments.push({
+        comment,
+        username,
+        timeAgo: timestampToTimeAgo(timestamp),
+        image_url,
+      });
     }
   }
   return comments;
@@ -30,7 +35,6 @@ const escape = (str) => {
   return div.innerHTML;
 };
 
-
 const makeComment = (username, comment, profilePicture, timeAgo) => {
   const elm = `
   <li class="collection-item avatar">
@@ -45,7 +49,7 @@ const makeComment = (username, comment, profilePicture, timeAgo) => {
   return elm;
 };
 
-const commentForm = (id, imageURL) => {
+const commentForm = (imageURL) => {
   const elm = `
   <li
     class="collection-item avatar new-comment-container"
@@ -67,7 +71,7 @@ const commentForm = (id, imageURL) => {
   `;
 
   return elm;
-}
+};
 
 const toTwoDecimalPlaces = (numString) => {
   const float = parseFloat(numString);
@@ -86,15 +90,28 @@ const updateResourceDeails = () => {
   const $detailsComments = $("#details-comments");
 
   return (resourceDetails) => {
-    const { id, description, url, title, rating, number_of_rating, number_of_comment, my_profile_url } =
-      resourceDetails[0];
+    const {
+      id,
+      description,
+      url,
+      title,
+      rating,
+      number_of_rating,
+      number_of_comment,
+      my_profile_url,
+    } = resourceDetails[0];
     const comments = compileComments(resourceDetails);
-    $detailsComments
-      .text("")
-      .append(commentForm(id, my_profile_url));
-    $("#submit-button").on("click", () => {
+    $detailsComments.text("").append(commentForm(my_profile_url));
+
+    $("#submit-button").on("click", async () => {
+      const $newComment = $("#new-comment");
       const data = $("#new-comment").serialize();
+      $newComment.trigger("reset");
+      commentResource(id, data);
+      const resourceDetails = await getdetailsOfResources(id);
+      return updateView("resourceDetails", null, resourceDetails);
     });
+
     comments.forEach((commentInfo) => {
       const { comment, username, timeAgo, image_url } = commentInfo;
       const elm = makeComment(username, comment, image_url, timeAgo);

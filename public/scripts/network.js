@@ -64,6 +64,14 @@ const likeResource = (id) => {
   });
 };
 
+const commentResource = (id, data) => {
+  return $.ajax({
+    method: "POST",
+    url: `/api/resources/${id}/comment`,
+    data
+  });
+};
+
 const getdetailsOfResources = (id) => {
   return $.ajax({
     url: `/api/resources/${id}`,
