@@ -5,7 +5,7 @@ const axios = require("axios");
 const queryGenerator = require("../db/query-helpers");
 
 module.exports = (db) => {
-  const { addNewResource, getIdFromCategory, getAllResources, addLikeToResource } = queryGenerator(db);
+  const { addNewResource, getIdFromCategory, getAllResources, addLikeToResource, getAllDetailsOfResource } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
     const user_id = req.session.user_id;
@@ -21,6 +21,21 @@ module.exports = (db) => {
     }
 
   });
+
+  router.get("/:id", async (req, res) => {
+
+    try {
+      const { id } = req.params;
+      const resourceInfo = await getAllDetailsOfResource(id);
+      console.log(resourceInfo);
+      res.json(resourceInfo);
+
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+
+  });
+
 
   router.post("/", async (req, res) => {
     const user_id = req.session.user_id;

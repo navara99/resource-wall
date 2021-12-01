@@ -22,14 +22,30 @@ const updateHeader = (userInfo) => {
 
 const headerButtonsEventListener = () => {
   const $homeButton = $("#home-button");
-  const $profileButton = $("#profile-button");
+  const $updateProfileButton = $("#update-profile-button");
   const $loginButton = $("#login-button");
   const $registerButton = $("#register-button");
   const $likedResourcesButton = $("#liked-resources-button");
   const $createResourceButton = $("#create-resource-button");
   const $floatingCreateResourceButton = $("#floating-create-resource-button");
   const $logoutButton = $("#logout-button");
+  const $dropdown = $("#dropdown");
   const $myResourcesButton = $("#my-resources-button");
+  const $changePasswordButton = $("#change-password-button");
+
+  window.onclick = (event) => {
+    const className = $(event.target).attr("class");
+    if (!className) return $dropdown.hide();
+
+    const targetIsClicked = className.includes("profile-picture");
+
+    if (targetIsClicked) $dropdown.show();
+    if (!targetIsClicked) $dropdown.hide();
+  };
+
+  $changePasswordButton.on("click", () => {
+    updateView("changePassword");
+  });
 
   $myResourcesButton.on("click", () => {
     updateView("myResources");
@@ -56,7 +72,7 @@ const headerButtonsEventListener = () => {
     updateView("resources");
   });
 
-  $profileButton.on("click", () => {
+  $updateProfileButton.on("click", () => {
     updateView("updateProfile");
   });
 

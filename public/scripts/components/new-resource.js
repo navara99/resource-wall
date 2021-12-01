@@ -2,17 +2,21 @@ const newResourceEventListener = () => {
   const $newResourceForm = $("#new-resource-form");
 
   $newResourceForm.submit(async (event) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
+      const data = $newResourceForm.serialize();
 
-    const data = $newResourceForm.serialize();
+      const resourceDetails = await submitResource(data);
+      const { id } = resourceDetails;
 
-    submitResource(data)
-      .then(() => {
-        $newResourceForm.trigger("reset");
-        updateView("resourceDetails");
-      })
-      .catch((err) => {
-        updateView(err);
-      });
+      const allResourceDetails = await getdetailsOfResources(id);
+
+      updateView("resourceDetails", null, allResourceDetails);
+
+      return $newResourceForm.trigger("reset");
+
+    } catch (err) {
+      updateView(err);
+    }
   });
 };

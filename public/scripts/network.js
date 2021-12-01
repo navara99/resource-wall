@@ -53,7 +53,7 @@ const submitResource = (data) => {
 
 const getAllResources = () => {
   return $.ajax({
-    url: "/api/resources"
+    url: "/api/resources",
   });
 };
 
@@ -61,5 +61,11 @@ const likeResource = (id) => {
   return $.ajax({
     method: "POST",
     url: `/api/resources/${id}/like`,
+  });
+};
+
+const getdetailsOfResources = (id) => {
+  return $.ajax({
+    url: `/api/resources/${id}`,
   });
 };

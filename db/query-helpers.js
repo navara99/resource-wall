@@ -117,6 +117,30 @@ const queryGenerator = (db) => {
     return result.rows;
   };
 
+  const getAllDetailsOfResource = async (id) => {
+    const value = [id];
+    const queryString = `
+    SELECT
+      resources.*,
+      categories.type AS catergory,
+      (SELECT AVG(rating) FROM ratings WHERE resource_id = $1) AS rating,
+      (SELECT COUNT(rating) FROM ratings WHERE resource_id = $1) AS number_of_rating,
+      (SELECT COUNT(likes) FROM likes WHERE resource_id = $1) AS likes,
+      comment,
+      timestamp,
+      first_name,
+      last_name,
+      username
+    FROM resources
+    LEFT OUTER JOIN comments ON resources.id = comments.resource_id
+    LEFT OUTER JOIN users on comments.user_id = users.id
+    JOIN categories ON categories.id = resources.category_id
+    WHERE resources.id = $1;`
+
+    const result = await db.query(queryString, value);
+    return result.rows;
+  }
+
   return {
     createNewUser,
     getUserByValue,
@@ -125,7 +149,8 @@ const queryGenerator = (db) => {
     addNewResource,
     getIdFromCategory,
     getAllResources,
-    addLikeToResource
+    addLikeToResource,
+    getAllDetailsOfResource
   };
 }
 

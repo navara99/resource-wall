@@ -13,6 +13,3 @@ CREATE TABLE resources
   is_private BOOLEAN NOT NULL,
   created_on TIMESTAMP NOT NULL DEFAULT NOW()
 )
-
-
-
