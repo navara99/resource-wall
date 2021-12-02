@@ -20,10 +20,10 @@ const getCardAction = (likesAmount, commentsAmount, averageRating) => {
   return $(`
   <div class="card-action">
     <div class="card-summary">
-      <i class="fas fa-star card-icon"></i>12
+      <i class="fas fa-star card-icon bright"></i>12
     </div>
     <div class="card-summary">
-      <i class="fas fa-heart card-icon"></i>${likesAmount}
+      <i class="fas fa-heart card-icon liked"></i>${likesAmount}
     </div>
     <div class="card-summary">
       <i class="fas fa-comment-alt card-icon"></i>30
