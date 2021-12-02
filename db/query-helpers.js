@@ -117,9 +117,17 @@ const queryGenerator = (db) => {
 
   const addLikeToResource = async (id, user_id) => {
     const values = [user_id, id];
-    const queryString = `INSERT into likes (user_id, resource_id) VALUES ($1, $2) RETURNING *;`;
-    const result = await db.query(queryString, values);
-    return result.rows;
+    const ifLikedQuery = "SELECT * FROM likes WHERE user_id = $1 AND resource_id = $2;"
+    const likes = await db.query(ifLikedQuery, values);
+    const like = getFirstRecord(likes);
+    if (!like) {
+      const queryString = `INSERT into likes (user_id, resource_id) VALUES ($1, $2);`;
+      db.query(queryString, values);
+      return true;
+    }
+    const deleteLikeQuery = "DELETE FROM likes WHERE user_id = $1 AND resource_id = $2;";
+    db.query(deleteLikeQuery, values);
+    return false;
   };
 
 
