@@ -44,7 +44,7 @@ const headerButtonsEventListener = () => {
   };
 
   $myProfilebutton.on("click", () => {
-    updateView("userPage");
+    updateUserDetailsPage();
   })
 
   $changePasswordButton.on("click", () => {

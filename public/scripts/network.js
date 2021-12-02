@@ -1,6 +1,12 @@
-const getMyDetails = (data) => {
+const getMyDetails = (getDefaultProfilePic) => {
   return $.ajax({
-    url: `/api/users/me/${data}`,
+    url: `/api/users/me/${getDefaultProfilePic}`,
+  });
+};
+
+const getUserDetails = (id) => {
+  return $.ajax({
+    url: `/api/users/${id}`,
   });
 };
 

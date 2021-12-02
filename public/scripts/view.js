@@ -17,6 +17,7 @@ const {
 } = profilePageHandler();
 
 const updateResourceDeailsPage = updateResourceDetails();
+const updateUserDetailsPage = updateUserPage();
 
 const eventListeners = () => {
   registerSearchListener();
