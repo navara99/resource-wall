@@ -14,11 +14,12 @@ const createThumbnail = (is_video, media_url) => {
 const createInfo = (title, url, description, category, created_on) => {
   return $(`
   <div class="text">
-  <h6>${title}</h6>
-  <a href="${url}" class="paragraph truncate">${url}</a>
-  <div>${description}</div>
-  <div>Added: ${timestampToTimeAgo(created_on)}</div>
-  <div>Category: ${category[0] + category.substring(1).toLowerCase()}</div>
+  <h6 class="my-resource-title">${title}</h6>
+  <a href="${url}" class="paragraph truncate">URL: ${url}</a>
+  <div><span>Description: </span> ${description}</div>
+  <div><span>Added by: </span> ${description}</div>
+  <div><span>Added:</span> ${timestampToTimeAgo(created_on)}</div>
+  <div><span>Category:</span> ${category[0] + category.substring(1).toLowerCase()}</div>
   </div>
   `
   );
