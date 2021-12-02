@@ -14,6 +14,7 @@ body {
 }
 
 #search {
+  background-color: white;
   border-radius: 200px;
   height: 70%;
   position: relative;
@@ -271,7 +272,7 @@ li textarea.materialize-textarea {
     .card-heart {
       font-size: 3em;
       &:hover {
-        color: red;
+        color: #db565b;
         transition: color 0.3s;
       }
     }
@@ -333,20 +334,34 @@ form {
 
 //My-resources
 
+#my-resource-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#my-resources-filter {
+  padding-right: 3em;
+  width: 35%;
+}
+
 .thumbnail-container {
   height: 150px;
 }
-
-// .media img {
-//   width: 100%;
-//   height: 100%;
-// }
 
 .stat, .stat-column {
   padding-right: 1em;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .fa-heart {
+    color: #db565b;
+  }
+}
+
+.fa-comment-alt {
+  color: #3b5998
 }
 
 #my-resource-list li {
@@ -521,6 +536,7 @@ figure:hover {
 }
 
 #details-stars i:hover {
+  cursor: pointer;
   color: #ffb840;
 }
 
