@@ -282,6 +282,10 @@ li textarea.materialize-textarea {
   color: rgba(128, 128, 128, 0.657);
 }
 
+.flex-row {
+  display: flex;
+}
+
 .liked {
   color: #db565b;
 }
@@ -514,6 +518,8 @@ figure:hover {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
+  // position: relative;
+  // top: 0.3em;
 }
 
 .bright {

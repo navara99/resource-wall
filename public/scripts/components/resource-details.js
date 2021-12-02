@@ -120,6 +120,10 @@ const updateResourceDetails = () => {
       rated,
     } = resourceDetails[0];
 
+    let averageRating = parseFloat(rating);
+    let numOfRating = parseInt(number_of_rating);
+    let currentRating = rated;
+
     const newMedia = await getHtmlFromAPI(id);
     const { html } = newMedia;
     if (html) {
@@ -158,8 +162,9 @@ const updateResourceDetails = () => {
         $detailsComments.prepend(elm);
       });
 
-      if (current_username)
+      if (current_username) {
         $detailsComments.prepend(commentForm(my_profile_url));
+      }
 
       $("#submit-button").on("click", async () => {
         const data = $("#new-comment").serialize();
@@ -179,63 +184,61 @@ const updateResourceDetails = () => {
 
     makeComments(commentsDetails);
 
-    const starElms = [ $1Star, $2Star, $3Star, $4Star, $5Star];
-    const addClassToStar = (rating) => {
-      for (let i = 0; i < rating; i ++) {
+    const starElms = [$1Star, $2Star, $3Star, $4Star, $5Star];
+    const addClassToStars = (rating) => {
+      for (let i = 0; i < rating; i++) {
         starElms[i].addClass("bright");
       }
       for (let i = rating; i < 5; i++) {
         starElms[i].removeClass("bright");
       }
-    }
+    };
 
-    const updateRatingStr = (newRating) => {
-      if (newRating) {
-        addClassToStar(newRating);
-        $ratingString.text(`You gave ${newRating} stars.`);
+    const updateRatingStr = () => {
+      if (currentRating) {
+        addClassToStars(currentRating);
+        $ratingString.html("You rated:&nbsp;");
       } else {
-        $ratingString.text("Rate it!");
+        $ratingString.text("Rate it: ");
       }
     };
 
     $detailsStars
-    .mouseenter(() => {
-      console.log("mouseenter");
-    })
-    .mouseleave(() => {
-      console.log("mouseleaves");
-    });
-    // averageRating
+      .mouseenter(() => {
+        console.log("mouseenter");
+        starElms.forEach((elm) => elm.removeClass("bright") );
+      })
+      .mouseleave(() => {
+        addClassToStars(currentRating);
+      });
+
     const ratingOnClick = ($elm, id, newRating) => {
       $elm.unbind();
       $elm.on("click", async () => {
+        currentRating = newRating;
         const newRatingInfo = await rateResource(id, `rating=${newRating}`);
         const { rating } = newRatingInfo;
         const floatRating = parseFloat(rating);
-        averageRating =
-          (averageRating * numOfRating + floatRating) / (numOfRating + 1);
+        averageRating = averageRating
+          ? (averageRating * numOfRating + floatRating) / (numOfRating + 1)
+          : floatRating;
         numOfRating++;
+        console.log("currentRating", currentRating);
         updateRating();
-        updateRatingStr(newRating);
-
+        updateRatingStr();
       });
     };
 
-    ratingOnClick($1Star, id, 1);
-    ratingOnClick($2Star, id, 2);
-    ratingOnClick($3Star, id, 3);
-    ratingOnClick($4Star, id, 4);
-    ratingOnClick($5Star, id, 5);
+    starElms.forEach((elm, index) => ratingOnClick(elm, id, index + 1));
 
-    let averageRating = parseFloat(rating);
-    let numOfRating = parseInt(number_of_rating);
+
 
     const updateRating = () => {
       const ratingText = displayRating(averageRating, numOfRating);
       $rating.text(ratingText);
     };
     updateRatingStr(rated);
-    updateRating();
+    updateRating(currentRating);
 
     const hostname = getHostname(url);
     $likesNum.text(number_of_like);

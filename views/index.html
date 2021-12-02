@@ -143,17 +143,21 @@
               ><i class="fas fa-external-link-alt"></i>
               <span id="details-display-link"></span>
             </a>
-            <h6>
 
-              <span id="details-stars">
-                <i id="five-star" class="fas fa-star not-liked"></i
-                ><i id="four-star" class="fas fa-star not-liked"></i
-                ><i id="three-star" class="fas fa-star not-liked"></i
-                ><i id="two-star" class="fas fa-star not-liked"></i
-                ><i id="one-star" class="fas fa-star not-liked"></i
-              ></span>
-              <span id="details-rating-string"></span>
-            </h6>
+              <h5>
+                <div class="flex-row">
+                  <span id="details-rating-string"></span>
+                <span id="details-stars">
+                  <i id="five-star" class="fas fa-star not-liked"></i
+                  ><i id="four-star" class="fas fa-star not-liked"></i
+                  ><i id="three-star" class="fas fa-star not-liked"></i
+                  ><i id="two-star" class="fas fa-star not-liked"></i
+                  ><i id="one-star" class="fas fa-star not-liked"></i
+                ></span>
+
+              </div>
+              </h5>
+
             <h6>
               <i class="fas fa-star show-rating"></i> Avg Rating:
               <span id="details-rating"></span>
@@ -397,10 +401,9 @@
                 <div id="password-button-border" class="active hidden"></div>
               </div>
             </div>
-            <div id="my-resources-details" >
+            <div id="my-resources-details">
               <h3 class="title">My Resources</h3>
-              <ul class="collection comments" id="my-resource-list">
-              </ul>
+              <ul class="collection comments" id="my-resource-list"></ul>
             </div>
             <div id="liked-resources-details" class="settings hidden">
               <h3 class="title"><i class="fas fa-heart"></i> Resources</h3>
@@ -713,7 +716,10 @@
     <script type="text/javascript" src="/scripts/components/login.js"></script>
     <script type="text/javascript" src="/scripts/components/home.js"></script>
     <script type="text/javascript" src="/scripts/components/error.js"></script>
-    <script type="text/javascript" src="/scripts/components/my-resources.js"></script>
+    <script
+      type="text/javascript"
+      src="/scripts/components/my-resources.js"
+    ></script>
     <script
       type="text/javascript"
       src="/scripts/components/resource-details.js"
