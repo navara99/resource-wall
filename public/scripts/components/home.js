@@ -20,19 +20,19 @@ const getCardAction = (likesAmount, commentsAmount, averageRating) => {
   return $(`
   <div class="card-action">
     <div class="card-summary">
-      <i class="fas fa-star card-icon bright"></i>12
+      <i class="fas fa-star card-icon bright"></i>${Number(averageRating) ? Number(averageRating).toFixed(1) : "0"}
     </div>
     <div class="card-summary">
       <i class="fas fa-heart card-icon liked"></i>${likesAmount}
     </div>
     <div class="card-summary">
-      <i class="fas fa-comment-alt card-icon"></i>30
+      <i class="fas fa-comment-alt card-icon"></i>${commentsAmount}
     </div>
   </div>
   `);
 };
 
-const getCardContent = (title, description, category) => {
+const getCardContent = (title, description, category, created_on, username) => {
   return $(`
   <div class="card-content" style="padding-top: 0;">
   <h5>${title}</h5>
@@ -93,15 +93,29 @@ const displayResources = async (resources) => {
   const $column = $("<div>").attr("id", "columns");
 
   renderedResources.forEach((resource) => {
-    const { id, user_id, title, description, url, media_url, created_on, is_video, is_liked, likes, category } = resource;
+    const {
+      id,
+      title,
+      description,
+      url,
+      media_url,
+      created_on,
+      is_video,
+      is_liked,
+      likes,
+      category,
+      username,
+      number_of_comment,
+      rating
+    } = resource;
 
     const $card = $("<div>").addClass("card");
     const videoHeight = 250;
     const $resourceMedia = is_video ? createEmbedVideo(media_url, videoHeight) : createScreenshot(media_url);
     const $figure = $("<figure>").attr("id", id);
 
-    const $cardAction = getCardAction(likes);
-    const $cardContent = getCardContent(title, description, category);
+    const $cardAction = getCardAction(likes, number_of_comment, rating);
+    const $cardContent = getCardContent(title, description, category, created_on, username);
     const $urlLink = getUrlLink(url);
     const $likeLink = getLikeLink(is_liked);
     const $cardImage = $("<div>")
