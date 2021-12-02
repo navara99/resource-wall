@@ -3,13 +3,20 @@ const timestampToTimeAgo = (timestamp) => timeago.format(new Date(timestamp));
 const compileComments = (resourceDetails) => {
   const comments = [];
   for (const details of resourceDetails) {
-    const { comment, username, timestamp, profile_picture_url } = details;
+    const {
+      comment,
+      username,
+      timestamp,
+      profile_picture_url,
+      comment_user_id,
+    } = details;
     if (comment) {
       comments.push({
         comment,
         username,
         timeAgo: timestampToTimeAgo(timestamp),
         profile_picture_url,
+        comment_user_id,
       });
     }
   }
@@ -36,8 +43,8 @@ const escape = (str) => {
   return div.innerHTML;
 };
 
-const makeComment = (username, comment, profilePicture, timeAgo) => {
-  const elm = `
+const makeComment = (username, comment, profilePicture, timeAgo, id) => {
+  const $elm = $(`
   <li class="collection-item avatar">
   <img
     src="${escape(profilePicture)}"
@@ -46,8 +53,13 @@ const makeComment = (username, comment, profilePicture, timeAgo) => {
     <span class="title">@${escape(username)}</span>
     <p>${escape(comment)}</p>
     <p class="secondary-content">${escape(timeAgo)}</p>
-  </li>`;
-  return elm;
+  </li>`);
+
+  $elm.on("click", () => {
+    updateUserDetailsPage(id);
+  });
+
+  return $elm;
 };
 
 const commentForm = (imageURL) => {
@@ -178,12 +190,20 @@ const updateResourceDetails = () => {
       $detailsComments.text("");
 
       comments.forEach((commentInfo) => {
-        const { comment, username, timeAgo, profile_picture_url } = commentInfo;
+        const {
+          comment,
+          username,
+          timeAgo,
+          profile_picture_url,
+          comment_user_id,
+        } = commentInfo;
+        console.log("comment_user_id", comment_user_id);
         const elm = makeComment(
           username,
           comment,
           profile_picture_url,
-          timeAgo
+          timeAgo,
+          comment_user_id
         );
         $detailsComments.prepend(elm);
       });
@@ -198,7 +218,7 @@ const updateResourceDetails = () => {
           if (data.length > 8) {
             $("#new-comment").val("");
             const commentInfo = await commentResource(id, data);
-            const { comment, user_id, timestamp } = commentInfo;
+            const { comment, timestamp, comment_user_id } = commentInfo;
             const userInfo = await getMyDetails();
             const { profile_picture_url, username } = userInfo;
             const commentDetails = {
@@ -206,6 +226,7 @@ const updateResourceDetails = () => {
               username,
               timestamp,
               profile_picture_url,
+              comment_user_id,
             };
             commentsDetails.push(commentDetails);
             makeComments(commentsDetails);

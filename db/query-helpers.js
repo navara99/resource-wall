@@ -167,6 +167,7 @@ const queryGenerator = (db) => {
       (SELECT username FROM users WHERE id = $2) AS current_username,
       comment,
       timestamp,
+      x.id AS comment_user_id,
       x.username,
       x.profile_picture_url,
       y.first_name,
