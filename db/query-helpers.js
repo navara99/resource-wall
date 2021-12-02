@@ -223,11 +223,16 @@ const queryGenerator = (db) => {
     categories.type AS category,
     category_id,
     ${subquery1} AS likes,
-    ${subquery2} AS is_liked
+    ${subquery2} AS is_liked,
+    (SELECT AVG(rating) FROM ratings WHERE resource_id = $1) AS rating,
+    (SELECT COUNT(comment) FROM comments WHERE resource_id = $1 AND comment IS NOT NULL) AS number_of_comment
     FROM resources
     JOIN categories ON resources.category_id = categories.id
+    LEFT OUTER JOIN users ON users.id = resources.user_id
+    LEFT OUTER JOIN comments ON comments.resource_id = resources.id
+    LEFT OUTER JOIN ratings ON resources.id = ratings.resource_id
     GROUP BY resources.id, categories.type
-    HAVING user_id = $1 OR ${subquery2} = $2;
+    HAVING resources.user_id = $1 OR ${subquery2} = $2;
     ;`;
 
     const result = await db.query(queryString, value);
