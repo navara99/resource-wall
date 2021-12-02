@@ -74,7 +74,7 @@ const renderMyResources = async () => {
     } = resource;
 
     console.log(number_of_comment);
-    const showLiked = ($("#liked-filter:checked").val() && Number(is_liked) === 1);
+    const showLiked = ($("#liked-filter:checked").val() && Number(is_liked) === 1 && user_id !== id);
     const showMine = ($("#mine-filter:checked").val() && user_id === id);
     console.log(user_id, id);
     console.log(showLiked, showMine);
