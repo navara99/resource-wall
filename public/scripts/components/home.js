@@ -35,12 +35,13 @@ const getCardAction = (likesAmount, commentsAmount, averageRating) => {
 const getCardContent = (title, description, category, created_on, username) => {
   return $(`
   <div class="card-content" style="padding-top: 0;">
-  <h5>${title}</h5>
-  <p>${description}</p>
-  <br/>
-  <p>Category: ${category[0] + category.substring(1).toLowerCase()}</p>
+    <h5><span>${title}</span></h5>
+    <p>${description}</p>
+    <br/>
+    <p><span>Added by:</span> @${username}</p>
+    <p><span>Added:</span> ${timestampToTimeAgo(created_on)}</p>
+    <p><span>Category:</span> ${category[0] + category.substring(1).toLowerCase()}</p>
   </div>
-
   `);
 };
 
