@@ -11,13 +11,13 @@ const createThumbnail = (is_video, media_url) => {
 `)
 };
 
-const createInfo = (title, url, description, category, created_on) => {
+const createInfo = (title, url, description, category, created_on, username) => {
   return $(`
   <div class="text">
   <h6 class="my-resource-title">${title}</h6>
   <a href="${url}" class="paragraph truncate">URL: ${url}</a>
   <div><span>Description: </span> ${description}</div>
-  <div><span>Added by: </span> ${description}</div>
+  <div><span>Added by: </span> ${username}</div>
   <div><span>Added:</span> ${timestampToTimeAgo(created_on)}</div>
   <div><span>Category:</span> ${category[0] + category.substring(1).toLowerCase()}</div>
   </div>
@@ -25,12 +25,12 @@ const createInfo = (title, url, description, category, created_on) => {
   );
 };
 
-const getStats = (likes) => {
+const getStats = (likes, ratings, comments) => {
   return $(`
   <div class="stat">
   <span class="stat-column">
     <span class="fas fa-star card-icon bright"></span>
-    <span>4.5</span>
+    <span>${Number(ratings) ? Number(ratings).toFixed(1) : "0"}</span>
   </span>
   <span class="stat-column">
     <span class="fas fa-heart card-icon liked"></span>
@@ -38,7 +38,7 @@ const getStats = (likes) => {
   </span>
   <span class="stat-column">
     <span class="fas fa-comment-alt card-icon"></span>
-    <span>4</span>
+    <span>${comments}</span>
   </span>
   </div>
   `)
@@ -57,7 +57,23 @@ const renderMyResources = async () => {
   const $listContainer = $("<ul>").attr("id", "my-resource-list").addClass("collection comments");
 
   myResources.forEach((resource) => {
-    const { user_id, title, description, url, media_url, created_on, is_video, is_liked, likes, category } = resource;
+    const {
+      user_id,
+      title,
+      description,
+      url,
+      media_url,
+      created_on,
+      is_video,
+      is_liked,
+      likes,
+      category,
+      number_of_comment,
+      rating,
+      username
+    } = resource;
+
+    console.log(number_of_comment);
     const showLiked = ($("#liked-filter:checked").val() && Number(is_liked) === 1);
     const showMine = ($("#mine-filter:checked").val() && user_id === id);
     console.log(user_id, id);
@@ -66,13 +82,12 @@ const renderMyResources = async () => {
     if (showLiked || showMine) {
       const $collection = $("<li>");
       const $thumbnail = createThumbnail(is_video, media_url);
-      const $info = createInfo(title, url, description, category, created_on);
-      const $stats = getStats(likes);
+      const $info = createInfo(title, url, description, category, created_on, username);
+      const $stats = getStats(likes, rating, number_of_comment);
       $collection.prepend($thumbnail, $info, $stats);
       $listContainer.prepend($collection);
       $("#my-resources-details").append($listContainer);
     }
-
 
   });
 
