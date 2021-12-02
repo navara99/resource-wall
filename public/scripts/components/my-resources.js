@@ -17,7 +17,7 @@ const createInfo = (title, url, description, category, created_on, username) => 
   <h6 class="my-resource-title">${title}</h6>
   <a href="${url}" class="paragraph truncate">URL: ${url}</a>
   <div><span>Description: </span> ${description}</div>
-  <div><span>Added by: </span> ${username}</div>
+  <div><span>Added by: </span> @${username}</div>
   <div><span>Added:</span> ${timestampToTimeAgo(created_on)}</div>
   <div><span>Category:</span> ${category[0] + category.substring(1).toLowerCase()}</div>
   </div>
