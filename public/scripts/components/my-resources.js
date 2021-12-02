@@ -17,7 +17,7 @@ const createInfo = (title, url, description, category, created_on) => {
   <h6>${title}</h6>
   <a href="${url}" class="paragraph truncate">${url}</a>
   <div>${description}</div>
-  <div>Added: ${created_on}</div>
+  <div>Added: ${timestampToTimeAgo(created_on)}</div>
   <div>Category: ${category[0] + category.substring(1).toLowerCase()}</div>
   </div>
   `
@@ -65,7 +65,7 @@ const renderMyResources = async () => {
     if (showLiked || showMine) {
       const $collection = $("<li>");
       const $thumbnail = createThumbnail(is_video, media_url);
-      const $info = createInfo(title, url, description, category);
+      const $info = createInfo(title, url, description, category, created_on);
       const $stats = getStats(likes);
       $collection.prepend($thumbnail, $info, $stats);
       $listContainer.prepend($collection);
