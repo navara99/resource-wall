@@ -87,7 +87,7 @@ const updateResourceDetails = () => {
   const $title = $("#details-title");
   const $link = $("#details-link");
   const $displayLink = $("#details-display-link");
-  const $rating = $("#details-rating");
+  const $averageRating = $("#details-average-rating");
   const $numOfComment = $("#details-num-of-comments");
   const $detailsComments = $("#details-comments");
   const $media = $("#details-media");
@@ -102,6 +102,7 @@ const updateResourceDetails = () => {
   const $detailsStars = $("#details-stars");
   const $createdOn = $("#details-time");
   const $ownerName = $("#details-owner-name");
+  const $rating = $("#details-rating");
 
   return async (id) => {
     const resourceDetails = await getdetailsOfResources(id);
@@ -130,6 +131,12 @@ const updateResourceDetails = () => {
     let currentRating = rated;
     let numOfComment = number_of_comment;
     let currentLike = liked > 0 ? true : false;
+
+    if (!current_username) {
+      $rating.hide();
+    } else {
+      $rating.show();
+    }
 
     const newMedia = await getHtmlFromAPI(id);
     const { html } = newMedia;
@@ -271,7 +278,7 @@ const updateResourceDetails = () => {
 
     const updateRating = () => {
       const ratingText = displayRating(averageRating, numOfRating);
-      $rating.text(ratingText);
+      $averageRating.text(ratingText);
     };
     updateRatingStr();
     updateRating();
