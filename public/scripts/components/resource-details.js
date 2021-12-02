@@ -123,6 +123,10 @@ const updateResourceDetails = () => {
     let averageRating = parseFloat(rating);
     let numOfRating = parseInt(number_of_rating);
     let currentRating = rated;
+    let currentLike =
+      liked > 0
+      ? true
+      : false;
 
     const newMedia = await getHtmlFromAPI(id);
     const { html } = newMedia;
@@ -135,21 +139,26 @@ const updateResourceDetails = () => {
       $media.append($newMedia);
     }
 
-    if (liked > 0) {
-      $likeIcon.addClass("liked");
-      $likeIcon.removeClass("not-liked");
-    } else {
-      $likeIcon.addClass("not-liked");
-      $likeIcon.removeClass("liked");
-    }
+    const updateHeart = () => {
+      if (currentLike) {
+        $likeIcon.addClass("liked");
+        $likeIcon.removeClass("not-liked");
+      } else {
+        $likeIcon.addClass("not-liked");
+        $likeIcon.removeClass("liked");
+      }
+    };
 
     $likeIcon.off();
     $likeIcon.on("click", async function () {
       likeResource(id);
+      currentLike = !currentLike;
       const numOfLike = $likesNum.text();
-      const newNumOfLike = parseInt(numOfLike) + 1;
+      const newNumOfLike = currentLike
+        ? parseInt(numOfLike) + 1
+        : parseInt(numOfLike) - 1;
       $likesNum.text(newNumOfLike);
-      $likeIcon.removeClass("not-liked").addClass("liked");
+      updateHeart();
     });
 
     const makeComments = (resourceDetails) => {
@@ -206,7 +215,7 @@ const updateResourceDetails = () => {
     $detailsStars
       .mouseenter(() => {
         console.log("mouseenter");
-        starElms.forEach((elm) => elm.removeClass("bright") );
+        starElms.forEach((elm) => elm.removeClass("bright"));
       })
       .mouseleave(() => {
         addClassToStars(currentRating);
@@ -231,14 +240,13 @@ const updateResourceDetails = () => {
 
     starElms.forEach((elm, index) => ratingOnClick(elm, id, index + 1));
 
-
-
     const updateRating = () => {
       const ratingText = displayRating(averageRating, numOfRating);
       $rating.text(ratingText);
     };
     updateRatingStr(rated);
     updateRating(currentRating);
+    updateHeart();
 
     const hostname = getHostname(url);
     $likesNum.text(number_of_like);
