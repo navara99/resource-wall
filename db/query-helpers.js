@@ -139,10 +139,21 @@ const queryGenerator = (db) => {
   };
 
   const addRatingToResource = async (id, user_id, rating) => {
-    const values = [user_id, id, rating];
-    const queryString = `INSERT into ratings (user_id, resource_id, rating) VALUES ($1, $2, $3) RETURNING *;`;
-    const result = await db.query(queryString, values);
-    return getFirstRecord(result);
+
+
+    const values = [user_id, id];
+    const ratingValues = [user_id, id, rating];
+    const ifRatedQuery = "SELECT * FROM ratings WHERE user_id = $1 AND resource_id = $2;"
+    const ratings = await db.query(ifRatedQuery, values);
+    const rate = getFirstRecord(ratings);
+    if (!rate) {
+      const addRatingString = `INSERT into ratings (user_id, resource_id, rating) VALUES ($1, $2, $3);`;
+      db.query(addRatingString, ratingValues);
+      return true;
+    }
+    const updateQuery = "UPDATE ratings SET rating = $3 WHERE user_id = $1 AND resource_id = $2;";
+    db.query(updateQuery, ratingValues);
+    return false;
   };
 
   const getAllDetailsOfResource = async (resourcesId, userId) => {

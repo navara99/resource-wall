@@ -120,14 +120,11 @@ const updateResourceDetails = () => {
       rated,
     } = resourceDetails[0];
 
-    let averageRating = parseFloat(rating);
+    let averageRating = rating;
     let numOfRating = parseInt(number_of_rating);
     let currentRating = rated;
     let numOfComment = number_of_comment;
-    let currentLike =
-      liked > 0
-      ? true
-      : false;
+    let currentLike = liked > 0 ? true : false;
 
     const newMedia = await getHtmlFromAPI(id);
     const { html } = newMedia;
@@ -187,7 +184,7 @@ const updateResourceDetails = () => {
           const commentDetails = { comment, username, timestamp, image_url };
           commentsDetails.push(commentDetails);
           makeComments(commentsDetails);
-          numOfComment ++;
+          numOfComment++;
           updateNumOfComment();
         }
       });
@@ -201,11 +198,12 @@ const updateResourceDetails = () => {
     makeComments(commentsDetails);
 
     const starElms = [$1Star, $2Star, $3Star, $4Star, $5Star];
-    const addClassToStars = (rating) => {
-      for (let i = 0; i < rating; i++) {
+    const addClassToStars = () => {
+      const rate = currentRating || 0;
+      for (let i = 0; i < rate; i++) {
         starElms[i].addClass("bright");
       }
-      for (let i = rating; i < 5; i++) {
+      for (let i = rate; i < 5; i++) {
         starElms[i].removeClass("bright");
       }
     };
@@ -231,14 +229,18 @@ const updateResourceDetails = () => {
     const ratingOnClick = ($elm, id, newRating) => {
       $elm.unbind();
       $elm.on("click", async () => {
+        const isNewRating = await rateResource(id, `rating=${newRating}`);
+        if (isNewRating) {
+          numOfRating++;
+          averageRating = averageRating
+            ? (averageRating * numOfRating + newRating) / (numOfRating)
+            : newRating;
+        } else {
+          averageRating =
+            (averageRating * numOfRating - currentRating + newRating) /
+            numOfRating;
+        }
         currentRating = newRating;
-        const newRatingInfo = await rateResource(id, `rating=${newRating}`);
-        const { rating } = newRatingInfo;
-        const floatRating = parseFloat(rating);
-        averageRating = averageRating
-          ? (averageRating * numOfRating + floatRating) / (numOfRating + 1)
-          : floatRating;
-        numOfRating++;
         updateRating();
         updateRatingStr();
       });
@@ -250,8 +252,8 @@ const updateResourceDetails = () => {
       const ratingText = displayRating(averageRating, numOfRating);
       $rating.text(ratingText);
     };
-    updateRatingStr(rated);
-    updateRating(currentRating);
+    updateRatingStr();
+    updateRating();
     updateHeart();
     updateNumOfComment();
 
@@ -264,7 +266,6 @@ const updateResourceDetails = () => {
     $displayLink.text(hostname);
 
     $title.text(title);
-
 
     return title;
   };
