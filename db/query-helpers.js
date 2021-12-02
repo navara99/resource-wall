@@ -111,6 +111,36 @@ const queryGenerator = (db) => {
     JOIN categories ON resources.category_id = categories.id
     WHERE is_private = $2;`;
 
+
+    // const subquery1 = `(SELECT COUNT(likes.*) FROM likes WHERE resource_id = resources.id)`;
+    // const subquery2 = `(SELECT COUNT(likes.*) FROM likes WHERE user_id = $1 AND resource_id = resources.id)`
+    // const queryString = `
+    // SELECT
+    // resources.id,
+    // is_private,
+    // description,
+    // url,
+    // title,
+    // is_video,
+    // created_on,
+    // users.username,
+    // media_url,
+    // categories.type AS category,
+    // category_id,
+    // ${subquery1} AS likes,
+    // ${subquery2} AS is_liked,
+    // resources.user_id,
+    // (SELECT AVG(rating) FROM ratings WHERE resources.id = ratings.resource_id) AS rating,
+    // (SELECT COUNT(comment) FROM comments WHERE comment IS NOT NULL AND resources.id = comments.resource_id) AS number_of_comment
+    // FROM resources
+    // JOIN categories ON resources.category_id = categories.id
+    // JOIN users ON users.id = resources.user_id
+    // LEFT JOIN comments ON comments.resource_id = resources.id
+    // LEFT JOIN ratings ON resources.id = ratings.resource_id
+    // GROUP BY resources.id, categories.type, users.username
+    // HAVING resources.user_id = $1 OR ${subquery2} = $2;
+    // ;`
+
     const result = await db.query(queryString, value);
     return result.rows;
   }
@@ -218,20 +248,21 @@ const queryGenerator = (db) => {
     title,
     is_video,
     created_on,
-    resources.user_id,
+    users.username,
     media_url,
     categories.type AS category,
     category_id,
     ${subquery1} AS likes,
     ${subquery2} AS is_liked,
-    (SELECT AVG(rating) FROM ratings WHERE resource_id = $1) AS rating,
-    (SELECT COUNT(comment) FROM comments WHERE resource_id = $1 AND comment IS NOT NULL) AS number_of_comment
+    resources.user_id,
+    (SELECT AVG(rating) FROM ratings WHERE resources.id = ratings.resource_id) AS rating,
+    (SELECT COUNT(comment) FROM comments WHERE comment IS NOT NULL AND resources.id = comments.resource_id) AS number_of_comment
     FROM resources
     JOIN categories ON resources.category_id = categories.id
-    LEFT OUTER JOIN users ON users.id = resources.user_id
-    LEFT OUTER JOIN comments ON comments.resource_id = resources.id
-    LEFT OUTER JOIN ratings ON resources.id = ratings.resource_id
-    GROUP BY resources.id, categories.type
+    JOIN users ON users.id = resources.user_id
+    LEFT JOIN comments ON comments.resource_id = resources.id
+    LEFT JOIN ratings ON resources.id = ratings.resource_id
+    GROUP BY resources.id, categories.type, users.username
     HAVING resources.user_id = $1 OR ${subquery2} = $2;
     ;`;
 
