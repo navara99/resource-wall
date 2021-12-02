@@ -111,6 +111,8 @@ module.exports = (db) => {
       media_url = source;
       is_video = true;
     } catch (e) {
+      console.log(process.env.APIKEY);
+      // media_url = "https://api.screenshotmachine.com/?key=506e0f&url=https://hipsum.co/?paras=5&type=hipster-centric&dimension=1024x768&zoom=200"
       media_url = `https://api.screenshotmachine.com?key=${process.env.APIKEY}&url=${url}&dimension=1024x768&zoom=200`
       is_video = false;
     }
