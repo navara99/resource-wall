@@ -122,7 +122,6 @@ module.exports = (db) => {
   router.get("/me/:getDefaultPic", async (req, res) => {
     try {
       const { getDefaultPic } = req.params;
-      console.log(typeof getDefaultPic);
       const { user_id } = req.session;
       if (!user_id) return res.json({});
       const userInfo = await getUserByValue("id", user_id, getDefaultPic);

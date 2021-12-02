@@ -10,7 +10,6 @@ const updateHeader = (userInfo) => {
     $floatingCreateResourceButton.hide();
     return $noUserButtons.show();
   }
-  console.log(userInfo);
   $profilePicture = $("#profile-picture");
 
   $profilePicture.attr("src", profile_picture_url);

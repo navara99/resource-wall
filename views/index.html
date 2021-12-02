@@ -58,6 +58,7 @@
                     id="profile-picture"
                     class="circle profile profile-picture"
                   />
+
                 </div>
               </a>
               <div class="hidden dropdown" id="dropdown">
@@ -139,14 +140,20 @@
               </div>
               <h3 id="details-title"></h3>
             </div>
-            <a id="details-link" class="paragraph" target="_blank"
-              ><i class="fas fa-external-link-alt"></i>
-              <span id="details-display-link"></span>
-            </a>
+            <div>
+              <a id="details-link" class="paragraph" target="_blank"
+                ><i class="fas fa-external-link-alt"></i>
+                <span id="details-display-link"></span>
+              </a>
+            </div>
+            <div>
+              Created by <span id="details-owner-name"></span>,
+              <span id="details-time"></span>
+            </div>
 
-              <h5>
-                <div class="flex-row">
-                  <span id="details-rating-string"></span>
+            <h5>
+              <div class="flex-row">
+                <span id="details-rating-string"></span>
                 <span id="details-stars">
                   <i id="five-star" class="fas fa-star not-liked"></i
                   ><i id="four-star" class="fas fa-star not-liked"></i
@@ -154,9 +161,8 @@
                   ><i id="two-star" class="fas fa-star not-liked"></i
                   ><i id="one-star" class="fas fa-star not-liked"></i
                 ></span>
-
               </div>
-              </h5>
+            </h5>
 
             <h6>
               <i class="fas fa-star show-rating"></i> Avg Rating:

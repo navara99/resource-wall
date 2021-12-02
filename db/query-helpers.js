@@ -5,7 +5,6 @@ const getFirstRecord = (result) => result.rows[0];
 const assignProfilePic = (userInfo, columnName) => {
   const { [columnName]: value } = userInfo;
   if (!value) userInfo[columnName] = defaultProfilePicUrl;
-  console.log(userInfo);
 };
 
 const queryGenerator = (db) => {

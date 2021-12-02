@@ -99,6 +99,8 @@ const updateResourceDetails = () => {
   const $4Star = $("#four-star");
   const $5Star = $("#five-star");
   const $detailsStars = $("#details-stars");
+  const $createdOn = $("#details-time");
+  const $ownerName = $("#details-owner-name");
 
   return async (id) => {
     const resourceDetails = await getdetailsOfResources(id);
@@ -118,6 +120,8 @@ const updateResourceDetails = () => {
       liked,
       current_username,
       rated,
+      created_on,
+      owner_username
     } = resourceDetails[0];
 
     let averageRating = rating;
@@ -266,6 +270,8 @@ const updateResourceDetails = () => {
     $displayLink.text(hostname);
 
     $title.text(title);
+    $createdOn.text(timestampToTimeAgo(created_on));
+    $ownerName.text(`@${owner_username}`);
 
     return title;
   };
