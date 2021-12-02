@@ -102,14 +102,21 @@ const queryGenerator = (db) => {
     is_video,
     created_on,
     resources.user_id,
+    users.username,
     media_url,
     categories.type AS category,
     category_id,
+    (SELECT AVG(rating) FROM ratings WHERE resources.id = ratings.resource_id) AS rating,
+    (SELECT COUNT(comment) FROM comments WHERE comment IS NOT NULL AND resources.id = comments.resource_id) AS number_of_comment,
     (SELECT COUNT(likes.*) FROM likes WHERE resource_id = resources.id) AS likes,
     (SELECT COUNT(likes.*) FROM likes WHERE user_id = $1 AND resource_id = resources.id) AS is_liked
     FROM resources
     JOIN categories ON resources.category_id = categories.id
-    WHERE is_private = $2;`;
+    JOIN users ON users.id = resources.user_id
+    LEFT JOIN comments ON comments.resource_id = resources.id
+    LEFT JOIN ratings ON resources.id = ratings.resource_id
+    GROUP BY resources.id, users.username, categories.type
+    HAVING is_private = $2;`;
 
     const result = await db.query(queryString, value);
     return result.rows;
@@ -218,16 +225,22 @@ const queryGenerator = (db) => {
     title,
     is_video,
     created_on,
-    resources.user_id,
+    users.username,
     media_url,
     categories.type AS category,
     category_id,
     ${subquery1} AS likes,
-    ${subquery2} AS is_liked
+    ${subquery2} AS is_liked,
+    resources.user_id,
+    (SELECT AVG(rating) FROM ratings WHERE resources.id = ratings.resource_id) AS rating,
+    (SELECT COUNT(comment) FROM comments WHERE comment IS NOT NULL AND resources.id = comments.resource_id) AS number_of_comment
     FROM resources
     JOIN categories ON resources.category_id = categories.id
-    GROUP BY resources.id, categories.type
-    HAVING user_id = $1 OR ${subquery2} = $2;
+    JOIN users ON users.id = resources.user_id
+    LEFT JOIN comments ON comments.resource_id = resources.id
+    LEFT JOIN ratings ON resources.id = ratings.resource_id
+    GROUP BY resources.id, categories.type, users.username
+    HAVING resources.user_id = $1 OR ${subquery2} = $2;
     ;`;
 
     const result = await db.query(queryString, value);

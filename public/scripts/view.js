@@ -20,6 +20,7 @@ const {
 const updateResourceDeailsPage = updateResourceDetails();
 
 const eventListeners = () => {
+  registerCheckListeners();
   registerSearchListener();
   headerButtonsEventListener();
   loginEventListener();

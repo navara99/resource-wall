@@ -14,6 +14,7 @@ body {
 }
 
 #search {
+  background-color: white;
   border-radius: 200px;
   height: 70%;
   position: relative;
@@ -240,6 +241,12 @@ li textarea.materialize-textarea {
   }
 }
 
+.card-content {
+  span {
+    font-weight: bold;
+  }
+}
+
 .card-image {
   position: relative;
 
@@ -271,7 +278,7 @@ li textarea.materialize-textarea {
     .card-heart {
       font-size: 3em;
       &:hover {
-        color: red;
+        color: #db565b;
         transition: color 0.3s;
       }
     }
@@ -337,20 +344,42 @@ form {
 
 //My-resources
 
+#my-resources-details {
+  overflow: auto;
+  width: 100%;
+
+  #my-resource-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 100%;
+  }
+}
+
+#my-resources-filter {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
 .thumbnail-container {
   height: 150px;
 }
 
-// .media img {
-//   width: 100%;
-//   height: 100%;
-// }
-
-.stat, .stat-column {
+.stat,
+.stat-column {
   padding-right: 1em;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .fa-heart {
+    color: #db565b;
+  }
+}
+
+.fa-comment-alt {
+  color: #3b5998;
 }
 
 #my-resource-list li {
@@ -361,6 +390,17 @@ form {
 .text {
   padding-right: 2em;
   width: 50%;
+
+  .my-resource-title {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  div {
+    span {
+      font-weight: bold;
+    }
+  }
 }
 
 div.left-navbar div.tab {
@@ -527,6 +567,7 @@ figure:hover {
 }
 
 #details-stars i:hover {
+  cursor: pointer;
   color: #ffb840;
 }
 
