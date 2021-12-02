@@ -62,7 +62,7 @@ const profilePageHandler = () => {
   };
 
   const prefillProfileForm = async () => {
-    const userInfo = await getMyDetails();
+    const userInfo = await getMyDetails(1);
     const { first_name, last_name, username, email, bio, profile_picture_url } = userInfo;
     putInValAndFocus($LastNameInput, last_name);
     putInValAndFocus($usernameInput, username);

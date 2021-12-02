@@ -10,15 +10,16 @@ const assignProfilePic = (userInfo, columnName) => {
 
 const queryGenerator = (db) => {
 
-  const getUserByValue = async (columnName, value) => {
+  const getUserByValue = async (columnName, value, getDefaultProfilePic) => {
     const values = [value];
     const queryString = `SELECT * FROM users WHERE ${columnName} = $1;`;
     const result = await db.query(queryString, values);
     const userInfo = getFirstRecord(result);
-    if (userInfo) assignProfilePic(userInfo, "profile_picture_url");
-    console.log(userInfo);
+    if (userInfo && getDefaultProfilePic !== "1") assignProfilePic(userInfo, "profile_picture_url");
     return userInfo;
   };
+
+
 
   const createNewUser = async (userInfo) => {
     const { email, password, username, firstName, lastName } = userInfo;

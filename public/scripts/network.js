@@ -1,6 +1,6 @@
-const getMyDetails = () => {
+const getMyDetails = (data) => {
   return $.ajax({
-    url: "/api/users/me",
+    url: `/api/users/me/${data}`,
   });
 };
 
