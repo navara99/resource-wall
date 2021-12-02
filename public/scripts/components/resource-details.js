@@ -23,10 +23,11 @@ const getHostname = (url) => {
 };
 
 const displayRating = (rating, numOfRating) => {
-  const displayStr = rating
-    ? `${toTwoDecimalPlaces(rating)} (Based on ${numOfRating} ratings)`
-    : "No rating yet";
-  return displayStr;
+  if (!rating) return "No rating yet";
+  if (numOfRating === 1) {
+    return `${toTwoDecimalPlaces(rating)} (Based on ${numOfRating} rating)`;
+  }
+  return `${toTwoDecimalPlaces(rating)} (Based on ${numOfRating} ratings)`;
 };
 
 const escape = (str) => {
@@ -121,7 +122,7 @@ const updateResourceDetails = () => {
       current_username,
       rated,
       created_on,
-      owner_username
+      owner_username,
     } = resourceDetails[0];
 
     let averageRating = rating;
@@ -153,14 +154,16 @@ const updateResourceDetails = () => {
 
     $likeIcon.off();
     $likeIcon.on("click", async function () {
-      likeResource(id);
-      currentLike = !currentLike;
-      const numOfLike = $likesNum.text();
-      const newNumOfLike = currentLike
-        ? parseInt(numOfLike) + 1
-        : parseInt(numOfLike) - 1;
-      $likesNum.text(newNumOfLike);
-      updateHeart();
+      if (current_username) {
+        likeResource(id);
+        currentLike = !currentLike;
+        const numOfLike = $likesNum.text();
+        const newNumOfLike = currentLike
+          ? parseInt(numOfLike) + 1
+          : parseInt(numOfLike) - 1;
+        $likesNum.text(newNumOfLike);
+        updateHeart();
+      }
     });
 
     const makeComments = (resourceDetails) => {
@@ -169,7 +172,12 @@ const updateResourceDetails = () => {
 
       comments.forEach((commentInfo) => {
         const { comment, username, timeAgo, profile_picture_url } = commentInfo;
-        const elm = makeComment(username, comment, profile_picture_url, timeAgo);
+        const elm = makeComment(
+          username,
+          comment,
+          profile_picture_url,
+          timeAgo
+        );
         $detailsComments.prepend(elm);
       });
 
@@ -178,18 +186,25 @@ const updateResourceDetails = () => {
       }
 
       $("#submit-button").on("click", async () => {
-        const data = $("#new-comment").serialize();
-        if (data.length > 8) {
-          $("#new-comment").val("");
-          const commentInfo = await commentResource(id, data);
-          const { comment, user_id, timestamp } = commentInfo;
-          const userInfo = await getMyDetails();
-          const { profile_picture_url, username } = userInfo;
-          const commentDetails = { comment, username, timestamp, profile_picture_url };
-          commentsDetails.push(commentDetails);
-          makeComments(commentsDetails);
-          numOfComment++;
-          updateNumOfComment();
+        if (current_username) {
+          const data = $("#new-comment").serialize();
+          if (data.length > 8) {
+            $("#new-comment").val("");
+            const commentInfo = await commentResource(id, data);
+            const { comment, user_id, timestamp } = commentInfo;
+            const userInfo = await getMyDetails();
+            const { profile_picture_url, username } = userInfo;
+            const commentDetails = {
+              comment,
+              username,
+              timestamp,
+              profile_picture_url,
+            };
+            commentsDetails.push(commentDetails);
+            makeComments(commentsDetails);
+            numOfComment++;
+            updateNumOfComment();
+          }
         }
       });
     };
@@ -217,7 +232,7 @@ const updateResourceDetails = () => {
         addClassToStars(currentRating);
         $ratingString.html("You rated:&nbsp;");
       } else {
-        $ratingString.text("Rate it: ");
+        $ratingString.html("Rate it:&nbsp;");
       }
     };
 
@@ -233,20 +248,22 @@ const updateResourceDetails = () => {
     const ratingOnClick = ($elm, id, newRating) => {
       $elm.unbind();
       $elm.on("click", async () => {
-        const isNewRating = await rateResource(id, `rating=${newRating}`);
-        if (isNewRating) {
-          numOfRating++;
-          averageRating = averageRating
-            ? (averageRating * numOfRating + newRating) / (numOfRating)
-            : newRating;
-        } else {
-          averageRating =
-            (averageRating * numOfRating - currentRating + newRating) /
-            numOfRating;
+        if (current_username) {
+          const isNewRating = await rateResource(id, `rating=${newRating}`);
+          if (isNewRating) {
+            numOfRating++;
+            averageRating = averageRating
+              ? (averageRating * numOfRating + newRating) / numOfRating
+              : newRating;
+          } else {
+            averageRating =
+              (averageRating * numOfRating - currentRating + newRating) /
+              numOfRating;
+          }
+          currentRating = newRating;
+          updateRating();
+          updateRatingStr();
         }
-        currentRating = newRating;
-        updateRating();
-        updateRatingStr();
       });
     };
 
