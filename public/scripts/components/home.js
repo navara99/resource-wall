@@ -82,7 +82,7 @@ const clearResources = () => {
 const displayResources = async (resources) => {
   clearResources();
   let renderedResources;
-
+  const { id: currentUserId } = await getMyDetails();
   if (!resources) {
     const result = await getAllResources();
     const { allResources } = result;
@@ -96,17 +96,31 @@ const displayResources = async (resources) => {
   const $column = $("<div>").attr("id", "columns");
 
   renderedResources.forEach((resource) => {
-    const { id, user_id, title, description, url, media_url, created_on, is_video, is_liked, likes, category } = resource;
+    const {
+      id,
+      user_id,
+      title,
+      description,
+      url,
+      media_url,
+      created_on,
+      is_video,
+      is_liked,
+      likes,
+      category,
+    } = resource;
 
     const $card = $("<div>").addClass("card");
     const videoHeight = 250;
-    const $resourceMedia = is_video ? createEmbedVideo(media_url, videoHeight) : createScreenshot(media_url);
+    const $resourceMedia = is_video
+      ? createEmbedVideo(media_url, videoHeight)
+      : createScreenshot(media_url);
     const $figure = $("<figure>").attr("id", id);
 
     const $cardAction = getCardAction(likes);
     const $cardContent = getCardContent(title, description, category);
     const $urlLink = getUrlLink(url);
-    const $likeLink = getLikeLink(is_liked);
+    const $likeLink = currentUserId ? getLikeLink(is_liked) : $("");
     const $cardImage = $("<div>")
       .addClass("card-image")
       .prepend($urlLink, $likeLink, $resourceMedia);
@@ -125,11 +139,9 @@ const displayResources = async (resources) => {
 
     $("#resources-page").prepend($column);
   });
-
 };
 
 const registerSearchListener = () => {
-
   const $searchBar = $(`#search`);
 
   $searchBar.on("input", async (e) => {
@@ -138,6 +150,4 @@ const registerSearchListener = () => {
     const { allResources } = await searchResource(query);
     displayResources(allResources);
   });
-
 };
-
