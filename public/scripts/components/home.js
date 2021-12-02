@@ -3,11 +3,12 @@ const createScreenshot = (media_url) => {
 };
 
 const createEmbedVideo = (media_url, height) => {
+  const url = media_url.replaceAll('"', '');
   return $(`
     <iframe
     width="100%"
     height=${height}
-    src=${media_url}
+    src=${url}
     frameborder="0" allow="accelerometer; autoplay;
     clipboard-write; encrypted-media;
     gyroscope;
