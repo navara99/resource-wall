@@ -334,22 +334,30 @@ form {
 
 //My-resources
 
-#my-resource-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+#my-resources-details {
+  overflow: auto;
+  width: 100%;
+
+  #my-resource-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 100%;
+  }
 }
 
 #my-resources-filter {
-  padding-right: 3em;
-  width: 35%;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 .thumbnail-container {
   height: 150px;
 }
 
-.stat, .stat-column {
+.stat,
+.stat-column {
   padding-right: 1em;
   display: flex;
   justify-content: center;
@@ -361,7 +369,7 @@ form {
 }
 
 .fa-comment-alt {
-  color: #3b5998
+  color: #3b5998;
 }
 
 #my-resource-list li {
@@ -372,6 +380,17 @@ form {
 .text {
   padding-right: 2em;
   width: 50%;
+
+  .my-resource-title {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  div {
+    span {
+      font-weight: bold;
+    }
+  }
 }
 
 div.left-navbar div.tab {
