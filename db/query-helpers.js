@@ -35,8 +35,8 @@ const queryGenerator = (db) => {
   }
 
   const updateUser = async (newUserInfo) => {
-    const { firstName, lastName, username, email, bio, userId } = newUserInfo;
-    const values = [firstName, lastName, username, email, bio, userId];
+    const { firstName, lastName, username, email, bio, picture, userId } = newUserInfo;
+    const values = [firstName, lastName, username, email, bio, picture, userId];
 
     const queryString = `
     UPDATE users
@@ -44,8 +44,9 @@ const queryGenerator = (db) => {
     last_name = $2,
     username = $3,
     email = $4,
-    bio = $5
-    WHERE id = $6
+    bio = $5,
+    profile_picture_url = $6
+    WHERE id = $7
     RETURNING *;
     `;
 
