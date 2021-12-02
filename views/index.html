@@ -1,735 +1,562 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Home Page</title>
-    <link rel="icon" href="../public/small-logo.png" type="image/png" />
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-  </head>
+<head>
+  <title>Home Page</title>
+  <link rel="icon" href="../public/small-logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bungee&family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
 
-  <body>
-    <header class="navbar-fixed">
-      <nav>
-        <div class="nav-wrapper blue">
-          <div class="logo"><img src="../public/logo.png" />Resource Wall</div>
-          <ul>
-            <li id="home-button">
-              <a><i class="fas fa-home"></i></a>
-            </li>
-          </ul>
-          <div class="input-field search-bar">
-            <input id="search" type="search" />
-            <label class="label-icon" for="search"
-              ><i class="fas fa-search"></i
-            ></label>
-          </div>
-          <ul id="user-buttons" class="hidden">
-            <li id="create-resource-button">
-              <a><i class="fas fa-plus-circle"></i></a>
-            </li>
-            <li id="profile-button" class="profile-picture">
-              <a class="profile profile-picture">
-                <div class="profile profile-picture">
-                  <img
-                    alt=""
-                    id="profile-picture"
-                    class="circle profile profile-picture"
-                  />
-                </div>
-              </a>
-              <div class="hidden dropdown" id="dropdown">
-                <a id="my-resources-button">My Resources</a>
-                <a class="divider"></a>
-                <a id="liked-resources-button"
-                  ><i class="fas fa-heart"></i> Resources</a
-                >
-                <a class="divider"></a>
-                <a id="update-profile-button">Update Profile</a>
-                <a class="divider"></a>
-                <a id="change-password-button">Change Password</a>
-                <a class="divider"></a>
-                <a id="logout-button">Logout</a>
+<body>
+  <header class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper blue">
+        <div class="logo"><img src="../public/logo.png" />Resource Wall</div>
+        <ul>
+          <li id="home-button">
+            <a><i class="fas fa-home"></i></a>
+          </li>
+        </ul>
+        <div class="input-field search-bar">
+          <input id="search" type="search" />
+          <label class="label-icon" for="search"><i class="fas fa-search"></i></label>
+        </div>
+        <ul id="user-buttons" class="hidden">
+          <li id="create-resource-button">
+            <a><i class="fas fa-plus-circle"></i></a>
+          </li>
+          <li id="profile-button" class="profile-picture">
+            <a class="profile profile-picture">
+              <div class="profile profile-picture">
+                <img alt="" id="profile-picture" class="circle profile profile-picture" />
               </div>
-            </li>
-          </ul>
-          <ul id="no-user-buttons">
-            <li id="login-button">
-              <a>LOGIN</a>
-            </li>
-            <li id="register-button">
-              <a>REGISTER</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-
-    <main>
-      <div class="row">
-        <div class="col s12">
-          <ul class="tabs">
-            <li class="tab col s1"><a class="active" href="">All</a></li>
-            <li class="tab col s1"><a href="">Art/DIY</a></li>
-            <li class="tab col s1"><a href="">Cooking</a></li>
-            <li class="tab col s1"><a href="">Design</a></li>
-            <li class="tab col s1"><a href="">Finance</a></li>
-            <li class="tab col s1"><a href="">Gardening</a></li>
-            <li class="tab col s1"><a href="">Health/Fitness</a></li>
-            <li class="tab col s1"><a href="">Language</a></li>
-            <li class="tab col s1"><a href="">Marketing</a></li>
-            <li class="tab col s1"><a href="">Music</a></li>
-            <li class="tab col s1"><a href="">Technology</a></li>
-            <li class="tab col s1"><a href="">Other</a></li>
-          </ul>
-        </div>
-        <div id="test1" class="col s12"></div>
-        <div id="test2" class="col s12"></div>
-        <div id="test3" class="col s12"></div>
-        <div id="test4" class="col s12"></div>
-      </div>
-      <div id="error-page" class="container hidden">
-        <div class="margin-container">
-          <div class="content-container">
-            ERROR:
-            <span id="error-message"></span>
-          </div>
-        </div>
-      </div>
-
-      <div id="resources-page">
-        <div id="columns"></div>
-      </div>
-      <div id="resource-details" class="hidden">
-        <div class="resource-details-container container">
-          <div class="details-media">
-            <a id="details-link-on-media" target="_blank"
-              ><i class="fas fa-external-link-alt"></i>
-              <span id="details-display-link-on-media"></span
-            ></a>
-            <div id="details-media"></div>
-          </div>
-          <div class="details">
-            <div>
-              <div class="details-heart">
-                <i id="details-like-icon" class="fas fa-heart like icon"></i>
-                <div id="details-likes-num"></div>
-              </div>
-              <h3 id="details-title"></h3>
-            </div>
-            <a id="details-link" class="paragraph" target="_blank"
-              ><i class="fas fa-external-link-alt"></i>
-              <span id="details-display-link"></span>
             </a>
-            <h6>
+            <div class="hidden dropdown" id="dropdown">
+              <a id="my-resources-button">My Resources</a>
+              <a class="divider"></a>
+              <a id="liked-resources-button"><i class="fas fa-heart"></i> Resources</a>
+              <a class="divider"></a>
+              <a id="update-profile-button">Update Profile</a>
+              <a class="divider"></a>
+              <a id="change-password-button">Change Password</a>
+              <a class="divider"></a>
+              <a id="logout-button">Logout</a>
+            </div>
+          </li>
+        </ul>
+        <ul id="no-user-buttons">
+          <li id="login-button">
+            <a>LOGIN</a>
+          </li>
+          <li id="register-button">
+            <a>REGISTER</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
-              <span id="details-stars">
-                <i id="five-star" class="fas fa-star not-liked"></i
-                ><i id="four-star" class="fas fa-star not-liked"></i
-                ><i id="three-star" class="fas fa-star not-liked"></i
-                ><i id="two-star" class="fas fa-star not-liked"></i
-                ><i id="one-star" class="fas fa-star not-liked"></i
-              ></span>
-              <span id="details-rating-string"></span>
-            </h6>
-            <h6>
-              <i class="fas fa-star show-rating"></i> Avg Rating:
-              <span id="details-rating"></span>
-            </h6>
-            <p id="details-desciption"></p>
-
-            <h5>
-              <i class="fas fa-comment-alt"></i> Comments(<span
-                id="details-num-of-comments"
-              ></span
-              >)
-            </h5>
-            <ul class="collection comments" id="details-comments"></ul>
-          </div>
+  <main>
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs">
+          <li class="tab col s1"><a class="active" href="">All</a></li>
+          <li class="tab col s1"><a href="">Art/DIY</a></li>
+          <li class="tab col s1"><a href="">Cooking</a></li>
+          <li class="tab col s1"><a href="">Design</a></li>
+          <li class="tab col s1"><a href="">Finance</a></li>
+          <li class="tab col s1"><a href="">Gardening</a></li>
+          <li class="tab col s1"><a href="">Health/Fitness</a></li>
+          <li class="tab col s1"><a href="">Language</a></li>
+          <li class="tab col s1"><a href="">Marketing</a></li>
+          <li class="tab col s1"><a href="">Music</a></li>
+          <li class="tab col s1"><a href="">Technology</a></li>
+          <li class="tab col s1"><a href="">Other</a></li>
+        </ul>
+      </div>
+      <div id="test1" class="col s12"></div>
+      <div id="test2" class="col s12"></div>
+      <div id="test3" class="col s12"></div>
+      <div id="test4" class="col s12"></div>
+    </div>
+    <div id="error-page" class="container hidden">
+      <div class="margin-container">
+        <div class="content-container">
+          ERROR:
+          <span id="error-message"></span>
         </div>
       </div>
+    </div>
 
-      <div id="register-page" class="container hidden">
-        <div class="margin-container">
-          <div class="content-container">
-            <h3 class="title">Register</h3>
-            <form id="register-form" class="col s12">
-              <div class="row">
-                <div class="input-field col s6">
-                  <input
-                    id="first_name"
-                    type="text"
-                    class="validate"
-                    name="firstName"
-                    required
-                  />
-                  <label for="first_name">First Name</label>
-                </div>
-                <div class="input-field col s6">
-                  <input
-                    id="last_name"
-                    type="text"
-                    class="validate"
-                    name="lastName"
-                    required
-                  />
-                  <label for="last_name">Last Name</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input
-                    id="username"
-                    type="text"
-                    class="validate"
-                    name="username"
-                    required
-                  />
-                  <label for="username">Username</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input
-                    id="register-password"
-                    type="password"
-                    class="validate"
-                    name="password"
-                    required
-                  />
-                  <label for="register-password">Password</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input
-                    id="register-email"
-                    type="email"
-                    class="validate"
-                    name="email"
-                    required
-                  />
-                  <label for="register-email">Email</label>
-                </div>
-              </div>
-              <button
-                class="btn waves-effect waves-light"
-                type="submit"
-                name="action"
-              >
-                Submit
-                <i class="fa fa-paper-plane" aria-hidden="true"></i>
-              </button>
-            </form>
+    <div id="resources-page">
+      <div id="columns"></div>
+    </div>
+    <div id="resource-details" class="hidden">
+      <div class="resource-details-container container">
+        <div class="details-media">
+          <a id="details-link-on-media" target="_blank"><i class="fas fa-external-link-alt"></i>
+            <span id="details-display-link-on-media"></span></a>
+          <div id="details-media"></div>
+        </div>
+        <div class="details">
+          <div>
+            <div class="details-heart">
+              <i id="details-like-icon" class="fas fa-heart like icon"></i>
+              <div id="details-likes-num"></div>
+            </div>
+            <h3 id="details-title"></h3>
           </div>
+          <a id="details-link" class="paragraph" target="_blank"><i class="fas fa-external-link-alt"></i>
+            <span id="details-display-link"></span>
+          </a>
+          <h6>
+
+            <span id="details-stars">
+              <i id="five-star" class="fas fa-star not-liked"></i><i id="four-star" class="fas fa-star not-liked"></i><i
+                id="three-star" class="fas fa-star not-liked"></i><i id="two-star" class="fas fa-star not-liked"></i><i
+                id="one-star" class="fas fa-star not-liked"></i></span>
+            <span id="details-rating-string"></span>
+          </h6>
+          <h6>
+            <i class="fas fa-star show-rating"></i> Avg Rating:
+            <span id="details-rating"></span>
+          </h6>
+          <p id="details-desciption"></p>
+
+          <h5>
+            <i class="fas fa-comment-alt"></i> Comments(<span id="details-num-of-comments"></span>)
+          </h5>
+          <ul class="collection comments" id="details-comments"></ul>
         </div>
       </div>
+    </div>
 
-      <div id="login-page" class="container hidden">
-        <div class="margin-container">
-          <div class="content-container">
-            <h3 class="title">Login</h3>
-            <form id="login-form" class="col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  <input
-                    id="login-email"
-                    type="email"
-                    class="validate"
-                    name="email"
-                    required
-                  />
-                  <label for="login-email">Email</label>
-                </div>
+    <div id="register-page" class="container hidden">
+      <div class="margin-container">
+        <div class="content-container">
+          <h3 class="title">Register</h3>
+          <form id="register-form" class="col s12">
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="first_name" type="text" class="validate" name="firstName" required />
+                <label for="first_name">First Name</label>
               </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input
-                    id="login-password"
-                    type="password"
-                    class="validate"
-                    name="password"
-                    required
-                  />
-                  <label for="login-password">Password</label>
-                </div>
-              </div>
-
-              <button class="btn waves-effect waves-light">
-                Submit
-                <i class="fa fa-paper-plane" aria-hidden="true"></i>
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div id="new-resource-page" class="container hidden">
-        <div class="margin-container">
-          <div class="content-container">
-            <h3 class="title">Create New Resource</h3>
-            <form class="col s12" id="new-resource-form">
-              <div class="row">
-                <div class="input-field col s12">
-                  <input
-                    id="title"
-                    type="text"
-                    class="validate"
-                    name="title"
-                    required
-                  />
-                  <label for="title">Title</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input
-                    id="description"
-                    type="text"
-                    class="validate"
-                    name="description"
-                    required
-                  />
-                  <label for="description">Description</label>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="input-field col s12">
-                  <input
-                    id="url"
-                    type="text"
-                    class="validate"
-                    name="url"
-                    required
-                  />
-                  <label for="url">URL</label>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="input-field col s12">
-                  <select class="icons" id="category" name="category">
-                    <option value="" disabled selected>Category</option>
-                    <option value="ART/DIY">Art/DIY</option>
-                    <option value="COOKING">Cooking</option>
-                    <option value="DESIGN">Design</option>
-                    <option value="FINANCE">Finance</option>
-                    <option value="GARDENING">Gardening</option>
-                    <option value="HEALTH/FITNESS">Health/Fitness</option>
-                    <option value="LANGUAGE">Language</option>
-                    <option value="MARKETING">Marketing</option>
-                    <option value="MUSIC">Music</option>
-                    <option value="TECHNOLOGY">Technology</option>
-                    <option value="OTHER">Other</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="switch">
-                <label>
-                  <input type="checkbox" name="is_private" />
-                  <span class="lever"></span>
-                  Private
-                </label>
-              </div>
-
-              <button
-                class="btn waves-effect waves-light"
-                type="submit"
-                name="action"
-              >
-                Submit
-                <i class="fa fa-paper-plane" aria-hidden="true"></i>
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div id="profile-page" class="container hidden">
-        <div class="margin-container">
-          <div class="content-container settings-container">
-            <div class="left-navbar"></div>
-          </div>
-        </div>
-      </div>
-      <div id="my-resources-page" class="container hidden">
-        <div class="margin-container">
-          <div class="content-container settings-container">
-            <div class="left-navbar">
-              <div id="side-my-resources-button" class="tab">
-                My Resources
-                <div id="my-button-border" class="active"></div>
-              </div>
-              <div id="side-liked-resources-button" class="tab">
-                <i class="fas fa-heart"></i> Resources
-                <div id="liked-button-border" class="active hidden"></div>
-              </div>
-              <div id="side-update-profile-button" class="tab">
-                Update Profile
-                <div id="profile-button-border" class="active"></div>
-              </div>
-              <div id="side-change-password-button" class="tab">
-                Change Password
-                <div id="password-button-border" class="active hidden"></div>
+              <div class="input-field col s6">
+                <input id="last_name" type="text" class="validate" name="lastName" required />
+                <label for="last_name">Last Name</label>
               </div>
             </div>
-            <div id="my-resources-details" >
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="username" type="text" class="validate" name="username" required />
+                <label for="username">Username</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="register-password" type="password" class="validate" name="password" required />
+                <label for="register-password">Password</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="register-email" type="email" class="validate" name="email" required />
+                <label for="register-email">Email</label>
+              </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">
+              Submit
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="login-page" class="container hidden">
+      <div class="margin-container">
+        <div class="content-container">
+          <h3 class="title">Login</h3>
+          <form id="login-form" class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="login-email" type="email" class="validate" name="email" required />
+                <label for="login-email">Email</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="login-password" type="password" class="validate" name="password" required />
+                <label for="login-password">Password</label>
+              </div>
+            </div>
+
+            <button class="btn waves-effect waves-light">
+              Submit
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="new-resource-page" class="container hidden">
+      <div class="margin-container">
+        <div class="content-container">
+          <h3 class="title">Create New Resource</h3>
+          <form class="col s12" id="new-resource-form">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="title" type="text" class="validate" name="title" required />
+                <label for="title">Title</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="description" type="text" class="validate" name="description" required />
+                <label for="description">Description</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="url" type="text" class="validate" name="url" required />
+                <label for="url">URL</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <select class="icons" id="category" name="category">
+                  <option value="" disabled selected>Category</option>
+                  <option value="ART/DIY">Art/DIY</option>
+                  <option value="COOKING">Cooking</option>
+                  <option value="DESIGN">Design</option>
+                  <option value="FINANCE">Finance</option>
+                  <option value="GARDENING">Gardening</option>
+                  <option value="HEALTH/FITNESS">Health/Fitness</option>
+                  <option value="LANGUAGE">Language</option>
+                  <option value="MARKETING">Marketing</option>
+                  <option value="MUSIC">Music</option>
+                  <option value="TECHNOLOGY">Technology</option>
+                  <option value="OTHER">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="switch">
+              <label>
+                <input type="checkbox" name="is_private" />
+                <span class="lever"></span>
+                Private
+              </label>
+            </div>
+
+            <button class="btn waves-effect waves-light" type="submit" name="action">
+              Submit
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="profile-page" class="container hidden">
+      <div class="margin-container">
+        <div class="content-container settings-container">
+          <div class="left-navbar"></div>
+        </div>
+      </div>
+    </div>
+    <div id="my-resources-page" class="container hidden">
+      <div class="margin-container">
+        <div class="content-container settings-container">
+          <div class="left-navbar">
+            <div id="side-my-resources-button" class="tab">
+              My Resources
+              <div id="my-button-border" class="active"></div>
+            </div>
+            <div id="side-liked-resources-button" class="tab">
+              <i class="fas fa-heart"></i> Resources
+              <div id="liked-button-border" class="active hidden"></div>
+            </div>
+            <div id="side-update-profile-button" class="tab">
+              Update Profile
+              <div id="profile-button-border" class="active"></div>
+            </div>
+            <div id="side-change-password-button" class="tab">
+              Change Password
+              <div id="password-button-border" class="active hidden"></div>
+            </div>
+          </div>
+          <div id="my-resources-details">
+            <div id="my-resource-header">
               <h3 class="title">My Resources</h3>
-              <ul class="collection comments" id="my-resource-list">
-              </ul>
+              <div id="my-resources-filter">
+                <form action="#">
+                  <p>
+                    <label>
+                      <input type="checkbox" checked="checked" />
+                      <span>Liked Resources</span>
+                    </label>
+                  </p>
+                  <p>
+                    <label>
+                      <input type="checkbox" checked="checked" />
+                      <span>My Posts</span>
+                    </label>
+                  </p>
+              </div>
             </div>
-            <div id="liked-resources-details" class="settings hidden">
-              <h3 class="title"><i class="fas fa-heart"></i> Resources</h3>
-              <ul class="collection comments">
-                <li>
-                  <div class="resource-thumbnail">
-                    <div class="thumbnail-container">
-                      <div class="media">
-                        <img
-                          alt=""
-                          src="https://images.unsplash.com/photo-1508138221679-760a23a2285b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
-                          class="thumbnail"
-                        />
-                      </div>
-                    </div>
-
-                    <div class="text">
-                      <h6>T waistcoat stree</h6>
-                      <a href="wwww.google.com" class="paragraph"
-                        >wwww.google.com</a
-                      >
-                      <div>
-                        cleanse intelligent pinterest post-ironic selfies
-                      </div>
-                    </div>
-
-                    <div class="stat">
-                      <span class="stat-column">
-                        <span class="fas fa-star card-icon"></span>
-                        <span>4.5</span>
-                      </span>
-                      <span class="stat-column">
-                        <span class="fas fa-heart card-icon"></span>
-                        <span>100</span>
-                      </span>
-                      <span class="stat-column">
-                        <span class="fas fa-comment-alt card-icon"></span>
-                        <span>4</span>
-                      </span>
+            <ul class="collection comments" id="my-resource-list">
+            </ul>
+          </div>
+          <div id="liked-resources-details" class="settings hidden">
+            <h3 class="title"><i class="fas fa-heart"></i> Resources</h3>
+            <ul class="collection comments">
+              <li>
+                <div class="resource-thumbnail">
+                  <div class="thumbnail-container">
+                    <div class="media">
+                      <img alt=""
+                        src="https://images.unsplash.com/photo-1508138221679-760a23a2285b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
+                        class="thumbnail" />
                     </div>
                   </div>
-                </li>
 
-                <li>
-                  <div class="resource-thumbnail">
-                    <div class="thumbnail-container">
-                      <div class="media">
-                        <img
-                          alt=""
-                          src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F13%2F2015%2F04%2F05%2Ffeatured.jpg&q=85"
-                          class="thumbnail"
-                        />
-                      </div>
-                    </div>
-
-                    <div class="text">
-                      <h6>T waistcoat stree</h6>
-                      <a href="wwww.google.com" class="paragraph"
-                        >wwww.google.com</a
-                      >
-                      <div>t viral. Ramps copper mug hoodie, mlkshk</div>
-                    </div>
-
-                    <div class="stat">
-                      <span class="stat-column">
-                        <span class="fas fa-star card-icon"></span>
-                        <span>4.5</span>
-                      </span>
-                      <span class="stat-column">
-                        <span class="fas fa-heart card-icon"></span>
-                        <span>100</span>
-                      </span>
-                      <span class="stat-column">
-                        <span class="fas fa-comment-alt card-icon"></span>
-                        <span>4</span>
-                      </span>
+                  <div class="text">
+                    <h6>T waistcoat stree</h6>
+                    <a href="wwww.google.com" class="paragraph">wwww.google.com</a>
+                    <div>
+                      cleanse intelligent pinterest post-ironic selfies
                     </div>
                   </div>
-                </li>
-                <li>
-                  <div class="resource-thumbnail">
-                    <div class="thumbnail-container">
-                      <div class="media">
-                        <img
-                          alt=""
-                          src="https://i.redd.it/jeuusd992wd41.jpg"
-                          class="thumbnail"
-                        />
-                      </div>
-                    </div>
 
-                    <div class="text">
-                      <h6>T waistcoat stree</h6>
-                      <a href="wwww.google.com" class="paragraph"
-                        >wwww.google.com</a
-                      >
-                      <div>
-                        cleanse intelligentsia lo-fi try-hard heirloom tofu
-                        retro offal raclette art a bird on it vis
-                      </div>
-                    </div>
-
-                    <div class="stat">
-                      <span class="stat-column">
-                        <span class="fas fa-star card-icon"></span>
-                        <span>4.5</span>
-                      </span>
-                      <span class="stat-column">
-                        <span class="fas fa-heart card-icon"></span>
-                        <span>100</span>
-                      </span>
-                      <span class="stat-column">
-                        <span class="fas fa-comment-alt card-icon"></span>
-                        <span>4</span>
-                      </span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="resource-thumbnail">
-                    <div class="thumbnail-container">
-                      <div class="media">
-                        <img
-                          alt=""
-                          src="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
-                          class="thumbnail"
-                        />
-                      </div>
-                    </div>
-
-                    <div class="text">
-                      <h6>T waistcoat stree</h6>
-                      <a href="wwww.google.com" class="paragraph"
-                        >wwww.google.com</a
-                      >
-                      <div>
-                        paleo artisan tacos plaid four loko XOXO. Selvage
-                        aesthetic lo
-                      </div>
-                    </div>
-
-                    <div class="stat">
-                      <span class="stat-column">
-                        <span><i class="fas fa-star card-icon"></i></span>
-                        <span>4.5</span>
-                      </span>
-                      <span class="stat-column">
-                        <span class="fas fa-heart card-icon"></span>
-                        <span>100</span>
-                      </span>
-                      <span class="stat-column">
-                        <span class="fas fa-comment-alt card-icon"></span>
-                        <span>4</span>
-                      </span>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div id="update-profile-page" class="settings">
-              <h3 class="title">Update Profile</h3>
-              <form
-                id="update-profile-form"
-                class="col s12"
-                action="/api/users/edit"
-                method="POST"
-              >
-                <div class="row">
-                  <div class="input-field col s6">
-                    <input
-                      id="update_first_name"
-                      type="text"
-                      class="validate"
-                      name="firstName"
-                      required
-                    />
-                    <label for="update_first_name">First Name</label>
-                  </div>
-                  <div class="input-field col s6">
-                    <input
-                      id="update_last_name"
-                      type="text"
-                      class="validate"
-                      name="lastName"
-                      required
-                    />
-                    <label for="update_last_name">Last Name</label>
+                  <div class="stat">
+                    <span class="stat-column">
+                      <span class="fas fa-star card-icon"></span>
+                      <span>4.5</span>
+                    </span>
+                    <span class="stat-column">
+                      <span class="fas fa-heart card-icon"></span>
+                      <span>100</span>
+                    </span>
+                    <span class="stat-column">
+                      <span class="fas fa-comment-alt card-icon"></span>
+                      <span>4</span>
+                    </span>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input
-                      id="update_username"
-                      type="text"
-                      class="validate"
-                      name="username"
-                      required
-                    />
-                    <label for="update_username">Username</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input
-                      id="update_email"
-                      type="email"
-                      class="validate"
-                      name="email"
-                      required
-                    />
-                    <label for="update_email">Email</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <textarea
-                      id="bio"
-                      class="materialize-textarea"
-                      data-length="120"
-                      name="bio"
-                    ></textarea>
-                    <label for="bio">Bio</label>
-                  </div>
-                </div>
-                <button
-                  class="btn waves-effect waves-light"
-                  type="submit"
-                  name="action"
-                >
-                  Submit
-                </button>
-              </form>
-            </div>
-            <div id="change-password-page" class="settings hidden">
-              <h3 class="title">Change Password</h3>
-              <form
-                id="change-password-form"
-                class="col s12"
-                action="/api/users/password"
-                method="POST"
-              >
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input
-                      id="current-password"
-                      type="password"
-                      class="validate"
-                      name="current_password"
-                      required
-                    />
-                    <label for="current-password">Current Password</label>
-                  </div>
-                </div>
+              </li>
 
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input
-                      id="new-password"
-                      type="password"
-                      class="validate"
-                      name="new_password"
-                      required
-                    />
-                    <label for="new-password">New Password</label>
+              <li>
+                <div class="resource-thumbnail">
+                  <div class="thumbnail-container">
+                    <div class="media">
+                      <img alt=""
+                        src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F13%2F2015%2F04%2F05%2Ffeatured.jpg&q=85"
+                        class="thumbnail" />
+                    </div>
+                  </div>
+
+                  <div class="text">
+                    <h6>T waistcoat stree</h6>
+                    <a href="wwww.google.com" class="paragraph">wwww.google.com</a>
+                    <div>t viral. Ramps copper mug hoodie, mlkshk</div>
+                  </div>
+
+                  <div class="stat">
+                    <span class="stat-column">
+                      <span class="fas fa-star card-icon"></span>
+                      <span>4.5</span>
+                    </span>
+                    <span class="stat-column">
+                      <span class="fas fa-heart card-icon"></span>
+                      <span>100</span>
+                    </span>
+                    <span class="stat-column">
+                      <span class="fas fa-comment-alt card-icon"></span>
+                      <span>4</span>
+                    </span>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input
-                      id="confirm-new-password"
-                      type="password"
-                      class="validate"
-                      name="confirm_new_password"
-                      required
-                    />
-                    <label for="confirm-new-password"
-                      >Confirm new password</label
-                    >
+              </li>
+              <li>
+                <div class="resource-thumbnail">
+                  <div class="thumbnail-container">
+                    <div class="media">
+                      <img alt="" src="https://i.redd.it/jeuusd992wd41.jpg" class="thumbnail" />
+                    </div>
+                  </div>
+
+                  <div class="text">
+                    <h6>T waistcoat stree</h6>
+                    <a href="wwww.google.com" class="paragraph">wwww.google.com</a>
+                    <div>
+                      cleanse intelligentsia lo-fi try-hard heirloom tofu
+                      retro offal raclette art a bird on it vis
+                    </div>
+                  </div>
+
+                  <div class="stat">
+                    <span class="stat-column">
+                      <span class="fas fa-star card-icon"></span>
+                      <span>4.5</span>
+                    </span>
+                    <span class="stat-column">
+                      <span class="fas fa-heart card-icon"></span>
+                      <span>100</span>
+                    </span>
+                    <span class="stat-column">
+                      <span class="fas fa-comment-alt card-icon"></span>
+                      <span>4</span>
+                    </span>
                   </div>
                 </div>
-                <button
-                  class="btn waves-effect waves-light"
-                  type="submit"
-                  name="action"
-                >
-                  Submit
-                  <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                </button>
-              </form>
-            </div>
+              </li>
+              <li>
+                <div class="resource-thumbnail">
+                  <div class="thumbnail-container">
+                    <div class="media">
+                      <img alt="" src="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
+                        class="thumbnail" />
+                    </div>
+                  </div>
+
+                  <div class="text">
+                    <h6>T waistcoat stree</h6>
+                    <a href="wwww.google.com" class="paragraph">wwww.google.com</a>
+                    <div>
+                      paleo artisan tacos plaid four loko XOXO. Selvage
+                      aesthetic lo
+                    </div>
+                  </div>
+
+                  <div class="stat">
+                    <span class="stat-column">
+                      <span><i class="fas fa-star card-icon"></i></span>
+                      <span>4.5</span>
+                    </span>
+                    <span class="stat-column">
+                      <span class="fas fa-heart card-icon"></span>
+                      <span>100</span>
+                    </span>
+                    <span class="stat-column">
+                      <span class="fas fa-comment-alt card-icon"></span>
+                      <span>4</span>
+                    </span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="update-profile-page" class="settings">
+            <h3 class="title">Update Profile</h3>
+            <form id="update-profile-form" class="col s12" action="/api/users/edit" method="POST">
+              <div class="row">
+                <div class="input-field col s6">
+                  <input id="update_first_name" type="text" class="validate" name="firstName" required />
+                  <label for="update_first_name">First Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="update_last_name" type="text" class="validate" name="lastName" required />
+                  <label for="update_last_name">Last Name</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="update_username" type="text" class="validate" name="username" required />
+                  <label for="update_username">Username</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="update_email" type="email" class="validate" name="email" required />
+                  <label for="update_email">Email</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="bio" class="materialize-textarea" data-length="120" name="bio"></textarea>
+                  <label for="bio">Bio</label>
+                </div>
+              </div>
+              <button class="btn waves-effect waves-light" type="submit" name="action">
+                Submit
+              </button>
+            </form>
+          </div>
+          <div id="change-password-page" class="settings hidden">
+            <h3 class="title">Change Password</h3>
+            <form id="change-password-form" class="col s12" action="/api/users/password" method="POST">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="current-password" type="password" class="validate" name="current_password" required />
+                  <label for="current-password">Current Password</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="new-password" type="password" class="validate" name="new_password" required />
+                  <label for="new-password">New Password</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="confirm-new-password" type="password" class="validate" name="confirm_new_password"
+                    required />
+                  <label for="confirm-new-password">Confirm new password</label>
+                </div>
+              </div>
+              <button class="btn waves-effect waves-light" type="submit" name="action">
+                Submit
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              </button>
+            </form>
           </div>
         </div>
       </div>
+    </div>
 
-      <a
-        id="floating-create-resource-button"
-        class="
+    <a id="floating-create-resource-button" class="
           hidden
           circle-container
           btn-floating btn-large
           waves-effect waves-light
           red
-        "
-        ><i class="fas fa-plus"></i
-      ></a>
-    </main>
-    <script type="text/javascript" src="/scripts/network.js"></script>
+        "><i class="fas fa-plus"></i></a>
+  </main>
+  <script type="text/javascript" src="/scripts/network.js"></script>
 
-    <script type="text/javascript" src="/scripts/components/header.js"></script>
-    <script type="text/javascript" src="/scripts/components/login.js"></script>
-    <script type="text/javascript" src="/scripts/components/home.js"></script>
-    <script type="text/javascript" src="/scripts/components/error.js"></script>
-    <script type="text/javascript" src="/scripts/components/my-resources.js"></script>
-    <script
-      type="text/javascript"
-      src="/scripts/components/resource-details.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="/scripts/components/profile.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="/scripts/components/register.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="/scripts/components/new-resource.js"
-    ></script>
-    <script type="text/javascript" src="/scripts/view.js"></script>
-  </body>
+  <script type="text/javascript" src="/scripts/components/header.js"></script>
+  <script type="text/javascript" src="/scripts/components/login.js"></script>
+  <script type="text/javascript" src="/scripts/components/home.js"></script>
+  <script type="text/javascript" src="/scripts/components/error.js"></script>
+  <script type="text/javascript" src="/scripts/components/my-resources.js"></script>
+  <script type="text/javascript" src="/scripts/components/resource-details.js"></script>
+  <script type="text/javascript" src="/scripts/components/profile.js"></script>
+  <script type="text/javascript" src="/scripts/components/register.js"></script>
+  <script type="text/javascript" src="/scripts/components/new-resource.js"></script>
+  <script type="text/javascript" src="/scripts/view.js"></script>
+</body>
+
 </html>
