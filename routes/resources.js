@@ -4,6 +4,7 @@ const validUrl = require("valid-url");
 const axios = require("axios");
 const queryGenerator = require("../db/query-helpers");
 const apiKey = process.env.IFRAME_KEY;
+const providers = require("./json/providers.json");
 
 module.exports = (db) => {
   const {
@@ -89,6 +90,23 @@ module.exports = (db) => {
     }
   });
 
+  const omebed = (url) => {
+    for (const provider of providers) {
+      const { endpoints, provider_url } = provider;
+      const { schemes, url: oembedURL } = endpoints[0];
+      const urlRegex2 = new RegExp(provider_url + "*");
+      const matched = urlRegex2.test(url);
+      if (matched) return oembedURL;
+      if (schemes) {
+        for (const str of schemes) {
+          const urlRegex = new RegExp(str);
+          const match = urlRegex.test(url);
+          if (match) return oembedURL;
+        }
+      }
+    }
+  }
+
   router.post("/", async (req, res) => {
     const user_id = req.session.user_id;
     let { is_private, category, url } = req.body;
@@ -98,10 +116,12 @@ module.exports = (db) => {
     if (!validUrl.isUri(url))
       return res.status(400).json({ error: "This url is not valid." });
 
+    const omebedUrl = omebed(url);
+
     try {
       const encodedURI = encodeURIComponent(url);
       const videoData = await axios.get(
-        `https://www.youtube.com/oembed?url=${encodedURI}&format=json`
+        `${omebedUrl}?url=${encodedURI}&format=json`
       );
       const source = videoData.data.html
         .split(" ")
