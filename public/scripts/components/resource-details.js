@@ -123,6 +123,7 @@ const updateResourceDetails = () => {
     let averageRating = parseFloat(rating);
     let numOfRating = parseInt(number_of_rating);
     let currentRating = rated;
+    let numOfComment = number_of_comment;
     let currentLike =
       liked > 0
       ? true
@@ -186,10 +187,16 @@ const updateResourceDetails = () => {
           const commentDetails = { comment, username, timestamp, image_url };
           commentsDetails.push(commentDetails);
           makeComments(commentsDetails);
+          numOfComment ++;
+          updateNumOfComment();
         }
       });
     };
     let commentsDetails = [...resourceDetails];
+
+    const updateNumOfComment = () => {
+      $numOfComment.text(numOfComment);
+    };
 
     makeComments(commentsDetails);
 
@@ -232,7 +239,6 @@ const updateResourceDetails = () => {
           ? (averageRating * numOfRating + floatRating) / (numOfRating + 1)
           : floatRating;
         numOfRating++;
-        console.log("currentRating", currentRating);
         updateRating();
         updateRatingStr();
       });
@@ -247,6 +253,7 @@ const updateResourceDetails = () => {
     updateRatingStr(rated);
     updateRating(currentRating);
     updateHeart();
+    updateNumOfComment();
 
     const hostname = getHostname(url);
     $likesNum.text(number_of_like);
@@ -257,7 +264,7 @@ const updateResourceDetails = () => {
     $displayLink.text(hostname);
 
     $title.text(title);
-    $numOfComment.text(number_of_comment);
+
 
     return title;
   };
