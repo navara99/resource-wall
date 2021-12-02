@@ -3,17 +3,17 @@ const updateHeader = (userInfo) => {
   const $noUserButtons = $("#no-user-buttons");
   const $floatingCreateResourceButton = $("#floating-create-resource-button");
 
-  const { id, image_url } = userInfo;
+  const { id, profile_picture_url } = userInfo;
 
   if (!id) {
     $userButtons.hide();
     $floatingCreateResourceButton.hide();
     return $noUserButtons.show();
   }
-
+  console.log(userInfo);
   $profilePicture = $("#profile-picture");
 
-  $profilePicture.attr("src", image_url);
+  $profilePicture.attr("src", profile_picture_url);
 
   $noUserButtons.hide();
   $userButtons.show();

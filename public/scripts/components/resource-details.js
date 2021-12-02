@@ -3,13 +3,13 @@ const timestampToTimeAgo = (timestamp) => timeago.format(new Date(timestamp));
 const compileComments = (resourceDetails) => {
   const comments = [];
   for (const details of resourceDetails) {
-    const { comment, username, timestamp, image_url } = details;
+    const { comment, username, timestamp, profile_picture_url } = details;
     if (comment) {
       comments.push({
         comment,
         username,
         timeAgo: timestampToTimeAgo(timestamp),
-        image_url,
+        profile_picture_url,
       });
     }
   }
@@ -164,8 +164,8 @@ const updateResourceDetails = () => {
       $detailsComments.text("");
 
       comments.forEach((commentInfo) => {
-        const { comment, username, timeAgo, image_url } = commentInfo;
-        const elm = makeComment(username, comment, image_url, timeAgo);
+        const { comment, username, timeAgo, profile_picture_url } = commentInfo;
+        const elm = makeComment(username, comment, profile_picture_url, timeAgo);
         $detailsComments.prepend(elm);
       });
 
@@ -179,9 +179,9 @@ const updateResourceDetails = () => {
           $("#new-comment").val("");
           const commentInfo = await commentResource(id, data);
           const { comment, user_id, timestamp } = commentInfo;
-          const userInfo = await getMyDetails(user_id);
-          const { image_url, username } = userInfo;
-          const commentDetails = { comment, username, timestamp, image_url };
+          const userInfo = await getMyDetails();
+          const { profile_picture_url, username } = userInfo;
+          const commentDetails = { comment, username, timestamp, profile_picture_url };
           commentsDetails.push(commentDetails);
           makeComments(commentsDetails);
           numOfComment++;

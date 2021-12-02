@@ -2,14 +2,10 @@ const defaultProfilePicUrl = 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_6467638
 
 const getFirstRecord = (result) => result.rows[0];
 
-const assignProfilePic = (userInfo) => {
-  const { image_url } = userInfo;
-  if (!image_url) userInfo.image_url = defaultProfilePicUrl;
-};
-
-const assignMyProfilePic = (details) => {
-  const { my_profile_url } = details;
-  if (!my_profile_url) details.my_profile_url = defaultProfilePicUrl;
+const assignProfilePic = (userInfo, columnName) => {
+  const { [columnName]: value } = userInfo;
+  if (!value) userInfo[columnName] = defaultProfilePicUrl;
+  console.log(userInfo);
 };
 
 const queryGenerator = (db) => {
@@ -19,7 +15,8 @@ const queryGenerator = (db) => {
     const queryString = `SELECT * FROM users WHERE ${columnName} = $1;`;
     const result = await db.query(queryString, values);
     const userInfo = getFirstRecord(result);
-    if (userInfo) assignProfilePic(userInfo);
+    if (userInfo) assignProfilePic(userInfo, "profile_picture_url");
+    console.log(userInfo);
     return userInfo;
   };
 
@@ -33,7 +30,7 @@ const queryGenerator = (db) => {
       `;
     const result = await db.query(queryString, values);
     const newUserInfo = getFirstRecord(result);
-    assignProfilePic(newUserInfo);
+    assignProfilePic(newUserInfo, "profile_picture_url");
     return newUserInfo;
   }
 
@@ -54,7 +51,7 @@ const queryGenerator = (db) => {
 
     const result = await db.query(queryString, values);
     const userInfo = getFirstRecord(result);
-    assignProfilePic(userInfo);
+    assignProfilePic(userInfo, "profile_picture_url");
     return userInfo;
   }
 
@@ -66,7 +63,7 @@ const queryGenerator = (db) => {
         `;
     const result = await db.query(queryString, values);
     const userInfo = getFirstRecord(result);
-    assignProfilePic(userInfo);
+    assignProfilePic(userInfo, "profile_picture_url");
     return userInfo;
   }
 
@@ -170,11 +167,11 @@ const queryGenerator = (db) => {
       comment,
       timestamp,
       x.username,
-      x.image_url,
+      x.profile_picture_url,
       y.first_name,
       y.last_name,
       y.username AS owner_username,
-      (SELECT image_url FROM users WHERE id = $2) as my_profile_url,
+      (SELECT profile_picture_url FROM users WHERE id = $2) as my_profile_url,
       (SELECT COUNT(id) FROM likes WHERE user_id = $2 AND resource_id = $1) AS liked,
       (SELECT rating FROM ratings WHERE user_id = $2 AND resource_id = $1 LIMIT 1) AS rated
     FROM resources
@@ -186,8 +183,8 @@ const queryGenerator = (db) => {
     ORDER BY timestamp;`
 
     const result = (await db.query(queryString, value)).rows;
-    result.forEach((details) => assignProfilePic(details));
-    assignMyProfilePic(result[0]);
+    result.forEach((details) => assignProfilePic(details, "profile_picture_url"));
+    assignProfilePic(result[0], "my_profile_url");
     return result;
   };
 

@@ -18,6 +18,7 @@ const profilePageHandler = () => {
   const $usernameInput = $("#update_username");
   const $emailInput = $("#update_email");
   const $bioInput = $("#bio");
+  const $profilePicInput = $("#profile_pic_url");
 
   const hideAllPages = () => {
     $likedButtonBorder.hide();
@@ -62,11 +63,12 @@ const profilePageHandler = () => {
 
   const prefillProfileForm = async () => {
     const userInfo = await getMyDetails();
-    const { first_name, last_name, username, email, bio } = userInfo;
+    const { first_name, last_name, username, email, bio, profile_picture_url } = userInfo;
     putInValAndFocus($LastNameInput, last_name);
     putInValAndFocus($usernameInput, username);
     putInValAndFocus($emailInput, email);
     putInValAndFocus($bioInput, bio);
+    putInValAndFocus($profilePicInput, profile_picture_url);
     putInValAndFocus($firstNameInput, first_name);
     $firstNameInput.blur();
   };

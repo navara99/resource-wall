@@ -43,7 +43,7 @@ module.exports = (db) => {
 
       const userWithSameEmail = await getUserByValue("email", email);
 
-      if (userWithSameEmail && userWithSameEmail.email !== userId) return res.status(400).json({ error: "This email is already taken." });
+      if (userWithSameEmail && userWithSameEmail.id !== userId) return res.status(400).json({ error: "This email is already taken." });
 
       const newUserInfo = { userId, ...req.body };
 
