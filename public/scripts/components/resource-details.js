@@ -3,13 +3,20 @@ const timestampToTimeAgo = (timestamp) => timeago.format(new Date(timestamp));
 const compileComments = (resourceDetails) => {
   const comments = [];
   for (const details of resourceDetails) {
-    const { comment, username, timestamp, image_url } = details;
+    const {
+      comment,
+      username,
+      timestamp,
+      profile_picture_url,
+      comment_user_id,
+    } = details;
     if (comment) {
       comments.push({
         comment,
         username,
         timeAgo: timestampToTimeAgo(timestamp),
-        image_url,
+        profile_picture_url,
+        comment_user_id,
       });
     }
   }
@@ -23,10 +30,11 @@ const getHostname = (url) => {
 };
 
 const displayRating = (rating, numOfRating) => {
-  const displayStr = rating
-    ? `${toTwoDecimalPlaces(rating)} (Based on ${numOfRating} ratings)`
-    : "No rating yet";
-  return displayStr;
+  if (!rating) return "No rating yet";
+  if (numOfRating === 1) {
+    return `${toTwoDecimalPlaces(rating)} (Based on ${numOfRating} rating)`;
+  }
+  return `${toTwoDecimalPlaces(rating)} (Based on ${numOfRating} ratings)`;
 };
 
 const escape = (str) => {
@@ -35,8 +43,8 @@ const escape = (str) => {
   return div.innerHTML;
 };
 
-const makeComment = (username, comment, profilePicture, timeAgo) => {
-  const elm = `
+const makeComment = (username, comment, profilePicture, timeAgo, id) => {
+  const $elm = $(`
   <li class="collection-item avatar">
   <img
     src="${escape(profilePicture)}"
@@ -45,8 +53,13 @@ const makeComment = (username, comment, profilePicture, timeAgo) => {
     <span class="title">@${escape(username)}</span>
     <p>${escape(comment)}</p>
     <p class="secondary-content">${escape(timeAgo)}</p>
-  </li>`;
-  return elm;
+  </li>`);
+
+  $elm.on("click", () => {
+    updateUserDetailsPage(id);
+  });
+
+  return $elm;
 };
 
 const commentForm = (imageURL) => {
@@ -86,7 +99,7 @@ const updateResourceDetails = () => {
   const $title = $("#details-title");
   const $link = $("#details-link");
   const $displayLink = $("#details-display-link");
-  const $rating = $("#details-rating");
+  const $averageRating = $("#details-average-rating");
   const $numOfComment = $("#details-num-of-comments");
   const $detailsComments = $("#details-comments");
   const $media = $("#details-media");
@@ -99,6 +112,9 @@ const updateResourceDetails = () => {
   const $4Star = $("#four-star");
   const $5Star = $("#five-star");
   const $detailsStars = $("#details-stars");
+  const $createdOn = $("#details-time");
+  const $ownerName = $("#details-owner-name");
+  const $rating = $("#details-rating");
 
   return async (id) => {
     const resourceDetails = await getdetailsOfResources(id);
@@ -118,11 +134,21 @@ const updateResourceDetails = () => {
       liked,
       current_username,
       rated,
+      created_on,
+      owner_username,
     } = resourceDetails[0];
 
-    let averageRating = parseFloat(rating);
+    let averageRating = rating;
     let numOfRating = parseInt(number_of_rating);
     let currentRating = rated;
+    let numOfComment = number_of_comment;
+    let currentLike = liked > 0 ? true : false;
+
+    if (!current_username) {
+      $rating.hide();
+    } else {
+      $rating.show();
+    }
 
     const newMedia = await getHtmlFromAPI(id);
     const { html } = newMedia;
@@ -135,21 +161,28 @@ const updateResourceDetails = () => {
       $media.append($newMedia);
     }
 
-    if (liked > 0) {
-      $likeIcon.addClass("liked");
-      $likeIcon.removeClass("not-liked");
-    } else {
-      $likeIcon.addClass("not-liked");
-      $likeIcon.removeClass("liked");
-    }
+    const updateHeart = () => {
+      if (currentLike) {
+        $likeIcon.addClass("liked");
+        $likeIcon.removeClass("not-liked");
+      } else {
+        $likeIcon.addClass("not-liked");
+        $likeIcon.removeClass("liked");
+      }
+    };
 
     $likeIcon.off();
     $likeIcon.on("click", async function () {
-      likeResource(id);
-      const numOfLike = $likesNum.text();
-      const newNumOfLike = parseInt(numOfLike) + 1;
-      $likesNum.text(newNumOfLike);
-      $likeIcon.removeClass("not-liked").addClass("liked");
+      if (current_username) {
+        likeResource(id);
+        currentLike = !currentLike;
+        const numOfLike = $likesNum.text();
+        const newNumOfLike = currentLike
+          ? parseInt(numOfLike) + 1
+          : parseInt(numOfLike) - 1;
+        $likesNum.text(newNumOfLike);
+        updateHeart();
+      }
     });
 
     const makeComments = (resourceDetails) => {
@@ -157,8 +190,21 @@ const updateResourceDetails = () => {
       $detailsComments.text("");
 
       comments.forEach((commentInfo) => {
-        const { comment, username, timeAgo, image_url } = commentInfo;
-        const elm = makeComment(username, comment, image_url, timeAgo);
+        const {
+          comment,
+          username,
+          timeAgo,
+          profile_picture_url,
+          comment_user_id,
+        } = commentInfo;
+        console.log("comment_user_id", comment_user_id);
+        const elm = makeComment(
+          username,
+          comment,
+          profile_picture_url,
+          timeAgo,
+          comment_user_id
+        );
         $detailsComments.prepend(elm);
       });
 
@@ -167,29 +213,44 @@ const updateResourceDetails = () => {
       }
 
       $("#submit-button").on("click", async () => {
-        const data = $("#new-comment").serialize();
-        if (data.length > 8) {
-          $("#new-comment").val("");
-          const commentInfo = await commentResource(id, data);
-          const { comment, user_id, timestamp } = commentInfo;
-          const userInfo = await getMyDetails(user_id);
-          const { image_url, username } = userInfo;
-          const commentDetails = { comment, username, timestamp, image_url };
-          commentsDetails.push(commentDetails);
-          makeComments(commentsDetails);
+        if (current_username) {
+          const data = $("#new-comment").serialize();
+          if (data.length > 8) {
+            $("#new-comment").val("");
+            const commentInfo = await commentResource(id, data);
+            const { comment, timestamp, comment_user_id } = commentInfo;
+            const userInfo = await getMyDetails();
+            const { profile_picture_url, username } = userInfo;
+            const commentDetails = {
+              comment,
+              username,
+              timestamp,
+              profile_picture_url,
+              comment_user_id,
+            };
+            commentsDetails.push(commentDetails);
+            makeComments(commentsDetails);
+            numOfComment++;
+            updateNumOfComment();
+          }
         }
       });
     };
     let commentsDetails = [...resourceDetails];
 
+    const updateNumOfComment = () => {
+      $numOfComment.text(numOfComment);
+    };
+
     makeComments(commentsDetails);
 
     const starElms = [$1Star, $2Star, $3Star, $4Star, $5Star];
-    const addClassToStars = (rating) => {
-      for (let i = 0; i < rating; i++) {
+    const addClassToStars = () => {
+      const rate = currentRating || 0;
+      for (let i = 0; i < rate; i++) {
         starElms[i].addClass("bright");
       }
-      for (let i = rating; i < 5; i++) {
+      for (let i = rate; i < 5; i++) {
         starElms[i].removeClass("bright");
       }
     };
@@ -199,14 +260,14 @@ const updateResourceDetails = () => {
         addClassToStars(currentRating);
         $ratingString.html("You rated:&nbsp;");
       } else {
-        $ratingString.text("Rate it: ");
+        $ratingString.html("Rate it:&nbsp;");
       }
     };
 
     $detailsStars
       .mouseenter(() => {
         console.log("mouseenter");
-        starElms.forEach((elm) => elm.removeClass("bright") );
+        starElms.forEach((elm) => elm.removeClass("bright"));
       })
       .mouseleave(() => {
         addClassToStars(currentRating);
@@ -215,30 +276,35 @@ const updateResourceDetails = () => {
     const ratingOnClick = ($elm, id, newRating) => {
       $elm.unbind();
       $elm.on("click", async () => {
-        currentRating = newRating;
-        const newRatingInfo = await rateResource(id, `rating=${newRating}`);
-        const { rating } = newRatingInfo;
-        const floatRating = parseFloat(rating);
-        averageRating = averageRating
-          ? (averageRating * numOfRating + floatRating) / (numOfRating + 1)
-          : floatRating;
-        numOfRating++;
-        console.log("currentRating", currentRating);
-        updateRating();
-        updateRatingStr();
+        if (current_username) {
+          const isNewRating = await rateResource(id, `rating=${newRating}`);
+          if (isNewRating) {
+            numOfRating++;
+            averageRating = averageRating
+              ? (averageRating * numOfRating + newRating) / numOfRating
+              : newRating;
+          } else {
+            averageRating =
+              (averageRating * numOfRating - currentRating + newRating) /
+              numOfRating;
+          }
+          currentRating = newRating;
+          updateRating();
+          updateRatingStr();
+        }
       });
     };
 
     starElms.forEach((elm, index) => ratingOnClick(elm, id, index + 1));
 
-
-
     const updateRating = () => {
       const ratingText = displayRating(averageRating, numOfRating);
-      $rating.text(ratingText);
+      $averageRating.text(ratingText);
     };
-    updateRatingStr(rated);
-    updateRating(currentRating);
+    updateRatingStr();
+    updateRating();
+    updateHeart();
+    updateNumOfComment();
 
     const hostname = getHostname(url);
     $likesNum.text(number_of_like);
@@ -249,7 +315,8 @@ const updateResourceDetails = () => {
     $displayLink.text(hostname);
 
     $title.text(title);
-    $numOfComment.text(number_of_comment);
+    $createdOn.text(timestampToTimeAgo(created_on));
+    $ownerName.text(`@${owner_username}`);
 
     return title;
   };

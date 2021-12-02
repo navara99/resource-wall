@@ -358,8 +358,10 @@ form {
 
 #my-resources-filter {
   display: flex;
-  justify-content: flex-end;
+  align-items: flex-end;
+  justify-content: flex-start;
   width: 100%;
+  flex-direction: column;
 }
 
 .thumbnail-container {
@@ -612,4 +614,18 @@ figure:hover {
 
 #details-rating-string {
   padding-left: 0.3em;
+}
+
+.user-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  margin: 0 15%;
+  text-align: justify;
+
+  img {
+    width: 15em;
+    height: auto;
+  }
 }

@@ -3,17 +3,16 @@ const updateHeader = (userInfo) => {
   const $noUserButtons = $("#no-user-buttons");
   const $floatingCreateResourceButton = $("#floating-create-resource-button");
 
-  const { id, image_url } = userInfo;
+  const { id, profile_picture_url } = userInfo;
 
   if (!id) {
     $userButtons.hide();
     $floatingCreateResourceButton.hide();
     return $noUserButtons.show();
   }
-
   $profilePicture = $("#profile-picture");
 
-  $profilePicture.attr("src", image_url);
+  $profilePicture.attr("src", profile_picture_url);
 
   $noUserButtons.hide();
   $userButtons.show();
@@ -32,6 +31,7 @@ const headerButtonsEventListener = () => {
   const $dropdown = $("#dropdown");
   const $myResourcesButton = $("#my-resources-button");
   const $changePasswordButton = $("#change-password-button");
+  const $myProfilebutton = $("#my-profile-button");
 
   window.onclick = (event) => {
     const className = $(event.target).attr("class");
@@ -42,6 +42,10 @@ const headerButtonsEventListener = () => {
     if (targetIsClicked) $dropdown.show();
     if (!targetIsClicked) $dropdown.hide();
   };
+
+  $myProfilebutton.on("click", () => {
+    updateUserDetailsPage();
+  })
 
   $changePasswordButton.on("click", () => {
     updateView("changePassword");

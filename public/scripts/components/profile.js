@@ -18,6 +18,7 @@ const profilePageHandler = () => {
   const $usernameInput = $("#update_username");
   const $emailInput = $("#update_email");
   const $bioInput = $("#bio");
+  const $profilePicInput = $("#profile_pic_url");
 
   const hideAllPages = () => {
     $likedButtonBorder.hide();
@@ -61,12 +62,14 @@ const profilePageHandler = () => {
   };
 
   const prefillProfileForm = async () => {
-    const userInfo = await getMyDetails();
-    const { first_name, last_name, username, email, bio } = userInfo;
+    const userInfo = await getMyDetails(1);
+    const { first_name, last_name, username, email, bio, profile_picture_url } =
+      userInfo;
     putInValAndFocus($LastNameInput, last_name);
     putInValAndFocus($usernameInput, username);
     putInValAndFocus($emailInput, email);
     putInValAndFocus($bioInput, bio);
+    putInValAndFocus($profilePicInput, profile_picture_url);
     putInValAndFocus($firstNameInput, first_name);
     $firstNameInput.blur();
   };
@@ -102,17 +105,16 @@ const profilePageHandler = () => {
 const updateProfileEventListener = () => {
   const $updateProfileForm = $("#update-profile-form");
 
-  $updateProfileForm.submit(async (event) => {
+  $updateProfileForm.submit((event) => {
     try {
       event.preventDefault();
 
       const data = $updateProfileForm.serialize();
 
-      const userInfo = await updateProfile(data);
-
-      updateView("resources", userInfo);
-
-      return $updateProfileForm.trigger("reset");
+      updateProfile(data).then(() => {
+        updateUserDetailsPage();
+        $updateProfileForm.trigger("reset");
+      });
     } catch (err) {
       updateError(err.responseText);
       updateView("error");
@@ -129,11 +131,11 @@ const changePasswordEventListener = () => {
 
       const data = $changePasswordForm.serialize();
 
-      const userInfo = await changePassword(data);
+      changePassword(data).then(() => {
+        updateUserDetailsPage();
+        $changePasswordForm.trigger("reset");
+      });
 
-      updateView("resources", userInfo);
-
-      return $changePasswordForm.trigger("reset");
     } catch (err) {
       updateError(err.responseText);
       updateView("error");

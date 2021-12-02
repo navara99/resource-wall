@@ -3,11 +3,12 @@ const createScreenshot = (media_url) => {
 };
 
 const createEmbedVideo = (media_url, height) => {
+  const url = media_url.replaceAll('"', '');
   return $(`
     <iframe
     width="100%"
     height=${height}
-    src=${media_url}
+    src=${url}
     frameborder="0" allow="accelerometer; autoplay;
     clipboard-write; encrypted-media;
     gyroscope;
@@ -53,23 +54,26 @@ const getUrlLink = (url) => {
   `);
 };
 
-const registerLikeListener = () => {
-  const $like = $(".like-link");
+const registerLikeListener = ($likeLink, id) => {
+  // const $like = $(".like-link");
 
-  $like.on("click", async function (e) {
-    $figure = $(this).closest("figure");
-    const resourceId = $figure.attr("id");
-    const result = await likeResource(resourceId);
-    const { resource_id } = result[0];
-    $likedHeart = $(`#${resource_id}`).find(".card-heart");
-    $likedHeart.removeClass("not-liked").addClass("liked");
+  $likeLink.on("click", async function (e) {
+    // $figure = $(this).closest("figure");
+    // const resourceId = $figure.attr("id");
+    const result = await likeResource(id);
+    console.log("id", id);
+    // $likedHeart = $(`#${id}`).find(".card-heart");
+    if (result) {
+      return $likeLink.removeClass("not-liked").addClass("liked");
+    }
+    $likeLink.removeClass("liked").addClass("not-liked");
   });
 };
 
 const getLikeLink = (is_liked) => {
   const colorClass = Number(is_liked) ? "liked" : "not-liked";
   return $(
-    `<a class="like-link"><i class="fas fa-heart card-heart ${colorClass}"></i></a>`
+    `<a class="like-link ${colorClass}"><i class="fas fa-heart card-heart"></i></a>`
   );
 };
 
@@ -80,7 +84,7 @@ const clearResources = () => {
 const displayResources = async (resources) => {
   clearResources();
   let renderedResources;
-
+  const { id: currentUserId } = await getMyDetails();
   if (!resources) {
     const result = await getAllResources();
     const { allResources } = result;
@@ -96,6 +100,7 @@ const displayResources = async (resources) => {
   renderedResources.forEach((resource) => {
     const {
       id,
+      user_id,
       title,
       description,
       url,
@@ -112,13 +117,15 @@ const displayResources = async (resources) => {
 
     const $card = $("<div>").addClass("card");
     const videoHeight = 250;
-    const $resourceMedia = is_video ? createEmbedVideo(media_url, videoHeight) : createScreenshot(media_url);
+    const $resourceMedia = is_video
+      ? createEmbedVideo(media_url, videoHeight)
+      : createScreenshot(media_url);
     const $figure = $("<figure>").attr("id", id);
 
     const $cardAction = getCardAction(likes, number_of_comment, rating);
     const $cardContent = getCardContent(title, description, category, created_on, username);
     const $urlLink = getUrlLink(url);
-    const $likeLink = getLikeLink(is_liked);
+    const $likeLink = currentUserId ? getLikeLink(is_liked) : $("");
     const $cardImage = $("<div>")
       .addClass("card-image")
       .prepend($urlLink, $likeLink, $resourceMedia);
@@ -131,17 +138,15 @@ const displayResources = async (resources) => {
         updateView("resourceDetails", null, id);
       }
     });
+    registerLikeListener($likeLink, id);
 
     $column.prepend($item);
 
     $("#resources-page").prepend($column);
   });
-
-  registerLikeListener();
 };
 
 const registerSearchListener = () => {
-
   const $searchBar = $(`#search`);
 
   $searchBar.on("input", async (e) => {
@@ -150,6 +155,4 @@ const registerSearchListener = () => {
     const { allResources } = await searchResource(query);
     displayResources(allResources);
   });
-
 };
-

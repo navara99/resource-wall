@@ -6,7 +6,7 @@ CREATE TABLE users
   email TEXT NOT NULL,
   password TEXT NOT NULL,
   username TEXT NOT NULL,
-  image_url TEXT,
+  profile_picture_url TEXT,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
   bio TEXT

@@ -7,7 +7,6 @@ $(() => {
   updateView("resources");
 });
 
-
 const {
   showUpdateProfilePage,
   profileButtonsEventListener,
@@ -18,6 +17,7 @@ const {
 } = profilePageHandler();
 
 const updateResourceDeailsPage = updateResourceDetails();
+const updateUserDetailsPage = updateUserPage();
 
 const eventListeners = () => {
   registerCheckListeners();
@@ -63,9 +63,10 @@ const viewHandler = () => {
   const $resourceDetails = $("#resource-details");
   const $errorPage = $("#error-page");
   const $myResourcesPage = $("#my-resources-page");
+  const $userPage = $("#user-page");
 
   const updateView = (nextView, userInfo, resourceId) => {
-    if(nextView !== "error") {
+    if (nextView !== "error") {
       updateUserInfo(userInfo);
       $newResourcePage.hide();
       $resourcesPage.hide();
@@ -76,9 +77,13 @@ const viewHandler = () => {
       $resourceDetails.hide();
       $errorPage.hide();
       $myResourcesPage.hide();
+      $userPage.hide();
     }
 
     switch (nextView) {
+      case "userPage":
+        $userPage.show();
+        break;
       case "resources":
         displayResources();
         $resourcesPage.show();
@@ -118,10 +123,12 @@ const viewHandler = () => {
         updateTitleURL("Create New Resource", "create-resource");
         break;
       case "resourceDetails":
-        updateResourceDeailsPage(resourceId)
-        .then((title) => {
+        updateResourceDeailsPage(resourceId).then((title) => {
           $resourceDetails.show();
-          updateTitleURL(`${title} - Resource Details`, `resource/${resourceId}`);
+          updateTitleURL(
+            `${title} - Resource Details`,
+            `resource/${resourceId}`
+          );
           updateUserInfo(userInfo);
         });
         break;
@@ -133,7 +140,5 @@ const viewHandler = () => {
   };
   return updateView;
 };
-
-
 
 const updateView = viewHandler();

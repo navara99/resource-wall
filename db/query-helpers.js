@@ -2,26 +2,23 @@ const defaultProfilePicUrl = 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_6467638
 
 const getFirstRecord = (result) => result.rows[0];
 
-const assignProfilePic = (userInfo) => {
-  const { image_url } = userInfo;
-  if (!image_url) userInfo.image_url = defaultProfilePicUrl;
-};
-
-const assignMyProfilePic = (details) => {
-  const { my_profile_url } = details;
-  if (!my_profile_url) details.my_profile_url = defaultProfilePicUrl;
+const assignProfilePic = (userInfo, columnName) => {
+  const { [columnName]: value } = userInfo;
+  if (!value) userInfo[columnName] = defaultProfilePicUrl;
 };
 
 const queryGenerator = (db) => {
 
-  const getUserByValue = async (columnName, value) => {
+  const getUserByValue = async (columnName, value, getDefaultProfilePic) => {
     const values = [value];
     const queryString = `SELECT * FROM users WHERE ${columnName} = $1;`;
     const result = await db.query(queryString, values);
     const userInfo = getFirstRecord(result);
-    if (userInfo) assignProfilePic(userInfo);
+    if (userInfo && getDefaultProfilePic !== "1") assignProfilePic(userInfo, "profile_picture_url");
     return userInfo;
   };
+
+
 
   const createNewUser = async (userInfo) => {
     const { email, password, username, firstName, lastName } = userInfo;
@@ -33,13 +30,13 @@ const queryGenerator = (db) => {
       `;
     const result = await db.query(queryString, values);
     const newUserInfo = getFirstRecord(result);
-    assignProfilePic(newUserInfo);
+    assignProfilePic(newUserInfo, "profile_picture_url");
     return newUserInfo;
   }
 
   const updateUser = async (newUserInfo) => {
-    const { firstName, lastName, username, email, bio, userId } = newUserInfo;
-    const values = [firstName, lastName, username, email, bio, userId];
+    const { firstName, lastName, username, email, bio, picture, userId } = newUserInfo;
+    const values = [firstName, lastName, username, email, bio, picture, userId];
 
     const queryString = `
     UPDATE users
@@ -47,14 +44,15 @@ const queryGenerator = (db) => {
     last_name = $2,
     username = $3,
     email = $4,
-    bio = $5
-    WHERE id = $6
+    bio = $5,
+    profile_picture_url = $6
+    WHERE id = $7
     RETURNING *;
     `;
 
     const result = await db.query(queryString, values);
     const userInfo = getFirstRecord(result);
-    assignProfilePic(userInfo);
+    assignProfilePic(userInfo, "profile_picture_url");
     return userInfo;
   }
 
@@ -66,7 +64,7 @@ const queryGenerator = (db) => {
         `;
     const result = await db.query(queryString, values);
     const userInfo = getFirstRecord(result);
-    assignProfilePic(userInfo);
+    assignProfilePic(userInfo, "profile_picture_url");
     return userInfo;
   }
 
@@ -124,9 +122,17 @@ const queryGenerator = (db) => {
 
   const addLikeToResource = async (id, user_id) => {
     const values = [user_id, id];
-    const queryString = `INSERT into likes (user_id, resource_id) VALUES ($1, $2) RETURNING *;`;
-    const result = await db.query(queryString, values);
-    return result.rows;
+    const ifLikedQuery = "SELECT * FROM likes WHERE user_id = $1 AND resource_id = $2;"
+    const likes = await db.query(ifLikedQuery, values);
+    const like = getFirstRecord(likes);
+    if (!like) {
+      const queryString = `INSERT into likes (user_id, resource_id) VALUES ($1, $2);`;
+      db.query(queryString, values);
+      return true;
+    }
+    const deleteLikeQuery = "DELETE FROM likes WHERE user_id = $1 AND resource_id = $2;";
+    db.query(deleteLikeQuery, values);
+    return false;
   };
 
 
@@ -138,10 +144,21 @@ const queryGenerator = (db) => {
   };
 
   const addRatingToResource = async (id, user_id, rating) => {
-    const values = [user_id, id, rating];
-    const queryString = `INSERT into ratings (user_id, resource_id, rating) VALUES ($1, $2, $3) RETURNING *;`;
-    const result = await db.query(queryString, values);
-    return getFirstRecord(result);
+
+
+    const values = [user_id, id];
+    const ratingValues = [user_id, id, rating];
+    const ifRatedQuery = "SELECT * FROM ratings WHERE user_id = $1 AND resource_id = $2;"
+    const ratings = await db.query(ifRatedQuery, values);
+    const rate = getFirstRecord(ratings);
+    if (!rate) {
+      const addRatingString = `INSERT into ratings (user_id, resource_id, rating) VALUES ($1, $2, $3);`;
+      db.query(addRatingString, ratingValues);
+      return true;
+    }
+    const updateQuery = "UPDATE ratings SET rating = $3 WHERE user_id = $1 AND resource_id = $2;";
+    db.query(updateQuery, ratingValues);
+    return false;
   };
 
   const getAllDetailsOfResource = async (resourcesId, userId) => {
@@ -157,12 +174,13 @@ const queryGenerator = (db) => {
       (SELECT username FROM users WHERE id = $2) AS current_username,
       comment,
       timestamp,
+      x.id AS comment_user_id,
       x.username,
-      x.image_url,
+      x.profile_picture_url,
       y.first_name,
       y.last_name,
       y.username AS owner_username,
-      (SELECT image_url FROM users WHERE id = $2) as my_profile_url,
+      (SELECT profile_picture_url FROM users WHERE id = $2) as my_profile_url,
       (SELECT COUNT(id) FROM likes WHERE user_id = $2 AND resource_id = $1) AS liked,
       (SELECT rating FROM ratings WHERE user_id = $2 AND resource_id = $1 LIMIT 1) AS rated
     FROM resources
@@ -174,8 +192,8 @@ const queryGenerator = (db) => {
     ORDER BY timestamp;`
 
     const result = (await db.query(queryString, value)).rows;
-    result.forEach((details) => assignProfilePic(details));
-    assignMyProfilePic(result[0]);
+    result.forEach((details) => assignProfilePic(details, "profile_picture_url"));
+    assignProfilePic(result[0], "my_profile_url");
     return result;
   };
 

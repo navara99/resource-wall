@@ -1,4 +1,4 @@
-INSERT INTO users (email, password, username, image_url, first_name, last_name)
+INSERT INTO users (email, password, username, profile_picture_url, first_name, last_name)
 VALUES
   ('email1', 'password1', 'username1', NULL, 'first_name1', 'last_name1'),
   ('email2', 'password2', 'username2', NULL, 'first_name2', 'last_name2'),
