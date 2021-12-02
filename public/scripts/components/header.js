@@ -31,6 +31,7 @@ const headerButtonsEventListener = () => {
   const $dropdown = $("#dropdown");
   const $myResourcesButton = $("#my-resources-button");
   const $changePasswordButton = $("#change-password-button");
+  const $myProfilebutton = $("#my-profile-button");
 
   window.onclick = (event) => {
     const className = $(event.target).attr("class");
@@ -41,6 +42,10 @@ const headerButtonsEventListener = () => {
     if (targetIsClicked) $dropdown.show();
     if (!targetIsClicked) $dropdown.hide();
   };
+
+  $myProfilebutton.on("click", () => {
+    updateView("userPage");
+  })
 
   $changePasswordButton.on("click", () => {
     updateView("changePassword");
