@@ -271,7 +271,6 @@ const updateResourceDetails = () => {
 
       $detailsStars
         .mouseenter(() => {
-          console.log("mouseenter");
           starElms.forEach((elm) => elm.removeClass("bright"));
         })
         .mouseleave(() => {
@@ -322,7 +321,7 @@ const updateResourceDetails = () => {
       $title.text(title);
 
       $createdOn.text(timestampToTimeAgo(created_on));
-      console.log(owner_url);
+
       $ownerProfilePicture.attr("src", owner_url);
       $ownerName.text(`${first_name} ${last_name} (@${owner_username})`);
       $ownerSection.unbind();

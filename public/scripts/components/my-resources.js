@@ -60,7 +60,6 @@ const renderMyResources = async() => {
     clearMyResources();
     const { id } = await getMyDetails();
     const myResources = await getMyResources();
-    console.log(myResources);
 
     const $listContainer = $("<ul>")
       .attr("id", "my-resource-list")
