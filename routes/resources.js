@@ -17,7 +17,8 @@ module.exports = (db) => {
     getAllDetailsOfResource,
     addCommentToResource,
     getURLById,
-    addRatingToResource
+    addRatingToResource,
+    getResourcesByCategory
   } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
@@ -33,6 +34,24 @@ module.exports = (db) => {
       res.status(500).json({ error: err.message });
     }
   });
+
+  router.get("/category/:catName", async (req, res) => {
+    const { catName } = req.params;
+    const { user_id } = req.session;
+
+    try {
+      const resourceByCategory = await getResourcesByCategory(user_id, catName);
+      res.json({
+        status: "success",
+        resourceByCategory
+      });
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).json({ error: err.message });
+    }
+
+
+  })
 
   router.get("/search/:q", async (req, res) => {
     const { q } = req.params;
@@ -82,7 +101,7 @@ module.exports = (db) => {
       const encodeURL = encodeURIComponent(url);
       const api = `https://iframe.ly/api/iframely?url=${encodeURL}&api_key=${apiKey}`;
       const data = await axios.get(api);
-      const html  = data.data.html;
+      const html = data.data.html;
       res.json({ html });
     } catch (err) {
       console.log(err);
@@ -196,6 +215,8 @@ module.exports = (db) => {
       res.status(500).json({ error: err.message });
     }
   });
+
+
 
   return router;
 };
