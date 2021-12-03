@@ -83,58 +83,58 @@ const viewHandler = () => {
     }
 
     switch (nextView) {
-      case "userPage":
-        $userPage.show();
-        updateTitleURL("Profile", "profile");
-        break;
-      case "resources":
-        displayResources();
-        $resourcesPage.show();
-        $tabs.show();
-        updateTitleURL("Home", "");
-        break;
-      case "myResources":
-        renderMyResources();
-        showMyResources();
-        $myResourcesPage.show();
-        updateTitleURL("My Resources", "my-resources");
-        break;
-      case "changePassword":
-        showChangePasswordPage();
-        $myResourcesPage.show();
-        updateTitleURL("Change Password", "change-password");
-        break;
-      case "updateProfile":
-        showUpdateProfilePage();
-        $myResourcesPage.show();
-        updateTitleURL("Update Profile", "update-profile");
-        break;
-      case "register":
-        $registerPage.show();
-        updateTitleURL("Register", "register");
-        break;
-      case "login":
-        $loginPage.show();
-        updateTitleURL("Login", "login");
-        break;
-      case "newResource":
-        $newResourcePage.show();
-        updateTitleURL("Create New Resource", "create-resource");
-        break;
-      case "resourceDetails":
-        updateResourceDeailsPage(resourceId).then((title) => {
-          $resourceDetails.show();
-          updateTitleURL(
-            `${title} - Resource Details`,
-            `resource/${resourceId}`
-          );
-          updateUserInfo(userInfo);
-        });
-        break;
-      case "error":
-        $errorPage.show();
-        updateTitleURL("Error", "error");
-        break;
+    case "userPage":
+      $userPage.show();
+      updateTitleURL("Profile", "profile");
+      break;
+    case "resources":
+      displayResources();
+      $resourcesPage.show();
+      $tabs.show();
+      updateTitleURL("Home", "");
+      break;
+    case "myResources":
+      renderMyResources();
+      showMyResources();
+      $myResourcesPage.show();
+      updateTitleURL("My Resources", "my-resources");
+      break;
+    case "changePassword":
+      showChangePasswordPage();
+      $myResourcesPage.show();
+      updateTitleURL("Change Password", "change-password");
+      break;
+    case "updateProfile":
+      showUpdateProfilePage();
+      $myResourcesPage.show();
+      updateTitleURL("Update Profile", "update-profile");
+      break;
+    case "register":
+      $registerPage.show();
+      updateTitleURL("Register", "register");
+      break;
+    case "login":
+      $loginPage.show();
+      updateTitleURL("Login", "login");
+      break;
+    case "newResource":
+      $newResourcePage.show();
+      updateTitleURL("Create New Resource", "create-resource");
+      break;
+    case "resourceDetails":
+      updateResourceDeailsPage(resourceId).then((title) => {
+        $resourceDetails.show();
+        updateTitleURL(
+          `${title} - Resource Details`,
+          `resource/${resourceId}`
+        );
+        updateUserInfo(userInfo);
+      });
+      break;
+    case "error":
+      $errorPage.show();
+      updateTitleURL("Error", "error");
+      break;
     }
   };
   return updateView;

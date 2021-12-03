@@ -57,7 +57,7 @@ const getUrlLink = (url) => {
 const registerLikeListener = ($likeLink, id) => {
   // const $like = $(".like-link");
 
-  $likeLink.on("click", async function (e) {
+  $likeLink.on("click", async function() {
     // $figure = $(this).closest("figure");
     // const resourceId = $figure.attr("id");
     const result = await likeResource(id);
@@ -81,7 +81,7 @@ const clearResources = () => {
   $("#columns").remove();
 };
 
-const displayResources = async (resources) => {
+const displayResources = async(resources) => {
   clearResources();
   let renderedResources;
   const { id: currentUserId } = await getMyDetails();
@@ -131,7 +131,7 @@ const displayResources = async (resources) => {
     const $resourceInfo = $card.prepend($cardImage, $cardContent, $cardAction);
     const $item = $figure.prepend($resourceInfo);
 
-    $item.on("click", async (event) => {
+    $item.on("click", async(event) => {
       const tagName = event.target.nodeName;
       if (tagName !== "A" && tagName !== "I") {
         updateView("resourceDetails", null, id);
@@ -148,7 +148,7 @@ const displayResources = async (resources) => {
 const registerSearchListener = () => {
   const $searchBar = $(`#search`);
 
-  $searchBar.on("input", async (e) => {
+  $searchBar.on("input", async(e) => {
     const query = e.target.value;
     if (!query) return displayResources();
     const { allResources } = await searchResource(query);
@@ -158,7 +158,7 @@ const registerSearchListener = () => {
 
 const registerTabListener = () => {
   const $tab = $(".tab").children("a");
-  $tab.on("click", async function () {
+  $tab.on("click", async function() {
     const filterCategory = $(this).attr("id");
     if (filterCategory === "ALL") return displayResources();
     const filteredResources = await getResourcesByCategory(filterCategory);
@@ -166,4 +166,4 @@ const registerTabListener = () => {
     displayResources(resourceByCategory);
   });
 
-}
+};

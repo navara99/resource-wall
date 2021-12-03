@@ -43,7 +43,7 @@ const escape = (str) => {
   return div.innerHTML;
 };
 
-const makeComment = (username, comment, profilePicture, timeAgo, id) => {
+const makeComment = (username, comment, profilePicture, timeAgo) => {
   const $elm = $(`
   <li class="collection-item avatar hover-pointer">
   <img
@@ -114,7 +114,7 @@ const updateResourceDetails = () => {
   const $ownerProfilePicture = $("#owner_profile-picture");
   const $ownerSection = $("#owner-row");
 
-  return async (id) => {
+  return async(id) => {
     try {
       const resourceDetails = await getdetailsOfResources(id);
 
@@ -175,7 +175,7 @@ const updateResourceDetails = () => {
       };
 
       $likeIcon.off();
-      $likeIcon.on("click", async function () {
+      $likeIcon.on("click", async function() {
         if (current_username) {
           likeResource(id);
           currentLike = !currentLike;
@@ -217,7 +217,7 @@ const updateResourceDetails = () => {
           $detailsComments.prepend(commentForm(my_profile_url));
         }
 
-        $("#submit-button").on("click", async () => {
+        $("#submit-button").on("click", async() => {
           if (current_username) {
             const data = $("#new-comment").serialize();
             if (data.length > 8) {
@@ -280,7 +280,7 @@ const updateResourceDetails = () => {
 
       const ratingOnClick = ($elm, id, newRating) => {
         $elm.unbind();
-        $elm.on("click", async () => {
+        $elm.on("click", async() => {
           if (current_username) {
             const isNewRating = await rateResource(id, `rating=${newRating}`);
             if (isNewRating) {

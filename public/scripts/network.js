@@ -114,4 +114,4 @@ const getResourcesByCategory = (category) => {
   return $.ajax({
     url: `/api/resources/category/${category}`,
   });
-}
+};
