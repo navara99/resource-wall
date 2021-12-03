@@ -55,14 +55,11 @@ const getUrlLink = (url) => {
 };
 
 const registerLikeListener = ($likeLink, id) => {
-  // const $like = $(".like-link");
 
   $likeLink.on("click", async function() {
-    // $figure = $(this).closest("figure");
-    // const resourceId = $figure.attr("id");
+
     const result = await likeResource(id);
-    console.log("id", id);
-    // $likedHeart = $(`#${id}`).find(".card-heart");
+
     if (result) {
       return $likeLink.removeClass("not-liked").addClass("liked");
     }
@@ -92,7 +89,6 @@ const displayResources = async(resources) => {
   } else {
     renderedResources = resources;
   }
-  console.log(renderedResources);
   if (!renderedResources.length) return;
 
   const $column = $("<div>").attr("id", "columns");
