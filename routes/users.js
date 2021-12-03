@@ -147,7 +147,7 @@ module.exports = (db) => {
     try {
       const { id } = req.params;
 
-      const userInfo = await getUserByValue("id", user_id);
+      const userInfo = await getUserByValue("id", id);
 
       res.json(userInfo);
     } catch (err) {

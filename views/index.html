@@ -38,7 +38,7 @@
   <body>
     <header class="navbar-fixed">
       <nav>
-        <div class="nav-wrapper blue">
+        <div class="nav-wrapper">
           <div class="logo"><img src="../public/logo.png" />Resource Wall</div>
           <ul>
             <li id="home-button">
@@ -55,13 +55,13 @@
             <li id="create-resource-button">
               <a><i class="fas fa-plus-circle"></i></a>
             </li>
-            <li id="profile-button" class="profile-picture">
-              <a class="profile profile-picture">
-                <div class="profile profile-picture">
+            <li id="profile-button" class="profile-picture profile-dropdown">
+              <a class="profile profile-picture profile-dropdown">
+                <div class="profile profile-picture profile-dropdown">
                   <img
                     alt=""
                     id="profile-picture"
-                    class="circle profile profile-picture"
+                    class="circle profile profile-picture profile-dropdown"
                   />
                 </div>
               </a>
@@ -126,18 +126,17 @@
               <div class="profile profile-picture">
                 <img
                   alt=""
-                  src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
-                  id="user-rofile-picture"
+                  id="user-profile-picture"
                   class="circle profile profile-picture"
                 />
               </div>
-              <h5 id="user-username">@username</h5>
+              <h5 id="user-username"></h5>
               <a
                 id="edit-my-profile-button"
                 class="waves-effect waves-light btn-large blue"
                 >Edit my profile</a
               >
-              <h4 id="user-name">Frist name Lastname</h4>
+              <h4 id="user-name"></h4>
               <div id="user-bio"></div>
             </div>
           </div>
@@ -173,9 +172,15 @@
                 </a>
               </div>
             </div>
-            <div>
-              Created by <span id="details-owner-name"></span>,
-              <span id="details-time"></span>
+            <div id="owner-row">
+              <img
+                id="owner_profile-picture"
+                class="circle profile profile-picture"
+              />
+              <div class="owner-text">
+                <div>Created by <span id="details-owner-name"></span></div>
+                <span id="details-time"></span>
+              </div>
             </div>
 
             <h5 id="details-rating">
@@ -444,7 +449,7 @@
                           checked="checked"
                           id="liked-filter"
                         />
-                        <span>Liked Resources</span>
+                        <span><i class="fas fa-heart"></i> Resources</span>
                       </label>
                     </p>
 
@@ -621,7 +626,6 @@
           circle-container
           btn-floating btn-large
           waves-effect waves-light
-          red
         "
         ><i class="fas fa-plus"></i
       ></a>

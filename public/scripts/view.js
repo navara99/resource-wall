@@ -83,6 +83,7 @@ const viewHandler = () => {
     switch (nextView) {
       case "userPage":
         $userPage.show();
+        updateTitleURL("Profile", "profile");
         break;
       case "resources":
         displayResources();

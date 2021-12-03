@@ -1,4 +1,5 @@
-const defaultProfilePicUrl = 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
+const defaultProfilePicUrl =
+  "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg";
 
 const getFirstRecord = (result) => result.rows[0];
 
@@ -8,37 +9,53 @@ const assignProfilePic = (userInfo, columnName) => {
 };
 
 const queryGenerator = (db) => {
-
   const getUserByValue = async (columnName, value, getDefaultProfilePic) => {
-    const values = [value];
-    const queryString = `SELECT * FROM users WHERE ${columnName} = $1;`;
-    const result = await db.query(queryString, values);
-    const userInfo = getFirstRecord(result);
-    if (userInfo && getDefaultProfilePic !== "1") assignProfilePic(userInfo, "profile_picture_url");
-    return userInfo;
+    try {
+      const values = [value];
+      const queryString = `SELECT * FROM users WHERE ${columnName} = $1;`;
+      const result = await db.query(queryString, values);
+      const userInfo = getFirstRecord(result);
+      if (userInfo && getDefaultProfilePic !== "1")
+        assignProfilePic(userInfo, "profile_picture_url");
+      return userInfo;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-
-
   const createNewUser = async (userInfo) => {
-    const { email, password, username, firstName, lastName } = userInfo;
-    const values = [email, password, username, firstName, lastName];
-    const queryString = `
+    try {
+      const { email, password, username, firstName, lastName } = userInfo;
+      const values = [email, password, username, firstName, lastName];
+      const queryString = `
       INSERT INTO users (email, password, username, first_name, last_name)
       VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
       `;
-    const result = await db.query(queryString, values);
-    const newUserInfo = getFirstRecord(result);
-    assignProfilePic(newUserInfo, "profile_picture_url");
-    return newUserInfo;
-  }
+      const result = await db.query(queryString, values);
+      const newUserInfo = getFirstRecord(result);
+      assignProfilePic(newUserInfo, "profile_picture_url");
+      return newUserInfo;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const updateUser = async (newUserInfo) => {
-    const { firstName, lastName, username, email, bio, picture, userId } = newUserInfo;
-    const values = [firstName, lastName, username, email, bio, picture, userId];
+    try {
+      const { firstName, lastName, username, email, bio, picture, userId } =
+        newUserInfo;
+      const values = [
+        firstName,
+        lastName,
+        username,
+        email,
+        bio,
+        picture,
+        userId,
+      ];
 
-    const queryString = `
+      const queryString = `
     UPDATE users
     SET first_name = $1,
     last_name = $2,
@@ -50,43 +67,76 @@ const queryGenerator = (db) => {
     RETURNING *;
     `;
 
-    const result = await db.query(queryString, values);
-    const userInfo = getFirstRecord(result);
-    assignProfilePic(userInfo, "profile_picture_url");
-    return userInfo;
-  }
+      const result = await db.query(queryString, values);
+      const userInfo = getFirstRecord(result);
+      assignProfilePic(userInfo, "profile_picture_url");
+      return userInfo;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const updatePasswordById = async (id, password) => {
-    const values = [id, password];
-    const queryString = `
+    try {
+      const values = [id, password];
+      const queryString = `
         UPDATE users SET password = $2 WHERE id = $1
         RETURNING *;
         `;
-    const result = await db.query(queryString, values);
-    const userInfo = getFirstRecord(result);
-    assignProfilePic(userInfo, "profile_picture_url");
-    return userInfo;
-  }
+      const result = await db.query(queryString, values);
+      const userInfo = getFirstRecord(result);
+      assignProfilePic(userInfo, "profile_picture_url");
+      return userInfo;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const getIdFromCategory = async (category) => {
-    const value = [category];
-    const queryString = `SELECT id FROM categories WHERE type = $1 LIMIT 1;`
-    const result = await db.query(queryString, value);
-    const category_id = getFirstRecord(result).id;
-    return category_id;
-  }
+    try {
+      const value = [category];
+      const queryString = `SELECT id FROM categories WHERE type = $1 LIMIT 1;`;
+      const result = await db.query(queryString, value);
+      const category_id = getFirstRecord(result).id;
+      return category_id;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  const addNewResource = async ({ user_id, title, description, url, is_private, category_id, media_url, is_video }) => {
-    const values = [user_id, title, description, url, media_url, is_video, category_id, is_private];
-    const queryString = `
+  const addNewResource = async ({
+    user_id,
+    title,
+    description,
+    url,
+    is_private,
+    category_id,
+    media_url,
+    is_video,
+  }) => {
+    try {
+      const values = [
+        user_id,
+        title,
+        description,
+        url,
+        media_url,
+        is_video,
+        category_id,
+        is_private,
+      ];
+      const queryString = `
     INSERT INTO resources (user_id, title, description, url, media_url, is_video, category_id, is_private)
     VALUES($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING *;
-    `
-    const result = await db.query(queryString, values);
-    const resourceInfo = getFirstRecord(result);
-    return resourceInfo;
-  }
+    `;
+      const result = await db.query(queryString, values);
+      const resourceInfo = getFirstRecord(result);
+      return resourceInfo;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const getAllResources = async (user_id) => {
     const value = [user_id, false];
@@ -115,47 +165,66 @@ const queryGenerator = (db) => {
     LEFT JOIN ratings ON resources.id = ratings.resource_id
     GROUP BY resources.id, users.username, categories.type
     HAVING is_private = $2;`;
-
-    const result = await db.query(queryString, value);
-    return result.rows;
-  }
+    try {
+      const result = await db.query(queryString, value);
+      return result.rows;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const addLikeToResource = async (id, user_id) => {
-    const values = [user_id, id];
-    const ifLikedQuery = "SELECT * FROM likes WHERE user_id = $1 AND resource_id = $2;"
-    const likes = await db.query(ifLikedQuery, values);
-    const like = getFirstRecord(likes);
-    if (!like) {
-      const queryString = `INSERT into likes (user_id, resource_id) VALUES ($1, $2);`;
-      db.query(queryString, values);
-      return true;
+    try {
+      const values = [user_id, id];
+      const ifLikedQuery =
+        "SELECT * FROM likes WHERE user_id = $1 AND resource_id = $2;";
+      const likes = await db.query(ifLikedQuery, values);
+      const like = getFirstRecord(likes);
+      if (!like) {
+        const queryString = `INSERT into likes (user_id, resource_id) VALUES ($1, $2);`;
+        db.query(queryString, values);
+        return true;
+      }
+      const deleteLikeQuery =
+        "DELETE FROM likes WHERE user_id = $1 AND resource_id = $2;";
+      db.query(deleteLikeQuery, values);
+      return false;
+    } catch (err) {
+      console.log(err);
     }
-    const deleteLikeQuery = "DELETE FROM likes WHERE user_id = $1 AND resource_id = $2;";
-    db.query(deleteLikeQuery, values);
-    return false;
   };
 
   const addCommentToResource = async (id, user_id, comment) => {
-    const values = [user_id, id, comment];
-    const queryString = `INSERT into comments (user_id, resource_id, comment) VALUES ($1, $2, $3) RETURNING *;`;
-    const result = await db.query(queryString, values);
-    return getFirstRecord(result);
+    try {
+      const values = [user_id, id, comment];
+      const queryString = `INSERT into comments (user_id, resource_id, comment) VALUES ($1, $2, $3) RETURNING *;`;
+      const result = await db.query(queryString, values);
+      return getFirstRecord(result);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const addRatingToResource = async (id, user_id, rating) => {
-    const values = [user_id, id];
-    const ratingValues = [user_id, id, rating];
-    const ifRatedQuery = "SELECT * FROM ratings WHERE user_id = $1 AND resource_id = $2;"
-    const ratings = await db.query(ifRatedQuery, values);
-    const rate = getFirstRecord(ratings);
-    if (!rate) {
-      const addRatingString = `INSERT into ratings (user_id, resource_id, rating) VALUES ($1, $2, $3);`;
-      db.query(addRatingString, ratingValues);
-      return true;
+    try {
+      const values = [user_id, id];
+      const ratingValues = [user_id, id, rating];
+      const ifRatedQuery =
+        "SELECT * FROM ratings WHERE user_id = $1 AND resource_id = $2;";
+      const ratings = await db.query(ifRatedQuery, values);
+      const rate = getFirstRecord(ratings);
+      if (!rate) {
+        const addRatingString = `INSERT into ratings (user_id, resource_id, rating) VALUES ($1, $2, $3);`;
+        db.query(addRatingString, ratingValues);
+        return true;
+      }
+      const updateQuery =
+        "UPDATE ratings SET rating = $3 WHERE user_id = $1 AND resource_id = $2;";
+      db.query(updateQuery, ratingValues);
+      return false;
+    } catch (err) {
+      console.log(err);
     }
-    const updateQuery = "UPDATE ratings SET rating = $3 WHERE user_id = $1 AND resource_id = $2;";
-    db.query(updateQuery, ratingValues);
-    return false;
   };
 
   const getAllDetailsOfResource = async (resourcesId, userId) => {
@@ -177,6 +246,8 @@ const queryGenerator = (db) => {
       y.first_name,
       y.last_name,
       y.username AS owner_username,
+      y.id AS owner_id,
+      y.profile_picture_url AS owner_url,
       (SELECT profile_picture_url FROM users WHERE id = $2) as my_profile_url,
       (SELECT COUNT(id) FROM likes WHERE user_id = $2 AND resource_id = $1) AS liked,
       (SELECT rating FROM ratings WHERE user_id = $2 AND resource_id = $1 LIMIT 1) AS rated
@@ -186,21 +257,31 @@ const queryGenerator = (db) => {
     LEFT OUTER JOIN users y on resources.user_id = y.id
     JOIN categories ON categories.id = resources.category_id
     WHERE resources.id = $1
-    ORDER BY timestamp;`
-
-    const result = (await db.query(queryString, value)).rows;
-    result.forEach((details) => assignProfilePic(details, "profile_picture_url"));
-    assignProfilePic(result[0], "my_profile_url");
-    return result;
+    ORDER BY timestamp;`;
+    try {
+      const result = (await db.query(queryString, value)).rows;
+      result.forEach((details) =>
+        assignProfilePic(details, "profile_picture_url")
+      );
+      assignProfilePic(result[0], "my_profile_url");
+      assignProfilePic(result[0], "owner_url");
+      return result;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const getURLById = async (id) => {
-    const values = [id];
-    const queryString = `SELECT url FROM resources WHERE id = $1;`;
-    const result = await db.query(queryString, values);
-    const { url } = getFirstRecord(result);
-    return url;
-  }
+    try {
+      const values = [id];
+      const queryString = `SELECT url FROM resources WHERE id = $1;`;
+      const result = await db.query(queryString, values);
+      const { url } = getFirstRecord(result);
+      return url;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const searchResources = async (user_id, query) => {
     const value = [user_id, false, '%' + query + '%'];
@@ -230,14 +311,18 @@ const queryGenerator = (db) => {
     GROUP BY resources.id, users.username, categories.type
     HAVING is_private = $2 AND (title LIKE $3 OR description LIKE $3 OR username LIKE $3);`;
 
-    const result = await db.query(queryString, value);
-    return result.rows;
-  }
+    try {
+      const result = await db.query(queryString, value);
+      return result.rows;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const getMyResources = async (user_id) => {
     const value = [user_id, 1];
     const subquery1 = `(SELECT COUNT(likes.*) FROM likes WHERE resource_id = resources.id)`;
-    const subquery2 = `(SELECT COUNT(likes.*) FROM likes WHERE user_id = $1 AND resource_id = resources.id)`
+    const subquery2 = `(SELECT COUNT(likes.*) FROM likes WHERE user_id = $1 AND resource_id = resources.id)`;
     const queryString = `
     SELECT
     resources.id,
@@ -264,10 +349,13 @@ const queryGenerator = (db) => {
     GROUP BY resources.id, categories.type, users.username
     HAVING resources.user_id = $1 OR ${subquery2} = $2;
     ;`;
-
-    const result = await db.query(queryString, value);
-    return result.rows;
-  }
+    try {
+      const result = await db.query(queryString, value);
+      return result.rows;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const getResourcesByCategory = async (user_id, category) => {
     const value = [user_id, false, category];
@@ -325,9 +413,6 @@ const queryGenerator = (db) => {
     addRatingToResource,
     getResourcesByCategory
   };
-}
+};
 
 module.exports = queryGenerator;
-
-
-

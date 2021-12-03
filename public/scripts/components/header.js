@@ -36,7 +36,7 @@ const headerButtonsEventListener = () => {
     const className = $(event.target).attr("class");
     if (!className) return $dropdown.hide();
 
-    const targetIsClicked = className.includes("profile-picture");
+    const targetIsClicked = className.includes("profile-dropdown");
 
     if (targetIsClicked) $dropdown.show();
     if (!targetIsClicked) $dropdown.hide();

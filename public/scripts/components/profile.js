@@ -51,21 +51,29 @@ const profilePageHandler = () => {
   };
 
   const prefillProfileForm = async () => {
-    const userInfo = await getMyDetails(1);
-    const { first_name, last_name, username, email, bio, profile_picture_url } =
-      userInfo;
-    putInValAndFocus($LastNameInput, last_name);
-    putInValAndFocus($usernameInput, username);
-    putInValAndFocus($emailInput, email);
-    putInValAndFocus($bioInput, bio);
-    putInValAndFocus($profilePicInput, profile_picture_url);
-    putInValAndFocus($firstNameInput, first_name);
-    $firstNameInput.blur();
+    try {
+      const userInfo = await getMyDetails(1);
+      const {
+        first_name,
+        last_name,
+        username,
+        email,
+        bio,
+        profile_picture_url,
+      } = userInfo;
+      putInValAndFocus($LastNameInput, last_name);
+      putInValAndFocus($usernameInput, username);
+      putInValAndFocus($emailInput, email);
+      putInValAndFocus($bioInput, bio);
+      putInValAndFocus($profilePicInput, profile_picture_url);
+      putInValAndFocus($firstNameInput, first_name);
+      $firstNameInput.blur();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const profileButtonsEventListener = () => {
-
-
     $myResoucesButton.on("click", () => {
       showMyResources();
     });
@@ -121,7 +129,6 @@ const changePasswordEventListener = () => {
         updateUserDetailsPage();
         $changePasswordForm.trigger("reset");
       });
-
     } catch (err) {
       updateError(err.responseText);
       updateView("error");
