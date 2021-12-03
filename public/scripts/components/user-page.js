@@ -1,5 +1,5 @@
 const updateUserPage = () => {
-  $profilePicture = $("#user-rofile-picture");
+  $profilePicture = $("#user-profile-picture");
   $username = $("#user-username");
   $name = $("#user-name");
   $bio = $("#user-bio");
@@ -16,11 +16,13 @@ const updateUserPage = () => {
     } else {
       $editMyProfile.show();
     }
-    const { username, first_name, last_name, profile_picture_url, bio } = userInfo;
+    const { username, first_name, last_name, profile_picture_url, bio } =
+      userInfo;
+    console.log(profile_picture_url);
     $username.text(`@${username}`);
     $name.text(`${first_name} ${last_name}`);
     $bio.text(bio);
-    $profilePicture.attr("src", profile_picture_url);
+    $("#user-profile-picture").attr("src", profile_picture_url);
     updateView("userPage");
-  }
-}
+  };
+};
