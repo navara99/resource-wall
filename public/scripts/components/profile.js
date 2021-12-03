@@ -9,9 +9,6 @@ const profilePageHandler = () => {
   const $myResoucesButton = $("#side-my-resources-button");
   const $myButtonBorder = $("#my-button-border");
   const $myResourcesPage = $("#my-resources-details");
-  const $likedResourcesButton = $("#side-liked-resources-button");
-  const $likedButtonBorder = $("#liked-button-border");
-  const $likedResourcesPage = $("#liked-resources-details");
 
   const $firstNameInput = $("#update_first_name");
   const $LastNameInput = $("#update_last_name");
@@ -21,8 +18,6 @@ const profilePageHandler = () => {
   const $profilePicInput = $("#profile_pic_url");
 
   const hideAllPages = () => {
-    $likedButtonBorder.hide();
-    $likedResourcesPage.hide();
     $passwordButtonBorder.hide();
     $changePasswordPage.hide();
     $profileButtonBorder.hide();
@@ -35,12 +30,6 @@ const profilePageHandler = () => {
     hideAllPages();
     $myButtonBorder.show();
     $myResourcesPage.show();
-  };
-
-  const showLikedResources = () => {
-    hideAllPages();
-    $likedButtonBorder.show();
-    $likedResourcesPage.show();
   };
 
   const showUpdateProfilePage = () => {
@@ -75,9 +64,7 @@ const profilePageHandler = () => {
   };
 
   const profileButtonsEventListener = () => {
-    $likedResourcesButton.on("click", () => {
-      showLikedResources();
-    });
+
 
     $myResoucesButton.on("click", () => {
       showMyResources();
@@ -98,7 +85,6 @@ const profilePageHandler = () => {
     prefillProfileForm,
     showChangePasswordPage,
     showMyResources,
-    showLikedResources,
   };
 };
 

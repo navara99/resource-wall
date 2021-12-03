@@ -13,7 +13,6 @@ const {
   prefillProfileForm,
   showChangePasswordPage,
   showMyResources,
-  showLikedResources,
 } = profilePageHandler();
 
 const updateResourceDeailsPage = updateResourceDetails();
@@ -95,15 +94,10 @@ const viewHandler = () => {
         $myResourcesPage.show();
         updateTitleURL("My Resources", "my-resources");
         break;
-      case "likedResources":
-        showLikedResources();
-        $myResourcesPage.show();
-        updateTitleURL("Liked Resources", "liked-resources");
-        break;
       case "changePassword":
         showChangePasswordPage();
         $myResourcesPage.show();
-        updateTitleURL("Change Password", "liked-resources");
+        updateTitleURL("Change Password", "change-password");
         break;
       case "updateProfile":
         showUpdateProfilePage();

@@ -1,3 +1,28 @@
+— What each of you did, individually
+
+1 homepage plus search (Thar)
+2 make new resources (Both)
+ - screenshot
+ - video
+ - private/public
+3 details page (Siu)
+ - rating, like (also on homepage), comment, go to my page/other user page
+4 update profile (Both)
+5 my resources (Thar)
+  - filtering
+6 login/logout/register (both)
+
+— Show us what you built (demo)
+
+— What you learned and/or what you’ll do differently in final projects
+
+1 divide HTML into smaller ejs files
+2 use React
+3 learned about merge and we should merge more often
+4 commit more often
+5 googling skill
+6 new async syntax
+
 ## To do list
 
 ### Requirements

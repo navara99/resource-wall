@@ -493,9 +493,10 @@ div.resource-thumbnail div.stat span.stat-column * {
   display: block;
 }
 
-#liked-resources-details {
-  margin: 0;
+div.container {
+  width: 90%;
 }
+
 
 div#dropdown.dropdown {
   background-color: white;
