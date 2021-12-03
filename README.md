@@ -1,15 +1,15 @@
 — What each of you did, individually
 
 1 homepage plus search (Thar)
-2 make new resources (Both)
+2 details page - gist (Siu)
+ - rating, like (also on homepage), comment, go to my page/other user page
+3 make new resources (Both)
  - screenshot
  - video
  - private/public
-3 details page (Siu)
- - rating, like (also on homepage), comment, go to my page/other user page
-4 update profile (Both)
-5 my resources (Thar)
+4 my resources (Thar)
   - filtering
+5 update profile (Both)
 6 login/logout/register (both)
 
 — Show us what you built (demo)
