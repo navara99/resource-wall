@@ -55,10 +55,6 @@ const makeComment = (username, comment, profilePicture, timeAgo, id) => {
     <p class="secondary-content">${escape(timeAgo)}</p>
   </li>`);
 
-  $elm.on("click", () => {
-    updateUserDetailsPage(id);
-  });
-
   return $elm;
 };
 
@@ -198,14 +194,16 @@ const updateResourceDetails = () => {
           comment_user_id,
         } = commentInfo;
         console.log("comment_user_id", comment_user_id);
-        const elm = makeComment(
+        const $elm = makeComment(
           username,
           comment,
           profile_picture_url,
-          timeAgo,
-          comment_user_id
+          timeAgo
         );
-        $detailsComments.prepend(elm);
+        $detailsComments.prepend($elm);
+        $elm.on("click", () => {
+          updateUserDetailsPage(comment_user_id);
+        });
       });
 
       if (current_username) {
