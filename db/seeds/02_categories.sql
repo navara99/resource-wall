@@ -1,6 +1,6 @@
 INSERT INTO categories (type)
 VALUES
-  ('ART/DIY'),
+  ('ART'),
   ('COOKING') ,
   ('DESIGN'),
   ('FINANCE'),
