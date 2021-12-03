@@ -158,12 +158,12 @@ const registerSearchListener = () => {
 
 const registerTabListener = () => {
   const $tab = $(".tab").children("a");
-  $tab.on("click", function async() {
+  $tab.on("click", async function () {
     const filterCategory = $(this).attr("id");
-    if (filterCategory = "ALL") return displayResources();
-    const filteredResources = getResourcesByCategory(filterCategory);
-
-    console.log(filteredResources);
+    if (filterCategory === "ALL") return displayResources();
+    const filteredResources = await getResourcesByCategory(filterCategory);
+    const { resourceByCategory } = filteredResources;
+    displayResources(resourceByCategory);
   });
 
 }
