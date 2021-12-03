@@ -109,3 +109,9 @@ const getHtmlFromAPI = (url) => {
     url: `/api/resources/media/${url}`,
   });
 };
+
+const getResourcesByCategory = (category) => {
+  return $.ajax({
+    url: `/api/resources/category/${category}`,
+  });
+}
