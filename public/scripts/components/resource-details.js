@@ -45,7 +45,7 @@ const escape = (str) => {
 
 const makeComment = (username, comment, profilePicture, timeAgo, id) => {
   const $elm = $(`
-  <li class="collection-item avatar">
+  <li class="collection-item avatar hover-pointer">
   <img
     src="${escape(profilePicture)}"
     class="circle profile profile-picture"
@@ -112,6 +112,7 @@ const updateResourceDetails = () => {
   const $ownerName = $("#details-owner-name");
   const $rating = $("#details-rating");
   const $ownerProfilePicture = $("#owner_profile-picture");
+  const $ownerSection = $("#owner-row");
 
   return async (id) => {
     const resourceDetails = await getdetailsOfResources(id);
@@ -198,7 +199,7 @@ const updateResourceDetails = () => {
           profile_picture_url,
           comment_user_id,
         } = commentInfo;
-        console.log("comment_user_id", comment_user_id);
+
         const $elm = makeComment(
           username,
           comment,
@@ -323,8 +324,8 @@ const updateResourceDetails = () => {
     console.log(owner_url);
     $ownerProfilePicture.attr("src", owner_url);
     $ownerName.text(`${first_name} ${last_name} (@${owner_username})`);
-    $ownerName.unbind();
-    $ownerName.on("click", () => {
+    $ownerSection.unbind();
+    $ownerSection.on("click", () => {
         updateUserDetailsPage(owner_id);
     });
 

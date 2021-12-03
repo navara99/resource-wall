@@ -495,8 +495,28 @@ div.resource-thumbnail div.stat span.stat-column * {
 
 div.container {
   width: 90%;
+  margin-bottom: 3em;
 }
 
+#owner-row {
+  margin-top: 0.9em;
+  display: flex;
+  img {
+    margin: 0.2em 0.6em 0 0;
+  }
+  .owner-text {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.hover-pointer:hover{
+  cursor: pointer;
+}
+
+#owner-row:hover {
+  cursor: pointer;
+}
 
 div#dropdown.dropdown {
   background-color: white;
