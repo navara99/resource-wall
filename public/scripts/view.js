@@ -19,6 +19,7 @@ const updateResourceDeailsPage = updateResourceDetails();
 const updateUserDetailsPage = updateUserPage();
 
 const eventListeners = () => {
+  registerTabListener();
   registerCheckListeners();
   registerSearchListener();
   headerButtonsEventListener();
