@@ -100,7 +100,6 @@ const displayResources = async (resources) => {
   renderedResources.forEach((resource) => {
     const {
       id,
-      user_id,
       title,
       description,
       url,
@@ -156,3 +155,15 @@ const registerSearchListener = () => {
     displayResources(allResources);
   });
 };
+
+const registerTabListener = () => {
+  const $tab = $(".tab").children("a");
+  $tab.on("click", function async() {
+    const filterCategory = $(this).attr("id");
+    if (filterCategory = "ALL") return displayResources();
+    const filteredResources = getResourcesByCategory(filterCategory);
+
+    console.log(filteredResources);
+  });
+
+}
