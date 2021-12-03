@@ -12,6 +12,7 @@ const updateUserPage = () => {
   return (id) => {
     if (id) {
       getUserDetails(id).then((userInfo) => {
+        $editMyProfile.hide();
         const { username, first_name, last_name, profile_picture_url, bio } =
           userInfo;
         $username.text(`@${username}`);
@@ -22,6 +23,7 @@ const updateUserPage = () => {
       });
     } else {
       getMyDetails().then((userInfo) => {
+        $editMyProfile.show();
         const { username, first_name, last_name, profile_picture_url, bio } =
           userInfo;
         $username.text(`@${username}`);

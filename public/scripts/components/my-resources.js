@@ -1,17 +1,25 @@
-
 const createThumbnail = (is_video, media_url) => {
   const videoHeight = 150;
-  const media = is_video ? createEmbedVideo(media_url, videoHeight) : createScreenshot(media_url);
+  const media = is_video
+    ? createEmbedVideo(media_url, videoHeight)
+    : createScreenshot(media_url);
   return $(`
   <div class="thumbnail-container">
     <div class="media">
       ${media.prop("outerHTML")}
     </div>
   </div>
-`)
+`);
 };
 
-const createInfo = (title, url, description, category, created_on, username) => {
+const createInfo = (
+  title,
+  url,
+  description,
+  category,
+  created_on,
+  username
+) => {
   return $(`
   <div class="text">
   <h6 class="my-resource-title">${title}</h6>
@@ -19,10 +27,11 @@ const createInfo = (title, url, description, category, created_on, username) => 
   <div><span>Description: </span> ${description}</div>
   <div><span>Added by: </span> @${username}</div>
   <div><span>Added:</span> ${timestampToTimeAgo(created_on)}</div>
-  <div><span>Category:</span> ${category[0] + category.substring(1).toLowerCase()}</div>
+  <div><span>Category:</span> ${
+    category[0] + category.substring(1).toLowerCase()
+  }</div>
   </div>
-  `
-  );
+  `);
 };
 
 const getStats = (likes, ratings, comments) => {
@@ -41,7 +50,7 @@ const getStats = (likes, ratings, comments) => {
     <span>${comments}</span>
   </span>
   </div>
-  `)
+  `);
 };
 
 const clearMyResources = () => {
@@ -49,52 +58,65 @@ const clearMyResources = () => {
 };
 
 const renderMyResources = async () => {
-  clearMyResources()
-  const { id } = await getMyDetails();
-  const myResources = await getMyResources();
-  console.log(myResources);
+  try {
+    clearMyResources();
+    const { id } = await getMyDetails();
+    const myResources = await getMyResources();
+    console.log(myResources);
 
-  const $listContainer = $("<ul>").attr("id", "my-resource-list").addClass("collection comments");
+    const $listContainer = $("<ul>")
+      .attr("id", "my-resource-list")
+      .addClass("collection comments");
 
-  myResources.forEach((resource) => {
-    const {
-      user_id,
-      title,
-      description,
-      url,
-      media_url,
-      created_on,
-      is_video,
-      is_liked,
-      likes,
-      category,
-      number_of_comment,
-      rating,
-      username
-    } = resource;
+    myResources.forEach((resource) => {
+      const {
+        user_id,
+        title,
+        description,
+        url,
+        media_url,
+        created_on,
+        is_video,
+        is_liked,
+        likes,
+        category,
+        number_of_comment,
+        rating,
+        username,
+      } = resource;
 
-    console.log(number_of_comment);
-    const showLiked = ($("#liked-filter:checked").val() && Number(is_liked) === 1 && user_id !== id);
-    const showMine = ($("#mine-filter:checked").val() && user_id === id);
-    console.log(user_id, id);
-    console.log(showLiked, showMine);
+      console.log(number_of_comment);
+      const showLiked =
+        $("#liked-filter:checked").val() &&
+        Number(is_liked) === 1 &&
+        user_id !== id;
+      const showMine = $("#mine-filter:checked").val() && user_id === id;
+      console.log(user_id, id);
+      console.log(showLiked, showMine);
 
-    if (showLiked || showMine) {
-      const $collection = $("<li>");
-      const $thumbnail = createThumbnail(is_video, media_url);
-      const $info = createInfo(title, url, description, category, created_on, username);
-      const $stats = getStats(likes, rating, number_of_comment);
-      $collection.prepend($thumbnail, $info, $stats);
-      $listContainer.prepend($collection);
-      $("#my-resources-details").append($listContainer);
-    }
-
-  });
-
-}
+      if (showLiked || showMine) {
+        const $collection = $("<li>");
+        const $thumbnail = createThumbnail(is_video, media_url);
+        const $info = createInfo(
+          title,
+          url,
+          description,
+          category,
+          created_on,
+          username
+        );
+        const $stats = getStats(likes, rating, number_of_comment);
+        $collection.prepend($thumbnail, $info, $stats);
+        $listContainer.prepend($collection);
+        $("#my-resources-details").append($listContainer);
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 const registerCheckListeners = async () => {
-
   $("#liked-filter").on("change", function () {
     renderMyResources();
   });
@@ -102,14 +124,15 @@ const registerCheckListeners = async () => {
   $("#mine-filter").on("change", function () {
     renderMyResources();
   });
+};
 
-}
-
-{/* <div id="my-resources-details" >
+{
+  /* <div id="my-resources-details" >
 <h3 class="title">My Resources</h3>
 <ul class="collection comments" id="my-resource-list">
 </ul>
-</div> */}
+</div> */
+}
 
 // const $column = $("<div>").attr("id", "columns");
 
@@ -131,8 +154,8 @@ const registerCheckListeners = async () => {
 
 //   $("#resources-page").prepend($column);
 
-
-{/* <li class="collection-item">
+{
+  /* <li class="collection-item">
   <div class="resource-thumbnail">
     <div class="thumbnail-container">
       <div class="media">
@@ -168,4 +191,5 @@ const registerCheckListeners = async () => {
       </span>
     </div>
   </div>
-</li> */}
+</li> */
+}
