@@ -37,7 +37,7 @@ const updateTitleURL = (title, url) => {
   document.title = `${title} - Resource Wall`;
 };
 
-const updateUserInfo = async (userInfo) => {
+const updateUserInfo = async(userInfo) => {
   try {
     if (!userInfo) userInfo = await getMyDetails();
     updateHeader(userInfo);

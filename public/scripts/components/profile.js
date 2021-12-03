@@ -119,7 +119,7 @@ const updateProfileEventListener = () => {
 const changePasswordEventListener = () => {
   const $changePasswordForm = $("#change-password-form");
 
-  $changePasswordForm.submit(async (event) => {
+  $changePasswordForm.submit(async(event) => {
     try {
       event.preventDefault();
 
