@@ -171,6 +171,7 @@ ul.collection li.collection-item.avatar {
   min-height: 0;
   border: none;
   padding-left: 50px;
+  background-color: #f8f8ff;
 }
 
 .show-rating {
@@ -341,6 +342,7 @@ form {
 //Tabs
 
 .tabs .tab a {
+  cursor: pointer;
   background-color: #f8f8ff;
   font-weight: bold;
 }
