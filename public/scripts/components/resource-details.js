@@ -111,6 +111,7 @@ const updateResourceDetails = () => {
   const $createdOn = $("#details-time");
   const $ownerName = $("#details-owner-name");
   const $rating = $("#details-rating");
+  const $ownerProfilePicture = $("#owner_profile-picture");
 
   return async (id) => {
     const resourceDetails = await getdetailsOfResources(id);
@@ -132,6 +133,10 @@ const updateResourceDetails = () => {
       rated,
       created_on,
       owner_username,
+      owner_id,
+      first_name,
+      last_name,
+      owner_url
     } = resourceDetails[0];
 
     let averageRating = rating;
@@ -313,8 +318,15 @@ const updateResourceDetails = () => {
     $displayLink.text(hostname);
 
     $title.text(title);
+
     $createdOn.text(timestampToTimeAgo(created_on));
-    $ownerName.text(`@${owner_username}`);
+    console.log(owner_url);
+    $ownerProfilePicture.attr("src", owner_url);
+    $ownerName.text(`${first_name} ${last_name} (@${owner_username})`);
+    $ownerName.unbind();
+    $ownerName.on("click", () => {
+        updateUserDetailsPage(owner_id);
+    });
 
     return title;
   };

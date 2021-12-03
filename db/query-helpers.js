@@ -180,6 +180,8 @@ const queryGenerator = (db) => {
       y.first_name,
       y.last_name,
       y.username AS owner_username,
+      y.id AS owner_id,
+      y.profile_picture_url AS owner_url,
       (SELECT profile_picture_url FROM users WHERE id = $2) as my_profile_url,
       (SELECT COUNT(id) FROM likes WHERE user_id = $2 AND resource_id = $1) AS liked,
       (SELECT rating FROM ratings WHERE user_id = $2 AND resource_id = $1 LIMIT 1) AS rated
@@ -194,6 +196,7 @@ const queryGenerator = (db) => {
     const result = (await db.query(queryString, value)).rows;
     result.forEach((details) => assignProfilePic(details, "profile_picture_url"));
     assignProfilePic(result[0], "my_profile_url");
+    assignProfilePic(result[0], "owner_url");
     return result;
   };
 
