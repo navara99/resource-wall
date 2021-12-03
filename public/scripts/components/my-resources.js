@@ -55,7 +55,7 @@ const clearMyResources = () => {
   $("#my-resource-list").remove();
 };
 
-const renderMyResources = async () => {
+const renderMyResources = async() => {
   try {
     clearMyResources();
     const { id } = await getMyDetails();
@@ -114,12 +114,12 @@ const renderMyResources = async () => {
   }
 };
 
-const registerCheckListeners = async () => {
-  $("#liked-filter").on("change", function () {
+const registerCheckListeners = async() => {
+  $("#liked-filter").on("change", function() {
     renderMyResources();
   });
 
-  $("#mine-filter").on("change", function () {
+  $("#mine-filter").on("change", function() {
     renderMyResources();
   });
 };

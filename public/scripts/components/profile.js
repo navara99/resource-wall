@@ -50,7 +50,7 @@ const profilePageHandler = () => {
     $elm.focus();
   };
 
-  const prefillProfileForm = async () => {
+  const prefillProfileForm = async() => {
     try {
       const userInfo = await getMyDetails(1);
       const {

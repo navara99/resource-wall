@@ -5,7 +5,7 @@
  - rating, like (also on homepage), comment, go to my page/other user page
 3 make new resources (Both)
  - screenshot
- - video
+ - video (dailymotion, Getty Images, codepen, instagram)
  - private/public
 4 my resources (Thar)
   - filtering

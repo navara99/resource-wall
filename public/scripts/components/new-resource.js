@@ -1,7 +1,7 @@
 const newResourceEventListener = () => {
   const $newResourceForm = $("#new-resource-form");
 
-  $newResourceForm.submit(async (event) => {
+  $newResourceForm.submit(async(event) => {
     try {
       event.preventDefault();
       const data = $newResourceForm.serialize();
