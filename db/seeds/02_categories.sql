@@ -5,7 +5,7 @@ VALUES
   ('DESIGN'),
   ('FINANCE'),
   ('GARDENING'),
-  ('HEALTH/FITNESS'),
+  ('HEALTH'),
   ('LANGUAGE'),
   ('MARKETING'),
   ('MUSIC'),

@@ -534,6 +534,10 @@ div.container {
   cursor: pointer;
 }
 
+#resources-page {
+  margin-top: 48px;
+}
+
 div#dropdown.dropdown {
   background-color: white;
   position: absolute;
@@ -541,6 +545,8 @@ div#dropdown.dropdown {
   margin: 0;
   right: 0;
   border: 0.1em solid #e5e5e5;
+
+  z-index: 2;
 }
 
 div#dropdown.hidden.dropdown a {

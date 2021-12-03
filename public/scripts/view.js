@@ -64,6 +64,7 @@ const viewHandler = () => {
   const $errorPage = $("#error-page");
   const $myResourcesPage = $("#my-resources-page");
   const $userPage = $("#user-page");
+  const $tabs = $("#tabs");
 
   const updateView = (nextView, userInfo, resourceId) => {
     if (nextView !== "error") {
@@ -78,6 +79,7 @@ const viewHandler = () => {
       $errorPage.hide();
       $myResourcesPage.hide();
       $userPage.hide();
+      $tabs.hide();
     }
 
     switch (nextView) {
@@ -88,6 +90,7 @@ const viewHandler = () => {
       case "resources":
         displayResources();
         $resourcesPage.show();
+        $tabs.show();
         updateTitleURL("Home", "");
         break;
       case "myResources":
