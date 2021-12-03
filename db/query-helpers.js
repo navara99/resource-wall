@@ -135,7 +135,6 @@ const queryGenerator = (db) => {
     return false;
   };
 
-
   const addCommentToResource = async (id, user_id, comment) => {
     const values = [user_id, id, comment];
     const queryString = `INSERT into comments (user_id, resource_id, comment) VALUES ($1, $2, $3) RETURNING *;`;
@@ -144,8 +143,6 @@ const queryGenerator = (db) => {
   };
 
   const addRatingToResource = async (id, user_id, rating) => {
-
-
     const values = [user_id, id];
     const ratingValues = [user_id, id, rating];
     const ifRatedQuery = "SELECT * FROM ratings WHERE user_id = $1 AND resource_id = $2;"
@@ -265,6 +262,44 @@ const queryGenerator = (db) => {
     return result.rows;
   }
 
+  const getResourcesByCategory = async (user_id, category) => {
+    const value = [user_id, false, category];
+    const queryString = `
+    SELECT
+    resources.id,
+    is_private,
+    description,
+    url,
+    title,
+    is_video,
+    created_on,
+    resources.user_id,
+    users.username,
+    media_url,
+    categories.type AS category,
+    category_id,
+    (SELECT AVG(rating) FROM ratings WHERE resources.id = ratings.resource_id) AS rating,
+    (SELECT COUNT(comment) FROM comments WHERE comment IS NOT NULL AND resources.id = comments.resource_id) AS number_of_comment,
+    (SELECT COUNT(likes.*) FROM likes WHERE resource_id = resources.id) AS likes,
+    (SELECT COUNT(likes.*) FROM likes WHERE user_id = $1 AND resource_id = resources.id) AS is_liked
+    FROM resources
+    JOIN categories ON resources.category_id = categories.id
+    JOIN users ON users.id = resources.user_id
+    LEFT JOIN comments ON comments.resource_id = resources.id
+    LEFT JOIN ratings ON resources.id = ratings.resource_id
+    GROUP BY resources.id, users.username, categories.type
+    HAVING is_private = $2 AND categories.type = $3;`;
+
+    try {
+      const result = await db.query(queryString, value);
+      return result.rows;
+    } catch (err) {
+      console.log(err.message);
+    }
+
+
+  }
+
   return {
     createNewUser,
     getUserByValue,
@@ -280,7 +315,8 @@ const queryGenerator = (db) => {
     addCommentToResource,
     getAllDetailsOfResource,
     getURLById,
-    addRatingToResource
+    addRatingToResource,
+    getResourcesByCategory
   };
 }
 
