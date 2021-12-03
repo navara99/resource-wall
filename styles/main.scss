@@ -289,10 +289,6 @@ li textarea.materialize-textarea {
   color: rgba(128, 128, 128, 0.657);
 }
 
-.flex-row {
-  display: flex;
-}
-
 .liked {
   color: #db565b;
 }
@@ -342,6 +338,17 @@ form {
   flex: 1;
 }
 
+//Tabs
+
+.tabs .tab a {
+  background-color: #f8f8ff;
+  font-weight: bold;
+}
+
+.tabs {
+  border-bottom: 1px solid rgba(33, 150, 243, 1);
+}
+
 //My-resources
 
 #my-resources-details {
@@ -358,10 +365,8 @@ form {
 
 #my-resources-filter {
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: flex-end;
   width: 100%;
-  flex-direction: column;
 }
 
 .thumbnail-container {
@@ -493,10 +498,9 @@ div.resource-thumbnail div.stat span.stat-column * {
   display: block;
 }
 
-div.container {
-  width: 90%;
+#liked-resources-details {
+  margin: 0;
 }
-
 
 div#dropdown.dropdown {
   background-color: white;
@@ -561,8 +565,6 @@ figure:hover {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
-  // position: relative;
-  // top: 0.3em;
 }
 
 .bright {
@@ -615,18 +617,4 @@ figure:hover {
 
 #details-rating-string {
   padding-left: 0.3em;
-}
-
-.user-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 70%;
-  margin: 0 15%;
-  text-align: justify;
-
-  img {
-    width: 15em;
-    height: auto;
-  }
 }
