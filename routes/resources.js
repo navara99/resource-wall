@@ -30,7 +30,6 @@ module.exports = (db) => {
         allResources,
       });
     } catch (err) {
-      console.log(err.message);
       res.status(500).json({ error: err.message });
     }
   });
@@ -46,7 +45,6 @@ module.exports = (db) => {
         resourceByCategory
       });
     } catch (err) {
-      console.log(err.message);
       res.status(500).json({ error: err.message });
     }
 
@@ -69,14 +67,13 @@ module.exports = (db) => {
   });
 
   router.get("/me", async (req, res) => {
-    console.log("hi")
+
     try {
       const { user_id } = req.session;
       if (!user_id) return res.json({});
       const myResources = await getMyResources(user_id);
       res.json(myResources);
     } catch (err) {
-      console.log(err.message);
       res.status(500).json({ error: err.message });
     }
 
@@ -97,14 +94,12 @@ module.exports = (db) => {
     try {
       const { id } = req.params;
       const url = await getURLById(id);
-      console.log(url);
       const encodeURL = encodeURIComponent(url);
       const api = `https://iframe.ly/api/iframely?url=${encodeURL}&api_key=${apiKey}`;
       const data = await axios.get(api);
       const html = data.data.html;
       res.json({ html });
     } catch (err) {
-      console.log(err);
       res.status(500).json({ error: err.message });
     }
   });
@@ -175,7 +170,6 @@ module.exports = (db) => {
   router.post("/:id/like", async (req, res) => {
     const { id } = req.params;
     const { user_id } = req.session;
-    console.log(id, user_id);
 
     if (!user_id)
       return res
