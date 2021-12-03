@@ -132,11 +132,12 @@ a.paragraph {
 .send-comment {
   font-size: 1.5em;
   padding-bottom: 0.5em;
-  color: #51a45a;
+  color: #ffc300;
 }
 
 .send-comment:hover {
   cursor: pointer;
+  color: #ffd60a;
 }
 
 .like {
@@ -351,8 +352,11 @@ form {
   #my-resource-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     min-width: 100%;
+    h3 {
+      flex: 1;
+    }
   }
 }
 
@@ -360,7 +364,6 @@ form {
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
-  width: 100%;
   flex-direction: column;
 }
 
@@ -414,7 +417,7 @@ div.left-navbar div.tab {
 }
 
 div.left-navbar div.active {
-  background-color: black;
+  background-color: #003566;
   position: absolute;
   left: 7%;
   right: 7%;
@@ -510,7 +513,7 @@ div.container {
   }
 }
 
-.hover-pointer:hover{
+.hover-pointer:hover {
   cursor: pointer;
 }
 
@@ -649,4 +652,16 @@ figure:hover {
     width: 15em;
     height: auto;
   }
+}
+
+header nav {
+  background-color: #003566;
+}
+
+.waves-effect.waves-light {
+  background-color: #ffc300;
+}
+
+.waves-effect.waves-light:hover {
+  background-color: #ffd60a;
 }
