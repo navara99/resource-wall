@@ -50,6 +50,10 @@ img.profile {
   display: none;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 div.resource-details-container.container {
   display: none;
   margin-top: 3em;
@@ -391,7 +395,7 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
-
+    font-weight: bold;
     .fa-heart {
       color: #db565b;
     }
@@ -419,6 +423,7 @@ form {
   display: flex;
   align-items: center;
   padding-bottom: 2em;
+  background-color: transparent;
 }
 
 .text {
