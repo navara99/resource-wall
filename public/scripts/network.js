@@ -57,6 +57,13 @@ const submitResource = (data) => {
   });
 };
 
+const deleteResource = (id) => {
+  return $.ajax({
+    method: "DELETE",
+    url: `/api/resources/${id}`
+  });
+};
+
 const getAllResources = () => {
   return $.ajax({
     url: "/api/resources",
@@ -115,3 +122,4 @@ const getResourcesByCategory = (category) => {
     url: `/api/resources/category/${category}`,
   });
 };
+
