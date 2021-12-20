@@ -82,7 +82,6 @@ const renderMyResources = async() => {
         username,
       } = resource;
 
-      console.log(number_of_comment);
       const showLiked =
         $("#liked-filter:checked").val() &&
         Number(is_liked) === 1 &&
