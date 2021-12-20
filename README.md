@@ -1,33 +1,6 @@
-— What each of you did, individually
+## Features
 
-1 homepage plus search (Thar)
-2 details page - gist (Siu)
- - rating, like (also on homepage), comment, go to my page/other user page
-3 make new resources (Both)
- - screenshot
- - video (dailymotion, Getty Images, codepen, instagram)
- - private/public
-4 my resources (Thar)
-  - filtering
-5 update profile (Both)
-6 login/logout/register (both)
-
-— Show us what you built (demo)
-
-— What you learned and/or what you’ll do differently in final projects
-
-1 divide HTML into smaller ejs files
-2 use React
-3 learned about merge and we should merge more often
-4 commit more often
-5 googling skill
-6 new async syntax
-
-## To do list
-
-### Requirements
-
-^ users should be able to save an external URL along with a title and description
+- users can save an external URL along with a title and description
 ^ users should be able to search for already-saved resources created by any user
 ^ users should be able to categorize any resource under a topic
 ^ sers should be able to comment on any resource
@@ -36,48 +9,74 @@
 ^ users should be able to view all their own and all liked resources on one page ("My resources")
 ^ users should be able to register, log in, log out and update their profile
 
-
-### edit page (stretch)
-- edit url, description, title, categories
-
 ### home page
-- oembed / thum.io
-^ display all the resources
-^ users should be able to like any resource
-^ display screenshot/embed video/images uploaded by the user
+- display all the resources
+- users should be able to like any resource
+- display screenshot/embed video/images uploaded by the user
 - diplsay title, rating, number of likes, part of desciption, username
 
 ### login
-^ email, password
-- (stretch) verify email
+- email, password
 
 ### register
-^ email(unique), password , username(unique)
-- (stretch: twice, included char and number, min length: 8)
+- email(unique), password , username(unique)
 
 ### detail page of a single resource
-^ iframely (call the api everytimes an user open the page)
-- (stretch) owner can make resource public/private
-^ users should be able to comment on any resource (just comment)
-^ users should be able to rate any resource (rating, plus comment)
-^ users should be able to like any resource
+- owner can make resource public/private
+- users should be able to comment on any resource (just comment)
+- users should be able to rate any resource (rating, plus comment)
+- users should be able to like any resource
 
-### liked resources
-^ users should be able to view all their own and all liked resources on one page ("My resources")
+### my & liked resources
+- users should be able to view all their own and all liked resources on one page ("My resources")
+
+### user page
+- view username, bio, full name
 
 ### my page
-- (stretch) owner can change public/private for all resources
-^ users should be able to update their profile (username, email, password[twice], profile picture)
+- users should be able to update their profile (username, email, password[twice], profile picture)
 
 ### new resource
-^ save an external URL along with a title and description (optional: upload image)
-^ users should be able to categorize any resource under a topic
+- save an external URL along with a title and description
+- users should be able to categorize any resource under a topic
 
 ### header
-^ users should be able to search for already-saved resources created by any user
-- (stretch) search user
-- (stretch) search by catergory
-^ logout button / login link
+- users should be able to search for already-saved resources created by any user
+- logout button / login link
+- view resources by catergory
+
+## To do list
+
+- deploy the server
+- README.md
+- html in ejs (smaller files) (siu)
+- refactoring (siu)
+
+### responsive
+- hide nav bar
+
+### my & liked resources (Thar)
+- users can go to the details page when they click on the resource
+- owner can delete resource
+
+### edit page (stretch)
+- edit url, description, title, categories
+- owner can change public/private for all resources
+
+### home page
+- order reources by date
+
+### register
+- twice, included char and number, min length: 8
+
+### user page
+- view the user's resources
+
+### new resource
+- upload image
+
+### header
+- users should be able to search any user
 
 # LHL Node Skeleton
 
@@ -126,3 +125,28 @@ The following steps are only for _one_ of the group members to perform.
 - Node 10.x or above
 - NPM 5.x or above
 - PG 6.x
+
+— What each of you did, individually
+
+1 homepage plus search (Thar)
+2 details page - gist (Siu)
+ - rating, like (also on homepage), comment, go to my page/other user page
+3 make new resources (Both)
+ - screenshot
+ - video (dailymotion, Getty Images, codepen, instagram)
+ - private/public
+4 my resources (Thar)
+  - filtering
+5 update profile (Both)
+6 login/logout/register (both)
+
+— Show us what you built (demo)
+
+— What you learned and/or what you’ll do differently in final projects
+
+1 divide HTML into smaller ejs files
+2 use React
+3 learned about merge and we should merge more often
+4 commit more often
+5 googling skill
+6 new async syntax
