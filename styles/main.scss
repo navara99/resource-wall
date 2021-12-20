@@ -380,15 +380,34 @@ form {
   height: 150px;
 }
 
-.stat,
-.stat-column {
-  padding-right: 1em;
+.stat-container {
+  height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 
-  .fa-heart {
-    color: #db565b;
+  .stat,
+  .stat-column {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .fa-heart {
+      color: #db565b;
+    }
+  }
+
+  .stat-column {
+    padding-right: 1em;
+  }
+
+  .resource-actions {
+    padding-top: 1em;
+    display: flex;
+
+    a {
+      margin-right: 1em;
+    }
   }
 }
 
@@ -398,6 +417,7 @@ form {
 
 #my-resource-list li {
   display: flex;
+  align-items: center;
   padding-bottom: 2em;
 }
 
@@ -675,7 +695,7 @@ header.navbar-fixed nav {
   box-shadow: none;
 }
 
-ul.tabs{
+ul.tabs {
   border: none;
 }
 div.col.s12.nav-colour {
@@ -690,12 +710,11 @@ div.col.s12.nav-colour {
       background-color: #001d3d;
       color: white;
     }
-    a.nav-colour:hover{
+    a.nav-colour:hover {
       background-color: #001d3d;
     }
   }
 }
-
 
 header nav {
   background-color: #003566;
