@@ -33,21 +33,31 @@ const createInfo = (
 };
 
 const getStats = (likes, ratings, comments) => {
+  const resourceOptions = `
+  <a class="waves-effect waves-light btn"><i class="material-icons left">edit</i>Edit</a>
+  <a class="waves-effect waves-light btn"><i class="material-icons left">delete</i>Delete</a>
+  `;
+
   return $(`
-  <div class="stat">
-  <span class="stat-column">
-    <span class="fas fa-star card-icon bright"></span>
-    <span>${Number(ratings) ? Number(ratings).toFixed(1) : "0"}</span>
-  </span>
-  <span class="stat-column">
-    <span class="fas fa-heart card-icon liked"></span>
-    <span>${likes}</span>
-  </span>
-  <span class="stat-column">
-    <span class="fas fa-comment-alt card-icon"></span>
-    <span>${comments}</span>
-  </span>
-  </div>
+  <div class="stat-container">
+    <div class="stat">
+      <span class="stat-column">
+        <span class="fas fa-star card-icon bright"></span>
+        <span>${Number(ratings) ? Number(ratings).toFixed(1) : "0"}</span>
+      </span>
+      <span class="stat-column">
+        <span class="fas fa-heart card-icon liked"></span>
+        <span>${likes}</span>
+      </span>
+      <span class="stat-column">
+        <span class="fas fa-comment-alt card-icon"></span>
+        <span>${comments}</span>
+      </span>
+    </div>
+    <div class="resource-actions">
+      ${resourceOptions}
+     </div>
+</div>
   `);
 };
 
@@ -55,7 +65,7 @@ const clearMyResources = () => {
   $("#my-resource-list").remove();
 };
 
-const renderMyResources = async() => {
+const renderMyResources = async () => {
   try {
     clearMyResources();
     const { id } = await getMyDetails();
@@ -112,12 +122,12 @@ const renderMyResources = async() => {
   }
 };
 
-const registerCheckListeners = async() => {
-  $("#liked-filter").on("change", function() {
+const registerCheckListeners = async () => {
+  $("#liked-filter").on("change", function () {
     renderMyResources();
   });
 
-  $("#mine-filter").on("change", function() {
+  $("#mine-filter").on("change", function () {
     renderMyResources();
   });
 };
