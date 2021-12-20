@@ -32,11 +32,40 @@ const createInfo = (
   `);
 };
 
-const getStats = (likes, ratings, comments) => {
+const registerMyResourceButtonsListeners = (resourceId, isMine) => {
+  if (!isMine) return;
+
+  $(`#${resourceId}-delete`).on("click", async function (e) {
+    const [id] = $(this).attr("id").split("-");
+    const result = await deleteResource(id);
+    console.log(result);
+  });
+
+  $(`#${resourceId}-edit`).on("click", function (e) { });
+
+};
+
+const getActionButtons = (resourceId, isMine) => {
+  const noButtons = !isMine ? "invisible" : "";
   const resourceOptions = `
-  <a class="waves-effect waves-light btn"><i class="material-icons left">edit</i>Edit</a>
-  <a class="waves-effect waves-light btn"><i class="material-icons left">delete</i>Delete</a>
+  <a id = "${resourceId}-edit" class="waves-effect waves-light btn my-resource-action ${noButtons}">
+    <i class="material-icons left">
+      edit
+    </i>
+      Edit
+  </a>
+  <a id = "${resourceId}-delete" class="waves-effect waves-light btn my-resource-action ${noButtons}">
+    <i class="material-icons left">
+      delete
+    </i>
+      Delete
+  </a>
   `;
+
+  return resourceOptions;
+}
+
+const getStats = (likes, ratings, comments, resourceId, isMine) => {
 
   return $(`
   <div class="stat-container">
@@ -55,7 +84,7 @@ const getStats = (likes, ratings, comments) => {
       </span>
     </div>
     <div class="resource-actions">
-      ${resourceOptions}
+      ${getActionButtons(resourceId, isMine)}
      </div>
 </div>
   `);
@@ -77,6 +106,7 @@ const renderMyResources = async () => {
 
     myResources.forEach((resource) => {
       const {
+        id: resourceId,
         user_id,
         title,
         description,
@@ -97,11 +127,10 @@ const renderMyResources = async () => {
         Number(is_liked) === 1 &&
         user_id !== id;
       const showMine = $("#mine-filter:checked").val() && user_id === id;
-      console.log(user_id, id);
-      console.log(showLiked, showMine);
 
       if (showLiked || showMine) {
         const $collection = $("<li>");
+        $collection.addClass("collection-item");
         const $thumbnail = createThumbnail(is_video, media_url);
         const $info = createInfo(
           title,
@@ -111,10 +140,12 @@ const renderMyResources = async () => {
           created_on,
           username
         );
-        const $stats = getStats(likes, rating, number_of_comment);
+        const isMine = user_id === id;
+        const $stats = getStats(likes, rating, number_of_comment, resourceId, isMine);
         $collection.prepend($thumbnail, $info, $stats);
         $listContainer.prepend($collection);
         $("#my-resources-details").append($listContainer);
+        registerMyResourceButtonsListeners(resourceId, isMine);
       }
     });
   } catch (err) {
