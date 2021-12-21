@@ -18,11 +18,13 @@ const createInfo = (
   description,
   category,
   created_on,
-  username
+  username,
+  resourceId
 ) => {
+
   return $(`
   <div class="text">
-    <h6 class="my-resource-title">${title}</h6>
+    <a class="my-resource-title" id=${resourceId}-my-resource >${title}</a>
     <div><span>URL: </span><a href="${url}" onclick="event.stopPropagation();" class="paragraph truncate">${url}</a></div>
     <div><span>Description: </span> ${description}</div>
     <div><span>Added by: </span> @${username}</div>
@@ -115,7 +117,6 @@ const getStats = (likes, ratings, comments, resourceId, isMine) => {
 const registerMyResourceDetailsListener = (resourceId) => {
 
   $(`#${resourceId}-my-resource`).on("click", function (e) {
-    e.stopPropagation();
     const [id] = $(this).attr("id").split("-");
     updateView("resourceDetails", null, id);
   });
@@ -162,8 +163,7 @@ const renderMyResources = async () => {
 
       if (showLiked || showMine) {
         const $collection = $("<li>");
-        $collection.attr("id", `${resourceId}-my-resource`);
-        $collection.addClass("collection-item waves-effect");
+        $collection.addClass("collection-item");
 
         const $thumbnail = createThumbnail(is_video, media_url);
         const $info = createInfo(
@@ -172,7 +172,8 @@ const renderMyResources = async () => {
           description,
           category,
           created_on,
-          username
+          username,
+          resourceId
         );
 
         const isMine = user_id === id;
