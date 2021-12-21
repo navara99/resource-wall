@@ -59,7 +59,11 @@ const commentForm = (imageURL) => {
   return elm;
 };
 
-const commentHelperFunctionsGenerator = (commentDetails, resourceInfo) => {
+const commentHelperFunctionsGenerator = (
+  commentDetails,
+  resourceInfo,
+  { $numOfComment, $detailsComments }
+) => {
   const compileComments = () => {
     const comments = [];
     for (const details of commentDetails) {
@@ -83,11 +87,11 @@ const commentHelperFunctionsGenerator = (commentDetails, resourceInfo) => {
     return comments;
   };
 
-  const updateNumOfComment = ($numOfComment) => {
+  const updateNumOfComment = () => {
     $numOfComment.text(resourceInfo.numOfComment);
   };
 
-  const makeComments = ($detailsComments, $numOfComment) => {
+  const makeComments = () => {
     const comments = compileComments(commentDetails);
     $detailsComments.text("");
     comments.forEach((commentInfo) => {
@@ -107,7 +111,9 @@ const commentHelperFunctionsGenerator = (commentDetails, resourceInfo) => {
     });
 
     if (resourceInfo.current_username) {
-      $detailsComments.prepend(commentForm(resourceInfo.my_profile_url));
+      $detailsComments.prepend(
+        commentForm(resourceInfo.my_profile_url)
+      );
     }
 
     $("#submit-button").on("click", async () => {
@@ -127,9 +133,9 @@ const commentHelperFunctionsGenerator = (commentDetails, resourceInfo) => {
             comment_user_id,
           };
           commentDetails.push(newCommentDetails);
-          makeComments($detailsComments, $numOfComment);
+          makeComments();
           resourceInfo.numOfComment++;
-          updateNumOfComment($numOfComment, resourceInfo.numOfComment);
+          updateNumOfComment();
         }
       }
     });
@@ -242,8 +248,19 @@ const updateResourceDetails = () => {
         currentLike: liked > 0 ? true : false,
       };
 
+      const domObj = {
+        $numOfComment,
+        $detailsComments,
+      };
+
+      // load media on the left
+      getMedia(id, $media, is_video, media_url);
+
       const { updateNumOfComment, makeComments } =
-        commentHelperFunctionsGenerator(resourceComments, resourceInfo);
+        commentHelperFunctionsGenerator(resourceComments, resourceInfo, domObj);
+
+      updateNumOfComment();
+      makeComments();
 
       let averageRating = rating;
       let numOfRating = parseInt(number_of_rating);
@@ -256,9 +273,6 @@ const updateResourceDetails = () => {
       } else {
         $rating.show();
       }
-
-      // load media on the left
-      getMedia(id, $media, is_video, media_url);
 
       // clear any previous event listener on the like icon
       $likeIcon.off();
@@ -274,8 +288,6 @@ const updateResourceDetails = () => {
           updateHeart($likeIcon, currentLike);
         }
       });
-
-      makeComments($detailsComments, $numOfComment);
 
       const addClassToStars = () => {
         const rate = currentRating || 0;
@@ -332,7 +344,6 @@ const updateResourceDetails = () => {
       updateRatingStr();
       updateRating();
       updateHeart($likeIcon, currentLike);
-      updateNumOfComment($numOfComment, numOfComment);
 
       const hostname = getHostname(url);
       $likesNum.text(number_of_like);
