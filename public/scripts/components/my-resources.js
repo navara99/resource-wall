@@ -32,7 +32,7 @@ const createInfo = (
   `);
 };
 
-const createModal = (title, resourceId) => {
+const createErrorModal = (title, resourceId) => {
   return $(`
 <div id="${resourceId}-confirm-delete" class="modal">
   <div class="modal-content">
@@ -51,12 +51,17 @@ const registerMyResourceButtonsListeners = (resourceId, isMine) => {
 
   $(`#${resourceId}-delete`).on("click", async function (e) {
     const [id] = $(this).attr("id").split("-");
-    const result = await deleteResource(id);
-    console.log(result);
+    try {
+      await deleteResource(id);
+      renderMyResources();
+    } catch (err) {
+      console.log(err.message);
+    };
+
   });
 
   $(`#${resourceId}-edit`).on("click", function (e) { });
-  
+
 };
 
 const getActionButtons = (resourceId, isMine) => {
@@ -159,7 +164,7 @@ const renderMyResources = async () => {
 
         const isMine = user_id === id;
         if (isMine) {
-          const $modal = createModal(title, resourceId);
+          const $modal = createErrorModal(title, resourceId);
           $("body").prepend($modal);
         };
         const $stats = getStats(likes, rating, number_of_comment, resourceId, isMine);
