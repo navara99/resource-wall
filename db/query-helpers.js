@@ -9,7 +9,7 @@ const assignProfilePic = (userInfo, columnName) => {
 };
 
 const queryGenerator = (db) => {
-  const getUserByValue = async(columnName, value, getDefaultProfilePic) => {
+  const getUserByValue = async (columnName, value, getDefaultProfilePic) => {
     try {
       const values = [value];
       const queryString = `SELECT * FROM users WHERE ${columnName} = $1;`;
@@ -23,7 +23,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const createNewUser = async(userInfo) => {
+  const createNewUser = async (userInfo) => {
     try {
       const { email, password, username, firstName, lastName } = userInfo;
       const values = [email, password, username, firstName, lastName];
@@ -41,7 +41,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const updateUser = async(newUserInfo) => {
+  const updateUser = async (newUserInfo) => {
     try {
       const { firstName, lastName, username, email, bio, picture, userId } =
         newUserInfo;
@@ -76,7 +76,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const updatePasswordById = async(id, password) => {
+  const updatePasswordById = async (id, password) => {
     try {
       const values = [id, password];
       const queryString = `
@@ -92,7 +92,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const getIdFromCategory = async(category) => {
+  const getIdFromCategory = async (category) => {
     try {
       const value = [category];
       const queryString = `SELECT id FROM categories WHERE type = $1 LIMIT 1;`;
@@ -104,7 +104,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const addNewResource = async({
+  const addNewResource = async ({
     user_id,
     title,
     description,
@@ -138,7 +138,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const getAllResources = async(user_id) => {
+  const getAllResources = async (user_id) => {
     const value = [user_id, false];
     const queryString = `
     SELECT
@@ -173,7 +173,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const addLikeToResource = async(id, user_id) => {
+  const addLikeToResource = async (id, user_id) => {
     try {
       const values = [user_id, id];
       const ifLikedQuery =
@@ -194,7 +194,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const addCommentToResource = async(id, user_id, comment) => {
+  const addCommentToResource = async (id, user_id, comment) => {
     try {
       const values = [user_id, id, comment];
       const queryString = `INSERT into comments (user_id, resource_id, comment) VALUES ($1, $2, $3) RETURNING *;`;
@@ -205,7 +205,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const addRatingToResource = async(id, user_id, rating) => {
+  const addRatingToResource = async (id, user_id, rating) => {
     try {
       const values = [user_id, id];
       const ratingValues = [user_id, id, rating];
@@ -227,7 +227,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const getAllDetailsOfResource = async(resourcesId, userId) => {
+  const getAllDetailsOfResource = async (resourcesId, userId) => {
     const value = [resourcesId, userId];
     const queryString = `
     SELECT
@@ -271,7 +271,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const getURLById = async(id) => {
+  const getURLById = async (id) => {
     try {
       const values = [id];
       const queryString = `SELECT url FROM resources WHERE id = $1;`;
@@ -283,7 +283,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const searchResources = async(user_id, query) => {
+  const searchResources = async (user_id, query) => {
     const value = [user_id, false, '%' + query + '%'];
     const queryString = `
     SELECT
@@ -319,7 +319,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const getMyResources = async(user_id) => {
+  const getMyResources = async (user_id) => {
     const value = [user_id, 1];
     const subquery1 = `(SELECT COUNT(likes.*) FROM likes WHERE resource_id = resources.id)`;
     const subquery2 = `(SELECT COUNT(likes.*) FROM likes WHERE user_id = $1 AND resource_id = resources.id)`;
@@ -357,7 +357,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const getResourcesByCategory = async(user_id, category) => {
+  const getResourcesByCategory = async (user_id, category) => {
     const value = [user_id, false, category];
     const queryString = `
     SELECT
@@ -392,6 +392,20 @@ const queryGenerator = (db) => {
       console.log(err.message);
     }
 
+  };
+
+  const deleteResource = async (id) => {
+    const value = [id];
+    const queryString = `
+      DELETE FROM resources
+      WHERE id = $1;
+    `
+
+    try {
+      await db.query(queryString, value);
+    } catch (err) {
+      console.log(err.message);
+    };
 
   };
 
@@ -411,7 +425,8 @@ const queryGenerator = (db) => {
     getAllDetailsOfResource,
     getURLById,
     addRatingToResource,
-    getResourcesByCategory
+    getResourcesByCategory,
+    deleteResource
   };
 };
 
