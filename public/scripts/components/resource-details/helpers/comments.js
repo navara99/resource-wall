@@ -4,11 +4,11 @@ const escape = (str) => {
   return div.innerHTML;
 };
 
-const makeComment = (username, comment, profilePicture, timeAgo) => {
+const makeComment = ({ username, comment, profile_picture_url, timeAgo }) => {
   const $elm = $(`
   <li class="collection-item avatar hover-pointer">
   <img
-    src="${escape(profilePicture)}"
+    src="${escape(profile_picture_url)}"
     class="circle profile profile-picture"
   />
     <span class="title">@${escape(username)}</span>
@@ -48,7 +48,6 @@ const commentHelperFunctionsGenerator = (
   resourceInfo,
   domObj
 ) => {
-
   const { $numOfComment, $detailsComments } = domObj;
   const { id, current_username, my_profile_url } = resourceInfo;
   let { number_of_comment } = resourceInfo;
@@ -63,69 +62,60 @@ const commentHelperFunctionsGenerator = (
         profile_picture_url,
         comment_user_id,
       } = details;
-      if (comment) {
-        comments.push({
-          comment,
-          username,
-          timeAgo: timestampToTimeAgo(timestamp),
-          profile_picture_url,
-          comment_user_id,
-        });
-      }
+
+      const newComment = {
+        comment,
+        username,
+        profile_picture_url,
+        comment_user_id,
+        timeAgo: timestampToTimeAgo(timestamp),
+      };
+
+      if (comment) comments.push(newComment);
     }
     return comments;
   };
 
-  const updateNumOfComment = () => {
-    $numOfComment.text(number_of_comment);
-  };
+  const updateNumOfComment = () => $numOfComment.text(number_of_comment);
 
   const makeComments = () => {
     const comments = compileComments(commentDetails);
     $detailsComments.text("");
-    comments.forEach((commentInfo) => {
-      const {
-        comment,
-        username,
-        timeAgo,
-        profile_picture_url,
-        comment_user_id,
-      } = commentInfo;
 
-      const $elm = makeComment(username, comment, profile_picture_url, timeAgo);
+    comments.forEach((commentInfo) => {
+      const $elm = makeComment(commentInfo);
+
       $detailsComments.prepend($elm);
-      $elm.on("click", () => {
-        updateUserDetailsPage(comment_user_id);
-      });
+
+      const { comment_user_id } = commentInfo;
+      $elm.on("click", () => updateUserDetailsPage(comment_user_id));
     });
 
     if (current_username) {
-      $detailsComments.prepend(commentForm(my_profile_url));
-    }
+      const commentFormElm = commentForm(my_profile_url);
+      $detailsComments.prepend(commentFormElm);
 
-    $("#submit-button").on("click", async () => {
-      if (current_username) {
-        const data = $("#new-comment").serialize();
-        if (data.length > 8) {
-          $("#new-comment").val("");
-          const commentInfo = await commentResource(id, data);
-          const { comment, timestamp, comment_user_id } = commentInfo;
-          const userInfo = await getMyDetails();
-          const { profile_picture_url, username } = userInfo;
-          const newCommentDetails = {
-            comment,
-            username,
-            timestamp,
-            profile_picture_url,
-            comment_user_id,
-          };
-          commentDetails.push(newCommentDetails);
-          makeComments();
-          number_of_comment++;
-          updateNumOfComment();
+      $("#submit-button").on("click", async () => {
+        if (current_username) {
+          const data = $("#new-comment").serialize();
+          if (data.length > 8) {
+            $("#new-comment").val("");
+
+            const commentInfo = await commentResource(id, data);
+            const userInfo = await getMyDetails();
+            const newCommentDetails = {
+              ...commentInfo,
+              ...userInfo,
+            };
+
+            commentDetails.push(newCommentDetails);
+            makeComments();
+            number_of_comment++;
+            updateNumOfComment();
+          }
         }
-      }
-    });
+      });
+    }
   };
 
   return { updateNumOfComment, makeComments };

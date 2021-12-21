@@ -20,7 +20,7 @@ const toTwoDecimalPlaces = (numString) => {
   return twoDecimal;
 };
 
-const getMedia = async (id, $media, is_video, media_url) => {
+const getMedia = async (id, is_video, media_url, $media) => {
   const newMedia = await getHtmlFromAPI(id);
   if (newMedia) return $media.html(newMedia.html);
   const $newMedia = is_video
@@ -106,7 +106,7 @@ const updateResourceDetails = () => {
       };
 
       // load media on the left
-      getMedia(id, $media, is_video, media_url);
+      getMedia(id, is_video, media_url, $media);
 
       const { updateNumOfComment, makeComments } =
         commentHelperFunctionsGenerator(resourceComments, resourceInfo, domObj);
