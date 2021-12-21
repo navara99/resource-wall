@@ -21,7 +21,8 @@ const escape = (str) => {
 };
 
 const commentHelperFunctionsGenerator = (commentDetails, resourceInfo) => {
-  const compileComments = () => {
+  const compileComments = (commentDetails) => {
+    console.log(commentDetails);
     const comments = [];
     for (const details of commentDetails) {
       const {
@@ -83,7 +84,12 @@ const commentHelperFunctionsGenerator = (commentDetails, resourceInfo) => {
     return elm;
   };
 
-  return { compileComments, makeComment, commentForm };
+
+  const updateNumOfComment = ($numOfComment, numOfComment) => {
+    $numOfComment.text(numOfComment);
+  };
+
+  return { compileComments, makeComment, commentForm, updateNumOfComment };
 };
 
 const toTwoDecimalPlaces = (numString) => {
@@ -136,6 +142,7 @@ const updateResourceDetails = () => {
   const $rating = $("#details-rating");
   const $ownerProfilePicture = $("#owner_profile-picture");
   const $ownerSection = $("#owner-row");
+  const starElms = [$1Star, $2Star, $3Star, $4Star, $5Star];
 
   return async (id) => {
     try {
@@ -188,7 +195,7 @@ const updateResourceDetails = () => {
         currentLike: liked > 0 ? true : false,
       };
 
-      const { compileComments, makeComment, commentForm } =
+      const { compileComments, makeComment, commentForm, updateNumOfComment } =
         commentHelperFunctionsGenerator(resourceComments, resourceInfo);
 
       let averageRating = rating;
@@ -224,7 +231,7 @@ const updateResourceDetails = () => {
       const makeComments = (resourceComments) => {
         const comments = compileComments(resourceComments);
         $detailsComments.text("");
-
+        console.log(comments);
         comments.forEach((commentInfo) => {
           const {
             comment,
@@ -259,30 +266,28 @@ const updateResourceDetails = () => {
               const { comment, timestamp, comment_user_id } = commentInfo;
               const userInfo = await getMyDetails();
               const { profile_picture_url, username } = userInfo;
-              const commentDetails = {
+              const newCommentDetails = {
                 comment,
                 username,
                 timestamp,
                 profile_picture_url,
                 comment_user_id,
               };
-              commentsDetails.push(commentDetails);
-              makeComments(commentsDetails);
+              resourceComments.push(newCommentDetails);
+              console.log(commentsDetails);
+              makeComments(resourceComments);
               numOfComment++;
-              updateNumOfComment();
+              updateNumOfComment($numOfComment, numOfComment);
             }
           }
         });
       };
       let commentsDetails = [...resourceComments];
 
-      const updateNumOfComment = () => {
-        $numOfComment.text(numOfComment);
-      };
 
       makeComments(commentsDetails);
 
-      const starElms = [$1Star, $2Star, $3Star, $4Star, $5Star];
+
       const addClassToStars = () => {
         const rate = currentRating || 0;
         for (let i = 0; i < rate; i++) {
@@ -338,7 +343,7 @@ const updateResourceDetails = () => {
       updateRatingStr();
       updateRating();
       updateHeart($likeIcon, currentLike);
-      updateNumOfComment();
+      updateNumOfComment($numOfComment, numOfComment);
 
       const hostname = getHostname(url);
       $likesNum.text(number_of_like);
