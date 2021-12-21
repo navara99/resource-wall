@@ -143,71 +143,7 @@
 
       <%- include("resources-page"); %>
 
-      <div id="resource-details" class="hidden">
-        <div class="resource-details-container container">
-          <div class="details-media">
-            <a id="details-link-on-media" target="_blank"
-              ><i class="fas fa-external-link-alt"></i>
-              <span id="details-display-link-on-media"></span
-            ></a>
-            <div id="details-media"></div>
-          </div>
-
-          <div class="details">
-            <div>
-              <div class="details-heart">
-                <i id="details-like-icon" class="fas fa-heart like icon"></i>
-                <div id="details-likes-num"></div>
-              </div>
-              <h3 id="details-title"></h3>
-              <div>
-                <a id="details-link" class="paragraph" target="_blank"
-                  ><i class="fas fa-external-link-alt"></i>
-
-                  <span id="details-display-link"></span>
-                </a>
-              </div>
-            </div>
-            <div id="owner-row">
-              <img
-                id="owner_profile-picture"
-                class="circle profile profile-picture"
-              />
-              <div class="owner-text">
-                <div>Created by <span id="details-owner-name"></span></div>
-                <span id="details-time"></span>
-              </div>
-            </div>
-
-            <h5 id="details-rating">
-              <div class="flex-row">
-                <span id="details-rating-string"></span>
-                <span id="details-stars">
-                  <i id="five-star" class="fas fa-star not-liked"></i
-                  ><i id="four-star" class="fas fa-star not-liked"></i
-                  ><i id="three-star" class="fas fa-star not-liked"></i
-                  ><i id="two-star" class="fas fa-star not-liked"></i
-                  ><i id="one-star" class="fas fa-star not-liked"></i
-                ></span>
-              </div>
-            </h5>
-
-            <h6>
-              <i class="fas fa-star show-rating"></i> Avg Rating:
-              <span id="details-average-rating"></span>
-            </h6>
-            <p id="details-desciption"></p>
-
-            <h5>
-              <i class="fas fa-comment-alt"></i> Comments(<span
-                id="details-num-of-comments"
-              ></span
-              >)
-            </h5>
-            <ul class="collection comments" id="details-comments"></ul>
-          </div>
-        </div>
-      </div>
+      <%- include("resource-details"); %>
 
       <div id="register-page" class="container hidden">
         <div class="margin-container">
