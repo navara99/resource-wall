@@ -10,6 +10,7 @@ const makeComment = ({ username, comment, profile_picture_url, timeAgo }) => {
   <img
     src="${escape(profile_picture_url)}"
     class="circle profile profile-picture"
+    onClick="() => updateUserDetailsPage(comment_user_id)"
   />
     <span class="title">@${escape(username)}</span>
     <p>${escape(comment)}</p>
@@ -55,23 +56,16 @@ const commentHelperFunctionsGenerator = (
   const compileComments = () => {
     const comments = [];
     for (const details of commentDetails) {
-      const {
-        comment,
-        username,
-        timestamp,
-        profile_picture_url,
-        comment_user_id,
-      } = details;
+      const { comment, timestamp } = details;
 
-      const newComment = {
-        comment,
-        username,
-        profile_picture_url,
-        comment_user_id,
-        timeAgo: timestampToTimeAgo(timestamp),
-      };
+      if (comment) {
+        const newComment = {
+          ...details,
+          timeAgo: timestampToTimeAgo(timestamp),
+        };
 
-      if (comment) comments.push(newComment);
+        comments.push(newComment);
+      }
     }
     return comments;
   };
@@ -91,6 +85,7 @@ const commentHelperFunctionsGenerator = (
       $elm.on("click", () => updateUserDetailsPage(comment_user_id));
     });
 
+    // show comment form is user is logged in
     if (current_username) {
       const commentFormElm = commentForm(my_profile_url);
       $detailsComments.prepend(commentFormElm);
@@ -98,11 +93,13 @@ const commentHelperFunctionsGenerator = (
       $("#submit-button").on("click", async () => {
         if (current_username) {
           const data = $("#new-comment").serialize();
+
           if (data.length > 8) {
             $("#new-comment").val("");
 
             const commentInfo = await commentResource(id, data);
             const userInfo = await getMyDetails();
+
             const newCommentDetails = {
               ...commentInfo,
               ...userInfo,
