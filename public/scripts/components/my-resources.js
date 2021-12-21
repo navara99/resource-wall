@@ -32,6 +32,20 @@ const createInfo = (
   `);
 };
 
+const createModal = (title, resourceId) => {
+  return $(`
+<div id="${resourceId}-confirm-delete" class="modal">
+  <div class="modal-content">
+    <h4>Are you sure?</h4>
+    <p>Are you sure you want to delete ${title}?</p>
+  </div>
+    <div class="modal-footer">
+    <a href="#!" id="${resourceId}-delete" class="modal-close  waves-effect waves-light red btn">Confirm</a>
+  </div>
+</div>
+  `);
+};
+
 const registerMyResourceButtonsListeners = (resourceId, isMine) => {
   if (!isMine) return;
 
@@ -42,19 +56,21 @@ const registerMyResourceButtonsListeners = (resourceId, isMine) => {
   });
 
   $(`#${resourceId}-edit`).on("click", function (e) { });
-
+  
 };
 
 const getActionButtons = (resourceId, isMine) => {
   const noButtons = !isMine ? "invisible" : "";
   const resourceOptions = `
-  <a id = "${resourceId}-edit" class="waves-effect waves-light btn my-resource-action ${noButtons}">
+  <a id = "${resourceId}-edit" class="waves-effect waves-light btn ${noButtons}">
     <i class="material-icons left">
       edit
     </i>
       Edit
   </a>
-  <a id = "${resourceId}-delete" class="waves-effect waves-light btn my-resource-action ${noButtons}">
+  <a id="${resourceId}-delete"
+     class="waves-effect waves-light btn modal-trigger ${noButtons}"
+     href="#${resourceId}-confirm-delete">
     <i class="material-icons left">
       delete
     </i>
@@ -140,7 +156,12 @@ const renderMyResources = async () => {
           created_on,
           username
         );
+
         const isMine = user_id === id;
+        if (isMine) {
+          const $modal = createModal(title, resourceId);
+          $("body").prepend($modal);
+        };
         const $stats = getStats(likes, rating, number_of_comment, resourceId, isMine);
         $collection.prepend($thumbnail, $info, $stats);
         $listContainer.prepend($collection);
@@ -148,6 +169,7 @@ const renderMyResources = async () => {
         registerMyResourceButtonsListeners(resourceId, isMine);
       }
     });
+    $('.modal').modal();
   } catch (err) {
     console.log(err);
   }
