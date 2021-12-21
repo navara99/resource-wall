@@ -34,9 +34,12 @@ const createInfo = (
   `);
 };
 
-const createErrorModal = (title, resourceId) => {
+const createDeleteModal = (title, resourceId) => {
   return $(`
 <div id="${resourceId}-confirm-delete" class="modal">
+  <a href="#!" id="close-confirm-delete" class="modal-close  waves-effect waves-light btn-flat">
+   <i class="material-icons right">close</i>
+  </a>
   <div class="modal-content">
     <h4>Are you sure?</h4>
     <p>Are you sure you want to delete ${title}?</p>
@@ -76,7 +79,7 @@ const getActionButtons = (resourceId, isMine) => {
       Edit
   </a>
   <a id="${resourceId}-delete"
-     class="waves-effect waves-light btn modal-trigger ${noButtons}"
+     class="waves-effect waves-light btn modal-trigger ${noButtons} red"
      href="#${resourceId}-confirm-delete"
      >
     <i class="material-icons left">
@@ -87,7 +90,7 @@ const getActionButtons = (resourceId, isMine) => {
   `;
 
   return resourceOptions;
-}
+};
 
 const getStats = (likes, ratings, comments, resourceId, isMine) => {
 
@@ -178,7 +181,7 @@ const renderMyResources = async () => {
 
         const isMine = user_id === id;
         if (isMine) {
-          const $modal = createErrorModal(title, resourceId);
+          const $modal = createDeleteModal(title, resourceId);
           $("body").prepend($modal);
         };
         const $stats = getStats(likes, rating, number_of_comment, resourceId, isMine);
@@ -192,7 +195,7 @@ const renderMyResources = async () => {
     $('.modal').modal();
   } catch (err) {
     console.log(err);
-  }
+  };
 };
 
 const registerCheckListeners = async () => {
