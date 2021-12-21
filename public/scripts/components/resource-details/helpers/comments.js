@@ -1,3 +1,9 @@
+const escape = (str) => {
+  let div = document.createElement("div");
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+};
+
 const makeComment = (username, comment, profilePicture, timeAgo) => {
   const $elm = $(`
   <li class="collection-item avatar hover-pointer">

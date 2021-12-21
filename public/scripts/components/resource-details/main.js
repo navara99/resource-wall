@@ -14,14 +14,6 @@ const displayRating = (rating, numOfRating) => {
   return `${toTwoDecimalPlaces(rating)} (Based on ${numOfRating} ratings)`;
 };
 
-const escape = (str) => {
-  let div = document.createElement("div");
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
-};
-
-
-
 const toTwoDecimalPlaces = (numString) => {
   const float = parseFloat(numString);
   const twoDecimal = Math.round(float * 100) / 100;
