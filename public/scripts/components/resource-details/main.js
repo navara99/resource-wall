@@ -79,6 +79,8 @@ const updateResourceDetails = () => {
       const domObj = {
         $numOfComment,
         $detailsComments,
+        $likeIcon,
+        $likesNum,
       };
 
       // load media on the left
@@ -90,7 +92,8 @@ const updateResourceDetails = () => {
       updateNumOfComment();
       makeComments();
 
-      const { updateHeart, likeIconEventListener } = likeHelperFunctionsGenerator();
+      const { updateHeart, likeIconEventListener } =
+        likeHelperFunctionsGenerator(domObj);
 
       let averageRating = rating;
       let numOfRating = parseInt(number_of_rating);
@@ -103,7 +106,7 @@ const updateResourceDetails = () => {
         $rating.show();
       }
 
-      likeIconEventListener($likeIcon, current_username, id, currentLike, $likesNum);
+      likeIconEventListener(current_username, id, currentLike);
 
       const addClassToStars = () => {
         const rate = currentRating || 0;
@@ -159,7 +162,7 @@ const updateResourceDetails = () => {
       };
       updateRatingStr();
       updateRating();
-      updateHeart($likeIcon, currentLike);
+      updateHeart(currentLike);
 
       const hostname = getHostname(url);
       $likesNum.text(number_of_like);

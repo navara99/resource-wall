@@ -1,5 +1,7 @@
-const likeHelperFunctionsGenerator = () => {
-  const updateHeart = ($likeIcon, currentLike) => {
+const likeHelperFunctionsGenerator = (domObj) => {
+  const { $likeIcon, $likesNum } = domObj;
+
+  const updateHeart = (currentLike) => {
     if (currentLike) {
       $likeIcon.addClass("liked");
       $likeIcon.removeClass("not-liked");
@@ -10,11 +12,9 @@ const likeHelperFunctionsGenerator = () => {
   };
 
   const likeIconEventListener = (
-    $likeIcon,
     current_username,
     id,
     currentLike,
-    $likesNum
   ) => {
     // clear any previous event listener on the like icon
     $likeIcon.off();
@@ -27,7 +27,7 @@ const likeHelperFunctionsGenerator = () => {
           ? parseInt(numOfLike) + 1
           : parseInt(numOfLike) - 1;
         $likesNum.text(newNumOfLike);
-        updateHeart($likeIcon, currentLike);
+        updateHeart(currentLike);
       }
     });
   };
