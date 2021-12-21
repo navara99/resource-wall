@@ -146,33 +146,9 @@
         </div>
       </div>
 
-      <div id="user-page" class="container hidden">
-        <div class="margin-container">
-          <div class="content-container">
-            <div class="user-container">
-              <div class="profile profile-picture">
-                <img
-                  alt=""
-                  id="user-profile-picture"
-                  class="circle profile profile-picture"
-                />
-              </div>
-              <h5 id="user-username"></h5>
-              <a
-                id="edit-my-profile-button"
-                class="waves-effect waves-light btn-large"
-                >Edit my profile</a
-              >
-              <h4 id="user-name"></h4>
-              <div id="user-bio"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <%- include("user-page"); %>
 
-      <div id="resources-page">
-        <div id="columns"></div>
-      </div>
+      <%- include("resources-page"); %>
 
       <div id="resource-details" class="hidden">
         <div class="resource-details-container container">
