@@ -373,6 +373,12 @@ form {
   }
 }
 
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #my-resources-filter {
   display: flex;
   justify-content: flex-end;
