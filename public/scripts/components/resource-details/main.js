@@ -74,6 +74,7 @@ const updateResourceDetails = () => {
         current_username,
         my_profile_url,
         number_of_comment,
+        currentLike: liked > 0 ? true : false,
       };
 
       const domObj = {
@@ -93,20 +94,20 @@ const updateResourceDetails = () => {
       makeComments();
 
       const { updateHeart, likeIconEventListener } =
-        likeHelperFunctionsGenerator(domObj);
+        likeHelperFunctionsGenerator(resourceInfo, domObj);
+
+      updateHeart();
+      likeIconEventListener();
 
       let averageRating = rating;
       let numOfRating = parseInt(number_of_rating);
       let currentRating = rated;
-      let currentLike = liked > 0 ? true : false;
 
       if (!current_username) {
         $rating.hide();
       } else {
         $rating.show();
       }
-
-      likeIconEventListener(current_username, id, currentLike);
 
       const addClassToStars = () => {
         const rate = currentRating || 0;
@@ -162,7 +163,6 @@ const updateResourceDetails = () => {
       };
       updateRatingStr();
       updateRating();
-      updateHeart(currentLike);
 
       const hostname = getHostname(url);
       $likesNum.text(number_of_like);
