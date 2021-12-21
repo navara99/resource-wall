@@ -89,7 +89,62 @@ const commentHelperFunctionsGenerator = (commentDetails, resourceInfo) => {
     $numOfComment.text(numOfComment);
   };
 
-  return { compileComments, makeComment, commentForm, updateNumOfComment };
+
+  const makeComments = (resourceComments, $detailsComments, current_username, my_profile_url, id, $numOfComment, numOfComment) => {
+    const comments = compileComments(resourceComments);
+    $detailsComments.text("");
+    console.log(comments);
+    comments.forEach((commentInfo) => {
+      const {
+        comment,
+        username,
+        timeAgo,
+        profile_picture_url,
+        comment_user_id,
+      } = commentInfo;
+
+      const $elm = makeComment(
+        username,
+        comment,
+        profile_picture_url,
+        timeAgo
+      );
+      $detailsComments.prepend($elm);
+      $elm.on("click", () => {
+        updateUserDetailsPage(comment_user_id);
+      });
+    });
+
+    if (current_username) {
+      $detailsComments.prepend(commentForm(my_profile_url));
+    }
+
+    $("#submit-button").on("click", async () => {
+      if (current_username) {
+        const data = $("#new-comment").serialize();
+        if (data.length > 8) {
+          $("#new-comment").val("");
+          const commentInfo = await commentResource(id, data);
+          const { comment, timestamp, comment_user_id } = commentInfo;
+          const userInfo = await getMyDetails();
+          const { profile_picture_url, username } = userInfo;
+          const newCommentDetails = {
+            comment,
+            username,
+            timestamp,
+            profile_picture_url,
+            comment_user_id,
+          };
+          resourceComments.push(newCommentDetails);
+          makeComments(resourceComments, $detailsComments, current_username, my_profile_url, id, $numOfComment, numOfComment);
+          numOfComment++;
+          updateNumOfComment($numOfComment, numOfComment);
+        }
+      }
+    });
+  };
+
+  return { compileComments, makeComment, commentForm, updateNumOfComment, makeComments };
 };
 
 const toTwoDecimalPlaces = (numString) => {
@@ -195,7 +250,7 @@ const updateResourceDetails = () => {
         currentLike: liked > 0 ? true : false,
       };
 
-      const { compileComments, makeComment, commentForm, updateNumOfComment } =
+      const { updateNumOfComment, makeComments } =
         commentHelperFunctionsGenerator(resourceComments, resourceInfo);
 
       let averageRating = rating;
@@ -228,64 +283,10 @@ const updateResourceDetails = () => {
         }
       });
 
-      const makeComments = (resourceComments) => {
-        const comments = compileComments(resourceComments);
-        $detailsComments.text("");
-        console.log(comments);
-        comments.forEach((commentInfo) => {
-          const {
-            comment,
-            username,
-            timeAgo,
-            profile_picture_url,
-            comment_user_id,
-          } = commentInfo;
-
-          const $elm = makeComment(
-            username,
-            comment,
-            profile_picture_url,
-            timeAgo
-          );
-          $detailsComments.prepend($elm);
-          $elm.on("click", () => {
-            updateUserDetailsPage(comment_user_id);
-          });
-        });
-
-        if (current_username) {
-          $detailsComments.prepend(commentForm(my_profile_url));
-        }
-
-        $("#submit-button").on("click", async () => {
-          if (current_username) {
-            const data = $("#new-comment").serialize();
-            if (data.length > 8) {
-              $("#new-comment").val("");
-              const commentInfo = await commentResource(id, data);
-              const { comment, timestamp, comment_user_id } = commentInfo;
-              const userInfo = await getMyDetails();
-              const { profile_picture_url, username } = userInfo;
-              const newCommentDetails = {
-                comment,
-                username,
-                timestamp,
-                profile_picture_url,
-                comment_user_id,
-              };
-              resourceComments.push(newCommentDetails);
-              console.log(commentsDetails);
-              makeComments(resourceComments);
-              numOfComment++;
-              updateNumOfComment($numOfComment, numOfComment);
-            }
-          }
-        });
-      };
       let commentsDetails = [...resourceComments];
 
 
-      makeComments(commentsDetails);
+      makeComments(commentsDetails, $detailsComments, current_username, my_profile_url, id, $numOfComment, numOfComment);
 
 
       const addClassToStars = () => {
