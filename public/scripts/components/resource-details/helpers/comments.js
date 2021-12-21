@@ -46,8 +46,13 @@ const commentForm = (imageURL) => {
 const commentHelperFunctionsGenerator = (
   commentDetails,
   resourceInfo,
-  { $numOfComment, $detailsComments }
+  domObj
 ) => {
+
+  const { $numOfComment, $detailsComments } = domObj;
+  const { id, current_username, my_profile_url } = resourceInfo;
+  let { number_of_comment } = resourceInfo;
+
   const compileComments = () => {
     const comments = [];
     for (const details of commentDetails) {
@@ -72,7 +77,7 @@ const commentHelperFunctionsGenerator = (
   };
 
   const updateNumOfComment = () => {
-    $numOfComment.text(resourceInfo.numOfComment);
+    $numOfComment.text(number_of_comment);
   };
 
   const makeComments = () => {
@@ -94,18 +99,16 @@ const commentHelperFunctionsGenerator = (
       });
     });
 
-    if (resourceInfo.current_username) {
-      $detailsComments.prepend(
-        commentForm(resourceInfo.my_profile_url)
-      );
+    if (current_username) {
+      $detailsComments.prepend(commentForm(my_profile_url));
     }
 
     $("#submit-button").on("click", async () => {
-      if (resourceInfo.current_username) {
+      if (current_username) {
         const data = $("#new-comment").serialize();
         if (data.length > 8) {
           $("#new-comment").val("");
-          const commentInfo = await commentResource(resourceInfo.id, data);
+          const commentInfo = await commentResource(id, data);
           const { comment, timestamp, comment_user_id } = commentInfo;
           const userInfo = await getMyDetails();
           const { profile_picture_url, username } = userInfo;
@@ -118,7 +121,7 @@ const commentHelperFunctionsGenerator = (
           };
           commentDetails.push(newCommentDetails);
           makeComments();
-          resourceInfo.numOfComment++;
+          number_of_comment++;
           updateNumOfComment();
         }
       }

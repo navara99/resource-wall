@@ -95,27 +95,9 @@ const updateResourceDetails = () => {
 
       const resourceInfo = {
         id,
-        description,
-        url,
-        title,
-        my_profile_url,
-        is_video,
-        media_url,
-        number_of_like,
-        liked,
         current_username,
-        rated,
-        created_on,
-        owner_username,
-        owner_id,
-        first_name,
-        last_name,
-        owner_url,
-        averageRating: rating,
-        numOfRating: parseInt(number_of_rating),
-        currentRating: rated,
-        numOfComment: number_of_comment,
-        currentLike: liked > 0 ? true : false,
+        my_profile_url,
+        number_of_comment
       };
 
       const domObj = {
@@ -135,7 +117,6 @@ const updateResourceDetails = () => {
       let averageRating = rating;
       let numOfRating = parseInt(number_of_rating);
       let currentRating = rated;
-      let numOfComment = number_of_comment;
       let currentLike = liked > 0 ? true : false;
 
       if (!current_username) {
