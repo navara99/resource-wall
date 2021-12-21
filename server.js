@@ -53,8 +53,9 @@ app.use("/api/resources", resourcesRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/index.html");
+  res.render("index");
 });
+
 
 app.use('/public', express.static(__dirname + "/public"));
 
