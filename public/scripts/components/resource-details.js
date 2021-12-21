@@ -1,28 +1,5 @@
 const timestampToTimeAgo = (timestamp) => timeago.format(new Date(timestamp));
 
-const compileComments = (resourceDetails) => {
-  const comments = [];
-  for (const details of resourceDetails) {
-    const {
-      comment,
-      username,
-      timestamp,
-      profile_picture_url,
-      comment_user_id,
-    } = details;
-    if (comment) {
-      comments.push({
-        comment,
-        username,
-        timeAgo: timestampToTimeAgo(timestamp),
-        profile_picture_url,
-        comment_user_id,
-      });
-    }
-  }
-  return comments;
-};
-
 const getHostname = (url) => {
   const parser = document.createElement("a");
   parser.href = url;
@@ -43,43 +20,70 @@ const escape = (str) => {
   return div.innerHTML;
 };
 
-const makeComment = (username, comment, profilePicture, timeAgo) => {
-  const $elm = $(`
-  <li class="collection-item avatar hover-pointer">
-  <img
-    src="${escape(profilePicture)}"
-    class="circle profile profile-picture"
-  />
-    <span class="title">@${escape(username)}</span>
-    <p>${escape(comment)}</p>
-    <p class="secondary-content">${escape(timeAgo)}</p>
-  </li>`);
+const commentHelperFunctionsGenerator = (commentDetails, resourceInfo) => {
+  const compileComments = () => {
+    const comments = [];
+    for (const details of commentDetails) {
+      const {
+        comment,
+        username,
+        timestamp,
+        profile_picture_url,
+        comment_user_id,
+      } = details;
+      if (comment) {
+        comments.push({
+          comment,
+          username,
+          timeAgo: timestampToTimeAgo(timestamp),
+          profile_picture_url,
+          comment_user_id,
+        });
+      }
+    }
+    return comments;
+  };
 
-  return $elm;
-};
-
-const commentForm = (imageURL) => {
-  const elm = `
-  <li
-    class="collection-item avatar new-comment-container"
-    id="make-new-comment">
+  const makeComment = (username, comment, profilePicture, timeAgo) => {
+    const $elm = $(`
+    <li class="collection-item avatar hover-pointer">
     <img
-    src="${escape(imageURL)}"
-    class="circle profile profile-picture"
-  />
-    <form class="make-comment">
-      <textarea
-        id="new-comment"
-        class="materialize-textarea"
-        name="comment"
-      ></textarea>
-      <label class="label-icon" for="comment"></label>
-      <span id="submit-button" class="fas fa-chevron-circle-right send-comment"></span>
-    </form>
-  </li>
-  `;
+      src="${escape(profilePicture)}"
+      class="circle profile profile-picture"
+    />
+      <span class="title">@${escape(username)}</span>
+      <p>${escape(comment)}</p>
+      <p class="secondary-content">${escape(timeAgo)}</p>
+    </li>`);
 
-  return elm;
+    return $elm;
+  };
+
+  const commentForm = (imageURL) => {
+    const elm = `
+    <li
+      class="collection-item avatar new-comment-container"
+      id="make-new-comment">
+      <img
+      src="${escape(imageURL)}"
+      class="circle profile profile-picture"
+    />
+      <form class="make-comment">
+        <textarea
+          id="new-comment"
+          class="materialize-textarea"
+          name="comment"
+        ></textarea>
+        <label class="label-icon" for="comment"></label>
+        <span id="submit-button" class="fas fa-chevron-circle-right send-comment"></span>
+      </form>
+    </li>
+    `;
+
+    return elm;
+  };
+
+  return { compileComments, makeComment, commentForm };
 };
 
 const toTwoDecimalPlaces = (numString) => {
@@ -135,7 +139,7 @@ const updateResourceDetails = () => {
 
   return async (id) => {
     try {
-      const resourceDetails = await getdetailsOfResources(id);
+      const resourceComments = await getdetailsOfResources(id);
 
       $media.html("");
       const {
@@ -158,7 +162,34 @@ const updateResourceDetails = () => {
         first_name,
         last_name,
         owner_url,
-      } = resourceDetails[0];
+      } = resourceComments[0];
+
+      const resourceInfo = {
+        description,
+        url,
+        title,
+        my_profile_url,
+        is_video,
+        media_url,
+        number_of_like,
+        liked,
+        current_username,
+        rated,
+        created_on,
+        owner_username,
+        owner_id,
+        first_name,
+        last_name,
+        owner_url,
+        averageRating: rating,
+        numOfRating: parseInt(number_of_rating),
+        currentRating: rated,
+        numOfComment: number_of_comment,
+        currentLike: liked > 0 ? true : false,
+      };
+
+      const { compileComments, makeComment, commentForm } =
+        commentHelperFunctionsGenerator(resourceComments, resourceInfo);
 
       let averageRating = rating;
       let numOfRating = parseInt(number_of_rating);
@@ -190,8 +221,8 @@ const updateResourceDetails = () => {
         }
       });
 
-      const makeComments = (resourceDetails) => {
-        const comments = compileComments(resourceDetails);
+      const makeComments = (resourceComments) => {
+        const comments = compileComments(resourceComments);
         $detailsComments.text("");
 
         comments.forEach((commentInfo) => {
@@ -243,7 +274,7 @@ const updateResourceDetails = () => {
           }
         });
       };
-      let commentsDetails = [...resourceDetails];
+      let commentsDetails = [...resourceComments];
 
       const updateNumOfComment = () => {
         $numOfComment.text(numOfComment);
@@ -278,7 +309,7 @@ const updateResourceDetails = () => {
 
       const ratingOnClick = ($elm, id, newRating) => {
         $elm.unbind();
-        $elm.on("click", async() => {
+        $elm.on("click", async () => {
           if (current_username) {
             const isNewRating = await rateResource(id, `rating=${newRating}`);
             if (isNewRating) {
