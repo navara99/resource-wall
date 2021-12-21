@@ -425,25 +425,48 @@ form {
   color: #3b5998;
 }
 
-#my-resource-list li {
-  display: flex;
-  align-items: center;
-  padding-bottom: 2em;
-  background-color: transparent;
-}
+#my-resource-list {
+  transition: background-color 0.5s;
+  box-shadow: none;
 
-.text {
-  padding-right: 2em;
-  width: 50%;
-
-  .my-resource-title {
-    font-size: 1.5em;
-    font-weight: bold;
+  &:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    transition: box-shadow 0.2s;
   }
 
-  div {
-    span {
+  .text {
+    a {
+      &:hover {
+        background-color: inherit;
+      }
+    }
+
+    padding-right: 2em;
+    width: 50%;
+
+    .my-resource-title {
+      font-size: 1.5em;
       font-weight: bold;
+    }
+
+    div {
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    -bottom: 2em;
+    background-color: transparent;
+    color: black;
+    padding-bottom: 1.5em;
+
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.1);
+      cursor: pointer;
     }
   }
 }
