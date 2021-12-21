@@ -23,7 +23,7 @@ const createInfo = (
   return $(`
   <div class="text">
     <h6 class="my-resource-title">${title}</h6>
-    <div><span>URL: </span><a href="${url}" class="paragraph truncate">${url}</a></div>
+    <div><span>URL: </span><a href="${url}" onclick="event.stopPropagation();" class="paragraph truncate">${url}</a></div>
     <div><span>Description: </span> ${description}</div>
     <div><span>Added by: </span> @${username}</div>
     <div><span>Added:</span> ${timestampToTimeAgo(created_on)}</div>
@@ -75,7 +75,8 @@ const getActionButtons = (resourceId, isMine) => {
   </a>
   <a id="${resourceId}-delete"
      class="waves-effect waves-light btn modal-trigger ${noButtons}"
-     href="#${resourceId}-confirm-delete">
+     href="#${resourceId}-confirm-delete"
+     >
     <i class="material-icons left">
       delete
     </i>
@@ -109,6 +110,16 @@ const getStats = (likes, ratings, comments, resourceId, isMine) => {
      </div>
 </div>
   `);
+};
+
+const registerMyResourceDetailsListener = (resourceId) => {
+
+  $(`#${resourceId}-my-resource`).on("click", function (e) {
+    e.stopPropagation();
+    const [id] = $(this).attr("id").split("-");
+    updateView("resourceDetails", null, id);
+  });
+
 };
 
 const clearMyResources = () => {
@@ -151,7 +162,9 @@ const renderMyResources = async () => {
 
       if (showLiked || showMine) {
         const $collection = $("<li>");
-        $collection.addClass("collection-item");
+        $collection.attr("id", `${resourceId}-my-resource`);
+        $collection.addClass("collection-item waves-effect");
+
         const $thumbnail = createThumbnail(is_video, media_url);
         const $info = createInfo(
           title,
@@ -172,7 +185,8 @@ const renderMyResources = async () => {
         $listContainer.prepend($collection);
         $("#my-resources-details").append($listContainer);
         registerMyResourceButtonsListeners(resourceId, isMine);
-      }
+        registerMyResourceDetailsListener(resourceId);
+      };
     });
     $('.modal').modal();
   } catch (err) {
