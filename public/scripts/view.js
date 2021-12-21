@@ -57,7 +57,6 @@ const viewHandler = () => {
   const $resourcesPage = $("#resources-page");
   const $registerPage = $("#register-page");
   const $loginPage = $("#login-page");
-  const $profilePage = $("#profile-page");
   const $changePasswordPage = $("#change-password-page");
   const $newResourcePage = $("#new-resource-page");
   const $resourceDetails = $("#resource-details");
@@ -73,7 +72,6 @@ const viewHandler = () => {
       $resourcesPage.hide();
       $registerPage.hide();
       $loginPage.hide();
-      $profilePage.hide();
       $changePasswordPage.hide();
       $resourceDetails.hide();
       $errorPage.hide();
