@@ -6,6 +6,47 @@ const getHostname = (url) => {
   return parser.hostname;
 };
 
+const initDisplay = (
+  $mediaURL,
+  owner_id,
+  $ownerSection,
+  first_name,
+  last_name,
+  owner_username,
+  $ownerName,
+  $createdOn,
+  owner_url,
+  $ownerProfilePicture,
+  created_on,
+  url,
+  description,
+  $title,
+  title,
+  $mediaDisplayedURL,
+  $descriptions,
+  $link,
+  $displayLink
+) => {
+  const hostname = getHostname(url);
+
+  $mediaDisplayedURL.text(hostname);
+  $descriptions.text(description);
+  $mediaURL.attr("href", url);
+  $link.attr("href", url);
+  $displayLink.text(hostname);
+
+  $title.text(title);
+
+  $createdOn.text(timestampToTimeAgo(created_on));
+
+  $ownerProfilePicture.attr("src", owner_url);
+  $ownerName.text(`${first_name} ${last_name} (@${owner_username})`);
+  $ownerSection.unbind();
+  $ownerSection.on("click", () => {
+    updateUserDetailsPage(owner_id);
+  });
+};
+
 const getMedia = async (id, is_video, media_url, $media) => {
   const newMedia = await getHtmlFromAPI(id);
   if (newMedia) return $media.html(newMedia.html);
@@ -84,6 +125,28 @@ const updateResourceDetails = () => {
         $likesNum,
       };
 
+      initDisplay(
+        $mediaURL,
+        owner_id,
+        $ownerSection,
+        first_name,
+        last_name,
+        owner_username,
+        $ownerName,
+        $createdOn,
+        owner_url,
+        $ownerProfilePicture,
+        created_on,
+        url,
+        description,
+        $title,
+        title,
+        $mediaDisplayedURL,
+        $descriptions,
+        $link,
+        $displayLink
+      );
+
       // load media on the left
       getMedia(id, is_video, media_url, $media);
 
@@ -98,6 +161,7 @@ const updateResourceDetails = () => {
 
       updateHeart();
       likeIconEventListener();
+      $likesNum.text(number_of_like);
 
       let averageRating = rating;
       let numOfRating = parseInt(number_of_rating);
@@ -163,25 +227,6 @@ const updateResourceDetails = () => {
       };
       updateRatingStr();
       updateRating();
-
-      const hostname = getHostname(url);
-      $likesNum.text(number_of_like);
-      $mediaDisplayedURL.text(hostname);
-      $descriptions.text(description);
-      $mediaURL.attr("href", url);
-      $link.attr("href", url);
-      $displayLink.text(hostname);
-
-      $title.text(title);
-
-      $createdOn.text(timestampToTimeAgo(created_on));
-
-      $ownerProfilePicture.attr("src", owner_url);
-      $ownerName.text(`${first_name} ${last_name} (@${owner_username})`);
-      $ownerSection.unbind();
-      $ownerSection.on("click", () => {
-        updateUserDetailsPage(owner_id);
-      });
 
       return title;
     } catch (err) {
