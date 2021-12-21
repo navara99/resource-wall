@@ -6,20 +6,6 @@ const getHostname = (url) => {
   return parser.hostname;
 };
 
-const displayRating = (rating, numOfRating) => {
-  if (!rating) return "No rating yet";
-  if (numOfRating === 1) {
-    return `${toTwoDecimalPlaces(rating)} (Based on ${numOfRating} rating)`;
-  }
-  return `${toTwoDecimalPlaces(rating)} (Based on ${numOfRating} ratings)`;
-};
-
-const toTwoDecimalPlaces = (numString) => {
-  const float = parseFloat(numString);
-  const twoDecimal = Math.round(float * 100) / 100;
-  return twoDecimal;
-};
-
 const getMedia = async (id, is_video, media_url, $media) => {
   const newMedia = await getHtmlFromAPI(id);
   if (newMedia) return $media.html(newMedia.html);
@@ -27,16 +13,6 @@ const getMedia = async (id, is_video, media_url, $media) => {
     ? createEmbedVideo(media_url)
     : createScreenshot(media_url);
   $media.append($newMedia);
-};
-
-const updateHeart = ($likeIcon, currentLike) => {
-  if (currentLike) {
-    $likeIcon.addClass("liked");
-    $likeIcon.removeClass("not-liked");
-  } else {
-    $likeIcon.addClass("not-liked");
-    $likeIcon.removeClass("liked");
-  }
 };
 
 const updateResourceDetails = () => {
