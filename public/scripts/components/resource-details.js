@@ -88,7 +88,7 @@ const toTwoDecimalPlaces = (numString) => {
   return twoDecimal;
 };
 
-const getMedia = async(id, $media, is_video, media_url) => {
+const getMedia = async (id, $media, is_video, media_url) => {
   const newMedia = await getHtmlFromAPI(id);
   if (newMedia) return $media.html(newMedia.html);
   const $newMedia = is_video
@@ -97,7 +97,7 @@ const getMedia = async(id, $media, is_video, media_url) => {
   $media.append($newMedia);
 };
 
-const updateHeart = (currentLike) => {
+const updateHeart = ($likeIcon, currentLike) => {
   if (currentLike) {
     $likeIcon.addClass("liked");
     $likeIcon.removeClass("not-liked");
@@ -175,10 +175,9 @@ const updateResourceDetails = () => {
       // load media on the left
       getMedia(id, $media, is_video, media_url);
 
-
-
+      // clear any previous event listener on the like icon
       $likeIcon.off();
-      $likeIcon.on("click", async function () {
+      $likeIcon.on("click", function () {
         if (current_username) {
           likeResource(id);
           currentLike = !currentLike;
@@ -187,7 +186,7 @@ const updateResourceDetails = () => {
             ? parseInt(numOfLike) + 1
             : parseInt(numOfLike) - 1;
           $likesNum.text(newNumOfLike);
-          updateHeart(currentLike);
+          updateHeart($likeIcon, currentLike);
         }
       });
 
@@ -264,12 +263,9 @@ const updateResourceDetails = () => {
       };
 
       const updateRatingStr = () => {
-        if (currentRating) {
-          addClassToStars(currentRating);
-          $ratingString.html("You rated:&nbsp;");
-        } else {
-          $ratingString.html("Rate it:&nbsp;");
-        }
+        if (!currentRating) return $ratingString.html("Rate it:&nbsp;");
+        addClassToStars(currentRating);
+        $ratingString.html("You rated:&nbsp;");
       };
 
       $detailsStars
@@ -282,7 +278,7 @@ const updateResourceDetails = () => {
 
       const ratingOnClick = ($elm, id, newRating) => {
         $elm.unbind();
-        $elm.on("click", async () => {
+        $elm.on("click", async() => {
           if (current_username) {
             const isNewRating = await rateResource(id, `rating=${newRating}`);
             if (isNewRating) {
@@ -310,7 +306,7 @@ const updateResourceDetails = () => {
       };
       updateRatingStr();
       updateRating();
-      updateHeart(currentLike);
+      updateHeart($likeIcon, currentLike);
       updateNumOfComment();
 
       const hostname = getHostname(url);
