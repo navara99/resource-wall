@@ -73,7 +73,7 @@ const updateResourceDetails = () => {
         id,
         current_username,
         my_profile_url,
-        number_of_comment
+        number_of_comment,
       };
 
       const domObj = {
@@ -90,6 +90,8 @@ const updateResourceDetails = () => {
       updateNumOfComment();
       makeComments();
 
+      const { updateHeart, likeIconEventListener } = likeHelperFunctionsGenerator();
+
       let averageRating = rating;
       let numOfRating = parseInt(number_of_rating);
       let currentRating = rated;
@@ -101,20 +103,7 @@ const updateResourceDetails = () => {
         $rating.show();
       }
 
-      // clear any previous event listener on the like icon
-      $likeIcon.off();
-      $likeIcon.on("click", function () {
-        if (current_username) {
-          likeResource(id);
-          currentLike = !currentLike;
-          const numOfLike = $likesNum.text();
-          const newNumOfLike = currentLike
-            ? parseInt(numOfLike) + 1
-            : parseInt(numOfLike) - 1;
-          $likesNum.text(newNumOfLike);
-          updateHeart($likeIcon, currentLike);
-        }
-      });
+      likeIconEventListener($likeIcon, current_username, id, currentLike, $likesNum);
 
       const addClassToStars = () => {
         const rate = currentRating || 0;
