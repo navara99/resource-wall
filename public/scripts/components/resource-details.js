@@ -88,6 +88,25 @@ const toTwoDecimalPlaces = (numString) => {
   return twoDecimal;
 };
 
+const getMedia = async(id, $media, is_video, media_url) => {
+  const newMedia = await getHtmlFromAPI(id);
+  if (newMedia) return $media.html(newMedia.html);
+  const $newMedia = is_video
+    ? createEmbedVideo(media_url)
+    : createScreenshot(media_url);
+  $media.append($newMedia);
+};
+
+const updateHeart = (currentLike) => {
+  if (currentLike) {
+    $likeIcon.addClass("liked");
+    $likeIcon.removeClass("not-liked");
+  } else {
+    $likeIcon.addClass("not-liked");
+    $likeIcon.removeClass("liked");
+  }
+};
+
 const updateResourceDetails = () => {
   const $descriptions = $("#details-desciption");
   const $mediaURL = $("#details-link-on-media");
@@ -114,7 +133,7 @@ const updateResourceDetails = () => {
   const $ownerProfilePicture = $("#owner_profile-picture");
   const $ownerSection = $("#owner-row");
 
-  return async(id) => {
+  return async (id) => {
     try {
       const resourceDetails = await getdetailsOfResources(id);
 
@@ -153,29 +172,13 @@ const updateResourceDetails = () => {
         $rating.show();
       }
 
-      const newMedia = await getHtmlFromAPI(id);
-      const { html } = newMedia;
-      if (html) {
-        $media.html(newMedia.html);
-      } else {
-        const $newMedia = is_video
-          ? createEmbedVideo(media_url)
-          : createScreenshot(media_url);
-        $media.append($newMedia);
-      }
+      // load media on the left
+      getMedia(id, $media, is_video, media_url);
 
-      const updateHeart = () => {
-        if (currentLike) {
-          $likeIcon.addClass("liked");
-          $likeIcon.removeClass("not-liked");
-        } else {
-          $likeIcon.addClass("not-liked");
-          $likeIcon.removeClass("liked");
-        }
-      };
+
 
       $likeIcon.off();
-      $likeIcon.on("click", async function() {
+      $likeIcon.on("click", async function () {
         if (current_username) {
           likeResource(id);
           currentLike = !currentLike;
@@ -184,7 +187,7 @@ const updateResourceDetails = () => {
             ? parseInt(numOfLike) + 1
             : parseInt(numOfLike) - 1;
           $likesNum.text(newNumOfLike);
-          updateHeart();
+          updateHeart(currentLike);
         }
       });
 
@@ -217,7 +220,7 @@ const updateResourceDetails = () => {
           $detailsComments.prepend(commentForm(my_profile_url));
         }
 
-        $("#submit-button").on("click", async() => {
+        $("#submit-button").on("click", async () => {
           if (current_username) {
             const data = $("#new-comment").serialize();
             if (data.length > 8) {
@@ -279,7 +282,7 @@ const updateResourceDetails = () => {
 
       const ratingOnClick = ($elm, id, newRating) => {
         $elm.unbind();
-        $elm.on("click", async() => {
+        $elm.on("click", async () => {
           if (current_username) {
             const isNewRating = await rateResource(id, `rating=${newRating}`);
             if (isNewRating) {
@@ -307,7 +310,7 @@ const updateResourceDetails = () => {
       };
       updateRatingStr();
       updateRating();
-      updateHeart();
+      updateHeart(currentLike);
       updateNumOfComment();
 
       const hostname = getHostname(url);
