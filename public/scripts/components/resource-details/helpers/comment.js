@@ -10,7 +10,6 @@ const makeComment = ({ username, comment, profile_picture_url, timeAgo }) => {
   <img
     src="${escape(profile_picture_url)}"
     class="circle profile profile-picture"
-    onClick="() => updateUserDetailsPage(comment_user_id)"
   />
     <span class="title">@${escape(username)}</span>
     <p>${escape(comment)}</p>
@@ -82,7 +81,7 @@ const commentSetup = (
       $detailsComments.prepend($elm);
 
       const { comment_user_id } = commentInfo;
-      $elm.on("click", () => updateUserDetailsPage(comment_user_id));
+      $elm.on("click", () => updateUserDetails(comment_user_id));
     });
 
     // show comment form is user is logged in

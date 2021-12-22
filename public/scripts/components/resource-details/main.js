@@ -46,7 +46,7 @@ const initDisplay = (resourceInfo, domObj) => {
   $ownerName.text(`${first_name} ${last_name} (@${owner_username})`);
   $ownerSection.unbind();
   $ownerSection.on("click", () => {
-    updateUserDetailsPage(owner_id);
+    updateUserDetails(owner_id);
   });
 
   $createdOn.text(timestampToTimeAgo(created_on));

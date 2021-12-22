@@ -1,9 +1,7 @@
-const createScreenshot = (media_url) => {
-  return $(`<img src = ${media_url}/>`);
-};
+const createScreenshot = (media_url) => $(`<img src = ${media_url}/>`);
 
 const createEmbedVideo = (media_url, height) => {
-  const url = media_url.replaceAll('"', '');
+  const url = media_url.replaceAll('"', "");
   return $(`
     <iframe
     width="100%"
@@ -21,7 +19,9 @@ const getCardAction = (likesAmount, commentsAmount, averageRating) => {
   return $(`
   <div class="card-action">
     <div class="card-summary">
-      <i class="fas fa-star card-icon bright"></i>${Number(averageRating) ? Number(averageRating).toFixed(1) : "0"}
+      <i class="fas fa-star card-icon bright"></i>${
+        Number(averageRating) ? Number(averageRating).toFixed(1) : "0"
+      }
     </div>
     <div class="card-summary">
       <i class="fas fa-heart card-icon liked"></i>${likesAmount}
@@ -41,7 +41,9 @@ const getCardContent = (title, description, category, created_on, username) => {
     <br/>
     <p><span>Added by:</span> @${username}</p>
     <p><span>Added:</span> ${timestampToTimeAgo(created_on)}</p>
-    <p><span>Category:</span> ${category[0] + category.substring(1).toLowerCase()}</p>
+    <p><span>Category:</span> ${
+      category[0] + category.substring(1).toLowerCase()
+    }</p>
   </div>
   `);
 };
@@ -55,9 +57,7 @@ const getUrlLink = (url) => {
 };
 
 const registerLikeListener = ($likeLink, id) => {
-
-  $likeLink.on("click", async function() {
-
+  $likeLink.on("click", async function () {
     const result = await likeResource(id);
 
     if (result) {
@@ -78,7 +78,7 @@ const clearResources = () => {
   $("#columns").remove();
 };
 
-const displayResources = async(resources) => {
+const displayResources = async (resources) => {
   clearResources();
   let renderedResources;
   const { id: currentUserId } = await getMyDetails();
@@ -107,7 +107,7 @@ const displayResources = async(resources) => {
       category,
       username,
       number_of_comment,
-      rating
+      rating,
     } = resource;
 
     const $card = $("<div>").addClass("card");
@@ -118,7 +118,13 @@ const displayResources = async(resources) => {
     const $figure = $("<figure>").attr("id", id);
 
     const $cardAction = getCardAction(likes, number_of_comment, rating);
-    const $cardContent = getCardContent(title, description, category, created_on, username);
+    const $cardContent = getCardContent(
+      title,
+      description,
+      category,
+      created_on,
+      username
+    );
     const $urlLink = getUrlLink(url);
     const $likeLink = currentUserId ? getLikeLink(is_liked) : $("");
     const $cardImage = $("<div>")
@@ -127,7 +133,7 @@ const displayResources = async(resources) => {
     const $resourceInfo = $card.prepend($cardImage, $cardContent, $cardAction);
     const $item = $figure.prepend($resourceInfo);
 
-    $item.on("click", async(event) => {
+    $item.on("click", async (event) => {
       const tagName = event.target.nodeName;
       if (tagName !== "A" && tagName !== "I") {
         updateView("resourceDetails", null, id);
@@ -144,7 +150,7 @@ const displayResources = async(resources) => {
 const registerSearchListener = () => {
   const $searchBar = $(`#search`);
 
-  $searchBar.on("input", async(e) => {
+  $searchBar.on("input", async (e) => {
     const query = e.target.value;
     if (!query) return displayResources();
     const { allResources } = await searchResource(query);
@@ -154,12 +160,11 @@ const registerSearchListener = () => {
 
 const registerTabListener = () => {
   const $tab = $(".tab").children("a");
-  $tab.on("click", async function() {
+  $tab.on("click", async function () {
     const filterCategory = $(this).attr("id");
     if (filterCategory === "ALL") return displayResources();
     const filteredResources = await getResourcesByCategory(filterCategory);
     const { resourceByCategory } = filteredResources;
     displayResources(resourceByCategory);
   });
-
 };

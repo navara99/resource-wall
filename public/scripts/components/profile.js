@@ -106,7 +106,7 @@ const updateProfileEventListener = () => {
       const data = $updateProfileForm.serialize();
 
       updateProfile(data).then(() => {
-        updateUserDetailsPage();
+        updateUserDetails();
         $updateProfileForm.trigger("reset");
       });
     } catch (err) {
@@ -126,7 +126,7 @@ const changePasswordEventListener = () => {
       const data = $changePasswordForm.serialize();
 
       changePassword(data).then(() => {
-        updateUserDetailsPage();
+        updateUserDetails();
         $changePasswordForm.trigger("reset");
       });
     } catch (err) {
