@@ -16,7 +16,7 @@ const myResourcesElementGenerator = (resource) => {
   } = resource;
 
   const videoHeight = 150;
-  const { createEmbedVideo, createScreenshot } = resourcesElementGenerator(
+  const { createEmbedVideo, createScreenshot } = thumbnailElementGenerator(
     resource,
     videoHeight
   );

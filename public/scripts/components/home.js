@@ -1,4 +1,4 @@
-const resourcesElementGenerator = (resource, videoHeight = 250) => {
+const thumbnailElementGenerator = (resource, videoHeight = 250) => {
   const { media_url } = resource;
 
   const createScreenshot = () => $(`<img src = ${media_url}/>`);
@@ -116,7 +116,7 @@ const displayResources = async (resources) => {
     } = resource;
 
     const { createScreenshot, createEmbedVideo } =
-      resourcesElementGenerator(resource);
+      thumbnailElementGenerator(resource);
 
     const $card = $("<div>").addClass("card");
 
