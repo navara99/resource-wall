@@ -15,11 +15,6 @@ const {
   showMyResources,
 } = profileHelperFunctionGenerator();
 
-const updateResourceDetails = updateResourceDetailsFunctionGenerator();
-const updateUserDetails = updateUserFunctionGenerator();
-const updateHeader = updateHeaderFunctionGenerator();
-const updateView = updateViewFunctionGenerator();
-
 const eventListeners = () => {
   registerTabListener();
   registerCheckListeners();
@@ -135,3 +130,8 @@ const updateViewFunctionGenerator = () => {
     }
   };
 };
+
+const updateResourceDetails = updateResourceDetailsFunctionGenerator();
+const updateUserDetails = updateUserFunctionGenerator();
+const updateHeader = updateHeaderFunctionGenerator();
+const updateView = updateViewFunctionGenerator();
