@@ -1,19 +1,30 @@
-const createScreenshot = (media_url) => $(`<img src = ${media_url}/>`);
+const resourcesElementGenerator = (resource) => {
+  const { media_url } = resource;
+  const videoHeight = 250;
 
-const createEmbedVideo = (media_url, height) => {
-  const url = media_url.replaceAll('"', "");
-  return $(`
-    <iframe
-    width="100%"
-    height=${height}
-    src=${url}
-    frameborder="0" allow="accelerometer; autoplay;
-    clipboard-write; encrypted-media;
-    gyroscope;
-    picture-in-picture"
-    allowfullscreen>
-    </iframe>"`);
+  const createScreenshot = () => $(`<img src = ${media_url}/>`);
+
+  const createEmbedVideo = () => {
+    const url = media_url.replaceAll('"', "");
+    return $(`
+      <iframe
+      width="100%"
+      height=${videoHeight}
+      src=${url}
+      frameborder="0" allow="accelerometer; autoplay;
+      clipboard-write; encrypted-media;
+      gyroscope;
+      picture-in-picture"
+      allowfullscreen>
+      </iframe>"`);
+  };
+
+  return { createScreenshot, createEmbedVideo };
 };
+
+
+
+
 
 const getCardAction = (likesAmount, commentsAmount, averageRating) => {
   return $(`
@@ -99,7 +110,6 @@ const displayResources = async (resources) => {
       title,
       description,
       url,
-      media_url,
       created_on,
       is_video,
       is_liked,
@@ -110,11 +120,13 @@ const displayResources = async (resources) => {
       rating,
     } = resource;
 
+    const { createScreenshot, createEmbedVideo } = resourcesElementGenerator(resource);
+
     const $card = $("<div>").addClass("card");
-    const videoHeight = 250;
+
     const $resourceMedia = is_video
-      ? createEmbedVideo(media_url, videoHeight)
-      : createScreenshot(media_url);
+      ? createEmbedVideo()
+      : createScreenshot();
     const $figure = $("<figure>").attr("id", id);
 
     const $cardAction = getCardAction(likes, number_of_comment, rating);
