@@ -21,22 +21,27 @@ const thumbnailElementGenerator = (resource, videoHeight = 250) => {
   return { createScreenshot, createEmbedVideo };
 };
 
-const getCardAction = (likesAmount, commentsAmount, averageRating) => {
-  return $(`
-  <div class="card-action">
-    <div class="card-summary">
-      <i class="fas fa-star card-icon bright"></i>${
-        Number(averageRating) ? Number(averageRating).toFixed(1) : "0"
-      }
+const resourcesElementGenerator = (resource) => {
+  const { likes, number_of_comment, rating } = resource;
+
+  const getCardAction = () => {
+    return $(`
+    <div class="card-action">
+      <div class="card-summary">
+        <i class="fas fa-star card-icon bright"></i>${
+          Number(rating) ? Number(rating).toFixed(1) : "0"
+        }
+      </div>
+      <div class="card-summary">
+        <i class="fas fa-heart card-icon liked"></i>${likes}
+      </div>
+      <div class="card-summary">
+        <i class="fas fa-comment-alt card-icon"></i>${number_of_comment}
+      </div>
     </div>
-    <div class="card-summary">
-      <i class="fas fa-heart card-icon liked"></i>${likesAmount}
-    </div>
-    <div class="card-summary">
-      <i class="fas fa-comment-alt card-icon"></i>${commentsAmount}
-    </div>
-  </div>
-  `);
+    `);
+  };
+  return { getCardAction };
 };
 
 const getCardContent = (title, description, category, created_on, username) => {
@@ -108,22 +113,21 @@ const displayResources = async (resources) => {
       created_on,
       is_video,
       is_liked,
-      likes,
       category,
       username,
-      number_of_comment,
-      rating,
     } = resource;
 
     const { createScreenshot, createEmbedVideo } =
       thumbnailElementGenerator(resource);
+
+    const { getCardAction } = resourcesElementGenerator(resource);
 
     const $card = $("<div>").addClass("card");
 
     const $resourceMedia = is_video ? createEmbedVideo() : createScreenshot();
     const $figure = $("<figure>").attr("id", id);
 
-    const $cardAction = getCardAction(likes, number_of_comment, rating);
+    const $cardAction = getCardAction();
     const $cardContent = getCardContent(
       title,
       description,
