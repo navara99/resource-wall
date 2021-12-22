@@ -59,10 +59,6 @@
 
 ### README.md
 
-### refactoring (siu)
-
-- scss files
-
 ### login
 
 - user can login with username

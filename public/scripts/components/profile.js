@@ -126,7 +126,6 @@ const changePasswordEventListener = () => {
       const data = $changePasswordForm.serialize();
 
       changePassword(data).then(() => {
-        updateUserDetails();
         $changePasswordForm.trigger("reset");
       });
     } catch (err) {
