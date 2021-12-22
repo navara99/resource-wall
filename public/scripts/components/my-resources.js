@@ -36,8 +36,7 @@ const myResourcesElementGenerator = (resource) => {
     $(`#${id}-edit`).on("click", function (e) {});
   };
 
-  const createInfo = () => {
-    return $(`
+  const $info = $(`
     <div class="text">
       <a class="my-resource-title" id=${id}-my-resource >${title}</a>
       <div>
@@ -59,24 +58,21 @@ const myResourcesElementGenerator = (resource) => {
         ${category[0] + category.substring(1).toLowerCase()}
       </div>
     </div>
-    `);
-  };
+  `);
 
-  const createThumbnail = () => {
-    const media = is_video
-      ? createEmbedVideo(media_url, videoHeight)
-      : createScreenshot(media_url);
-    return $(`
+  const media = is_video
+  ? createEmbedVideo(media_url, videoHeight)
+  : createScreenshot(media_url);
+
+  const $thumbnail = $(`
     <div class="thumbnail-container">
       <div class="media">
         ${media.prop("outerHTML")}
       </div>
     </div>
   `);
-  };
 
-  const createDeleteModal = () => {
-    return $(`
+  const $modal = $(`
       <div id="${id}-confirm-delete" class="modal">
         <a href="#!" id="close-confirm-delete" class="modal-close  waves-effect waves-light btn-flat">
           <i class="material-icons right">close</i>
@@ -89,12 +85,10 @@ const myResourcesElementGenerator = (resource) => {
           <a href="#!" id="${id}-delete" class="modal-close  waves-effect waves-light red btn">Confirm</a>
       </div>
     </div>
-    `);
-  };
+  `);
 
-  const getActionButtons = () => {
-    const noButtons = !isMine ? "invisible" : "";
-    const resourceOptions = `
+  const noButtons = !isMine ? "invisible" : "";
+  const actionButtons = `
       <a id = "${id}-edit" class="waves-effect waves-light btn ${noButtons}">
         <i class="material-icons left">
           edit
@@ -111,9 +105,6 @@ const myResourcesElementGenerator = (resource) => {
         Delete
       </a>
     `;
-
-    return resourceOptions;
-  };
 
   const $stats = $(`
     <div class="stat-container">
@@ -132,7 +123,7 @@ const myResourcesElementGenerator = (resource) => {
         </span>
       </div>
       <div class="resource-actions">
-        ${getActionButtons()}
+        ${actionButtons}
       </div>
     </div>
   `);
@@ -145,9 +136,9 @@ const myResourcesElementGenerator = (resource) => {
 
   return {
     $stats,
-    createDeleteModal,
-    createThumbnail,
-    createInfo,
+    $modal,
+    $thumbnail,
+    $info,
     registerMyResourceButtonsListeners,
     registerMyResourceDetailsListener,
   };
@@ -175,9 +166,9 @@ const renderMyResources = async () => {
 
       const {
         $stats,
-        createDeleteModal,
-        createThumbnail,
-        createInfo,
+        $modal,
+        $thumbnail,
+        $info,
         registerMyResourceButtonsListeners,
         registerMyResourceDetailsListener,
       } = myResourcesElementGenerator(info);
@@ -193,11 +184,7 @@ const renderMyResources = async () => {
         const $collection = $("<li>");
         $collection.addClass("collection-item");
 
-        const $thumbnail = createThumbnail();
-        const $info = createInfo();
-
         if (info.isMine) {
-          const $modal = createDeleteModal();
           $("body").prepend($modal);
         }
 
