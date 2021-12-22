@@ -53,6 +53,8 @@
 
 ### history
 
+### handle error
+
 ### responsive
 - hide nav bar
 
