@@ -16,7 +16,7 @@ const {
 } = profilePageHandler();
 
 const updateResourceDetails = updateResourceDetailsFunctionGenerator();
-const updateUserDetailsPage = updateUserPage();
+const updateUserDetails = updateUserFunctionGenerator();
 
 const eventListeners = () => {
   registerTabListener();

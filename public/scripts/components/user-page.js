@@ -1,4 +1,4 @@
-const updateUserPage = () => {
+const updateUserFunctionGenerator = () => {
   $profilePicture = $("#user-profile-picture");
   $username = $("#user-username");
   $name = $("#user-name");
