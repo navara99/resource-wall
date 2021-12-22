@@ -68,7 +68,9 @@ module.exports = (db) => {
     const { user_id } = req.session;
     const { current_password, new_password, confirm_new_password } = req.body;
 
+
     try {
+
       const user = await getUserByValue("id", user_id);
 
       const { password: hashedPassword } = user;
@@ -90,6 +92,14 @@ module.exports = (db) => {
         return res
           .status(400)
           .json({ error: "different inputs for new password." });
+      }
+
+      const sameNewAndOldPassword = current_password === new_password;
+
+      if (sameNewAndOldPassword) {
+        return res
+          .status(400)
+          .json({ error: "The new password is same with the current password." });
       }
 
       const newHashedPassword = await bcrypt.hash(new_password, salt);

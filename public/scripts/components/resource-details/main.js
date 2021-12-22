@@ -149,7 +149,8 @@ const resourceDetailsSetup = async (id, domObj) => {
 
     return title;
   } catch (err) {
-    console.log(err);
+    updateError(err.responseText);
+    updateView("error");
   }
 };
 

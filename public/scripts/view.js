@@ -40,6 +40,8 @@ const updateUserInfo = async (userInfo) => {
     updateHeader(userInfo);
   } catch (err) {
     updateHeader({});
+    updateError(err.responseText);
+    updateView("error");
   }
 };
 

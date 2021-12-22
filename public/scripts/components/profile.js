@@ -50,7 +50,7 @@ const profileHelperFunctionGenerator = () => {
     $elm.focus();
   };
 
-  const prefillProfileForm = async() => {
+  const prefillProfileForm = async () => {
     try {
       const userInfo = await getMyDetails(1);
       const {
@@ -69,7 +69,8 @@ const profileHelperFunctionGenerator = () => {
       putInValAndFocus($firstNameInput, first_name);
       $firstNameInput.blur();
     } catch (err) {
-      console.log(err);
+      updateError(err.responseText);
+      updateView("error");
     }
   };
 
@@ -119,15 +120,17 @@ const updateProfileEventListener = () => {
 const changePasswordEventListener = () => {
   const $changePasswordForm = $("#change-password-form");
 
-  $changePasswordForm.submit(async(event) => {
+  $changePasswordForm.submit(async (event) => {
     try {
       event.preventDefault();
 
       const data = $changePasswordForm.serialize();
 
-      changePassword(data).then(() => {
-        $changePasswordForm.trigger("reset");
-      });
+      await changePassword(data);
+
+      $changePasswordForm.trigger("reset");
+
+      updateView("changePassword");
     } catch (err) {
       updateError(err.responseText);
       updateView("error");

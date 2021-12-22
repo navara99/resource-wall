@@ -32,7 +32,8 @@ const myResourcesSetup = (resource, myId, $listContainer) => {
         await deleteResource(id);
         renderMyResources();
       } catch (err) {
-        console.log(err.message);
+        updateError(err.responseText);
+        updateView("error");
       }
     });
 
@@ -180,7 +181,8 @@ const renderMyResourcesFunctionGenerator = () => {
 
       $(".modal").modal();
     } catch (err) {
-      console.log(err);
+      updateError(err.responseText);
+      updateView("error");
     }
   };
 };
