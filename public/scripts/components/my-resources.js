@@ -194,13 +194,12 @@ const renderMyResources = async () => {
 
         const $thumbnail = createThumbnail();
         const $info = createInfo();
+        const $stats = getStats(resource);
 
         if (info.isMine) {
           const $modal = createDeleteModal();
           $("body").prepend($modal);
         }
-
-        const $stats = getStats(resource);
 
         $collection.prepend($thumbnail, $info, $stats);
         $listContainer.prepend($collection);
