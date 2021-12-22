@@ -24,31 +24,42 @@ const createInfo = (
   return $(`
   <div class="text">
     <a class="my-resource-title" id=${resourceId}-my-resource >${title}</a>
-    <div><span>URL: </span><a href="${url}" onclick="event.stopPropagation();" class="paragraph truncate">${url}</a></div>
-    <div><span>Description: </span> ${description}</div>
-    <div><span>Added by: </span> @${username}</div>
-    <div><span>Added:</span> ${timestampToTimeAgo(created_on)}</div>
-    <div><span>Category:</span> ${
-      category[0] + category.substring(1).toLowerCase()
-    }</div>
+    <div>
+      <span>URL: </span>
+      <a href="${url}" onclick="event.stopPropagation();" class="paragraph truncate">${url}</a>
+    </div>
+    <div>
+      <span>Description: </span> ${description}
+    </div>
+    <div>
+      <span>Added by: </span> @${username}
+    </div>
+    <div>
+      <span>Added:</span>
+      ${timestampToTimeAgo(created_on)}
+    </div>
+    <div>
+      <span>Category:</span>
+      ${category[0] + category.substring(1).toLowerCase()}
+    </div>
   </div>
   `);
 };
 
 const createDeleteModal = (title, resourceId) => {
   return $(`
-<div id="${resourceId}-confirm-delete" class="modal">
-  <a href="#!" id="close-confirm-delete" class="modal-close  waves-effect waves-light btn-flat">
-   <i class="material-icons right">close</i>
-  </a>
-  <div class="modal-content">
-    <h4>Are you sure?</h4>
-    <p>Are you sure you want to delete ${title}?</p>
+    <div id="${resourceId}-confirm-delete" class="modal">
+      <a href="#!" id="close-confirm-delete" class="modal-close  waves-effect waves-light btn-flat">
+        <i class="material-icons right">close</i>
+      </a>
+      <div class="modal-content">
+        <h4>Are you sure?</h4>
+        <p>Are you sure you want to delete ${title}?</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" id="${resourceId}-delete" class="modal-close  waves-effect waves-light red btn">Confirm</a>
+    </div>
   </div>
-    <div class="modal-footer">
-    <a href="#!" id="${resourceId}-delete" class="modal-close  waves-effect waves-light red btn">Confirm</a>
-  </div>
-</div>
   `);
 };
 
@@ -71,21 +82,21 @@ const registerMyResourceButtonsListeners = (resourceId, isMine) => {
 const getActionButtons = (resourceId, isMine) => {
   const noButtons = !isMine ? "invisible" : "";
   const resourceOptions = `
-  <a id = "${resourceId}-edit" class="waves-effect waves-light btn ${noButtons}">
-    <i class="material-icons left">
-      edit
-    </i>
+    <a id = "${resourceId}-edit" class="waves-effect waves-light btn ${noButtons}">
+      <i class="material-icons left">
+        edit
+      </i>
       Edit
-  </a>
-  <a id="${resourceId}-delete"
-     class="waves-effect waves-light btn modal-trigger ${noButtons} red"
-     href="#${resourceId}-confirm-delete"
-     >
-    <i class="material-icons left">
-      delete
-    </i>
+    </a>
+    <a id="${resourceId}-delete"
+      class="waves-effect waves-light btn modal-trigger ${noButtons} red"
+      href="#${resourceId}-confirm-delete"
+      >
+      <i class="material-icons left">
+        delete
+      </i>
       Delete
-  </a>
+    </a>
   `;
 
   return resourceOptions;
@@ -111,7 +122,7 @@ const getStats = (likes, ratings, comments, resourceId, isMine) => {
     <div class="resource-actions">
       ${getActionButtons(resourceId, isMine)}
      </div>
-</div>
+  </div>
   `);
 };
 
@@ -127,8 +138,9 @@ const clearMyResources = () => {
 };
 
 const renderMyResources = async () => {
+  clearMyResources();
+
   try {
-    clearMyResources();
     const { id } = await getMyDetails();
     const myResources = await getMyResources();
 
@@ -180,6 +192,7 @@ const renderMyResources = async () => {
           const $modal = createDeleteModal(title, resourceId);
           $("body").prepend($modal);
         }
+
         const $stats = getStats(
           likes,
           rating,
@@ -187,6 +200,7 @@ const renderMyResources = async () => {
           resourceId,
           isMine
         );
+
         $collection.prepend($thumbnail, $info, $stats);
         $listContainer.prepend($collection);
         $("#my-resources-details").append($listContainer);
