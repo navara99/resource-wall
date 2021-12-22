@@ -1,7 +1,7 @@
 const newResourceEventListener = () => {
   const $newResourceForm = $("#new-resource-form");
 
-  $newResourceForm.submit(async(event) => {
+  $newResourceForm.submit(async (event) => {
     try {
       event.preventDefault();
       const data = $newResourceForm.serialize();
@@ -12,7 +12,6 @@ const newResourceEventListener = () => {
       updateView("resourceDetails", null, id);
 
       return $newResourceForm.trigger("reset");
-
     } catch (err) {
       updateError(err);
     }

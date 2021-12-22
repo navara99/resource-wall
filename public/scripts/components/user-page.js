@@ -36,7 +36,7 @@ const updateUserFunctionGenerator = () => {
         });
       }
     } catch (err) {
-
+      updateError(err);
     }
   };
 };

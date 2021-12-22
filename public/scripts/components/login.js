@@ -1,7 +1,7 @@
 const loginEventListener = () => {
   const $loginForm = $("#login-form");
 
-  $loginForm.submit(async(event) => {
+  $loginForm.submit(async (event) => {
     try {
       event.preventDefault();
 
