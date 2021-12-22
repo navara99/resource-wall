@@ -59,6 +59,24 @@ div.resource-details-container.container {
   margin: 0.4em 0 0.1em;
 }
 
+// OWNER INTO
+
+#owner-row {
+  margin-top: 0.9em;
+  display: flex;
+  img {
+    margin: 0.2em 0.6em 0 0;
+  }
+  .owner-text {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+#owner-row:hover {
+  cursor: pointer;
+}
+
 // HEART ICON ON TOP LEFT
 
 .icon {
@@ -108,7 +126,26 @@ ul.collection li.collection-item.avatar {
   background-color: #f8f8ff;
 }
 
-// RESOURCE DETAILS - LIKE SECTION
+.hover-pointer:hover {
+  cursor: pointer;
+}
+
+li.collection-item.avatar img.profile-picture.circle.profile {
+  left: 0em;
+  top: 0.65em;
+}
+
+.make-comment {
+  display: flex;
+  min-height: 50px;
+  align-items: flex-end;
+  margin-bottom: 5px;
+  textarea {
+    flex: 1;
+  }
+}
+
+// LIKE SECTION
 
 .like {
   float: right;
@@ -142,4 +179,56 @@ li textarea.materialize-textarea {
 
 .liked {
   color: #db565b;
+}
+
+.bright {
+  color: #ffb840;
+}
+
+#details-stars i:hover {
+  cursor: pointer;
+  color: #ffb840;
+}
+
+#two-star:hover + #one-star {
+  color: #ffb840;
+}
+
+#three-star:hover ~ #one-star {
+  color: #ffb840;
+}
+
+#three-star:hover + #two-star {
+  color: #ffb840;
+}
+
+#four-star:hover ~ #one-star {
+  color: #ffb840;
+}
+#four-star:hover ~ #two-star {
+  color: #ffb840;
+}
+
+#four-star:hover + #three-star {
+  color: #ffb840;
+}
+
+#five-star:hover ~ #one-star {
+  color: #ffb840;
+}
+
+#five-star:hover ~ #two-star {
+  color: #ffb840;
+}
+
+#five-star:hover ~ #three-star {
+  color: #ffb840;
+}
+
+#five-star:hover + #four-star {
+  color: #ffb840;
+}
+
+#details-rating-string {
+  padding-left: 0.3em;
 }

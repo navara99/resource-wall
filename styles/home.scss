@@ -1,5 +1,9 @@
 // LAYOUT
 
+#resources-page {
+  margin-top: 48px;
+}
+
 #columns {
   column-count: 4;
   column-gap: 0.5em;
@@ -85,6 +89,10 @@
 .card-icon {
   font-size: 2em;
   padding-right: 0.25em;
+}
+
+figure:hover {
+  cursor: pointer;
 }
 
 // Tabs

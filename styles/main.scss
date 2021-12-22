@@ -28,6 +28,11 @@ div.hidden {
   box-shadow: 0 0 3px #ccc;
 }
 
+div.container {
+  width: 90%;
+  margin-bottom: 3em;
+}
+
 form {
   margin: inherit;
 }
@@ -74,88 +79,6 @@ h3.title {
   }
 }
 
-div.container {
-  width: 90%;
-  margin-bottom: 3em;
-}
-
-#owner-row {
-  margin-top: 0.9em;
-  display: flex;
-  img {
-    margin: 0.2em 0.6em 0 0;
-  }
-  .owner-text {
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-.hover-pointer:hover {
-  cursor: pointer;
-}
-
-#owner-row:hover {
-  cursor: pointer;
-}
-
-#resources-page {
-  margin-top: 48px;
-}
-
-div#dropdown.dropdown {
-  background-color: white;
-  position: absolute;
-  bottom: -0.0000000001;
-  margin: 0;
-  right: 0;
-  border: 0.1em solid #e5e5e5;
-
-  z-index: 2;
-}
-
-div#dropdown.hidden.dropdown a {
-  color: #111111;
-  text-align: center;
-}
-
-div.dropdown a i.fas.fa-heart {
-  position: relative;
-  top: 0.15em;
-}
-
-li.collection-item.avatar img.profile-picture.circle.profile {
-  left: 0em;
-  top: 0.65em;
-}
-
-.make-comment {
-  display: flex;
-  min-height: 50px;
-  align-items: flex-end;
-  margin-bottom: 5px;
-}
-
-.make-comment textarea {
-  flex: 1;
-}
-
-.logo {
-  font-family: "Lobster", cursive;
-  font-size: 2em;
-}
-
-.logo img {
-  height: 32px;
-  position: relative;
-  top: 5px;
-  padding-right: 1px;
-}
-
-figure:hover {
-  cursor: pointer;
-}
-
 .details-heart {
   float: right;
   display: flex;
@@ -168,58 +91,6 @@ figure:hover {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
-}
-
-.bright {
-  color: #ffb840;
-}
-
-#details-stars i:hover {
-  cursor: pointer;
-  color: #ffb840;
-}
-
-#two-star:hover + #one-star {
-  color: #ffb840;
-}
-
-#three-star:hover ~ #one-star {
-  color: #ffb840;
-}
-
-#three-star:hover + #two-star {
-  color: #ffb840;
-}
-
-#four-star:hover ~ #one-star {
-  color: #ffb840;
-}
-#four-star:hover ~ #two-star {
-  color: #ffb840;
-}
-
-#four-star:hover + #three-star {
-  color: #ffb840;
-}
-
-#five-star:hover ~ #one-star {
-  color: #ffb840;
-}
-
-#five-star:hover ~ #two-star {
-  color: #ffb840;
-}
-
-#five-star:hover ~ #three-star {
-  color: #ffb840;
-}
-
-#five-star:hover + #four-star {
-  color: #ffb840;
-}
-
-#details-rating-string {
-  padding-left: 0.3em;
 }
 
 .user-container {
