@@ -21,7 +21,7 @@ const thumbnailElementGenerator = (resource, videoHeight = 250) => {
   return { createScreenshot, createEmbedVideo };
 };
 
-const homepageSetup = (resource, currentUserId, $column) => {
+const cardSetup = (resource, currentUserId, $column) => {
   const {
     id,
     likes,
@@ -91,6 +91,7 @@ const homepageSetup = (resource, currentUserId, $column) => {
   const $cardImage = $("<div>")
     .addClass("card-image")
     .prepend($urlLink, $likeLink, $resourceMedia);
+
   const $resourceInfo = $card.prepend($cardImage, $cardContent, $cardAction);
   const $item = $figure.prepend($resourceInfo);
 
@@ -100,12 +101,7 @@ const homepageSetup = (resource, currentUserId, $column) => {
       updateView("resourceDetails", null, id);
     }
   });
-  registerLikeListener($likeLink, id);
 
-  $column.prepend($item);
-};
-
-const registerLikeListener = ($likeLink, id) => {
   $likeLink.on("click", async function () {
     const result = await likeResource(id);
 
@@ -114,6 +110,8 @@ const registerLikeListener = ($likeLink, id) => {
     }
     $likeLink.removeClass("liked").addClass("not-liked");
   });
+
+  $column.prepend($item);
 };
 
 const displayResourcesFunctionGenerator = () => {
@@ -132,9 +130,9 @@ const displayResourcesFunctionGenerator = () => {
 
       if (!renderedResources.length) return;
 
-      renderedResources.forEach((resource) => {
-        homepageSetup(resource, currentUserId, $column);
-      });
+      renderedResources.forEach((resource) =>
+        cardSetup(resource, currentUserId, $column)
+      );
     } catch (e) {
       console.log(e);
     }
