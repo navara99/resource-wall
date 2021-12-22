@@ -135,4 +135,5 @@ const renderMyResources = renderMyResourcesFunctionGenerator();
 const updateResourceDetails = updateResourceDetailsFunctionGenerator();
 const updateUserDetails = updateUserFunctionGenerator();
 const updateHeader = updateHeaderFunctionGenerator();
+const displayResources = displayResourcesFunctionGenerator();
 const updateView = updateViewFunctionGenerator();

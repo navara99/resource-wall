@@ -21,7 +21,7 @@ const thumbnailElementGenerator = (resource, videoHeight = 250) => {
   return { createScreenshot, createEmbedVideo };
 };
 
-const cardElementGenerator = (resource) => {
+const cardElementGenerator = (resource, currentUserId) => {
   const {
     id,
     likes,
@@ -34,6 +34,7 @@ const cardElementGenerator = (resource) => {
     username,
     is_video,
     url,
+    is_liked,
   } = resource;
 
   const { createScreenshot, createEmbedVideo } =
@@ -80,6 +81,13 @@ const cardElementGenerator = (resource) => {
     </div>
     `);
 
+  const colorClass = Number(is_liked) ? "liked" : "not-liked";
+  const getLikeLink = $(
+    `<a class="like-link ${colorClass}"><i class="fas fa-heart card-heart"></i></a>`
+  );
+
+  const $likeLink = currentUserId ? getLikeLink : $("");
+
   return {
     $cardAction,
     $resourceMedia,
@@ -87,6 +95,7 @@ const cardElementGenerator = (resource) => {
     $figure,
     $cardContent,
     $urlLink,
+    $likeLink,
   };
 };
 
@@ -101,64 +110,70 @@ const registerLikeListener = ($likeLink, id) => {
   });
 };
 
-const getLikeLink = (is_liked) => {
-  const colorClass = Number(is_liked) ? "liked" : "not-liked";
-  return $(
-    `<a class="like-link ${colorClass}"><i class="fas fa-heart card-heart"></i></a>`
-  );
-};
-
 const clearResources = () => {
   $("#columns").remove();
 };
 
-const displayResources = async (resources) => {
-  clearResources();
-  let renderedResources;
-  const { id: currentUserId } = await getMyDetails();
+const displayResourcesFunctionGenerator = () => {
+  const resourcesPage = $("#resources-page");
 
-  if (!resources) {
-    const result = await getAllResources();
-    const { allResources } = result;
-    renderedResources = allResources;
-  } else {
-    renderedResources = resources;
-  }
-  if (!renderedResources.length) return;
+  return async (resources) => {
+    clearResources();
 
-  const $column = $("<div>").attr("id", "columns");
+    try {
+      const { id: currentUserId } = await getMyDetails();
 
-  renderedResources.forEach((resource) => {
-    const { id, is_liked } = resource;
+      let renderedResources;
 
-    const {
-      $cardAction,
-      $resourceMedia,
-      $card,
-      $figure,
-      $cardContent,
-      $urlLink,
-    } = cardElementGenerator(resource);
-
-    const $likeLink = currentUserId ? getLikeLink(is_liked) : $("");
-    const $cardImage = $("<div>")
-      .addClass("card-image")
-      .prepend($urlLink, $likeLink, $resourceMedia);
-    const $resourceInfo = $card.prepend($cardImage, $cardContent, $cardAction);
-    const $item = $figure.prepend($resourceInfo);
-
-    $item.on("click", async (event) => {
-      const tagName = event.target.nodeName;
-      if (tagName !== "A" && tagName !== "I") {
-        updateView("resourceDetails", null, id);
+      if (!resources) {
+        const { allResources } = await getAllResources();
+        renderedResources = allResources;
+      } else {
+        renderedResources = resources;
       }
-    });
-    registerLikeListener($likeLink, id);
+      if (!renderedResources.length) return;
 
-    $column.prepend($item);
+      const $column = $("<div>").attr("id", "columns");
 
-    $("#resources-page").prepend($column);
-  });
+      renderedResources.forEach((resource) => {
+        const { id } = resource;
+
+        const {
+          $cardAction,
+          $resourceMedia,
+          $card,
+          $figure,
+          $cardContent,
+          $urlLink,
+          $likeLink,
+        } = cardElementGenerator(resource, currentUserId);
+
+        const $cardImage = $("<div>")
+          .addClass("card-image")
+          .prepend($urlLink, $likeLink, $resourceMedia);
+        const $resourceInfo = $card.prepend(
+          $cardImage,
+          $cardContent,
+          $cardAction
+        );
+        const $item = $figure.prepend($resourceInfo);
+
+        $item.on("click", async (event) => {
+          const tagName = event.target.nodeName;
+          if (tagName !== "A" && tagName !== "I") {
+            updateView("resourceDetails", null, id);
+          }
+        });
+        registerLikeListener($likeLink, id);
+
+        $column.prepend($item);
+
+        resourcesPage.prepend($column);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 };
 
 const registerSearchListener = () => {
