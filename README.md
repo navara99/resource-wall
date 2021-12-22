@@ -54,6 +54,9 @@
 - home.js
 - my-resources.js
 - scss files
+- query-helpers.js
+- routes/resources.js
+- routes/users.js
 
 ### history
 
