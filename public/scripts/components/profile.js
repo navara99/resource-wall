@@ -1,4 +1,4 @@
-const profilePageHandler = () => {
+const profileHelperFunctionGenerator = () => {
   const $updateProfileButton = $("#side-update-profile-button");
   const $profileButtonBorder = $("#profile-button-border");
   const $updateProfilePage = $("#update-profile-page");
