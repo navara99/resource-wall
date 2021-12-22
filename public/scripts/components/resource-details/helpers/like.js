@@ -32,11 +32,11 @@ const likeSetup = (resourceInfo, domObj) => {
     });
   };
 
-  const initLikeSetup = () => {
+  const initSetup = () => {
     updateNumOfLikes();
     updateHeart();
     likeIconEventListener();
   }
 
-  return initLikeSetup;
+  return initSetup;
 };
