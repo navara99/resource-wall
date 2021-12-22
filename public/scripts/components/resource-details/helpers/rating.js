@@ -62,7 +62,7 @@ const ratingSetup = (resourceInfo, domObj) => {
       try {
         if (current_username) {
           const isNewRating = await rateResource(id, `rating=${newRating}`);
-          console.log(isNewRating);
+
           if (isNewRating) {
             const totalRate = averageRating ? averageRating * numOfRating : 0;
             numOfRating++;
