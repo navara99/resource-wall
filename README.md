@@ -49,8 +49,9 @@
 
 - deploy the server
 - README.md
-- html in ejs (smaller files) (siu)
 - refactoring (siu)
+
+### history
 
 ### responsive
 - hide nav bar
