@@ -1,22 +1,23 @@
-const updateHeader = (userInfo) => {
+const updateHeaderFunctionGenerator = () => {
   const $userButtons = $("#user-buttons");
   const $noUserButtons = $("#no-user-buttons");
   const $floatingCreateResourceButton = $("#floating-create-resource-button");
-
-  const { id, profile_picture_url } = userInfo;
-
-  if (!id) {
-    $userButtons.hide();
-    $floatingCreateResourceButton.hide();
-    return $noUserButtons.show();
-  }
   $profilePicture = $("#profile-picture");
 
-  $profilePicture.attr("src", profile_picture_url);
+  return ({ id, profile_picture_url } ) => {
 
-  $noUserButtons.hide();
-  $userButtons.show();
-  $floatingCreateResourceButton.show();
+    if (!id) {
+      $userButtons.hide();
+      $floatingCreateResourceButton.hide();
+      return $noUserButtons.show();
+    }
+
+    $profilePicture.attr("src", profile_picture_url);
+
+    $noUserButtons.hide();
+    $userButtons.show();
+    $floatingCreateResourceButton.show();
+  };
 };
 
 const headerButtonsEventListener = () => {
