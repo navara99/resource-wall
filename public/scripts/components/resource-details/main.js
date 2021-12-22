@@ -119,7 +119,7 @@ const makeInfoObj = (id, details) => {
 
 const getMedia = async ({ id, is_video, media_url }, $media) => {
   const newMedia = await getHtmlFromAPI(id);
-  if (newMedia) return $media.html(newMedia.html);
+  if (newMedia.html) return $media.html(newMedia.html);
   const $newMedia = is_video
     ? createEmbedVideo(media_url)
     : createScreenshot(media_url);
