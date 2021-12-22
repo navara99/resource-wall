@@ -163,11 +163,8 @@ const myResourcesSetup = (resource, myId, $listContainer) => {
   };
 };
 
-
-
 // top-level function
 const renderMyResourcesFunctionGenerator = () => {
-  const $myResources = $("#my-resources-details");
   const $listContainer = $("#my-resource-list");
 
   const clearMyResources = () => {
@@ -180,6 +177,7 @@ const renderMyResourcesFunctionGenerator = () => {
     try {
       const { id } = await getMyDetails();
       const myResources = await getMyResources();
+      console.log(myResources);
 
       myResources.forEach((resource) => {
         myResourcesSetup(resource, id, $listContainer)();
