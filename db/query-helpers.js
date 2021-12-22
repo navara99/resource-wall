@@ -1,7 +1,8 @@
 const defaultProfilePicUrl =
   "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg";
 
-const getFirstRecord = (result) => result.rows[0];
+const getData = ({rows}) => rows;
+const getFirstRecord = (result) => getData(result)[0];
 
 const assignProfilePic = (userInfo, columnName) => {
   const { [columnName]: value } = userInfo;
@@ -16,8 +17,11 @@ const queryGenerator = (db) => {
     try {
       const result = await db.query(queryString, values);
       const userInfo = getFirstRecord(result);
-      if (userInfo && getDefaultProfilePic !== "1")
+
+      if (userInfo && getDefaultProfilePic !== "1") {
         assignProfilePic(userInfo, "profile_picture_url");
+      }
+
       return userInfo;
     } catch (err) {
       console.log(err);
@@ -172,7 +176,8 @@ const queryGenerator = (db) => {
 
     try {
       const result = await db.query(queryString, value);
-      return result.rows;
+      const data = getData(result);
+      return data;
     } catch (err) {
       console.log(err);
     }
@@ -273,15 +278,17 @@ const queryGenerator = (db) => {
     `;
 
     try {
-      const result = (await db.query(queryString, value)).rows;
+      const result = (await db.query(queryString, value));
+      const data = getData(result);
+      const firstData = getFirstRecord(result);
 
-      result.forEach((details) =>
+      data.forEach((details) =>
         assignProfilePic(details, "profile_picture_url")
       );
-      assignProfilePic(result[0], "my_profile_url");
-      assignProfilePic(result[0], "owner_url");
+      assignProfilePic(firstData, "my_profile_url");
+      assignProfilePic(firstData, "owner_url");
 
-      return result;
+      return data;
     } catch (err) {
       console.log(err);
     }
@@ -331,7 +338,9 @@ const queryGenerator = (db) => {
 
     try {
       const result = await db.query(queryString, value);
-      return result.rows;
+      const data = getData(result);
+
+      return data;
     } catch (err) {
       console.log(err);
     }
@@ -370,7 +379,9 @@ const queryGenerator = (db) => {
 
     try {
       const result = await db.query(queryString, value);
-      return result.rows;
+      const data = getData(result);
+
+      return data;
     } catch (err) {
       console.log(err);
     }
@@ -407,7 +418,9 @@ const queryGenerator = (db) => {
 
     try {
       const result = await db.query(queryString, value);
-      return result.rows;
+      const data = getData(result);
+
+      return data;
     } catch (err) {
       console.log(err.message);
     }
