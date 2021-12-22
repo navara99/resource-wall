@@ -1,89 +1,107 @@
 ## Features
 
-- users can save an external URL along with a title and description
-^ users should be able to search for already-saved resources created by any user
-^ users should be able to categorize any resource under a topic
-^ sers should be able to comment on any resource
-^ users should be able to rate any resource
-^ users should be able to like any resource
-^ users should be able to view all their own and all liked resources on one page ("My resources")
-^ users should be able to register, log in, log out and update their profile
-
 ### home page
+
 - display all the resources
-- users should be able to like any resource
-- display screenshot/embed video/images uploaded by the user
-- diplsay title, rating, number of likes, part of desciption, username
+- users can like any resource
+- display screenshot/embed video uploaded by the user
+- diplsay title, rating, number of likes, desciption, owner's username, added date
+- users can view resources by catergory
 
 ### login
-- email, password
+
+- users can login with email, password
+
+### logout
+
+- users can logout
 
 ### register
-- email(unique), password , username(unique)
+
+- users can regsiter with email(unique), password , username(unique)
 
 ### detail page of a single resource
-- owner can make resource public/private
-- users should be able to comment on any resource (just comment)
-- users should be able to rate any resource (rating, plus comment)
-- users should be able to like any resource
 
-### my & liked resources
-- users should be able to view all their own and all liked resources on one page ("My resources")
+- users can comment/rate/like on any resources
+
+### My resources
+
+- users can view all their own and all liked resources on one page
+- users can go to the details page when they click on the resource
+- owner can delete resource
+
+### update profile
+
+- users can update their profile (email, username, bio, first name, last name, link for profile picture)
+
+### change password
+
+- users can change their password
 
 ### user page
-- view username, bio, full name
 
-### my page
-- users should be able to update their profile (username, email, password[twice], profile picture)
+- users can view user's info (profile picture, username, bio, full name)
 
 ### new resource
-- save an external URL along with a title and description
-- users should be able to categorize any resource under a topic
+
+- users save an external URL along with a title and description
+- users can make resource public/private
+- users can categorize resource under a topic
 
 ### header
-- users should be able to search for already-saved resources created by any user
-- logout button / login link
-- view resources by catergory
+
+- users can search for already-saved resources created by any user
+- display logout button / login link
 
 ## To do list
 
 ### deploy the server
+
 ### README.md
 
 ### refactoring (siu)
+
 - home.js
 - my-resources.js
 - scss files
+
+### login
+
+- user can login with username
 
 ### history
 
 ### handle error
 
-### responsive
+### responsive design
 - hide nav bar
 
-### my & liked resources (Thar)
-- users can go to the details page when they click on the resource
-- owner can delete resource
+### edit page
 
-### edit page (stretch)
-- edit url, description, title, categories
-- owner can change public/private for all resources
+- edit url, description, title, category
+- change public/private
 
 ### home page
+
 - order reources by date
+- only show partial description if too long
+- test the tabs
 
 ### register
-- twice, included char and number, min length: 8
+- constrain on password, enter twice
 
 ### user page
+
 - view the user's resources
 
 ### new resource
+
 - upload image
 
 ### header
+
 - users should be able to search any user
+- go back to homepage when focused
 
 # LHL Node Skeleton
 
@@ -137,15 +155,16 @@ The following steps are only for _one_ of the group members to perform.
 
 1 homepage plus search (Thar)
 2 details page - gist (Siu)
- - rating, like (also on homepage), comment, go to my page/other user page
-3 make new resources (Both)
- - screenshot
- - video (dailymotion, Getty Images, codepen, instagram)
- - private/public
-4 my resources (Thar)
-  - filtering
-5 update profile (Both)
-6 login/logout/register (both)
+
+- rating, like (also on homepage), comment, go to my page/other user page
+  3 make new resources (Both)
+- screenshot
+- video (dailymotion, Getty Images, codepen, instagram)
+- private/public
+  4 my resources (Thar)
+- filtering
+  5 update profile (Both)
+  6 login/logout/register (both)
 
 — Show us what you built (demo)
 
