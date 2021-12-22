@@ -59,21 +59,25 @@ const ratingSetup = (resourceInfo, domObj) => {
   const ratingOnClick = ($elm, id, newRating) => {
     $elm.unbind();
     $elm.on("click", async () => {
-      if (current_username) {
-        const isNewRating = await rateResource(id, `rating=${newRating}`);
-        if (isNewRating) {
-          numOfRating++;
-          averageRating = averageRating
-            ? (averageRating * numOfRating + newRating) / numOfRating
-            : newRating;
-        } else {
-          averageRating =
-            (averageRating * numOfRating - currentRating + newRating) /
-            numOfRating;
+      try {
+        if (current_username) {
+          const isNewRating = await rateResource(id, `rating=${newRating}`);
+          console.log(isNewRating);
+          if (isNewRating) {
+            const totalRate = averageRating ? averageRating * numOfRating : 0;
+            numOfRating++;
+            averageRating = (totalRate + newRating) / numOfRating;
+          } else {
+            averageRating =
+              (averageRating * numOfRating - currentRating + newRating) /
+              numOfRating;
+          }
+          currentRating = newRating;
+          updateRating();
+          updateRatingStr();
         }
-        currentRating = newRating;
-        updateRating();
-        updateRatingStr();
+      } catch (e) {
+        console.log(e);
       }
     });
   };
