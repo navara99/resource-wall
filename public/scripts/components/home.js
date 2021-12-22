@@ -22,10 +22,38 @@ const thumbnailElementGenerator = (resource, videoHeight = 250) => {
 };
 
 const cardElementGenerator = (resource) => {
-  const { likes, number_of_comment, rating } = resource;
+  const {
+    id,
+    likes,
+    number_of_comment,
+    rating,
+    title,
+    description,
+    category,
+    created_on,
+    username,
+    is_video
+  } = resource;
 
-  const getCardAction = () => {
-    return $(`
+  const $cardContent = $(`
+    <div class="card-content" style="padding-top: 0;">
+      <h5><span>${title}</span></h5>
+      <p>${description}</p>
+      <br/>
+      <p><span>Added by:</span> @${username}</p>
+      <p><span>Added:</span> ${timestampToTimeAgo(created_on)}</p>
+      <p><span>Category:</span>
+        ${category[0] + category.substring(1).toLowerCase()}
+      </p>
+    </div>
+  `);
+
+  const { createScreenshot, createEmbedVideo } =
+    thumbnailElementGenerator(resource);
+
+  const $resourceMedia = is_video ? createEmbedVideo() : createScreenshot();
+
+  const $cardAction = $(`
     <div class="card-action">
       <div class="card-summary">
         <i class="fas fa-star card-icon bright"></i>${
@@ -40,23 +68,12 @@ const cardElementGenerator = (resource) => {
       </div>
     </div>
     `);
-  };
-  return { getCardAction };
-};
 
-const getCardContent = (title, description, category, created_on, username) => {
-  return $(`
-  <div class="card-content" style="padding-top: 0;">
-    <h5><span>${title}</span></h5>
-    <p>${description}</p>
-    <br/>
-    <p><span>Added by:</span> @${username}</p>
-    <p><span>Added:</span> ${timestampToTimeAgo(created_on)}</p>
-    <p><span>Category:</span> ${
-      category[0] + category.substring(1).toLowerCase()
-    }</p>
-  </div>
-  `);
+  const $card = $("<div>").addClass("card");
+
+  const $figure = $("<figure>").attr("id", id);
+
+  return { $cardAction, $resourceMedia, $card, $figure, $cardContent };
 };
 
 const getUrlLink = (url) => {
@@ -107,34 +124,13 @@ const displayResources = async (resources) => {
   renderedResources.forEach((resource) => {
     const {
       id,
-      title,
-      description,
       url,
-      created_on,
-      is_video,
       is_liked,
-      category,
-      username,
     } = resource;
 
-    const { createScreenshot, createEmbedVideo } =
-      thumbnailElementGenerator(resource);
+    const { $cardAction, $resourceMedia, $card, $figure, $cardContent } =
+      cardElementGenerator(resource);
 
-    const { getCardAction } = cardElementGenerator(resource);
-
-    const $card = $("<div>").addClass("card");
-
-    const $resourceMedia = is_video ? createEmbedVideo() : createScreenshot();
-    const $figure = $("<figure>").attr("id", id);
-
-    const $cardAction = getCardAction();
-    const $cardContent = getCardContent(
-      title,
-      description,
-      category,
-      created_on,
-      username
-    );
     const $urlLink = getUrlLink(url);
     const $likeLink = currentUserId ? getLikeLink(is_liked) : $("");
     const $cardImage = $("<div>")
