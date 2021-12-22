@@ -155,37 +155,41 @@ const myResourcesSetup = (resource, myId, $listContainer) => {
 
       $collection.prepend($thumbnail, $info, $stats);
       $listContainer.prepend($collection);
-      $("#my-resources-details").append($listContainer);
+      // console.log($listContainer);
+      // $myResources.append($listContainer);
       registerMyResourceButtonsListeners();
       registerMyResourceDetailsListener();
     }
   };
 };
 
-const clearMyResources = () => {
-  $("#my-resource-list").remove();
-};
+
 
 // top-level function
-const renderMyResources = async () => {
-  clearMyResources();
+const renderMyResourcesFunctionGenerator = () => {
+  const $myResources = $("#my-resources-details");
+  const $listContainer = $("#my-resource-list");
 
-  try {
-    const { id } = await getMyDetails();
-    const myResources = await getMyResources();
+  const clearMyResources = () => {
+    $listContainer.html("");
+  };
 
-    const $listContainer = $("<ul>")
-      .attr("id", "my-resource-list")
-      .addClass("collection comments");
+  return async () => {
+    clearMyResources();
 
-    myResources.forEach((resource) => {
-      myResourcesSetup(resource, id, $listContainer)();
-    });
+    try {
+      const { id } = await getMyDetails();
+      const myResources = await getMyResources();
 
-    $(".modal").modal();
-  } catch (err) {
-    console.log(err);
-  }
+      myResources.forEach((resource) => {
+        myResourcesSetup(resource, id, $listContainer)();
+      });
+
+      $(".modal").modal();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 };
 
 const registerCheckListeners = () => {

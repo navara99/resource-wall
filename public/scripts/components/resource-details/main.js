@@ -115,6 +115,10 @@ const makeInfoObj = (id, details) => {
 };
 
 const getMedia = async ({ id, is_video, media_url }, $media) => {
+  const { createEmbedVideo, createScreenshot } = thumbnailElementGenerator({
+    media_url,
+  });
+
   const newMedia = await getHtmlFromAPI(id);
   if (newMedia.html) return $media.html(newMedia.html);
   const $newMedia = is_video

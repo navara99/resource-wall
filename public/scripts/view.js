@@ -131,6 +131,7 @@ const updateViewFunctionGenerator = () => {
   };
 };
 
+const renderMyResources = renderMyResourcesFunctionGenerator();
 const updateResourceDetails = updateResourceDetailsFunctionGenerator();
 const updateUserDetails = updateUserFunctionGenerator();
 const updateHeader = updateHeaderFunctionGenerator();
