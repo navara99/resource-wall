@@ -147,13 +147,14 @@ module.exports = (db) => {
   });
 
   router.post("/", async (req, res) => {
-    const { is_private, category, url } = req.body;
+    let { is_private, category, url } = req.body;
+    is_private = is_private || false;
 
     const urlIsValid = isUri(url);
     if (!urlIsValid) {
       return res.status(400).json({ error: "This url is not valid." });
     }
-
+    console.log("156");
     const user_id = req.session.user_id;
     const omebedUrl = omebed(url);
     const encodedURI = encodeURIComponent(url);
