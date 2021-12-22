@@ -86,9 +86,9 @@ module.exports = (db) => {
   });
 
   router.get("/me", async (req, res) => {
-    try {
-      const { user_id } = req.session;
+    const { user_id } = req.session;
 
+    try {
       if (!user_id) return res.json({});
       const myResources = await getMyResources(user_id);
 
@@ -99,10 +99,10 @@ module.exports = (db) => {
   });
 
   router.get("/:id", async (req, res) => {
-    try {
-      const { user_id } = req.session;
-      const { id } = req.params;
+    const { user_id } = req.session;
+    const { id } = req.params;
 
+    try {
       const resourceDetails = await getAllDetailsOfResource(id, user_id);
 
       res.json(resourceDetails);
@@ -113,10 +113,9 @@ module.exports = (db) => {
 
   router.delete("/:id", async (req, res) => {
     const { user_id } = req.session;
+    const { id } = req.params;
 
     try {
-      const { id } = req.params;
-
       const result = await getAllDetailsOfResource(id, user_id);
       const { user_id: owner_id } = result[0];
 
@@ -130,9 +129,9 @@ module.exports = (db) => {
   });
 
   router.get("/media/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
+    const { id } = req.params;
 
+    try {
       const url = await getURLById(id);
       const encodeURL = encodeURIComponent(url);
 
