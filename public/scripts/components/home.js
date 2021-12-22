@@ -21,7 +21,7 @@ const thumbnailElementGenerator = (resource, videoHeight = 250) => {
   return { createScreenshot, createEmbedVideo };
 };
 
-const cardElementGenerator = (resource, currentUserId) => {
+const cardElementGenerator = (resource, currentUserId, $column) => {
   const {
     id,
     likes,
@@ -88,15 +88,21 @@ const cardElementGenerator = (resource, currentUserId) => {
 
   const $likeLink = currentUserId ? getLikeLink : $("");
 
-  return {
-    $cardAction,
-    $resourceMedia,
-    $card,
-    $figure,
-    $cardContent,
-    $urlLink,
-    $likeLink,
-  };
+  const $cardImage = $("<div>")
+    .addClass("card-image")
+    .prepend($urlLink, $likeLink, $resourceMedia);
+  const $resourceInfo = $card.prepend($cardImage, $cardContent, $cardAction);
+  const $item = $figure.prepend($resourceInfo);
+
+  $item.on("click", async (event) => {
+    const tagName = event.target.nodeName;
+    if (tagName !== "A" && tagName !== "I") {
+      updateView("resourceDetails", null, id);
+    }
+  });
+  registerLikeListener($likeLink, id);
+
+  $column.prepend($item);
 };
 
 const registerLikeListener = ($likeLink, id) => {
@@ -110,12 +116,14 @@ const registerLikeListener = ($likeLink, id) => {
   });
 };
 
-const clearResources = () => {
-  $("#columns").remove();
-};
+
 
 const displayResourcesFunctionGenerator = () => {
-  const resourcesPage = $("#resources-page");
+  const $column = $("#columns");
+
+  const clearResources = () => {
+    $column.html("");
+  };
 
   return async (resources) => {
     clearResources();
@@ -123,52 +131,12 @@ const displayResourcesFunctionGenerator = () => {
     try {
       const { id: currentUserId } = await getMyDetails();
 
-      let renderedResources;
+      const renderedResources = resources || (await getAllResources()).allResources;
 
-      if (!resources) {
-        const { allResources } = await getAllResources();
-        renderedResources = allResources;
-      } else {
-        renderedResources = resources;
-      }
       if (!renderedResources.length) return;
 
-      const $column = $("<div>").attr("id", "columns");
-
       renderedResources.forEach((resource) => {
-        const { id } = resource;
-
-        const {
-          $cardAction,
-          $resourceMedia,
-          $card,
-          $figure,
-          $cardContent,
-          $urlLink,
-          $likeLink,
-        } = cardElementGenerator(resource, currentUserId);
-
-        const $cardImage = $("<div>")
-          .addClass("card-image")
-          .prepend($urlLink, $likeLink, $resourceMedia);
-        const $resourceInfo = $card.prepend(
-          $cardImage,
-          $cardContent,
-          $cardAction
-        );
-        const $item = $figure.prepend($resourceInfo);
-
-        $item.on("click", async (event) => {
-          const tagName = event.target.nodeName;
-          if (tagName !== "A" && tagName !== "I") {
-            updateView("resourceDetails", null, id);
-          }
-        });
-        registerLikeListener($likeLink, id);
-
-        $column.prepend($item);
-
-        resourcesPage.prepend($column);
+        cardElementGenerator(resource, currentUserId, $column);
       });
     } catch (e) {
       console.log(e);
