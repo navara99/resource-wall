@@ -52,7 +52,7 @@ const initDisplay = (resourceInfo, domObj) => {
   $createdOn.text(timestampToTimeAgo(created_on));
 };
 
-const makeInfoObj = (details) => {
+const makeInfoObj = (id, details) => {
   const {
     description,
     url,
@@ -80,6 +80,7 @@ const makeInfoObj = (details) => {
     current_username,
     my_profile_url,
     number_of_comment,
+    number_of_like,
     currentLike: liked > 0 ? true : false,
   };
 
@@ -95,21 +96,26 @@ const makeInfoObj = (details) => {
     description,
     title,
   };
+
+  const infoForMedia = {
+    id,
+    is_video,
+    media_url,
+  };
+
   return {
     infoForSetUp,
     resourceInfo,
+    infoForMedia,
     title,
     rating,
     number_of_rating,
-    is_video,
-    media_url,
-    number_of_like,
     current_username,
     rated,
   };
 };
 
-const getMedia = async (id, is_video, media_url, $media) => {
+const getMedia = async ({ id, is_video, media_url }, $media) => {
   const newMedia = await getHtmlFromAPI(id);
   if (newMedia) return $media.html(newMedia.html);
   const $newMedia = is_video
@@ -159,22 +165,20 @@ const updateResourceDetails = () => {
       $media.html("");
 
       const {
-        domObjForSetUp,
-        domObj,
+        infoForSetUp,
+        resourceInfo,
+        infoForMedia,
         title,
         rating,
         number_of_rating,
-        is_video,
-        media_url,
-        number_of_like,
         current_username,
         rated,
-      } = makeInfoObj(resourceComments[0]);
+      } = makeInfoObj(id, resourceComments[0]);
 
       initDisplay(infoForSetUp, domObjForSetUp);
 
       // load media on the left
-      getMedia(id, is_video, media_url, $media);
+      getMedia(infoForMedia, $media);
 
       const { updateNumOfComment, makeComments } =
         commentHelperFunctionsGenerator(resourceComments, resourceInfo, domObj);
@@ -182,12 +186,12 @@ const updateResourceDetails = () => {
       updateNumOfComment();
       makeComments();
 
-      const { updateHeart, likeIconEventListener } =
+      const { updateHeart, likeIconEventListener, updateNumOfLikes } =
         likeHelperFunctionsGenerator(resourceInfo, domObj);
 
+      updateNumOfLikes();
       updateHeart();
       likeIconEventListener();
-      $likesNum.text(number_of_like);
 
       let averageRating = rating;
       let numOfRating = parseInt(number_of_rating);

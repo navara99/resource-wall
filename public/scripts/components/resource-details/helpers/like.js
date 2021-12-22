@@ -1,7 +1,11 @@
 const likeHelperFunctionsGenerator = (resourceInfo, domObj) => {
   const { $likeIcon, $likesNum } = domObj;
   const { current_username, id } = resourceInfo;
-  let { currentLike } = resourceInfo;
+  let { currentLike, number_of_like } = resourceInfo;
+
+  const updateNumOfLikes = () => {
+    $likesNum.text(number_of_like);
+  };
 
   const updateHeart = () => {
     if (currentLike) {
@@ -22,14 +26,12 @@ const likeHelperFunctionsGenerator = (resourceInfo, domObj) => {
         likeResource(id);
         currentLike = !currentLike;
         const numOfLike = $likesNum.text();
-        const newNumOfLike = currentLike
-          ? parseInt(numOfLike) + 1
-          : parseInt(numOfLike) - 1;
-        $likesNum.text(newNumOfLike);
-        updateHeart(currentLike);
+        number_of_like = currentLike ? number_of_like + 1 : number_of_like - 1;
+        updateNumOfLikes();
+        updateHeart();
       }
     });
   };
 
-  return { updateHeart, likeIconEventListener };
+  return { updateHeart, likeIconEventListener, updateNumOfLikes };
 };
