@@ -10,7 +10,7 @@
 
 ### login
 
-- users can login with email, password
+- users can login with email/username and password
 
 ### logout
 
@@ -59,13 +59,9 @@
 
 ### README.md
 
-### login
-
-- user can login with username
-
 ### history
 
-### handle error
+### handle error/hint
 
 ### responsive design
 
