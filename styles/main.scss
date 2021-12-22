@@ -1,4 +1,6 @@
 @import './nav.scss';
+@import './resource-details.scss';
+@import './my-resources.scss';
 
 body {
   overflow-x: hidden;
@@ -13,17 +15,12 @@ body {
   visibility: hidden;
 }
 
-div.resource-details-container.container {
-  display: none;
-  margin-top: 3em;
-  display: flex;
-  align-items: flex-start;
-}
-
 div.hidden {
   display: none;
   margin-top: 3em;
 }
+
+// PAGE CONTAINER
 
 .container {
   border-radius: 32px;
@@ -34,13 +31,8 @@ form {
   margin: inherit;
 }
 
-// PAGE CONTAINER
 
-.margin-container {
-  margin: 3em;
-  display: flex;
-  flex-direction: column;
-}
+
 
 .details {
   width: 50%;
