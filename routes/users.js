@@ -9,7 +9,7 @@ module.exports = (db) => {
   const { createNewUser, getUserByValue, updatePasswordById, updateUser } =
     queryGenerator(db);
 
-  router.post("/login", async(req, res) => {
+  router.post("/login", async (req, res) => {
     try {
       const { email, password } = req.body;
 
@@ -32,22 +32,24 @@ module.exports = (db) => {
     }
   });
 
-  router.post("/edit", async(req, res) => {
+  router.post("/edit", async (req, res) => {
     try {
       const userId = req.session.user_id;
       const { username, email } = req.body;
 
       const userWithSameUsername = await getUserByValue("username", username);
 
-      if (userWithSameUsername && userWithSameUsername.id !== userId)
+      if (userWithSameUsername && userWithSameUsername.id !== userId) {
         return res
           .status(400)
           .json({ error: "This username is already taken." });
+      }
 
       const userWithSameEmail = await getUserByValue("email", email);
 
-      if (userWithSameEmail && userWithSameEmail.id !== userId)
+      if (userWithSameEmail && userWithSameEmail.id !== userId) {
         return res.status(400).json({ error: "This email is already taken." });
+      }
 
       const newUserInfo = { userId, ...req.body };
 
@@ -59,7 +61,7 @@ module.exports = (db) => {
     }
   });
 
-  router.post("/password", async(req, res) => {
+  router.post("/password", async (req, res) => {
     try {
       const { user_id } = req.session;
       const { current_password, new_password, confirm_new_password } = req.body;
@@ -73,17 +75,19 @@ module.exports = (db) => {
         hashedPassword
       );
 
-      if (!correctPassword)
+      if (!correctPassword) {
         return res
           .status(400)
           .json({ error: "current password is incorrect." });
+      }
 
       const newPasswordIsConfirmed = new_password === confirm_new_password;
 
-      if (!newPasswordIsConfirmed)
+      if (!newPasswordIsConfirmed) {
         return res
           .status(400)
           .json({ error: "different inputs for new password." });
+      }
 
       const newHashedPassword = await bcrypt.hash(new_password, salt);
 
@@ -100,21 +104,23 @@ module.exports = (db) => {
     res.json({});
   });
 
-  router.post("/register", async(req, res) => {
+  router.post("/register", async (req, res) => {
     try {
       const { email, password, username } = req.body;
 
       const userWithSameUsername = await getUserByValue("username", username);
 
-      if (userWithSameUsername)
+      if (userWithSameUsername) {
         return res
           .status(400)
           .json({ error: "This username is already taken." });
+      }
 
       const userWithSameEmail = await getUserByValue("email", email);
 
-      if (userWithSameEmail)
+      if (userWithSameEmail) {
         return res.status(400).json({ error: "This email is already taken." });
+      }
 
       const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -129,7 +135,7 @@ module.exports = (db) => {
     }
   });
 
-  router.get("/me/:getDefaultPic", async(req, res) => {
+  router.get("/me/:getDefaultPic", async (req, res) => {
     try {
       const { getDefaultPic } = req.params;
       const { user_id } = req.session;
@@ -142,7 +148,7 @@ module.exports = (db) => {
     }
   });
 
-  router.get("/:id", async(req, res) => {
+  router.get("/:id", async (req, res) => {
     try {
       const { id } = req.params;
 
