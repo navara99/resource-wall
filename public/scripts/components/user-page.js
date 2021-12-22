@@ -10,7 +10,12 @@ const updateUserFunctionGenerator = () => {
     updateView("updateProfile");
   });
 
+  const clearResource = () => {
+    $resources.html("");
+  }
+
   return async (id) => {
+    clearResource();
     try {
       const { username, first_name, last_name, profile_picture_url, bio } = id
         ? await getUserDetails(id)
@@ -26,15 +31,26 @@ const updateUserFunctionGenerator = () => {
       updateView("userPage");
 
       const userId = id || 0;
-      const { resources } = await getUserResources(userId);
+      const { resources, id: profileId } = await getUserResources(userId);
 
       resources.forEach((resource) => {
-        console.log(resource);
-        // myResourcesSetup(resource, id, $resources)();
-      });
 
+        const { user_id, isPrivate } = resource;
+
+        const showMine = user_id === profileId && !isPrivate;
+
+        const allResourceInfo = {
+          ...resource,
+          showMine,
+          isMine: false,
+          showLiked: false,
+        };
+        console.log(showMine);
+        myResourcesSetup(allResourceInfo, $resources)();
+      });
     } catch (err) {
-      updateError(err);
+      // updateError(err);
+      console.log(err);
     }
   };
 };

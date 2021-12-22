@@ -1,4 +1,4 @@
-const myResourcesSetup = (resource, myId, $listContainer) => {
+const myResourcesSetup = (resource, $listContainer) => {
   const {
     title,
     url,
@@ -180,7 +180,7 @@ const renderMyResourcesFunctionGenerator = () => {
         const showMine = $("#mine-filter:checked").val() && user_id === id;
 
         const allResourceInfo = { ...resource, isMine, showLiked, showMine };
-        myResourcesSetup(allResourceInfo, id, $listContainer)();
+        myResourcesSetup(allResourceInfo, $listContainer)();
       });
 
       $(".modal").modal();
