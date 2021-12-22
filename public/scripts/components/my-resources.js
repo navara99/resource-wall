@@ -21,7 +21,6 @@ const createInfo = (
   username,
   resourceId
 ) => {
-
   return $(`
   <div class="text">
     <a class="my-resource-title" id=${resourceId}-my-resource >${title}</a>
@@ -29,7 +28,9 @@ const createInfo = (
     <div><span>Description: </span> ${description}</div>
     <div><span>Added by: </span> @${username}</div>
     <div><span>Added:</span> ${timestampToTimeAgo(created_on)}</div>
-    <div><span>Category:</span> ${category[0] + category.substring(1).toLowerCase()}</div>
+    <div><span>Category:</span> ${
+      category[0] + category.substring(1).toLowerCase()
+    }</div>
   </div>
   `);
 };
@@ -61,12 +62,10 @@ const registerMyResourceButtonsListeners = (resourceId, isMine) => {
       renderMyResources();
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   });
 
-  $(`#${resourceId}-edit`).on("click", function (e) { });
-
+  $(`#${resourceId}-edit`).on("click", function (e) {});
 };
 
 const getActionButtons = (resourceId, isMine) => {
@@ -93,7 +92,6 @@ const getActionButtons = (resourceId, isMine) => {
 };
 
 const getStats = (likes, ratings, comments, resourceId, isMine) => {
-
   return $(`
   <div class="stat-container">
     <div class="stat">
@@ -118,12 +116,10 @@ const getStats = (likes, ratings, comments, resourceId, isMine) => {
 };
 
 const registerMyResourceDetailsListener = (resourceId) => {
-
   $(`#${resourceId}-my-resource`).on("click", function (e) {
     const [id] = $(this).attr("id").split("-");
     updateView("resourceDetails", null, id);
   });
-
 };
 
 const clearMyResources = () => {
@@ -183,19 +179,25 @@ const renderMyResources = async () => {
         if (isMine) {
           const $modal = createDeleteModal(title, resourceId);
           $("body").prepend($modal);
-        };
-        const $stats = getStats(likes, rating, number_of_comment, resourceId, isMine);
+        }
+        const $stats = getStats(
+          likes,
+          rating,
+          number_of_comment,
+          resourceId,
+          isMine
+        );
         $collection.prepend($thumbnail, $info, $stats);
         $listContainer.prepend($collection);
         $("#my-resources-details").append($listContainer);
         registerMyResourceButtonsListeners(resourceId, isMine);
         registerMyResourceDetailsListener(resourceId);
-      };
+      }
     });
-    $('.modal').modal();
+    $(".modal").modal();
   } catch (err) {
     console.log(err);
-  };
+  }
 };
 
 const registerCheckListeners = async () => {
