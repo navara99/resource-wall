@@ -1,3 +1,109 @@
+#my-resource-list {
+  transition: background-color 0.5s;
+  box-shadow: none;
+
+  .text {
+    a {
+      &:hover {
+        background-color: inherit;
+      }
+    }
+
+    padding-right: 2em;
+    width: 50%;
+
+    .my-resource-title {
+      cursor: pointer;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    div {
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    color: black;
+    padding-bottom: 1.5em;
+  }
+}
+
+#my-resources-details {
+  overflow: auto;
+  width: 100%;
+
+  .my-resource-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-width: 100%;
+    h3 {
+      flex: 1;
+    }
+  }
+}
+
+#my-resources-filter {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  font-weight: bold;
+}
+
+.thumbnail-container {
+  height: 150px;
+}
+
+.stat-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .stat,
+  .stat-column {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    .fa-heart {
+      color: #db565b;
+    }
+  }
+
+  .stat-column {
+    padding-right: 1em;
+  }
+
+  .resource-actions {
+    padding-top: 1em;
+    display: flex;
+
+    a {
+      margin-right: 1em;
+    }
+  }
+}
+
+// MODAL
+
+#close-confirm-delete {
+  background-color: transparent;
+  float: right;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 // LAYOUT
 
 .margin-container {
@@ -8,4 +114,41 @@
 
 .content-container {
   margin: 2.5em 0;
+}
+
+div.left-navbar {
+  margin-right: 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  div.tab {
+    font-size: 1.2em;
+    padding: 0.4em 0.6em;
+    border-radius: 12px;
+    position: relative;
+    margin: 0.5em 0;
+  }
+
+  div.active {
+    background-color: #003566;
+    position: absolute;
+    left: 7%;
+    right: 7%;
+    height: 3px;
+    bottom: 0px;
+    border-radius: 10px;
+  }
+
+  div.tab:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+}
+
+.settings {
+  flex: 1;
+}
+
+.settings-container {
+  display: flex;
 }

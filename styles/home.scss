@@ -86,3 +86,15 @@
   font-size: 2em;
   padding-right: 0.25em;
 }
+
+// Tabs
+
+.tabs .tab a {
+  cursor: pointer;
+  background-color: #f8f8ff;
+  font-weight: bold;
+}
+
+.tabs {
+  border-bottom: 1px solid rgba(33, 150, 243, 1);
+}
