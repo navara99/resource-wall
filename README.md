@@ -7,6 +7,7 @@
 - display screenshot/embed video uploaded by the user
 - diplsay title, rating, number of likes, desciption, owner's username, added date
 - users can view resources by catergory
+- only show partial title/description if too long
 
 ### login
 
@@ -29,6 +30,7 @@
 - users can view all their own and all liked resources on one page (filter function)
 - users can go to the details page when they click on the resource
 - owner can delete resource
+- only show partial title/description if too long
 
 ### update profile
 
@@ -78,12 +80,6 @@
 ### home page
 
 - order reources by date
-- only show partial description if too long
-- test the tabs
-
-### My resources
-
-- only show partial description if too long
 
 ### user page
 
