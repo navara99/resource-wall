@@ -105,9 +105,9 @@ const searchResource = (searchQuery) => {
   });
 };
 
-const getMyResources = () => {
+const getMyResources = (id) => {
   return $.ajax({
-    url: `/api/resources/me`,
+    url: `/api/resources/user/${id}`,
   });
 };
 

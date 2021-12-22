@@ -85,12 +85,12 @@ module.exports = (db) => {
     }
   });
 
-  router.get("/me", async (req, res) => {
-    const { user_id } = req.session;
+  router.get("/user/:userId", async (req, res) => {
+    const { userId } = req.params;
 
     try {
-      if (!user_id) return res.json({});
-      const myResources = await getMyResources(user_id);
+      if (!userId) return res.json({});
+      const myResources = await getMyResources(userId);
 
       res.json(myResources);
     } catch (err) {

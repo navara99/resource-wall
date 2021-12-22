@@ -25,6 +25,13 @@ const updateUserFunctionGenerator = () => {
       $("#user-profile-picture").attr("src", profile_picture_url);
       updateView("userPage");
 
+      const userId = id || (await getMyDetails()).id;
+      const myResources = await getMyResources(userId);
+
+      myResources.forEach((resource) => {
+        myResourcesSetup(resource, id, $listContainer)();
+      });
+
     } catch (err) {
       updateError(err);
     }

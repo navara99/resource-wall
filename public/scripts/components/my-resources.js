@@ -175,7 +175,7 @@ const renderMyResourcesFunctionGenerator = () => {
 
     try {
       const { id } = await getMyDetails();
-      const myResources = await getMyResources();
+      const myResources = await getMyResources(id);
 
       myResources.forEach((resource) => {
         myResourcesSetup(resource, id, $listContainer)();
