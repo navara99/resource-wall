@@ -140,9 +140,9 @@ const myResourcesSetup = (resource, myId, $listContainer) => {
   const showLiked =
     $("#liked-filter:checked").val() &&
     Number(is_liked) === 1 &&
-    user_id !== id;
+    user_id !== myId;
 
-  const showMine = $("#mine-filter:checked").val() && user_id === id;
+  const showMine = $("#mine-filter:checked").val() && user_id === myId;
 
   return () => {
     if (showLiked || showMine) {
@@ -155,8 +155,7 @@ const myResourcesSetup = (resource, myId, $listContainer) => {
 
       $collection.prepend($thumbnail, $info, $stats);
       $listContainer.prepend($collection);
-      // console.log($listContainer);
-      // $myResources.append($listContainer);
+
       registerMyResourceButtonsListeners();
       registerMyResourceDetailsListener();
     }
@@ -177,7 +176,6 @@ const renderMyResourcesFunctionGenerator = () => {
     try {
       const { id } = await getMyDetails();
       const myResources = await getMyResources();
-      console.log(myResources);
 
       myResources.forEach((resource) => {
         myResourcesSetup(resource, id, $listContainer)();
