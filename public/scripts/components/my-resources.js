@@ -42,13 +42,13 @@ const myResourcesSetup = (resource, myId, $listContainer) => {
 
   const $info = $(`
     <div class="text">
-      <a class="my-resource-title" id=${id}-my-resource >${title}</a>
+      <a class="my-resource-title" id=${id}-my-resource >${partialText(title,10)}</a>
       <div>
         <span>URL: </span>
         <a href="${url}" onclick="event.stopPropagation();" class="paragraph truncate">${url}</a>
       </div>
       <div>
-        <span>Description: </span> ${description}
+        <span>Description: </span> ${partialText(description, 35)}
       </div>
       <div>
         <span>Added by: </span> @${username}

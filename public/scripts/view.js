@@ -7,14 +7,6 @@ $(() => {
   updateView("resources");
 });
 
-const {
-  showUpdateProfilePage,
-  profileButtonsEventListener,
-  prefillProfileForm,
-  showChangePasswordPage,
-  showMyResources,
-} = profileHelperFunctionGenerator();
-
 const eventListeners = () => {
   registerTabListener();
   registerCheckListeners();
@@ -26,6 +18,14 @@ const eventListeners = () => {
   changePasswordEventListener();
   updateProfileEventListener();
   profileButtonsEventListener();
+};
+
+const partialText = (text, num) => {
+  const wordArr = text.split(" ");
+  const wordCount = wordArr.length;
+  const TextIsTooLong = wordCount > num;
+  if (!TextIsTooLong) return text;
+  return wordArr.slice(0, num).join(" ") + "...";
 };
 
 const updateTitleURL = (title, url) => {
@@ -138,4 +138,11 @@ const updateUserDetails = updateUserFunctionGenerator();
 const updateHeader = updateHeaderFunctionGenerator();
 const updateError = updateErrorFunctionGenerator();
 const displayResources = displayResourcesFunctionGenerator();
+const {
+  showUpdateProfilePage,
+  profileButtonsEventListener,
+  prefillProfileForm,
+  showChangePasswordPage,
+  showMyResources,
+} = profileHelperFunctionGenerator();
 const updateView = updateViewFunctionGenerator();

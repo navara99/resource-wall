@@ -42,8 +42,8 @@ const cardSetup = (resource, currentUserId, $column) => {
 
   const $cardContent = $(`
     <div class="card-content" style="padding-top: 0;">
-      <h5><span>${title}</span></h5>
-      <p>${description}</p>
+      <h5><span>${partialText(title, 10)}</span></h5>
+      <p>${partialText(description, 35)}</p>
       <br/>
       <p><span>Added by:</span> @${username}</p>
       <p><span>Added:</span> ${timestampToTimeAgo(created_on)}</p>
