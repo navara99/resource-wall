@@ -61,7 +61,6 @@
 
 ### refactoring (siu)
 
-- home.js
 - scss files
 
 ### login
