@@ -123,7 +123,7 @@ const getMedia = async ({ id, is_video, media_url }, $media) => {
   $media.append($newMedia);
 };
 
-const updateResourceDetails = () => {
+const updateResourceDetailsFunctionGenerator = () => {
   const $media = $("#details-media");
 
   const $1Star = $("#one-star");

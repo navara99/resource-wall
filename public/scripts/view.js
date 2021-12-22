@@ -15,7 +15,7 @@ const {
   showMyResources,
 } = profilePageHandler();
 
-const updateResourceDeailsPage = updateResourceDetails();
+const updateResourceDetails = updateResourceDetailsFunctionGenerator();
 const updateUserDetailsPage = updateUserPage();
 
 const eventListeners = () => {
@@ -122,7 +122,7 @@ const viewHandler = () => {
       updateTitleURL("Create New Resource", "create-resource");
       break;
     case "resourceDetails":
-      updateResourceDeailsPage(resourceId).then((title) => {
+      updateResourceDetails(resourceId).then((title) => {
         $resourceDetails.show();
         updateTitleURL(
           `${title} - Resource Details`,
