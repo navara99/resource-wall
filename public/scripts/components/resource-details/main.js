@@ -80,7 +80,7 @@ const makeInfoObj = (id, details) => {
     current_username,
     my_profile_url,
     number_of_comment,
-    number_of_like,
+    numOfLike: parseInt(number_of_like),
     currentRating: rated,
     averageRating: rating,
     numOfRating: parseInt(number_of_rating),

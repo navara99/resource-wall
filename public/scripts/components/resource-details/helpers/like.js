@@ -1,10 +1,10 @@
 const likeSetup = (resourceInfo, domObj) => {
   const { $likeIcon, $likesNum } = domObj;
   const { current_username, id } = resourceInfo;
-  let { currentLike, number_of_like } = resourceInfo;
+  let { currentLike, numOfLike } = resourceInfo;
 
   const updateNumOfLikes = () => {
-    $likesNum.text(number_of_like);
+    $likesNum.text(numOfLike);
   };
 
   const updateHeart = () => {
@@ -25,7 +25,7 @@ const likeSetup = (resourceInfo, domObj) => {
       if (current_username) {
         likeResource(id);
         currentLike = !currentLike;
-        number_of_like = currentLike ? number_of_like + 1 : number_of_like - 1;
+        numOfLike = currentLike ? numOfLike + 1 : numOfLike - 1;
         updateNumOfLikes();
         updateHeart();
       }
