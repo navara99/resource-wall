@@ -53,6 +53,7 @@
 ### refactoring (siu)
 - home.js
 - my-resources.js
+- scss files
 
 ### history
 
