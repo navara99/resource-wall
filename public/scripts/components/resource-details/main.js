@@ -87,7 +87,7 @@ const makeInfoObj = (id, details) => {
     currentLike: liked > 0 ? true : false,
   };
 
-  const infoForSetUp = {
+  const infoForSetup = {
     id,
     owner_id,
     first_name,
@@ -107,7 +107,7 @@ const makeInfoObj = (id, details) => {
   };
 
   return {
-    infoForSetUp,
+    infoForSetup,
     resourceInfo,
     infoForMedia,
     title,
@@ -147,7 +147,7 @@ const updateResourceDetails = () => {
     $detailsStars: $("#details-stars"),
   };
 
-  const domObjForSetUp = {
+  const domObjForSetup = {
     $mediaURL: $("#details-link-on-media"),
     $ownerSection: $("#owner_profile-picture"),
     $ownerName: $("#details-owner-name"),
@@ -166,12 +166,12 @@ const updateResourceDetails = () => {
 
       $media.html("");
 
-      const { infoForSetUp, resourceInfo, infoForMedia, title } = makeInfoObj(
+      const { infoForSetup, resourceInfo, infoForMedia, title } = makeInfoObj(
         id,
         resourceComments[0]
       );
 
-      initDisplay(infoForSetUp, domObjForSetUp);
+      initDisplay(infoForSetup, domObjForSetup);
 
       // load media on the left
       getMedia(infoForMedia, $media);
@@ -182,12 +182,7 @@ const updateResourceDetails = () => {
       updateNumOfComment();
       makeComments();
 
-      const { updateHeart, likeIconEventListener, updateNumOfLikes } =
-        likeHelperFunctionsGenerator(resourceInfo, domObj);
-
-      updateNumOfLikes();
-      updateHeart();
-      likeIconEventListener();
+      likeSetup(resourceInfo, domObj)();
 
       const { initRatingSetup } = ratingHelperFunctionsGenerator(
         resourceInfo,
