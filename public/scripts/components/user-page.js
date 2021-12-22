@@ -29,7 +29,8 @@ const updateUserFunctionGenerator = () => {
       const { resources } = await getUserResources(userId);
 
       resources.forEach((resource) => {
-        myResourcesSetup(resource, id, $resources)();
+        console.log(resource);
+        // myResourcesSetup(resource, id, $resources)();
       });
 
     } catch (err) {

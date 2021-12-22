@@ -12,11 +12,11 @@ const myResourcesSetup = (resource, myId, $listContainer) => {
     id,
     is_video,
     media_url,
-    user_id,
-    is_liked,
+    isMine,
+    showLiked,
+    showMine
   } = resource;
 
-  const isMine = user_id === myId;
   const videoHeight = 150;
 
   const { createEmbedVideo, createScreenshot } = thumbnailElementGenerator(
@@ -140,13 +140,6 @@ const myResourcesSetup = (resource, myId, $listContainer) => {
     });
   };
 
-  const showLiked =
-    $("#liked-filter:checked").val() &&
-    Number(is_liked) === 1 &&
-    user_id !== myId;
-
-  const showMine = $("#mine-filter:checked").val() && user_id === myId;
-
   return () => {
     if (showLiked || showMine) {
       const $collection = $(`<li class="collection-item"></li>`);
@@ -177,7 +170,17 @@ const renderMyResourcesFunctionGenerator = () => {
       const { id, resources } = await getUserResources(0);
 
       resources.forEach((resource) => {
-        myResourcesSetup(resource, id, $listContainer)();
+        const { user_id, is_liked } = resource;
+
+        const isMine = user_id === id;
+        const showLiked =
+          $("#liked-filter:checked").val() &&
+          Number(is_liked) === 1 &&
+          user_id !== id;
+        const showMine = $("#mine-filter:checked").val() && user_id === id;
+
+        const allResourceInfo = { ...resource, isMine, showLiked, showMine };
+        myResourcesSetup(allResourceInfo, id, $listContainer)();
       });
 
       $(".modal").modal();
