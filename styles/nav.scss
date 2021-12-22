@@ -1,0 +1,44 @@
+header {
+  nav {
+    background-color: #003566;
+  }
+}
+
+.logo {
+  margin: 0 0.7em;
+}
+
+.search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+#search {
+  background-color: white;
+  border-radius: 200px;
+  height: 70%;
+  position: relative;
+  top: 4px;
+}
+
+a.profile {
+  height: 68px;
+}
+
+div.profile {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+img.profile {
+  height: 2.5em;
+}
+
+.nav-wrapper {
+  display: flex;
+  flex-wrap: no-wrap;
+  align-items: center;
+  justify-content: space-between;
+}
