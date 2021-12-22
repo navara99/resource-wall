@@ -146,12 +146,9 @@ const myResourcesSetup = (resource, myId, $listContainer) => {
 
   return () => {
     if (showLiked || showMine) {
-      const $collection = $("<li>");
-      $collection.addClass("collection-item");
+      const $collection = $(`<li class="collection-item"></li>`);
 
-      if (isMine) {
-        $("body").prepend($modal);
-      }
+      if (isMine) $("body").prepend($modal);
 
       $collection.prepend($thumbnail, $info, $stats);
       $listContainer.prepend($collection);
