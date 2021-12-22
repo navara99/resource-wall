@@ -176,12 +176,7 @@ const updateResourceDetails = () => {
       // load media on the left
       getMedia(infoForMedia, $media);
 
-      const { updateNumOfComment, makeComments } =
-        commentHelperFunctionsGenerator(resourceComments, resourceInfo, domObj);
-
-      updateNumOfComment();
-      makeComments();
-
+      commentSetup(resourceComments, resourceInfo, domObj)();
       likeSetup(resourceInfo, domObj)();
 
       const { initRatingSetup } = ratingHelperFunctionsGenerator(

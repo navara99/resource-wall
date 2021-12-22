@@ -44,7 +44,7 @@ const commentForm = (imageURL) => {
   return elm;
 };
 
-const commentHelperFunctionsGenerator = (
+const commentSetup = (
   commentDetails,
   resourceInfo,
   domObj
@@ -115,5 +115,10 @@ const commentHelperFunctionsGenerator = (
     }
   };
 
-  return { updateNumOfComment, makeComments };
+  const initSetUp = () => {
+    updateNumOfComment();
+      makeComments();
+  }
+
+  return initSetUp;
 };
