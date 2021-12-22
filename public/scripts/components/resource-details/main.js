@@ -127,9 +127,33 @@ const getMedia = async ({ id, is_video, media_url }, $media) => {
   $media.append($newMedia);
 };
 
-const updateResourceDetailsFunctionGenerator = () => {
-  const $media = $("#details-media");
+const resourceDetailsSetup = async (id, domObj) => {
+  try {
+    const resourceComments = await getdetailsOfResources(id);
 
+    domObj.$media.html("");
+
+    const { infoForSetup, resourceInfo, infoForMedia, title } = makeInfoObj(
+      id,
+      resourceComments[0]
+    );
+
+    initDisplay(infoForSetup, domObj);
+
+    // load media on the left
+    getMedia(infoForMedia, domObj.$media);
+
+    commentSetup(resourceComments, resourceInfo, domObj)();
+    likeSetup(resourceInfo, domObj)();
+    ratingSetup(resourceInfo, domObj)();
+
+    return title;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const updateResourceDetailsFunctionGenerator = () => {
   const $1Star = $("#one-star");
   const $2Star = $("#two-star");
   const $3Star = $("#three-star");
@@ -137,6 +161,7 @@ const updateResourceDetailsFunctionGenerator = () => {
   const $5Star = $("#five-star");
 
   const domObj = {
+    $media: $("#details-media"),
     $likesNum: $("#details-likes-num"),
     $numOfComment: $("#details-num-of-comments"),
     $detailsComments: $("#details-comments"),
@@ -146,9 +171,6 @@ const updateResourceDetailsFunctionGenerator = () => {
     $averageRating: $("#details-average-rating"),
     $ratingString: $("#details-rating-string"),
     $detailsStars: $("#details-stars"),
-  };
-
-  const domObjForSetup = {
     $mediaURL: $("#details-link-on-media"),
     $ownerSection: $("#owner_profile-picture"),
     $ownerName: $("#details-owner-name"),
@@ -161,29 +183,5 @@ const updateResourceDetailsFunctionGenerator = () => {
     $displayLink: $("#details-display-link"),
   };
 
-  return async (id) => {
-    try {
-      const resourceComments = await getdetailsOfResources(id);
-
-      $media.html("");
-
-      const { infoForSetup, resourceInfo, infoForMedia, title } = makeInfoObj(
-        id,
-        resourceComments[0]
-      );
-
-      initDisplay(infoForSetup, domObjForSetup);
-
-      // load media on the left
-      getMedia(infoForMedia, $media);
-
-      commentSetup(resourceComments, resourceInfo, domObj)();
-      likeSetup(resourceInfo, domObj)();
-      ratingSetup(resourceInfo, domObj)();
-
-      return title;
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  return (id) => resourceDetailsSetup(id, domObj);
 };
