@@ -52,6 +52,63 @@ const initDisplay = (resourceInfo, domObj) => {
   $createdOn.text(timestampToTimeAgo(created_on));
 };
 
+const makeInfoObj = (details) => {
+  const {
+    description,
+    url,
+    title,
+    rating,
+    number_of_rating,
+    number_of_comment,
+    my_profile_url,
+    is_video,
+    media_url,
+    number_of_like,
+    liked,
+    current_username,
+    rated,
+    created_on,
+    owner_username,
+    owner_id,
+    first_name,
+    last_name,
+    owner_url,
+  } = details;
+
+  const resourceInfo = {
+    id,
+    current_username,
+    my_profile_url,
+    number_of_comment,
+    currentLike: liked > 0 ? true : false,
+  };
+
+  const infoForSetUp = {
+    id,
+    owner_id,
+    first_name,
+    last_name,
+    owner_username,
+    owner_url,
+    created_on,
+    url,
+    description,
+    title,
+  };
+  return {
+    infoForSetUp,
+    resourceInfo,
+    title,
+    rating,
+    number_of_rating,
+    is_video,
+    media_url,
+    number_of_like,
+    current_username,
+    rated,
+  };
+};
+
 const getMedia = async (id, is_video, media_url, $media) => {
   const newMedia = await getHtmlFromAPI(id);
   if (newMedia) return $media.html(newMedia.html);
@@ -100,48 +157,19 @@ const updateResourceDetails = () => {
       const resourceComments = await getdetailsOfResources(id);
 
       $media.html("");
+
       const {
-        description,
-        url,
+        domObjForSetUp,
+        domObj,
         title,
         rating,
         number_of_rating,
-        number_of_comment,
-        my_profile_url,
         is_video,
         media_url,
         number_of_like,
-        liked,
         current_username,
         rated,
-        created_on,
-        owner_username,
-        owner_id,
-        first_name,
-        last_name,
-        owner_url,
-      } = resourceComments[0];
-
-      const resourceInfo = {
-        id,
-        current_username,
-        my_profile_url,
-        number_of_comment,
-        currentLike: liked > 0 ? true : false,
-      };
-
-      const infoForSetUp = {
-        id,
-        owner_id,
-        first_name,
-        last_name,
-        owner_username,
-        owner_url,
-        created_on,
-        url,
-        description,
-        title,
-      };
+      } = makeInfoObj(resourceComments[0]);
 
       initDisplay(infoForSetUp, domObjForSetUp);
 
