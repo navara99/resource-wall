@@ -47,8 +47,8 @@
 
 ## To do list
 
-- deploy the server
-- README.md
+### deploy the server
+### README.md
 
 ### refactoring (siu)
 - home.js
