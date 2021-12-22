@@ -32,8 +32,12 @@ const cardElementGenerator = (resource) => {
     category,
     created_on,
     username,
-    is_video
+    is_video,
+    url,
   } = resource;
+
+  const { createScreenshot, createEmbedVideo } =
+    thumbnailElementGenerator(resource);
 
   const $cardContent = $(`
     <div class="card-content" style="padding-top: 0;">
@@ -47,9 +51,6 @@ const cardElementGenerator = (resource) => {
       </p>
     </div>
   `);
-
-  const { createScreenshot, createEmbedVideo } =
-    thumbnailElementGenerator(resource);
 
   const $resourceMedia = is_video ? createEmbedVideo() : createScreenshot();
 
@@ -73,15 +74,20 @@ const cardElementGenerator = (resource) => {
 
   const $figure = $("<figure>").attr("id", id);
 
-  return { $cardAction, $resourceMedia, $card, $figure, $cardContent };
-};
+  const $urlLink = $(`
+    <div class="url-wrapper truncate">
+      <a href=${url} class="card-url btn-flat" target="_blank">${url}</a>
+    </div>
+    `);
 
-const getUrlLink = (url) => {
-  return $(`
-  <div class="url-wrapper truncate">
-    <a href=${url} class="card-url btn-flat" target="_blank">${url}</a>
-  </div>
-  `);
+  return {
+    $cardAction,
+    $resourceMedia,
+    $card,
+    $figure,
+    $cardContent,
+    $urlLink,
+  };
 };
 
 const registerLikeListener = ($likeLink, id) => {
@@ -110,6 +116,7 @@ const displayResources = async (resources) => {
   clearResources();
   let renderedResources;
   const { id: currentUserId } = await getMyDetails();
+
   if (!resources) {
     const result = await getAllResources();
     const { allResources } = result;
@@ -122,16 +129,17 @@ const displayResources = async (resources) => {
   const $column = $("<div>").attr("id", "columns");
 
   renderedResources.forEach((resource) => {
+    const { id, is_liked } = resource;
+
     const {
-      id,
-      url,
-      is_liked,
-    } = resource;
+      $cardAction,
+      $resourceMedia,
+      $card,
+      $figure,
+      $cardContent,
+      $urlLink,
+    } = cardElementGenerator(resource);
 
-    const { $cardAction, $resourceMedia, $card, $figure, $cardContent } =
-      cardElementGenerator(resource);
-
-    const $urlLink = getUrlLink(url);
     const $likeLink = currentUserId ? getLikeLink(is_liked) : $("");
     const $cardImage = $("<div>")
       .addClass("card-image")
