@@ -6,27 +6,32 @@ const getHostname = (url) => {
   return parser.hostname;
 };
 
-const initDisplay = (
-  $mediaURL,
-  owner_id,
-  $ownerSection,
-  first_name,
-  last_name,
-  owner_username,
-  $ownerName,
-  $createdOn,
-  owner_url,
-  $ownerProfilePicture,
-  created_on,
-  url,
-  description,
-  $title,
-  title,
-  $mediaDisplayedURL,
-  $descriptions,
-  $link,
-  $displayLink
-) => {
+const initDisplay = (resourceInfo, domObj) => {
+  const {
+    owner_id,
+    first_name,
+    last_name,
+    owner_username,
+    owner_url,
+    created_on,
+    url,
+    description,
+    title,
+  } = resourceInfo;
+
+  const {
+    $mediaURL,
+    $ownerSection,
+    $ownerName,
+    $createdOn,
+    $title,
+    $ownerProfilePicture,
+    $mediaDisplayedURL,
+    $descriptions,
+    $link,
+    $displayLink,
+  } = domObj;
+
   const hostname = getHostname(url);
 
   $mediaDisplayedURL.text(hostname);
@@ -57,18 +62,9 @@ const getMedia = async (id, is_video, media_url, $media) => {
 };
 
 const updateResourceDetails = () => {
-  const $descriptions = $("#details-desciption");
-  const $mediaURL = $("#details-link-on-media");
-  const $mediaDisplayedURL = $("#details-display-link-on-media");
-  const $title = $("#details-title");
-  const $link = $("#details-link");
-  const $displayLink = $("#details-display-link");
   const $averageRating = $("#details-average-rating");
-  const $numOfComment = $("#details-num-of-comments");
-  const $detailsComments = $("#details-comments");
   const $media = $("#details-media");
   const $likesNum = $("#details-likes-num");
-  const $likeIcon = $("#details-like-icon");
   const $ratingString = $("#details-rating-string");
   const $1Star = $("#one-star");
   const $2Star = $("#two-star");
@@ -76,12 +72,28 @@ const updateResourceDetails = () => {
   const $4Star = $("#four-star");
   const $5Star = $("#five-star");
   const $detailsStars = $("#details-stars");
-  const $createdOn = $("#details-time");
-  const $ownerName = $("#details-owner-name");
   const $rating = $("#details-rating");
-  const $ownerProfilePicture = $("#owner_profile-picture");
-  const $ownerSection = $("#owner-row");
   const starElms = [$1Star, $2Star, $3Star, $4Star, $5Star];
+
+  const domObj = {
+    $numOfComment: $("#details-num-of-comments"),
+    $detailsComments: $("#details-comments"),
+    $likeIcon: $("#details-like-icon"),
+    $likesNum,
+  };
+
+  const domObjForSetUp = {
+    $mediaURL: $("#details-link-on-media"),
+    $ownerSection: $("#owner_profile-picture"),
+    $ownerName: $("#details-owner-name"),
+    $createdOn: $("#details-time"),
+    $title: $("#details-title"),
+    $ownerProfilePicture: $("#owner_profile-picture"),
+    $mediaDisplayedURL: $("#details-display-link-on-media"),
+    $descriptions: $("#details-desciption"),
+    $link: $("#details-link"),
+    $displayLink: $("#details-display-link"),
+  };
 
   return async (id) => {
     try {
@@ -118,34 +130,20 @@ const updateResourceDetails = () => {
         currentLike: liked > 0 ? true : false,
       };
 
-      const domObj = {
-        $numOfComment,
-        $detailsComments,
-        $likeIcon,
-        $likesNum,
-      };
-
-      initDisplay(
-        $mediaURL,
+      const infoForSetUp = {
+        id,
         owner_id,
-        $ownerSection,
         first_name,
         last_name,
         owner_username,
-        $ownerName,
-        $createdOn,
         owner_url,
-        $ownerProfilePicture,
         created_on,
         url,
         description,
-        $title,
         title,
-        $mediaDisplayedURL,
-        $descriptions,
-        $link,
-        $displayLink
-      );
+      };
+
+      initDisplay(infoForSetUp, domObjForSetUp);
 
       // load media on the left
       getMedia(id, is_video, media_url, $media);
