@@ -34,6 +34,19 @@
   }
 }
 
+div.stat {
+  display: flex;
+  margin: 0;
+  justify-content: flex-end;
+}
+
+.thumbnail-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10em;
+}
+
 #my-resources-details {
   overflow: auto;
   width: 100%;
