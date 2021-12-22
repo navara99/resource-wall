@@ -1,84 +1,3 @@
-const createThumbnail = (is_video, media_url) => {
-  const videoHeight = 150;
-  const media = is_video
-    ? createEmbedVideo(media_url, videoHeight)
-    : createScreenshot(media_url);
-  return $(`
-  <div class="thumbnail-container">
-    <div class="media">
-      ${media.prop("outerHTML")}
-    </div>
-  </div>
-`);
-};
-
-const createInfo = (
-  title,
-  url,
-  description,
-  category,
-  created_on,
-  username,
-  resourceId
-) => {
-  return $(`
-  <div class="text">
-    <a class="my-resource-title" id=${resourceId}-my-resource >${title}</a>
-    <div>
-      <span>URL: </span>
-      <a href="${url}" onclick="event.stopPropagation();" class="paragraph truncate">${url}</a>
-    </div>
-    <div>
-      <span>Description: </span> ${description}
-    </div>
-    <div>
-      <span>Added by: </span> @${username}
-    </div>
-    <div>
-      <span>Added:</span>
-      ${timestampToTimeAgo(created_on)}
-    </div>
-    <div>
-      <span>Category:</span>
-      ${category[0] + category.substring(1).toLowerCase()}
-    </div>
-  </div>
-  `);
-};
-
-const createDeleteModal = (title, resourceId) => {
-  return $(`
-    <div id="${resourceId}-confirm-delete" class="modal">
-      <a href="#!" id="close-confirm-delete" class="modal-close  waves-effect waves-light btn-flat">
-        <i class="material-icons right">close</i>
-      </a>
-      <div class="modal-content">
-        <h4>Are you sure?</h4>
-        <p>Are you sure you want to delete ${title}?</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" id="${resourceId}-delete" class="modal-close  waves-effect waves-light red btn">Confirm</a>
-    </div>
-  </div>
-  `);
-};
-
-const registerMyResourceButtonsListeners = (resourceId, isMine) => {
-  if (!isMine) return;
-
-  $(`#${resourceId}-delete`).on("click", async function (e) {
-    const [id] = $(this).attr("id").split("-");
-    try {
-      await deleteResource(id);
-      renderMyResources();
-    } catch (err) {
-      console.log(err.message);
-    }
-  });
-
-  $(`#${resourceId}-edit`).on("click", function (e) {});
-};
-
 const getActionButtons = (resourceId, isMine) => {
   const noButtons = !isMine ? "invisible" : "";
   const resourceOptions = `
@@ -102,35 +21,135 @@ const getActionButtons = (resourceId, isMine) => {
   return resourceOptions;
 };
 
-const getStats = (likes, ratings, comments, resourceId, isMine) => {
-  return $(`
-  <div class="stat-container">
-    <div class="stat">
-      <span class="stat-column">
-        <span class="fas fa-star card-icon bright"></span>
-        <span>${Number(ratings) ? Number(ratings).toFixed(1) : "0"}</span>
-      </span>
-      <span class="stat-column">
-        <span class="fas fa-heart card-icon liked"></span>
-        <span>${likes}</span>
-      </span>
-      <span class="stat-column">
-        <span class="fas fa-comment-alt card-icon"></span>
-        <span>${comments}</span>
-      </span>
-    </div>
-    <div class="resource-actions">
-      ${getActionButtons(resourceId, isMine)}
-     </div>
-  </div>
-  `);
-};
+const myResourcesElementGenerator = (resource) => {
+  const {
+    title,
+    url,
+    description,
+    category,
+    created_on,
+    username,
+    likes,
+    rating,
+    number_of_comment,
+    id,
+    isMine,
+    is_video,
+    media_url,
+  } = resource;
 
-const registerMyResourceDetailsListener = (resourceId) => {
-  $(`#${resourceId}-my-resource`).on("click", function (e) {
-    const [id] = $(this).attr("id").split("-");
-    updateView("resourceDetails", null, id);
-  });
+  const registerMyResourceButtonsListeners = () => {
+    if (!isMine) return;
+
+    $(`#${id}-delete`).on("click", async function (e) {
+      const [resourceId] = $(this).attr("id").split("-");
+      try {
+        await deleteResource(resourceId);
+        renderMyResources();
+      } catch (err) {
+        console.log(err.message);
+      }
+    });
+
+    $(`#${id}-edit`).on("click", function (e) {});
+  };
+
+  const createInfo = () => {
+    return $(`
+    <div class="text">
+      <a class="my-resource-title" id=${id}-my-resource >${title}</a>
+      <div>
+        <span>URL: </span>
+        <a href="${url}" onclick="event.stopPropagation();" class="paragraph truncate">${url}</a>
+      </div>
+      <div>
+        <span>Description: </span> ${description}
+      </div>
+      <div>
+        <span>Added by: </span> @${username}
+      </div>
+      <div>
+        <span>Added:</span>
+        ${timestampToTimeAgo(created_on)}
+      </div>
+      <div>
+        <span>Category:</span>
+        ${category[0] + category.substring(1).toLowerCase()}
+      </div>
+    </div>
+    `);
+  };
+
+  const createThumbnail = () => {
+    const videoHeight = 150;
+    const media = is_video
+      ? createEmbedVideo(media_url, videoHeight)
+      : createScreenshot(media_url);
+    return $(`
+    <div class="thumbnail-container">
+      <div class="media">
+        ${media.prop("outerHTML")}
+      </div>
+    </div>
+  `);
+  };
+
+  const createDeleteModal = () => {
+    return $(`
+      <div id="${id}-confirm-delete" class="modal">
+        <a href="#!" id="close-confirm-delete" class="modal-close  waves-effect waves-light btn-flat">
+          <i class="material-icons right">close</i>
+        </a>
+        <div class="modal-content">
+          <h4>Are you sure?</h4>
+          <p>Are you sure you want to delete ${title}?</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" id="${id}-delete" class="modal-close  waves-effect waves-light red btn">Confirm</a>
+      </div>
+    </div>
+    `);
+  };
+
+  const getStats = () => {
+    return $(`
+      <div class="stat-container">
+        <div class="stat">
+          <span class="stat-column">
+            <span class="fas fa-star card-icon bright"></span>
+            <span>${Number(rating) ? Number(rating).toFixed(1) : "0"}</span>
+          </span>
+          <span class="stat-column">
+            <span class="fas fa-heart card-icon liked"></span>
+            <span>${likes}</span>
+          </span>
+          <span class="stat-column">
+            <span class="fas fa-comment-alt card-icon"></span>
+            <span>${number_of_comment}</span>
+          </span>
+        </div>
+        <div class="resource-actions">
+          ${getActionButtons(id, isMine)}
+        </div>
+      </div>
+    `);
+  };
+
+  const registerMyResourceDetailsListener = () => {
+    $(`#${id}-my-resource`).on("click", function (e) {
+      const [resourceId] = $(this).attr("id").split("-");
+      updateView("resourceDetails", null, resourceId);
+    });
+  };
+
+  return {
+    getStats,
+    createDeleteModal,
+    createThumbnail,
+    createInfo,
+    registerMyResourceButtonsListeners,
+    registerMyResourceDetailsListener,
+  };
 };
 
 const clearMyResources = () => {
@@ -149,63 +168,45 @@ const renderMyResources = async () => {
       .addClass("collection comments");
 
     myResources.forEach((resource) => {
+      const { user_id, is_liked } = resource;
+
+      const info = { ...resource, isMine: user_id === id };
+
       const {
-        id: resourceId,
-        user_id,
-        title,
-        description,
-        url,
-        media_url,
-        created_on,
-        is_video,
-        is_liked,
-        likes,
-        category,
-        number_of_comment,
-        rating,
-        username,
-      } = resource;
+        getStats,
+        createDeleteModal,
+        createThumbnail,
+        createInfo,
+        registerMyResourceButtonsListeners,
+        registerMyResourceDetailsListener,
+      } = myResourcesElementGenerator(info);
 
       const showLiked =
         $("#liked-filter:checked").val() &&
         Number(is_liked) === 1 &&
         user_id !== id;
+
       const showMine = $("#mine-filter:checked").val() && user_id === id;
 
       if (showLiked || showMine) {
         const $collection = $("<li>");
         $collection.addClass("collection-item");
 
-        const $thumbnail = createThumbnail(is_video, media_url);
-        const $info = createInfo(
-          title,
-          url,
-          description,
-          category,
-          created_on,
-          username,
-          resourceId
-        );
+        const $thumbnail = createThumbnail();
+        const $info = createInfo();
 
-        const isMine = user_id === id;
-        if (isMine) {
-          const $modal = createDeleteModal(title, resourceId);
+        if (info.isMine) {
+          const $modal = createDeleteModal();
           $("body").prepend($modal);
         }
 
-        const $stats = getStats(
-          likes,
-          rating,
-          number_of_comment,
-          resourceId,
-          isMine
-        );
+        const $stats = getStats(resource);
 
         $collection.prepend($thumbnail, $info, $stats);
         $listContainer.prepend($collection);
         $("#my-resources-details").append($listContainer);
-        registerMyResourceButtonsListeners(resourceId, isMine);
-        registerMyResourceDetailsListener(resourceId);
+        registerMyResourceButtonsListeners();
+        registerMyResourceDetailsListener();
       }
     });
     $(".modal").modal();
