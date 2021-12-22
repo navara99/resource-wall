@@ -150,7 +150,6 @@ const resourceDetailsSetup = async (id, domObj) => {
     return title;
   } catch (err) {
     updateError(err);
-    updateView("error");
   }
 };
 

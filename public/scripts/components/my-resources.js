@@ -33,7 +33,6 @@ const myResourcesSetup = (resource, myId, $listContainer) => {
         renderMyResources();
       } catch (err) {
         updateError(err);
-        updateView("error");
       }
     });
 
@@ -182,7 +181,6 @@ const renderMyResourcesFunctionGenerator = () => {
       $(".modal").modal();
     } catch (err) {
       updateError(err);
-      updateView("error");
     }
   };
 };

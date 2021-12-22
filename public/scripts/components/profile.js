@@ -70,7 +70,6 @@ const profileHelperFunctionGenerator = () => {
       $firstNameInput.blur();
     } catch (err) {
       updateError(err);
-      updateView("error");
     }
   };
 
@@ -111,7 +110,6 @@ const updateProfileEventListener = () => {
       $updateProfileForm.trigger("reset");
     } catch (err) {
       updateError(err);
-      updateView("error");
     }
   });
 };
@@ -132,7 +130,6 @@ const changePasswordEventListener = () => {
       updateView("changePassword");
     } catch (err) {
       updateError(err);
-      updateView("error");
     }
   });
 };

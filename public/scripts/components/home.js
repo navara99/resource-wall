@@ -135,7 +135,6 @@ const displayResourcesFunctionGenerator = () => {
       );
     } catch (e) {
       updateError(e);
-      updateView("error");
     }
   };
 };

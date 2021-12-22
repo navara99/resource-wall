@@ -41,7 +41,6 @@ const updateUserInfo = async (userInfo) => {
   } catch (err) {
     updateHeader({});
     updateError(err);
-    updateView("error");
   }
 };
 

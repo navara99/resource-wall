@@ -15,7 +15,6 @@ const newResourceEventListener = () => {
 
     } catch (err) {
       updateError(err);
-      updateView("error");
     }
   });
 };

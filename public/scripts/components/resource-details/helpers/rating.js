@@ -78,7 +78,6 @@ const ratingSetup = (resourceInfo, domObj) => {
         }
       } catch (e) {
         updateError(err);
-        updateView("error");
       }
     });
   };
