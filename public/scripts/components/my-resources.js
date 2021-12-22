@@ -212,7 +212,7 @@ const renderMyResources = async () => {
   }
 };
 
-const registerCheckListeners = async () => {
+const registerCheckListeners = () => {
   $("#liked-filter").on("change", function () {
     renderMyResources();
   });
