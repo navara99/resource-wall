@@ -18,7 +18,7 @@
 
 ### register
 
-- users can regsiter with email(unique), password , username(unique)
+- users can regsiter with email(unique), password(enter twice) , username(unique)
 
 ### detail page of a single resource
 
@@ -66,7 +66,6 @@
 
 ### history
 
-
 ### responsive design
 
 - hide nav bar
@@ -85,10 +84,6 @@
 ### My resources
 
 - only show partial description if too long
-
-### register
-
-- constrain on password, enter twice
 
 ### user page
 

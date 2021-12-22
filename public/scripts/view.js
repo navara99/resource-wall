@@ -127,7 +127,6 @@ const updateViewFunctionGenerator = () => {
         break;
       case "error":
         $errorPage.show();
-        updateTitleURL("Error", "error");
         break;
     }
   };

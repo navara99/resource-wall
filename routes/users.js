@@ -18,7 +18,7 @@ module.exports = (db) => {
         (await getUserByValue("username", email_username));
 
       if (!user)
-        return res.status(400).json({ error: "email/username doesn't exist" });
+        return res.status(400).json({ error: "Email/username doesn't exist" });
 
       const { password: hashedPassword } = user;
       const correctPassword = await bcrypt.compare(password, hashedPassword);
@@ -26,7 +26,7 @@ module.exports = (db) => {
       if (!correctPassword)
         return res
           .status(400)
-          .json({ error: "email doesn't match with password" });
+          .json({ error: "Email doesn't match with password" });
 
       req.session.user_id = user.id;
       res.json(user);
@@ -83,7 +83,7 @@ module.exports = (db) => {
       if (!correctPassword) {
         return res
           .status(400)
-          .json({ error: "current password is incorrect." });
+          .json({ error: "Current password is incorrect." });
       }
 
       const newPasswordIsConfirmed = new_password === confirm_new_password;
@@ -91,7 +91,7 @@ module.exports = (db) => {
       if (!newPasswordIsConfirmed) {
         return res
           .status(400)
-          .json({ error: "different inputs for new password." });
+          .json({ error: "Different inputs for new password." });
       }
 
       const sameNewAndOldPassword = current_password === new_password;
@@ -118,7 +118,7 @@ module.exports = (db) => {
   });
 
   router.post("/register", async (req, res) => {
-    const { email, password, username } = req.body;
+    const { email, password, username, confirmed_password } = req.body;
 
     try {
       const userWithSameUsername = await getUserByValue("username", username);
@@ -133,6 +133,12 @@ module.exports = (db) => {
 
       if (userWithSameEmail) {
         return res.status(400).json({ error: "This email is already taken." });
+      }
+
+      const passwordIsSame = confirmed_password === password;
+
+      if (!passwordIsSame) {
+        return res.status(400).json({ error: "Passwords are different." });
       }
 
       const hashedPassword = await bcrypt.hash(password, salt);
