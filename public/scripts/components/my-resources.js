@@ -1,26 +1,3 @@
-const getActionButtons = (resourceId, isMine) => {
-  const noButtons = !isMine ? "invisible" : "";
-  const resourceOptions = `
-    <a id = "${resourceId}-edit" class="waves-effect waves-light btn ${noButtons}">
-      <i class="material-icons left">
-        edit
-      </i>
-      Edit
-    </a>
-    <a id="${resourceId}-delete"
-      class="waves-effect waves-light btn modal-trigger ${noButtons} red"
-      href="#${resourceId}-confirm-delete"
-      >
-      <i class="material-icons left">
-        delete
-      </i>
-      Delete
-    </a>
-  `;
-
-  return resourceOptions;
-};
-
 const myResourcesElementGenerator = (resource) => {
   const {
     title,
@@ -111,6 +88,29 @@ const myResourcesElementGenerator = (resource) => {
     `);
   };
 
+  const getActionButtons = () => {
+    const noButtons = !isMine ? "invisible" : "";
+    const resourceOptions = `
+      <a id = "${id}-edit" class="waves-effect waves-light btn ${noButtons}">
+        <i class="material-icons left">
+          edit
+        </i>
+        Edit
+      </a>
+      <a id="${id}-delete"
+        class="waves-effect waves-light btn modal-trigger ${noButtons} red"
+        href="#${id}-confirm-delete"
+        >
+        <i class="material-icons left">
+          delete
+        </i>
+        Delete
+      </a>
+    `;
+
+    return resourceOptions;
+  };
+
   const getStats = () => {
     return $(`
       <div class="stat-container">
@@ -129,7 +129,7 @@ const myResourcesElementGenerator = (resource) => {
           </span>
         </div>
         <div class="resource-actions">
-          ${getActionButtons(id, isMine)}
+          ${getActionButtons()}
         </div>
       </div>
     `);
