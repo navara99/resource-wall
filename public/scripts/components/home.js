@@ -22,10 +22,6 @@ const resourcesElementGenerator = (resource) => {
   return { createScreenshot, createEmbedVideo };
 };
 
-
-
-
-
 const getCardAction = (likesAmount, commentsAmount, averageRating) => {
   return $(`
   <div class="card-action">
@@ -120,13 +116,12 @@ const displayResources = async (resources) => {
       rating,
     } = resource;
 
-    const { createScreenshot, createEmbedVideo } = resourcesElementGenerator(resource);
+    const { createScreenshot, createEmbedVideo } =
+      resourcesElementGenerator(resource);
 
     const $card = $("<div>").addClass("card");
 
-    const $resourceMedia = is_video
-      ? createEmbedVideo()
-      : createScreenshot();
+    const $resourceMedia = is_video ? createEmbedVideo() : createScreenshot();
     const $figure = $("<figure>").attr("id", id);
 
     const $cardAction = getCardAction(likes, number_of_comment, rating);
