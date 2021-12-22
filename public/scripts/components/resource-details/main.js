@@ -111,9 +111,6 @@ const makeInfoObj = (id, details) => {
     resourceInfo,
     infoForMedia,
     title,
-    rating,
-    number_of_rating,
-    current_username,
   };
 };
 
@@ -179,8 +176,6 @@ const updateResourceDetails = () => {
       commentSetup(resourceComments, resourceInfo, domObj)();
       likeSetup(resourceInfo, domObj)();
       ratingSetup(resourceInfo, domObj)();
-
-      initRatingSetup();
 
       return title;
     } catch (err) {
