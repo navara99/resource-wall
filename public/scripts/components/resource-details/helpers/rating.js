@@ -45,6 +45,7 @@ const ratingSetup = (resourceInfo, domObj) => {
 
     starElms.forEach((elm, index) => ratingOnClick(elm, id, index + 1));
 
+    addClassToStars();
     updateRatingStr();
     updateRating();
   };
