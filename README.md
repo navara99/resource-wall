@@ -26,7 +26,7 @@
 
 ### My resources
 
-- users can view all their own and all liked resources on one page
+- users can view all their own and all liked resources on one page (filter function)
 - users can go to the details page when they click on the resource
 - owner can delete resource
 
@@ -74,7 +74,12 @@
 ### handle error
 
 ### responsive design
+
 - hide nav bar
+
+### change password
+
+- can't change password if the old and new password are the same
 
 ### edit page
 
@@ -87,7 +92,12 @@
 - only show partial description if too long
 - test the tabs
 
+### My resources
+
+- only show partial description if too long
+
 ### register
+
 - constrain on password, enter twice
 
 ### user page
@@ -100,6 +110,7 @@
 
 ### header
 
+- case sensitive of search
 - users should be able to search any user
 - go back to homepage when focused
 
