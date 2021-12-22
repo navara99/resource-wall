@@ -1,6 +1,7 @@
-@import './nav.scss';
-@import './resource-details.scss';
-@import './my-resources.scss';
+@import "./nav.scss";
+@import "./resource-details.scss";
+@import "./my-resources.scss";
+@import "./home.scss";
 
 body {
   overflow-x: hidden;
@@ -31,150 +32,12 @@ form {
   margin: inherit;
 }
 
-
-
-
-.details {
-  width: 50%;
-  margin: 2em;
-}
-
-.details-media {
-  margin: 1.5em;
-  width: 50%;
-  overflow: hidden;
-  border-radius: 16px;
-  position: relative;
-}
-
-.media {
-  margin: 1.5em;
-  width: 50%;
-  overflow: hidden;
-  border-radius: 16px;
-  position: relative;
-}
-
-.media * {
-  max-width: 100%;
-  color: #111111;
-}
-
-.details-media * {
-  max-width: 100%;
-  color: #111111;
-}
-
-.details-media a {
-  position: absolute;
-  left: 1em;
-  top: 1em;
-  border-radius: 200px;
-  background-color: white;
-  padding: 0.6em;
-  opacity: 0.9;
-  color: #282828;
-}
-
-a.paragraph {
-  text-decoration: underline;
-  color: #111111;
-}
-
-.icon {
-  font-size: 2.3em;
-  padding: 0.2em;
-}
-
-// RESOURCE DETAILS - COMMENT SECTION
-
-.send-comment {
-  font-size: 1.5em;
-  padding-bottom: 0.5em;
-  color: #ffc300;
-}
-
-.send-comment:hover {
-  cursor: pointer;
-  color: #ffd60a;
-}
-
-.comment {
-  display: flex;
-  align-items: flex-end;
-}
-
-ul.comments {
-  border: none;
-}
-
-// RESOURCE DETAILS - LIKE SECTION
-
-.like {
-  float: right;
-}
-
-.like:hover {
-  cursor: pointer;
-}
-
-.details h3 {
-  margin: 0.4em 0 0.1em;
-}
+// TITLE OF PAGE
 
 h3.title {
   margin: 0;
   margin-bottom: 0.5em;
   padding: 0;
-}
-
-ul.collection .collection-item.avatar .secondary-content {
-  position: absolute;
-  top: 10px;
-  right: 16px;
-}
-
-ul.collection li.collection-item.avatar {
-  min-height: 0;
-  border: none;
-  padding-left: 50px;
-  background-color: #f8f8ff;
-}
-
-// RESOURCE DETAILS - RATING SECTION
-
-.show-rating {
-  color: #ffb840;
-}
-
-li textarea.materialize-textarea {
-  min-height: 0;
-  padding: 0;
-  height: auto;
-  margin: 0;
-}
-
-.collection .collection-item.new-comment-container {
-  padding: 0;
-  margin: 0;
-}
-
-// HOME PAGE
-
-#columns {
-  column-count: 4;
-  column-gap: 0.5em;
-  margin: 25px auto;
-  width: 90%;
-  figure {
-    margin: 5px;
-    height: auto;
-    max-width: 100%;
-    overflow: hidden;
-    -webkit-column-break-inside: avoid;
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
 }
 
 @media (max-width: 800px) {
@@ -192,61 +55,6 @@ li textarea.materialize-textarea {
 @media (max-width: 500px) {
   #columns {
     column-count: 1;
-  }
-}
-
-// CARD
-
-.card {
-  box-shadow: none;
-  &:hover {
-    cursor: pointer;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    transition: box-shadow 0.2s;
-  }
-}
-
-.card-content {
-  span {
-    font-weight: bold;
-  }
-}
-
-.card-image {
-  position: relative;
-
-  .url-wrapper {
-    background-color: black;
-    opacity: 0.6;
-    border-radius: 200px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 70%;
-    z-index: 2;
-
-    &:hover {
-      opacity: 0.8;
-      transition: opacity 0.2s;
-    }
-
-    .card-url {
-      color: white;
-    }
-  }
-
-  .like-link {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 2;
-    .card-heart {
-      font-size: 3em;
-      &:hover {
-        color: #db565b;
-        transition: color 0.3s;
-      }
-    }
   }
 }
 

@@ -1,0 +1,72 @@
+// LAYOUT
+
+#columns {
+  column-count: 4;
+  column-gap: 0.5em;
+  margin: 25px auto;
+  width: 90%;
+  figure {
+    margin: 5px;
+    height: auto;
+    max-width: 100%;
+    overflow: hidden;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+
+// CARD
+
+.card {
+  box-shadow: none;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    transition: box-shadow 0.2s;
+  }
+}
+
+.card-content {
+  span {
+    font-weight: bold;
+  }
+}
+
+.card-image {
+  position: relative;
+
+  .url-wrapper {
+    background-color: black;
+    opacity: 0.6;
+    border-radius: 200px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 70%;
+    z-index: 2;
+
+    &:hover {
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .card-url {
+      color: white;
+    }
+  }
+
+  .like-link {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    .card-heart {
+      font-size: 3em;
+      &:hover {
+        color: #db565b;
+        transition: color 0.3s;
+      }
+    }
+  }
+}
