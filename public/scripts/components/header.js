@@ -2,7 +2,7 @@ const updateHeaderFunctionGenerator = () => {
   const $userButtons = $("#user-buttons");
   const $noUserButtons = $("#no-user-buttons");
   const $floatingCreateResourceButton = $("#floating-create-resource-button");
-  $profilePicture = $("#profile-picture");
+  const $profilePicture = $("#profile-picture");
 
   return ({ id, profile_picture_url } ) => {
 
