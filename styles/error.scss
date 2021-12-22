@@ -1,0 +1,9 @@
+.error-container {
+  box-shadow: 0 0 3px red;
+  padding: 0.5em 0 1em 0;
+  text-align: center;
+
+  .fas.fa-exclamation-triangle {
+    color: red;
+  }
+}

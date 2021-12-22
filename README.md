@@ -54,6 +54,10 @@
 - users can search for already-saved resources created by any user
 - display logout button / login link
 
+### handle error
+
+- if there is any errors, it is shown on the top of the page under nav bar
+
 ## To do list
 
 ### deploy the server
@@ -62,7 +66,6 @@
 
 ### history
 
-### handle error/hint
 
 ### responsive design
 
