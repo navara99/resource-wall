@@ -178,11 +178,7 @@ const updateResourceDetails = () => {
 
       commentSetup(resourceComments, resourceInfo, domObj)();
       likeSetup(resourceInfo, domObj)();
-
-      const { initRatingSetup } = ratingHelperFunctionsGenerator(
-        resourceInfo,
-        domObj
-      );
+      ratingSetup(resourceInfo, domObj)();
 
       initRatingSetup();
 

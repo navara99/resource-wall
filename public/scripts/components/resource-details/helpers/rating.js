@@ -12,7 +12,7 @@ const toTwoDecimalPlaces = (numString) => {
   return twoDecimal;
 };
 
-const ratingHelperFunctionsGenerator = (resourceInfo, domObj) => {
+const ratingSetup = (resourceInfo, domObj) => {
   const { $rating, starElms, $ratingString, $detailsStars, $averageRating } =
     domObj;
   const { current_username, id } = resourceInfo;
@@ -28,7 +28,7 @@ const ratingHelperFunctionsGenerator = (resourceInfo, domObj) => {
     }
   };
 
-  const initRatingSetup = () => {
+  const initSetup = () => {
     if (!current_username) {
       $rating.hide();
     } else {
@@ -82,5 +82,5 @@ const ratingHelperFunctionsGenerator = (resourceInfo, domObj) => {
     $averageRating.text(ratingText);
   };
 
-  return { initRatingSetup };
+  return initSetup;
 };
