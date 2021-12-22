@@ -1,4 +1,4 @@
-const myResourcesElementGenerator = (resource) => {
+const myResourcesSetup = (resource, myId, $listContainer) => {
   const {
     title,
     url,
@@ -10,12 +10,15 @@ const myResourcesElementGenerator = (resource) => {
     rating,
     number_of_comment,
     id,
-    isMine,
     is_video,
     media_url,
+    user_id,
+    is_liked,
   } = resource;
 
+  const isMine = user_id === myId;
   const videoHeight = 150;
+
   const { createEmbedVideo, createScreenshot } = thumbnailElementGenerator(
     resource,
     videoHeight
@@ -61,8 +64,8 @@ const myResourcesElementGenerator = (resource) => {
   `);
 
   const media = is_video
-  ? createEmbedVideo(media_url, videoHeight)
-  : createScreenshot(media_url);
+    ? createEmbedVideo(media_url, videoHeight)
+    : createScreenshot(media_url);
 
   const $thumbnail = $(`
     <div class="thumbnail-container">
@@ -134,13 +137,28 @@ const myResourcesElementGenerator = (resource) => {
     });
   };
 
-  return {
-    $stats,
-    $modal,
-    $thumbnail,
-    $info,
-    registerMyResourceButtonsListeners,
-    registerMyResourceDetailsListener,
+  const showLiked =
+    $("#liked-filter:checked").val() &&
+    Number(is_liked) === 1 &&
+    user_id !== id;
+
+  const showMine = $("#mine-filter:checked").val() && user_id === id;
+
+  return () => {
+    if (showLiked || showMine) {
+      const $collection = $("<li>");
+      $collection.addClass("collection-item");
+
+      if (isMine) {
+        $("body").prepend($modal);
+      }
+
+      $collection.prepend($thumbnail, $info, $stats);
+      $listContainer.prepend($collection);
+      $("#my-resources-details").append($listContainer);
+      registerMyResourceButtonsListeners();
+      registerMyResourceDetailsListener();
+    }
   };
 };
 
@@ -148,6 +166,7 @@ const clearMyResources = () => {
   $("#my-resource-list").remove();
 };
 
+// top-level function
 const renderMyResources = async () => {
   clearMyResources();
 
@@ -160,41 +179,9 @@ const renderMyResources = async () => {
       .addClass("collection comments");
 
     myResources.forEach((resource) => {
-      const { user_id, is_liked } = resource;
-
-      const info = { ...resource, isMine: user_id === id };
-
-      const {
-        $stats,
-        $modal,
-        $thumbnail,
-        $info,
-        registerMyResourceButtonsListeners,
-        registerMyResourceDetailsListener,
-      } = myResourcesElementGenerator(info);
-
-      const showLiked =
-        $("#liked-filter:checked").val() &&
-        Number(is_liked) === 1 &&
-        user_id !== id;
-
-      const showMine = $("#mine-filter:checked").val() && user_id === id;
-
-      if (showLiked || showMine) {
-        const $collection = $("<li>");
-        $collection.addClass("collection-item");
-
-        if (info.isMine) {
-          $("body").prepend($modal);
-        }
-
-        $collection.prepend($thumbnail, $info, $stats);
-        $listContainer.prepend($collection);
-        $("#my-resources-details").append($listContainer);
-        registerMyResourceButtonsListeners();
-        registerMyResourceDetailsListener();
-      }
+      myResourcesSetup(resource, id, $listContainer)();
     });
+
     $(".modal").modal();
   } catch (err) {
     console.log(err);
