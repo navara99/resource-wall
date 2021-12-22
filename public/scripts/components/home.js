@@ -21,7 +21,7 @@ const thumbnailElementGenerator = (resource, videoHeight = 250) => {
   return { createScreenshot, createEmbedVideo };
 };
 
-const cardElementGenerator = (resource, currentUserId, $column) => {
+const homepageSetup = (resource, currentUserId, $column) => {
   const {
     id,
     likes,
@@ -116,14 +116,10 @@ const registerLikeListener = ($likeLink, id) => {
   });
 };
 
-
-
 const displayResourcesFunctionGenerator = () => {
   const $column = $("#columns");
 
-  const clearResources = () => {
-    $column.html("");
-  };
+  const clearResources = () => $column.html("");
 
   return async (resources) => {
     clearResources();
@@ -131,12 +127,13 @@ const displayResourcesFunctionGenerator = () => {
     try {
       const { id: currentUserId } = await getMyDetails();
 
-      const renderedResources = resources || (await getAllResources()).allResources;
+      const renderedResources =
+        resources || (await getAllResources()).allResources;
 
       if (!renderedResources.length) return;
 
       renderedResources.forEach((resource) => {
-        cardElementGenerator(resource, currentUserId, $column);
+        homepageSetup(resource, currentUserId, $column);
       });
     } catch (e) {
       console.log(e);
