@@ -3,6 +3,12 @@ body {
   color: #111111;
 }
 
+// NAV BAR
+
+header nav {
+  background-color: #003566;
+}
+
 .logo {
   margin: 0 0.7em;
 }
@@ -75,6 +81,8 @@ form {
   margin: inherit;
 }
 
+// PAGE CONTAINER
+
 .margin-container {
   margin: 3em;
   display: flex;
@@ -133,6 +141,8 @@ a.paragraph {
   padding: 0.2em;
 }
 
+// RESOURCE DETAILS - COMMENT SECTION
+
 .send-comment {
   font-size: 1.5em;
   padding-bottom: 0.5em;
@@ -143,6 +153,17 @@ a.paragraph {
   cursor: pointer;
   color: #ffd60a;
 }
+
+.comment {
+  display: flex;
+  align-items: flex-end;
+}
+
+ul.comments {
+  border: none;
+}
+
+// RESOURCE DETAILS - LIKE SECTION
 
 .like {
   float: right;
@@ -162,10 +183,6 @@ h3.title {
   padding: 0;
 }
 
-ul.comments {
-  border: none;
-}
-
 ul.collection .collection-item.avatar .secondary-content {
   position: absolute;
   top: 10px;
@@ -179,13 +196,10 @@ ul.collection li.collection-item.avatar {
   background-color: #f8f8ff;
 }
 
+// RESOURCE DETAILS - RATING SECTION
+
 .show-rating {
   color: #ffb840;
-}
-
-.comment {
-  display: flex;
-  align-items: flex-end;
 }
 
 li textarea.materialize-textarea {
@@ -236,7 +250,7 @@ li textarea.materialize-textarea {
   }
 }
 
-//Card
+// CARD
 
 .card {
   box-shadow: none;
@@ -344,7 +358,7 @@ form {
   flex: 1;
 }
 
-//Tabs
+// Tabs
 
 .tabs .tab a {
   cursor: pointer;
@@ -356,7 +370,7 @@ form {
   border-bottom: 1px solid rgba(33, 150, 243, 1);
 }
 
-//My-resources
+//MY RESOURCES
 
 #close-confirm-delete {
   background-color: transparent;
@@ -743,10 +757,6 @@ div.col.s12.nav-colour {
       background-color: #001d3d;
     }
   }
-}
-
-header nav {
-  background-color: #003566;
 }
 
 .waves-effect.waves-light {
