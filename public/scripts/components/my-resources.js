@@ -15,6 +15,12 @@ const myResourcesElementGenerator = (resource) => {
     media_url,
   } = resource;
 
+  const videoHeight = 150;
+  const { createEmbedVideo, createScreenshot } = resourcesElementGenerator(
+    resource,
+    videoHeight
+  );
+
   const registerMyResourceButtonsListeners = () => {
     if (!isMine) return;
 
@@ -57,7 +63,6 @@ const myResourcesElementGenerator = (resource) => {
   };
 
   const createThumbnail = () => {
-    const videoHeight = 150;
     const media = is_video
       ? createEmbedVideo(media_url, videoHeight)
       : createScreenshot(media_url);
@@ -110,29 +115,27 @@ const myResourcesElementGenerator = (resource) => {
     return resourceOptions;
   };
 
-  const getStats = () => {
-    return $(`
-      <div class="stat-container">
-        <div class="stat">
-          <span class="stat-column">
-            <span class="fas fa-star card-icon bright"></span>
-            <span>${Number(rating) ? Number(rating).toFixed(1) : "0"}</span>
-          </span>
-          <span class="stat-column">
-            <span class="fas fa-heart card-icon liked"></span>
-            <span>${likes}</span>
-          </span>
-          <span class="stat-column">
-            <span class="fas fa-comment-alt card-icon"></span>
-            <span>${number_of_comment}</span>
-          </span>
-        </div>
-        <div class="resource-actions">
-          ${getActionButtons()}
-        </div>
+  const $stats = $(`
+    <div class="stat-container">
+      <div class="stat">
+        <span class="stat-column">
+          <span class="fas fa-star card-icon bright"></span>
+          <span>${Number(rating) ? Number(rating).toFixed(1) : "0"}</span>
+        </span>
+        <span class="stat-column">
+          <span class="fas fa-heart card-icon liked"></span>
+          <span>${likes}</span>
+        </span>
+        <span class="stat-column">
+          <span class="fas fa-comment-alt card-icon"></span>
+          <span>${number_of_comment}</span>
+        </span>
       </div>
-    `);
-  };
+      <div class="resource-actions">
+        ${getActionButtons()}
+      </div>
+    </div>
+  `);
 
   const registerMyResourceDetailsListener = () => {
     $(`#${id}-my-resource`).on("click", function (e) {
@@ -141,7 +144,7 @@ const myResourcesElementGenerator = (resource) => {
   };
 
   return {
-    getStats,
+    $stats,
     createDeleteModal,
     createThumbnail,
     createInfo,
@@ -171,7 +174,7 @@ const renderMyResources = async () => {
       const info = { ...resource, isMine: user_id === id };
 
       const {
-        getStats,
+        $stats,
         createDeleteModal,
         createThumbnail,
         createInfo,
@@ -192,7 +195,6 @@ const renderMyResources = async () => {
 
         const $thumbnail = createThumbnail();
         const $info = createInfo();
-        const $stats = getStats(resource);
 
         if (info.isMine) {
           const $modal = createDeleteModal();

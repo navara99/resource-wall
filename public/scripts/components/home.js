@@ -1,6 +1,5 @@
-const resourcesElementGenerator = (resource) => {
+const resourcesElementGenerator = (resource, videoHeight = 250) => {
   const { media_url } = resource;
-  const videoHeight = 250;
 
   const createScreenshot = () => $(`<img src = ${media_url}/>`);
 
