@@ -11,3 +11,17 @@ const toTwoDecimalPlaces = (numString) => {
   const twoDecimal = Math.round(float * 100) / 100;
   return twoDecimal;
 };
+
+const ratingHelperFunctionsGenerator = (resourceInfo, domObj) => {
+  const { $rating } = domObj;
+  const { current_username } = resourceInfo;
+
+  const initRatingSetup = () => {
+    if (!current_username) {
+      $rating.hide();
+    } else {
+      $rating.show();
+    }
+  }
+  return { initRatingSetup };
+};

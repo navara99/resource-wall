@@ -127,7 +127,6 @@ const getMedia = async ({ id, is_video, media_url }, $media) => {
 const updateResourceDetails = () => {
   const $averageRating = $("#details-average-rating");
   const $media = $("#details-media");
-  const $likesNum = $("#details-likes-num");
   const $ratingString = $("#details-rating-string");
   const $1Star = $("#one-star");
   const $2Star = $("#two-star");
@@ -135,14 +134,14 @@ const updateResourceDetails = () => {
   const $4Star = $("#four-star");
   const $5Star = $("#five-star");
   const $detailsStars = $("#details-stars");
-  const $rating = $("#details-rating");
   const starElms = [$1Star, $2Star, $3Star, $4Star, $5Star];
 
   const domObj = {
+    $likesNum: $("#details-likes-num"),
     $numOfComment: $("#details-num-of-comments"),
     $detailsComments: $("#details-comments"),
     $likeIcon: $("#details-like-icon"),
-    $likesNum,
+    $rating: $("#details-rating"),
   };
 
   const domObjForSetUp = {
@@ -193,15 +192,16 @@ const updateResourceDetails = () => {
       updateHeart();
       likeIconEventListener();
 
+      const { initRatingSetup } = ratingHelperFunctionsGenerator(
+        resourceInfo,
+        domObj
+      );
+
+      initRatingSetup();
+
       let averageRating = rating;
       let numOfRating = parseInt(number_of_rating);
       let currentRating = rated;
-
-      if (!current_username) {
-        $rating.hide();
-      } else {
-        $rating.show();
-      }
 
       const addClassToStars = () => {
         const rate = currentRating || 0;
