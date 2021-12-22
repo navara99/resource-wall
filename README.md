@@ -49,7 +49,10 @@
 
 - deploy the server
 - README.md
-- refactoring (siu)
+
+### refactoring (siu)
+- home.js
+- my-resources.js
 
 ### history
 
