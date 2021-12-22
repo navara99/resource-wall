@@ -19,9 +19,8 @@ const myResourcesElementGenerator = (resource) => {
     if (!isMine) return;
 
     $(`#${id}-delete`).on("click", async function (e) {
-      const [resourceId] = $(this).attr("id").split("-");
       try {
-        await deleteResource(resourceId);
+        await deleteResource(id);
         renderMyResources();
       } catch (err) {
         console.log(err.message);
@@ -137,8 +136,7 @@ const myResourcesElementGenerator = (resource) => {
 
   const registerMyResourceDetailsListener = () => {
     $(`#${id}-my-resource`).on("click", function (e) {
-      const [resourceId] = $(this).attr("id").split("-");
-      updateView("resourceDetails", null, resourceId);
+      updateView("resourceDetails", null, id);
     });
   };
 
