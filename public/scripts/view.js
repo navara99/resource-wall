@@ -40,7 +40,7 @@ const updateUserInfo = async (userInfo) => {
     updateHeader(userInfo);
   } catch (err) {
     updateHeader({});
-    updateError(err.responseText);
+    updateError(err);
     updateView("error");
   }
 };
@@ -137,5 +137,6 @@ const renderMyResources = renderMyResourcesFunctionGenerator();
 const updateResourceDetails = updateResourceDetailsFunctionGenerator();
 const updateUserDetails = updateUserFunctionGenerator();
 const updateHeader = updateHeaderFunctionGenerator();
+const updateError = updateErrorFunctionGenerator();
 const displayResources = displayResourcesFunctionGenerator();
 const updateView = updateViewFunctionGenerator();

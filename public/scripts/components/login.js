@@ -13,7 +13,7 @@ const loginEventListener = () => {
 
       return $loginForm.trigger("reset");
     } catch (err) {
-      updateError(err.responseText);
+      updateError(err);
       updateView("error");
     }
   });

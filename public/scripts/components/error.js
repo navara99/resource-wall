@@ -1,4 +1,8 @@
-const updateError = (errorMsg) => {
+const updateErrorFunctionGenerator = () => {
   const $errorMsg = $("#error-message");
-  $errorMsg.text(errorMsg);
+  return ({responseText}) => {
+    const msg = responseText.slice(10, -2);
+    $errorMsg.text(msg);
+    console.log(msg);
+  };
 };

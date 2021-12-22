@@ -14,7 +14,7 @@ const newResourceEventListener = () => {
       return $newResourceForm.trigger("reset");
 
     } catch (err) {
-      updateError(err.responseText);
+      updateError(err);
       updateView("error");
     }
   });

@@ -69,7 +69,7 @@ const profileHelperFunctionGenerator = () => {
       putInValAndFocus($firstNameInput, first_name);
       $firstNameInput.blur();
     } catch (err) {
-      updateError(err.responseText);
+      updateError(err);
       updateView("error");
     }
   };
@@ -111,7 +111,7 @@ const updateProfileEventListener = () => {
         $updateProfileForm.trigger("reset");
       });
     } catch (err) {
-      updateError(err.responseText);
+      updateError(err);
       updateView("error");
     }
   });
@@ -132,7 +132,7 @@ const changePasswordEventListener = () => {
 
       updateView("changePassword");
     } catch (err) {
-      updateError(err.responseText);
+      updateError(err);
       updateView("error");
     }
   });

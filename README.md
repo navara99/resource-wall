@@ -37,6 +37,7 @@
 ### change password
 
 - users can change their password
+- can't change password if the old and new password are the same
 
 ### user page
 
@@ -66,10 +67,6 @@
 ### responsive design
 
 - hide nav bar
-
-### change password
-
-- can't change password if the old and new password are the same
 
 ### edit page
 
