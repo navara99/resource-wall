@@ -34,15 +34,13 @@ const initDisplay = (resourceInfo, domObj) => {
 
   const hostname = getHostname(url);
 
-  $mediaDisplayedURL.text(hostname);
+  $title.text(title);
   $descriptions.text(description);
+
   $mediaURL.attr("href", url);
+  $mediaDisplayedURL.text(hostname);
   $link.attr("href", url);
   $displayLink.text(hostname);
-
-  $title.text(title);
-
-  $createdOn.text(timestampToTimeAgo(created_on));
 
   $ownerProfilePicture.attr("src", owner_url);
   $ownerName.text(`${first_name} ${last_name} (@${owner_username})`);
@@ -50,6 +48,8 @@ const initDisplay = (resourceInfo, domObj) => {
   $ownerSection.on("click", () => {
     updateUserDetailsPage(owner_id);
   });
+
+  $createdOn.text(timestampToTimeAgo(created_on));
 };
 
 const getMedia = async (id, is_video, media_url, $media) => {
