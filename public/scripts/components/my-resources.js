@@ -174,10 +174,9 @@ const renderMyResourcesFunctionGenerator = () => {
     clearMyResources();
 
     try {
-      const { id } = await getMyDetails();
-      const myResources = await getMyResources(id);
+      const { id, resources } = await getUserResources(0);
 
-      myResources.forEach((resource) => {
+      resources.forEach((resource) => {
         myResourcesSetup(resource, id, $listContainer)();
       });
 

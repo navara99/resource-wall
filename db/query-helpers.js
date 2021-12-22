@@ -346,7 +346,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const getMyResources = async (user_id) => {
+  const getUserResources = async (user_id) => {
     const value = [user_id, 1];
     const subquery1 = `(SELECT COUNT(likes.*) FROM likes WHERE resource_id = resources.id)`;
     const subquery2 = `(SELECT COUNT(likes.*) FROM likes WHERE user_id = $1 AND resource_id = resources.id)`;
@@ -451,7 +451,7 @@ const queryGenerator = (db) => {
     addLikeToResource,
     getAllDetailsOfResource,
     searchResources,
-    getMyResources,
+    getUserResources,
     addCommentToResource,
     getAllDetailsOfResource,
     getURLById,

@@ -28,7 +28,7 @@ module.exports = (db) => {
     addNewResource,
     getIdFromCategory,
     getAllResources,
-    getMyResources,
+    getUserResources,
     searchResources,
     addLikeToResource,
     getAllDetailsOfResource,
@@ -87,12 +87,14 @@ module.exports = (db) => {
 
   router.get("/user/:userId", async (req, res) => {
     const { userId } = req.params;
+    const { user_id } = req.session;
+
+    const id = parseInt(userId) || user_id;
 
     try {
-      if (!userId) return res.json({});
-      const myResources = await getMyResources(userId);
+      const resources = await getUserResources(id);
 
-      res.json(myResources);
+      res.json({ resources, id });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
