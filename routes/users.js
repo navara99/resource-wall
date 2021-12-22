@@ -10,12 +10,15 @@ module.exports = (db) => {
     queryGenerator(db);
 
   router.post("/login", async (req, res) => {
-    const { email, password } = req.body;
+    const { email_username, password } = req.body;
 
     try {
-      const user = await getUserByValue("email", email);
+      const user =
+        (await getUserByValue("email", email_username)) ||
+        (await getUserByValue("username", email_username));
 
-      if (!user) return res.status(400).json({ error: "email doesn't exist" });
+      if (!user)
+        return res.status(400).json({ error: "email/username doesn't exist" });
 
       const { password: hashedPassword } = user;
       const correctPassword = await bcrypt.compare(password, hashedPassword);
