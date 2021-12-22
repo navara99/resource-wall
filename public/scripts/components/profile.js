@@ -100,16 +100,15 @@ const profileHelperFunctionGenerator = () => {
 const updateProfileEventListener = () => {
   const $updateProfileForm = $("#update-profile-form");
 
-  $updateProfileForm.submit((event) => {
+  $updateProfileForm.submit(async (event) => {
     try {
       event.preventDefault();
 
       const data = $updateProfileForm.serialize();
 
-      updateProfile(data).then(() => {
-        updateUserDetails();
-        $updateProfileForm.trigger("reset");
-      });
+      await updateProfile(data);
+      updateUserDetails();
+      $updateProfileForm.trigger("reset");
     } catch (err) {
       updateError(err);
       updateView("error");
