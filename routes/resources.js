@@ -1,10 +1,27 @@
 const express = require("express");
 const router = express.Router();
-const validUrl = require("valid-url");
+const { isUri } = require("valid-url");
 const axios = require("axios");
 const queryGenerator = require("../db/query-helpers");
 const apiKey = process.env.IFRAME_KEY;
 const providers = require("./json/providers.json");
+
+const omebed = (url) => {
+  for (const provider of providers) {
+    const { endpoints, provider_url } = provider;
+    const { schemes, url: oembedURL } = endpoints[0];
+    const urlRegex2 = new RegExp(provider_url + "*");
+    const matched = urlRegex2.test(url);
+    if (matched) return oembedURL;
+    if (schemes) {
+      for (const str of schemes) {
+        const urlRegex = new RegExp(str);
+        const match = urlRegex.test(url);
+        if (match) return oembedURL;
+      }
+    }
+  }
+};
 
 module.exports = (db) => {
   const {
@@ -19,13 +36,14 @@ module.exports = (db) => {
     getURLById,
     addRatingToResource,
     getResourcesByCategory,
-    deleteResource
+    deleteResource,
   } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
     const user_id = req.session.user_id;
     try {
       const allResources = await getAllResources(user_id);
+
       res.json({
         status: "success",
         allResources,
@@ -41,15 +59,14 @@ module.exports = (db) => {
 
     try {
       const resourceByCategory = await getResourcesByCategory(user_id, catName);
+
       res.json({
         status: "success",
-        resourceByCategory
+        resourceByCategory,
       });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
-
-
   });
 
   router.get("/search/:q", async (req, res) => {
@@ -58,9 +75,10 @@ module.exports = (db) => {
 
     try {
       const allResources = await searchResources(user_id, q);
+
       res.json({
         status: "success",
-        allResources
+        allResources,
       });
     } catch (err) {
       res.status(500).json({ error: err.message });
@@ -68,23 +86,25 @@ module.exports = (db) => {
   });
 
   router.get("/me", async (req, res) => {
-
     try {
       const { user_id } = req.session;
+
       if (!user_id) return res.json({});
       const myResources = await getMyResources(user_id);
+
       res.json(myResources);
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
-
   });
 
   router.get("/:id", async (req, res) => {
     try {
       const { user_id } = req.session;
       const { id } = req.params;
+
       const resourceDetails = await getAllDetailsOfResource(id, user_id);
+
       res.json(resourceDetails);
     } catch (err) {
       res.status(500).json({ error: err.message });
@@ -96,61 +116,52 @@ module.exports = (db) => {
 
     try {
       const { id } = req.params;
+
       const result = await getAllDetailsOfResource(id, user_id);
       const { user_id: owner_id } = result[0];
+
       if (user_id !== owner_id) return res.status(401).json({ status: "fail" });
       await deleteResource(id);
+
       res.status(204).json({ status: "success" });
     } catch (err) {
       res.status(500).json({ error: err.message });
-    };
-    
+    }
   });
 
   router.get("/media/:id", async (req, res) => {
     try {
       const { id } = req.params;
+
       const url = await getURLById(id);
       const encodeURL = encodeURIComponent(url);
+
       const api = `https://iframe.ly/api/iframely?url=${encodeURL}&api_key=${apiKey}`;
-      const data = await axios.get(api);
-      const html = data.data.html;
+      const {
+        data: { html },
+      } = await axios.get(api);
+
       res.json({ html });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
   });
 
-  const omebed = (url) => {
-    for (const provider of providers) {
-      const { endpoints, provider_url } = provider;
-      const { schemes, url: oembedURL } = endpoints[0];
-      const urlRegex2 = new RegExp(provider_url + "*");
-      const matched = urlRegex2.test(url);
-      if (matched) return oembedURL;
-      if (schemes) {
-        for (const str of schemes) {
-          const urlRegex = new RegExp(str);
-          const match = urlRegex.test(url);
-          if (match) return oembedURL;
-        }
-      }
-    }
-  };
-
   router.post("/", async (req, res) => {
+    const { is_private, category, url } = req.body;
+
+    const urlIsValid = isUri(url);
+    if (!urlIsValid) {
+      return res.status(400).json({ error: "This url is not valid." });
+    }
+
     const user_id = req.session.user_id;
-    let { is_private, category, url } = req.body;
+    const omebedUrl = omebed(url);
+    const encodedURI = encodeURIComponent(url);
     let media_url;
     let is_video;
 
-    if (!validUrl.isUri(url))
-      return res.status(400).json({ error: "This url is not valid." });
-
-    const omebedUrl = omebed(url);
-
     try {
-      const encodedURI = encodeURIComponent(url);
       const videoData = await axios.get(
         `${omebedUrl}?url=${encodedURI}&format=json`
       );
@@ -159,6 +170,7 @@ module.exports = (db) => {
         .filter((attribute) => attribute.includes("src"))[0]
         .slice(4)
         .replace(`"`, "");
+
       media_url = source;
       is_video = true;
     } catch (e) {
@@ -167,7 +179,6 @@ module.exports = (db) => {
     }
 
     try {
-      is_private = is_private ? true : false;
       const category_id = await getIdFromCategory(category);
       const newResourceInput = {
         ...req.body,
@@ -177,6 +188,7 @@ module.exports = (db) => {
         is_video,
         media_url,
       };
+
       const newResource = await addNewResource(newResourceInput);
       res.json(newResource);
     } catch (err) {
@@ -188,10 +200,11 @@ module.exports = (db) => {
     const { id } = req.params;
     const { user_id } = req.session;
 
-    if (!user_id)
+    if (!user_id) {
       return res
         .status(500)
         .json({ error: "You must be logged in to like resources." });
+    }
 
     try {
       const likes = await addLikeToResource(id, user_id);
@@ -226,8 +239,6 @@ module.exports = (db) => {
       res.status(500).json({ error: err.message });
     }
   });
-
-
 
   return router;
 };

@@ -10,9 +10,9 @@ module.exports = (db) => {
     queryGenerator(db);
 
   router.post("/login", async (req, res) => {
-    try {
-      const { email, password } = req.body;
+    const { email, password } = req.body;
 
+    try {
       const user = await getUserByValue("email", email);
 
       if (!user) return res.status(400).json({ error: "email doesn't exist" });
@@ -33,10 +33,10 @@ module.exports = (db) => {
   });
 
   router.post("/edit", async (req, res) => {
-    try {
-      const userId = req.session.user_id;
-      const { username, email } = req.body;
+    const userId = req.session.user_id;
+    const { username, email } = req.body;
 
+    try {
       const userWithSameUsername = await getUserByValue("username", username);
 
       if (userWithSameUsername && userWithSameUsername.id !== userId) {
@@ -62,10 +62,10 @@ module.exports = (db) => {
   });
 
   router.post("/password", async (req, res) => {
-    try {
-      const { user_id } = req.session;
-      const { current_password, new_password, confirm_new_password } = req.body;
+    const { user_id } = req.session;
+    const { current_password, new_password, confirm_new_password } = req.body;
 
+    try {
       const user = await getUserByValue("id", user_id);
 
       const { password: hashedPassword } = user;
@@ -105,9 +105,9 @@ module.exports = (db) => {
   });
 
   router.post("/register", async (req, res) => {
-    try {
-      const { email, password, username } = req.body;
+    const { email, password, username } = req.body;
 
+    try {
       const userWithSameUsername = await getUserByValue("username", username);
 
       if (userWithSameUsername) {
@@ -136,10 +136,11 @@ module.exports = (db) => {
   });
 
   router.get("/me/:getDefaultPic", async (req, res) => {
+    const { getDefaultPic } = req.params;
+    const { user_id } = req.session;
+    if (!user_id) return res.json({});
+
     try {
-      const { getDefaultPic } = req.params;
-      const { user_id } = req.session;
-      if (!user_id) return res.json({});
       const userInfo = await getUserByValue("id", user_id, getDefaultPic);
 
       res.json(userInfo);
@@ -149,9 +150,9 @@ module.exports = (db) => {
   });
 
   router.get("/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
+    const { id } = req.params;
 
+    try {
       const userInfo = await getUserByValue("id", id);
 
       res.json(userInfo);
