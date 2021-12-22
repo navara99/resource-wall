@@ -106,3 +106,24 @@ figure:hover {
 .tabs {
   border-bottom: 1px solid rgba(33, 150, 243, 1);
 }
+
+ul.tabs {
+  border: none;
+}
+div.col.s12.nav-colour {
+  background-color: #003566;
+  ul li.tab.col.s1.nav-colour {
+    background-color: white;
+    a.nav-colour {
+      background-color: #003566;
+      color: white;
+    }
+    a.nav-colour.active {
+      background-color: #001d3d;
+      color: white;
+    }
+    a.nav-colour:hover {
+      background-color: #001d3d;
+    }
+  }
+}

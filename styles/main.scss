@@ -61,6 +61,16 @@ h3.title {
   margin: 0;
 }
 
+// BUTTONS STYLE
+
+.waves-effect.waves-light {
+  background-color: #ffc300;
+}
+
+.waves-effect.waves-light:hover {
+  background-color: #ffd60a;
+}
+
 @media (max-width: 800px) {
   #columns {
     column-count: 3;
@@ -77,69 +87,4 @@ h3.title {
   #columns {
     column-count: 1;
   }
-}
-
-.details-heart {
-  float: right;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-#details-stars {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-
-.user-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 70%;
-  margin: 0 15%;
-  text-align: justify;
-
-  img {
-    width: 15em;
-    height: auto;
-  }
-}
-
-header.navbar-fixed nav {
-  box-shadow: none;
-}
-
-ul.tabs {
-  border: none;
-}
-div.col.s12.nav-colour {
-  background-color: #003566;
-  ul li.tab.col.s1.nav-colour {
-    background-color: white;
-    a.nav-colour {
-      background-color: #003566;
-      color: white;
-    }
-    a.nav-colour.active {
-      background-color: #001d3d;
-      color: white;
-    }
-    a.nav-colour:hover {
-      background-color: #001d3d;
-    }
-  }
-}
-
-.waves-effect.waves-light {
-  background-color: #ffc300;
-}
-
-.waves-effect.waves-light:hover {
-  background-color: #ffd60a;
-}
-
-.flex-row {
-  display: flex;
 }
