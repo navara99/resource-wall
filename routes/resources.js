@@ -154,7 +154,7 @@ module.exports = (db) => {
     if (!urlIsValid) {
       return res.status(400).json({ error: "This url is not valid." });
     }
-    console.log("156");
+
     const user_id = req.session.user_id;
     const omebedUrl = omebed(url);
     const encodedURI = encodeURIComponent(url);
