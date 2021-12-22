@@ -32,7 +32,14 @@ form {
   margin: inherit;
 }
 
-// TITLE OF PAGE
+// BUTTON ON THE RIGHT BOTTOM
+a.circle-container {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+}
+
+// TITLE OF PAGES
 
 h3.title {
   margin: 0;
@@ -56,44 +63,6 @@ h3.title {
   #columns {
     column-count: 1;
   }
-}
-
-.not-liked {
-  color: rgba(128, 128, 128, 0.657);
-}
-
-.liked {
-  color: #db565b;
-}
-
-.card-action {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.card-summary {
-  display: flex;
-  align-items: center;
-}
-
-.card-icon {
-  font-size: 2em;
-  padding-right: 0.25em;
-}
-
-a.circle-container {
-  position: fixed;
-  bottom: 1em;
-  right: 1em;
-}
-
-form {
-  margin: initial;
-}
-
-.content-container {
-  margin: 2.5em 0;
 }
 
 .settings-container {

@@ -70,3 +70,19 @@
     }
   }
 }
+
+.card-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.card-summary {
+  display: flex;
+  align-items: center;
+}
+
+.card-icon {
+  font-size: 2em;
+  padding-right: 0.25em;
+}
