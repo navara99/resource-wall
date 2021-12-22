@@ -21,7 +21,7 @@ const thumbnailElementGenerator = (resource, videoHeight = 250) => {
   return { createScreenshot, createEmbedVideo };
 };
 
-const resourcesElementGenerator = (resource) => {
+const cardElementGenerator = (resource) => {
   const { likes, number_of_comment, rating } = resource;
 
   const getCardAction = () => {
@@ -120,7 +120,7 @@ const displayResources = async (resources) => {
     const { createScreenshot, createEmbedVideo } =
       thumbnailElementGenerator(resource);
 
-    const { getCardAction } = resourcesElementGenerator(resource);
+    const { getCardAction } = cardElementGenerator(resource);
 
     const $card = $("<div>").addClass("card");
 
