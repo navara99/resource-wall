@@ -81,6 +81,9 @@ const makeInfoObj = (id, details) => {
     my_profile_url,
     number_of_comment,
     number_of_like,
+    currentRating: rated,
+    averageRating: rating,
+    numOfRating: parseInt(number_of_rating),
     currentLike: liked > 0 ? true : false,
   };
 
@@ -111,7 +114,6 @@ const makeInfoObj = (id, details) => {
     rating,
     number_of_rating,
     current_username,
-    rated,
   };
 };
 
@@ -125,16 +127,13 @@ const getMedia = async ({ id, is_video, media_url }, $media) => {
 };
 
 const updateResourceDetails = () => {
-  const $averageRating = $("#details-average-rating");
   const $media = $("#details-media");
-  const $ratingString = $("#details-rating-string");
+
   const $1Star = $("#one-star");
   const $2Star = $("#two-star");
   const $3Star = $("#three-star");
   const $4Star = $("#four-star");
   const $5Star = $("#five-star");
-  const $detailsStars = $("#details-stars");
-  const starElms = [$1Star, $2Star, $3Star, $4Star, $5Star];
 
   const domObj = {
     $likesNum: $("#details-likes-num"),
@@ -142,6 +141,10 @@ const updateResourceDetails = () => {
     $detailsComments: $("#details-comments"),
     $likeIcon: $("#details-like-icon"),
     $rating: $("#details-rating"),
+    starElms: [$1Star, $2Star, $3Star, $4Star, $5Star],
+    $averageRating: $("#details-average-rating"),
+    $ratingString: $("#details-rating-string"),
+    $detailsStars: $("#details-stars"),
   };
 
   const domObjForSetUp = {
@@ -163,16 +166,10 @@ const updateResourceDetails = () => {
 
       $media.html("");
 
-      const {
-        infoForSetUp,
-        resourceInfo,
-        infoForMedia,
-        title,
-        rating,
-        number_of_rating,
-        current_username,
-        rated,
-      } = makeInfoObj(id, resourceComments[0]);
+      const { infoForSetUp, resourceInfo, infoForMedia, title } = makeInfoObj(
+        id,
+        resourceComments[0]
+      );
 
       initDisplay(infoForSetUp, domObjForSetUp);
 
@@ -198,65 +195,6 @@ const updateResourceDetails = () => {
       );
 
       initRatingSetup();
-
-      let averageRating = rating;
-      let numOfRating = parseInt(number_of_rating);
-      let currentRating = rated;
-
-      const addClassToStars = () => {
-        const rate = currentRating || 0;
-        for (let i = 0; i < rate; i++) {
-          starElms[i].addClass("bright");
-        }
-        for (let i = rate; i < 5; i++) {
-          starElms[i].removeClass("bright");
-        }
-      };
-
-      const updateRatingStr = () => {
-        if (!currentRating) return $ratingString.html("Rate it:&nbsp;");
-        addClassToStars(currentRating);
-        $ratingString.html("You rated:&nbsp;");
-      };
-
-      $detailsStars
-        .mouseenter(() => {
-          starElms.forEach((elm) => elm.removeClass("bright"));
-        })
-        .mouseleave(() => {
-          addClassToStars(currentRating);
-        });
-
-      const ratingOnClick = ($elm, id, newRating) => {
-        $elm.unbind();
-        $elm.on("click", async () => {
-          if (current_username) {
-            const isNewRating = await rateResource(id, `rating=${newRating}`);
-            if (isNewRating) {
-              numOfRating++;
-              averageRating = averageRating
-                ? (averageRating * numOfRating + newRating) / numOfRating
-                : newRating;
-            } else {
-              averageRating =
-                (averageRating * numOfRating - currentRating + newRating) /
-                numOfRating;
-            }
-            currentRating = newRating;
-            updateRating();
-            updateRatingStr();
-          }
-        });
-      };
-
-      starElms.forEach((elm, index) => ratingOnClick(elm, id, index + 1));
-
-      const updateRating = () => {
-        const ratingText = displayRating(averageRating, numOfRating);
-        $averageRating.text(ratingText);
-      };
-      updateRatingStr();
-      updateRating();
 
       return title;
     } catch (err) {
