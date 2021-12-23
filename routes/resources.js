@@ -37,6 +37,7 @@ module.exports = (db) => {
     addRatingToResource,
     getResourcesByCategory,
     deleteResource,
+    updateResource
   } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
@@ -201,12 +202,16 @@ module.exports = (db) => {
   router.put("/:id", async (req, res) => {
     const { user_id } = req.session;
     const { id } = req.params;
-    
 
     try {
+      await updateResource(id, req.body);
+      res.status(200).json({ status: "success" });
     } catch (err) {
-
+      console.log(err.message);
+      res.status(500).json({ error: err.message });
     }
+
+
   });
 
   router.post("/:id/like", async (req, res) => {
