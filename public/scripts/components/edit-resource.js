@@ -10,7 +10,8 @@ const showEditResourceModal = async (resourceId) => {
 };
 
 const closeEditModal = () => {
-  
+  $("#title-edit").value("");
+  $("")
 }
 
 
