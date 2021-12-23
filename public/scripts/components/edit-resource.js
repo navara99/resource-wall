@@ -13,6 +13,7 @@ const updateEditForm = (title, description, url, is_private, category) => {
 };
 
 const clearEditModalForm = () => {
+  $("#edit-resource-btn").off("click");
   $("#title-edit").val("");
   $("#description-edit").val("");
   $("#url-edit").val("");
