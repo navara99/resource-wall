@@ -104,9 +104,6 @@ const myResourcesSetup = (resource, $listContainer) => {
     <div id="${id}-edit-form-modal" class="modal-content">
       <h4>Edit ${title}</h4>
     </div>
-    <div class="modal-footer">
-      <a href="#!" id="edit-submit" class="modal-close  waves-effect waves-light btn">Confirm</a>
-    </div>
   </div>
 `);
 
