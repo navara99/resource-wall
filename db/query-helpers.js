@@ -422,7 +422,7 @@ const queryGenerator = (db) => {
 
       return data;
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
     }
   };
 
@@ -436,7 +436,7 @@ const queryGenerator = (db) => {
     try {
       await db.query(queryString, value);
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
     }
   };
 

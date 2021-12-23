@@ -12,7 +12,7 @@ const updateUserFunctionGenerator = () => {
 
   const clearResource = () => {
     $resources.html("");
-  }
+  };
 
   return async (id) => {
     clearResource();
@@ -34,7 +34,6 @@ const updateUserFunctionGenerator = () => {
       const { resources, id: profileId } = await getUserResources(userId);
 
       resources.forEach((resource) => {
-
         const { user_id, isPrivate } = resource;
 
         const showMine = user_id === profileId && !isPrivate;
@@ -45,12 +44,11 @@ const updateUserFunctionGenerator = () => {
           isMine: false,
           showLiked: false,
         };
-        console.log(showMine);
+
         myResourcesSetup(allResourceInfo, $resources)();
       });
     } catch (err) {
-      // updateError(err);
-      console.log(err);
+      updateError(err);
     }
   };
 };
