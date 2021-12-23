@@ -103,7 +103,7 @@ const myResourcesSetup = (resource, $listContainer) => {
     <a href="#!" id="close-edit" class="modal-close  waves-effect waves-light btn-flat">
       <i class="material-icons right">close</i>
     </a>
-    <div id="edit-form-modal" class="modal-content">
+    <div id="${id}-edit-form-modal" class="modal-content">
       <h4>Edit ${title}</h4>
     </div>
     <div class="modal-footer">
