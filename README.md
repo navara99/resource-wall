@@ -90,7 +90,6 @@
 
 - case sensitive of search
 - users should be able to search any user
-- go back to homepage when serach bar is "onChange"
 
 # LHL Node Skeleton
 

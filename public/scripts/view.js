@@ -81,7 +81,7 @@ const updateViewFunctionGenerator = () => {
         updateTitleURL("Profile", "profile");
         break;
       case "resources":
-        displayResources();
+        if(!resourceId) displayResources();
         $resourcesPage.show();
         $tabs.show();
         updateTitleURL("Home", "");

@@ -145,7 +145,9 @@ const registerSearchListener = () => {
   $searchBar.on("input", async (e) => {
     const query = e.target.value;
     if (!query) return displayResources();
+
     const { allResources } = await searchResource(query);
+    updateView("resources", null, true);
     displayResources(allResources);
   });
 };
