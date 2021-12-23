@@ -333,7 +333,7 @@ const queryGenerator = (db) => {
       LEFT JOIN comments ON comments.resource_id = resources.id
       LEFT JOIN ratings ON resources.id = ratings.resource_id
       GROUP BY resources.id, users.username, categories.type
-      HAVING is_private = $2 AND (title LIKE $3 OR description LIKE $3 OR username LIKE $3);
+      HAVING is_private = $2 AND (title ILIKE $3 OR description ILIKE $3 OR username ILIKE $3);
     `;
 
     try {
