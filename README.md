@@ -44,6 +44,7 @@
 ### user page
 
 - users can view user's info (profile picture, username, bio, full name)
+- view the user's resources
 
 ### new resource
 
@@ -81,10 +82,6 @@
 
 - order reources by date
 
-### user page
-
-- view the user's resources
-
 ### new resource
 
 - upload image
@@ -93,7 +90,7 @@
 
 - case sensitive of search
 - users should be able to search any user
-- go back to homepage when focused
+- go back to homepage when serach bar is "onChange"
 
 # LHL Node Skeleton
 
