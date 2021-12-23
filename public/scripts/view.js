@@ -54,6 +54,7 @@ const updateViewFunctionGenerator = () => {
   const $myResourcesPage = $("#my-resources-page");
   const $userPage = $("#user-page");
   const $tabs = $("#tabs");
+  const $editResource = $("edit-resource-page");
 
   const hideAll = () => {
     $newResourcePage.hide();
@@ -80,7 +81,7 @@ const updateViewFunctionGenerator = () => {
         updateTitleURL("Profile", "profile");
         break;
       case "resources":
-        if(!resourceId) displayResources();
+        if (!resourceId) displayResources();
         $resourcesPage.show();
         $tabs.show();
         updateTitleURL("Home", "");
