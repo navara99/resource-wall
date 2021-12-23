@@ -25,10 +25,10 @@ const registerSubmitResourceEdit = (resourceId, editForm) => {
   $("#edit-resource-btn").on("click", async (e) => {
     e.preventDefault();
     const newInfo = editForm.serialize();
-    console.log(newInfo);
-    const result = await updateResource(resourceId, newInfo);
-    console.log(result);
+    await updateResource(resourceId, newInfo);
     clearEditModalForm();
+    renderMyResources();
+    $(".modal").modal("close");
   });
 
 };
