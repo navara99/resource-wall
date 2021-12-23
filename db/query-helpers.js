@@ -440,6 +440,10 @@ const queryGenerator = (db) => {
     }
   };
 
+  const updateResource = async (id, { title, description, url, category, is_private }) => {
+    
+  }
+
   return {
     createNewUser,
     getUserByValue,
