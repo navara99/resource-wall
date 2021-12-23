@@ -95,6 +95,7 @@ const updateViewFunctionGenerator = () => {
         break;
       case "editResource":
         $editResource.show();
+        updateTitleURL("Edit Resource", "edit-resource");
       case "changePassword":
         showChangePasswordPage();
         $myResourcesPage.show();
