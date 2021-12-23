@@ -35,6 +35,7 @@ const showEditResourceModal = async (resourceId) => {
   const $editResourceForm = $("#edit-resource-form");
   const $editModalContent = $(`#${resourceId}-edit-form-modal`);
   $editModalContent.append($editResourceForm);
+  registerSubmitResourceEdit();
   updateEditForm(title, description, url, is_private, catergory);
   $editResourceForm.show();
 };
