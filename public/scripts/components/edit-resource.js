@@ -20,10 +20,12 @@ const clearEditModalForm = () => {
   $("#edit-Resource-form").hide();
 };
 
-const registerSubmitResourceEdit = () => {
+const registerSubmitResourceEdit = (title, url, description, is_private, category_id, resourceId) => {
+  const newInfo = { title, url, description, is_private, category_id };
 
   $("#edit-resource-btn").on("click", (e) => {
     e.preventDefault();
+    updateResource(resourceId, newInfo);
     clearEditModalForm();
   });
 
@@ -36,7 +38,7 @@ const showEditResourceModal = async (resourceId) => {
   const $editResourceForm = $("#edit-resource-form");
   const $editModalContent = $(`#${resourceId}-edit-form-modal`);
   $editModalContent.append($editResourceForm);
-  registerSubmitResourceEdit();
+  registerSubmitResourceEdit(title, url, description, is_private, category_id, resourceId);
   updateEditForm(title, description, url, is_private, catergory);
   $editResourceForm.show();
 };
