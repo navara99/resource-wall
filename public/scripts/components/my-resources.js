@@ -36,7 +36,11 @@ const myResourcesSetup = (resource, $listContainer) => {
       }
     });
 
-    $(`#${id}-edit`).on("click", function (e) {});
+    $(`#${id}-edit`).on("click", function (e) {
+      showEditResourceModal(id);
+    });
+
+
   };
 
   const $info = $(`
