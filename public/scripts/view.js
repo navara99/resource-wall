@@ -54,7 +54,7 @@ const updateViewFunctionGenerator = () => {
   const $myResourcesPage = $("#my-resources-page");
   const $userPage = $("#user-page");
   const $tabs = $("#tabs");
-  const $editResource = $("edit-resource-page");
+  const $editResource = $("#edit-resource-page");
 
   const hideAll = () => {
     $newResourcePage.hide();
@@ -67,6 +67,7 @@ const updateViewFunctionGenerator = () => {
     $myResourcesPage.hide();
     $userPage.hide();
     $tabs.hide();
+    $editResource.hide();
   };
 
   return (nextView, userInfo, resourceId) => {
@@ -92,6 +93,8 @@ const updateViewFunctionGenerator = () => {
         $myResourcesPage.show();
         updateTitleURL("My Resources", "my-resources");
         break;
+      case "editResource":
+        $editResource.show();
       case "changePassword":
         showChangePasswordPage();
         $myResourcesPage.show();
