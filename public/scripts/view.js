@@ -10,7 +10,6 @@ $(() => {
 const eventListeners = () => {
   registerTabListener();
   registerCheckListeners();
-  registerSearchListener();
   headerButtonsEventListener();
   loginEventListener();
   registerEventListener();

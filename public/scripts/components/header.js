@@ -4,8 +4,7 @@ const updateHeaderFunctionGenerator = () => {
   const $floatingCreateResourceButton = $("#floating-create-resource-button");
   const $profilePicture = $("#profile-picture");
 
-  return ({ id, profile_picture_url } ) => {
-
+  return ({ id, profile_picture_url }) => {
     if (!id) {
       $userButtons.hide();
       $floatingCreateResourceButton.hide();
@@ -32,6 +31,19 @@ const headerButtonsEventListener = () => {
   const $myResourcesButton = $("#my-resources-button");
   const $changePasswordButton = $("#change-password-button");
   const $myProfilebutton = $("#my-profile-button");
+  const $searchBar = $(`#search`);
+
+  $searchBar.on("input", async (e) => {
+    const query = e.target.value;
+    if (!query) return displayResources();
+
+    const { allResources } = await searchResource(query);
+    displayResources(allResources);
+  });
+
+  $searchBar.on("focus", async (e) => {
+    updateView("resources", null, true);
+  });
 
   window.onclick = (event) => {
     const className = $(event.target).attr("class");
@@ -69,6 +81,7 @@ const headerButtonsEventListener = () => {
   });
 
   $homeButton.on("click", () => {
+    $searchBar.val("");
     updateView("resources");
   });
 

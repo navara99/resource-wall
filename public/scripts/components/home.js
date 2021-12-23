@@ -139,19 +139,6 @@ const displayResourcesFunctionGenerator = () => {
   };
 };
 
-const registerSearchListener = () => {
-  const $searchBar = $(`#search`);
-
-  $searchBar.on("input", async (e) => {
-    const query = e.target.value;
-    if (!query) return displayResources();
-
-    const { allResources } = await searchResource(query);
-    updateView("resources", null, true);
-    displayResources(allResources);
-  });
-};
-
 const registerTabListener = () => {
   const $tab = $(".tab").children("a");
   $tab.on("click", async function () {
