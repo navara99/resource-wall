@@ -94,7 +94,7 @@ module.exports = (db) => {
     try {
       const resources = await getUserResources(id);
 
-      res.json({ resources, id: user_id });
+      res.json({ resources, id });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
