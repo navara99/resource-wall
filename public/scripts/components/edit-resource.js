@@ -5,7 +5,7 @@ const placeInput = (elem, value) => {
 
 const updateEditForm = (title, description) => {
   placeInput($("#title-edit"), title);
-
+  placeInput($("#description-edit"), description);
 };
 
 const showEditResourceModal = async (resourceId) => {
