@@ -20,6 +20,10 @@ const clearEditModalForm = () => {
   $("#edit-Resource-form").hide();
 };
 
+const registerSubmitResourceEdit = () => {
+  
+}
+
 const showEditResourceModal = async (resourceId) => {
   clearEditModalForm();
   const [resourceDetails] = await getDetailsOfResources(resourceId);
