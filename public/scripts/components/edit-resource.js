@@ -1,18 +1,21 @@
 const createEditModal = () => {
+  const $editResourceForm = $("#edit-resource-form");
+
   const $modal = $(`
-  <div id="${id}-confirm-delete" class="modal">
-    <a href="#!" id="close-confirm-delete" class="modal-close  waves-effect waves-light btn-flat">
+  <div id="${id}-edit" class="modal">
+    <a href="#!" id="close-edit" class="modal-close  waves-effect waves-light btn-flat">
       <i class="material-icons right">close</i>
     </a>
     <div class="modal-content">
-      <h4>Are you sure?</h4>
-      <p>Are you sure you want to delete ${title}?</p>
+      <h4>Edit ${title}</h4>
     </div>
     <div class="modal-footer">
       <a href="#!" id="${id}-delete" class="modal-close  waves-effect waves-light red btn">Confirm</a>
   </div>
 </div>
 `);
+
+
   return $modal;
 }
 
