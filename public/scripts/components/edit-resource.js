@@ -12,6 +12,7 @@ const showEditResourceModal = async (resourceId) => {
 const closeEditModal = () => {
   $("#title-edit").val("");
   $("#description-edit").val("");
+  $("#url-edit").val("");
 };
 
 
