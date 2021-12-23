@@ -93,7 +93,7 @@ const rateResource = (id, data) => {
   });
 };
 
-const getdetailsOfResources = (id) => {
+const getDetailsOfResources = (id) => {
   return $.ajax({
     url: `/api/resources/${id}`,
   });
