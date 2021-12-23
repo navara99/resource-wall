@@ -1,4 +1,10 @@
-const updateEditForm = ()=> {
+const placeInput = (elem, value) => {
+  elem.focus();
+  elem.val(value);
+};
+
+const updateEditForm = (title, description) => {
+  placeInput($("#title-edit"), title);
 
 };
 
@@ -8,8 +14,8 @@ const showEditResourceModal = async (resourceId) => {
   const $editResourceForm = $("#edit-resource-form");
   const $editModalContent = $(`#${resourceId}-edit-form-modal`);
   $editModalContent.append($editResourceForm);
+  updateEditForm(title, description, url, is_private, category_id);
   $editResourceForm.show();
-
   console.log(resourceId);
   console.log(resourceDetails);
 };
