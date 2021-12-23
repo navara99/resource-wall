@@ -13,7 +13,17 @@ const updateEditForm = (title, description, url, is_private, category) => {
   console.log(is_private);
 };
 
+const closeEditModal = () => {
+  console.log("Modal closed");
+  $("#title-edit").val("");
+  $("#description-edit").val("");
+  $("#url-edit").val("");
+  $("#edit-private").removeAttr("checked");
+  $("#edit-Resource-form").hide();
+};
+
 const showEditResourceModal = async (resourceId) => {
+  closeEditModal();
   const [resourceDetails] = await getDetailsOfResources(resourceId);
   const { title, url, description, is_private, category_id, catergory } = resourceDetails;
   const $editResourceForm = $("#edit-resource-form");
@@ -26,14 +36,7 @@ const showEditResourceModal = async (resourceId) => {
   console.log(resourceDetails);
 };
 
-const closeEditModal = () => {
-  console.log("Modal closed");
-  $("#title-edit").val("");
-  $("#description-edit").val("");
-  $("#url-edit").val("");
-  $("#edit-private").removeAttr("checked");
-  $("#edit-Resource-form").hide();
-};
+
 
 
 
