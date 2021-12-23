@@ -37,7 +37,8 @@ const myResourcesSetup = (resource, $listContainer) => {
     });
 
     $(`#${id}-edit`).on("click", async function (e) {
-      await showEditResourceModal(id);
+      const modal = await editResourceModalGenerator();
+      modal(id);
     });
 
   };
