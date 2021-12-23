@@ -40,8 +40,6 @@ const myResourcesSetup = (resource, $listContainer) => {
       await showEditResourceModal(id);
     });
 
-    $("#close-edit").on("click", () => closeEditModal());
-
   };
 
   const $info = $(`
