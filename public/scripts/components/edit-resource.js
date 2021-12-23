@@ -4,9 +4,13 @@ const showEditResourceModal = async (resourceId) => {
   const $editResourceForm = $("#edit-resource-form");
   const $editModalContent = $("#edit-form-modal");
   $editModalContent.append($editResourceForm);
-
+  $editResourceForm.show();
   console.log(resourceId);
   console.log(resourceDetails);
 };
+
+const closeEditModal = () => {
+  
+}
 
 
