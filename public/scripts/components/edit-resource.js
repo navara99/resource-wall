@@ -35,6 +35,13 @@ const registerSubmitResourceEdit = (resourceId, editForm) => {
 };
 
 const editResourceModalGenerator = async () => {
+  const $title = $("#title-edit");
+  const $description = $("#description-edit");
+  const $url = $("#url-edit");
+  const $category = $("#category-edit");
+  const $private$ = ("#edit-private");
+
+  
 
   return async (resourceId) => {
     console.log(resourceId);
