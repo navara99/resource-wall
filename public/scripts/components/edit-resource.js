@@ -21,8 +21,12 @@ const clearEditModalForm = () => {
 };
 
 const registerSubmitResourceEdit = () => {
-  
-}
+
+  $("#edit-resource-btn").on("click", (e) => {
+    e.preventDefault();
+  });
+
+};
 
 const showEditResourceModal = async (resourceId) => {
   clearEditModalForm();
