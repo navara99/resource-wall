@@ -3,9 +3,10 @@ const placeInput = (elem, value) => {
   elem.val(value);
 };
 
-const updateEditForm = (title, description) => {
+const updateEditForm = (title, description, url) => {
   placeInput($("#title-edit"), title);
   placeInput($("#description-edit"), description);
+  placeInput($("#url-edit"), url);
 };
 
 const showEditResourceModal = async (resourceId) => {
