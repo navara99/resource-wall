@@ -129,7 +129,7 @@ const getMedia = async ({ id, is_video, media_url }, $media) => {
 
 const resourceDetailsSetup = async (id, domObj) => {
   try {
-    const resourceComments = await getdetailsOfResources(id);
+    const resourceComments = await getDetailsOfResources(id);
 
     domObj.$media.html("");
 
