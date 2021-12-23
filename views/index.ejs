@@ -23,116 +23,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
     <link
-      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+      rel="stylesheet"
     />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
     <link
-      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
+      rel="stylesheet"
     />
   </head>
 
   <body>
     <header class="navbar-fixed">
       <nav>
-        <div class="nav-wrapper">
-          <div class="logo"><img src="../public/images/logo.png" />Resource Wall</div>
-          <ul>
-            <li id="home-button">
-              <a><i class="fas fa-home"></i></a>
-            </li>
-          </ul>
-          <div class="input-field search-bar">
-            <input id="search" type="search" autofocus />
-            <label class="label-icon" for="search"
-              ><i class="fas fa-search"></i
-            ></label>
-          </div>
-          <ul id="user-buttons" class="hidden">
-            <li id="create-resource-button">
-              <a><i class="fas fa-plus-circle"></i></a>
-            </li>
-            <li id="profile-button" class="profile-picture profile-dropdown">
-              <a class="profile profile-picture profile-dropdown">
-                <div class="profile profile-picture profile-dropdown">
-                  <img
-                    alt=""
-                    id="profile-picture"
-                    class="circle profile profile-picture profile-dropdown"
-                  />
-                </div>
-              </a>
-              <div class="hidden dropdown" id="dropdown">
-                <a id="my-resources-button">My Resources</a>
-                <a class="divider"></a>
-                <a id="my-profile-button">My profile</a>
-                <a class="divider"></a>
-                <a id="update-profile-button">Update Profile</a>
-                <a class="divider"></a>
-                <a id="change-password-button">Change Password</a>
-                <a class="divider"></a>
-                <a id="logout-button">Logout</a>
-              </div>
-            </li>
-          </ul>
-          <ul id="no-user-buttons">
-            <li id="login-button">
-              <a>LOGIN</a>
-            </li>
-            <li id="register-button">
-              <a>REGISTER</a>
-            </li>
-          </ul>
-        </div>
-        <div class="row" id="tabs">
-          <div class="col s12 nav-colour">
-            <ul class="tabs">
-              <li class="tab col s1 nav-colour">
-                <a class="active nav-colour" id="ALL">All</a>
-              </li>
-              <li class="tab col s1 nav-colour">
-                <a class="nav-colour" id="ART">Art</a>
-              </li>
-              <li class="tab col s1 nav-colour">
-                <a class="nav-colour" id="COOKING">Cooking</a>
-              </li>
-              <li class="tab col s1 nav-colour">
-                <a class="nav-colour" id="DESIGN">Design</a>
-              </li>
-              <li class="tab col s1 nav-colour">
-                <a class="nav-colour" id="FINANCE">Finance</a>
-              </li>
-              <li class="tab col s1 nav-colour">
-                <a class="nav-colour" id="GARDENING">Gardening</a>
-              </li>
-              <li class="tab col s1 nav-colour">
-                <a class="nav-colour" id="HEALTH">Health/Fitness</a>
-              </li>
-              <li class="tab col s1 nav-colour">
-                <a class="nav-colour" id="LANGUAGE">Language</a>
-              </li>
-              <li class="tab col s1 nav-colour">
-                <a class="nav-colour" id="MARKETING">Marketing</a>
-              </li>
-              <li class="tab col s1 nav-colour">
-                <a class="nav-colour" id="MUSIC">Music</a>
-              </li>
-              <li class="tab col s1 nav-colour">
-                <a class="nav-colour" id="TECHNOLOGY">Technology</a>
-              </li>
-              <li class="tab col s1 nav-colour">
-                <a class="nav-colour" id="OTHER">Other</a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <%- include("nav"); %>
+        <%- include("tabs"); %>
       </nav>
     </header>
 
