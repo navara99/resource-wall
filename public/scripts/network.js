@@ -1,4 +1,4 @@
-const getMyDetails = (getDefaultProfilePic) => {
+const getMyDetails = (getDefaultProfilePic = 0) => {
   return $.ajax({
     url: `/api/users/me/${getDefaultProfilePic}`,
   });

@@ -1,7 +1,7 @@
 const defaultProfilePicUrl =
   "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg";
 
-const getData = ({rows}) => rows;
+const getData = ({ rows }) => rows;
 const getFirstRecord = (result) => getData(result)[0];
 
 const assignProfilePic = (userInfo, columnName) => {
@@ -278,7 +278,7 @@ const queryGenerator = (db) => {
     `;
 
     try {
-      const result = (await db.query(queryString, value));
+      const result = await db.query(queryString, value);
       const data = getData(result);
       const firstData = getFirstRecord(result);
 
@@ -308,7 +308,7 @@ const queryGenerator = (db) => {
   };
 
   const searchResources = async (user_id, query) => {
-    const value = [user_id, false, "%" + query + "%"];
+    const value = [user_id, "%" + query + "%"];
     const queryString = `
       SELECT
       resources.id,
@@ -332,8 +332,8 @@ const queryGenerator = (db) => {
       JOIN users ON users.id = resources.user_id
       LEFT JOIN comments ON comments.resource_id = resources.id
       LEFT JOIN ratings ON resources.id = ratings.resource_id
-      GROUP BY resources.id, users.username, categories.type
-      HAVING is_private = $2 AND (title ILIKE $3 OR description ILIKE $3 OR username ILIKE $3);
+      GROUP BY resources.id, users.username, categories.type, users.first_name, users.last_name
+      HAVING is_private = false AND (CONCAT(first_name, ' ', last_name) ILIKE $2 OR username ILIKE $2 OR title ILIKE $2 OR description ILIKE $2);
     `;
 
     try {
