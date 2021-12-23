@@ -441,8 +441,10 @@ const queryGenerator = (db) => {
   };
 
   const updateResource = async (id, { title, description, url, category, is_private }) => {
-    
-  }
+    const category_id = await getIdFromCategory(category);
+    const values = [id, title, description, url, category_id, is_private];
+    console.log(values);
+  };
 
   return {
     createNewUser,
@@ -462,6 +464,7 @@ const queryGenerator = (db) => {
     addRatingToResource,
     getResourcesByCategory,
     deleteResource,
+    updateResource
   };
 };
 
