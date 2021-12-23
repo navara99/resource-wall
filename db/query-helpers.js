@@ -443,8 +443,22 @@ const queryGenerator = (db) => {
   const updateResource = async (id, { title, description, url, category, is_private }) => {
     const category_id = await getIdFromCategory(category);
     is_private = is_private || false;
-    const values = [id, title, description, url, category_id, is_private];
+    const values = [title, description, url, category_id, is_private, id];
     console.log(values);
+    const queryString = `
+      UPDATE resources
+      SET title = $1,
+        description = $2,
+        url = $3,
+        category_id = $4,
+        is_private = $5
+      WHERE id = $6;
+    `
+    try {
+      await db.query(queryString, values);
+    } catch (err) {
+      console.log(err);
+    };
   };
 
   return {
