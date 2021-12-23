@@ -3,24 +3,6 @@ const placeInput = (elem, value) => {
   elem.val(value);
 };
 
-const updateEditForm = (title, description, url, is_private, category) => {
-  placeInput($("#title-edit"), title);
-  placeInput($("#description-edit"), description);
-  placeInput($("#url-edit"), url);
-  placeInput($("#category-edit"), category);
-  $("#category-edit").formSelect();
-  if (is_private) $("#edit-private").attr("checked", true);
-};
-
-const clearEditModalForm = () => {
-  $("#edit-resource-btn").off("click");
-  $("#title-edit").val("");
-  $("#description-edit").val("");
-  $("#url-edit").val("");
-  $("#edit-private").removeAttr("checked");
-  $("#edit-Resource-form").hide();
-};
-
 const registerSubmitResourceEdit = (resourceId, editForm) => {
 
   $("#edit-resource-btn").on("click", async (e) => {
@@ -39,9 +21,26 @@ const editResourceModalGenerator = async () => {
   const $description = $("#description-edit");
   const $url = $("#url-edit");
   const $category = $("#category-edit");
-  const $private$ = ("#edit-private");
+  const $private = ("#edit-private");
 
-  
+  const updateEditForm = (title, description, url, is_private, category) => {
+    placeInput($title, title);
+    placeInput($description, description);
+    placeInput($url, url);
+    placeInput($category, category);
+    $category.formSelect();
+    if (is_private) $private.attr("checked", true);
+  };
+
+  const clearEditModalForm = () => {
+    $("#edit-resource-btn").off("click");
+    $title.val("");
+    $description.val("");
+    $url.val("");
+    $private.removeAttr("checked");
+    $("#edit-Resource-form").hide();
+  };
+
 
   return async (resourceId) => {
     console.log(resourceId);
