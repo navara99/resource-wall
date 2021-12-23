@@ -123,3 +123,11 @@ const getResourcesByCategory = (category) => {
   });
 };
 
+const updateResource = (id, data) => {
+  return $.ajax({
+    method: "PUT",
+    url: `/api/resources/${id}`,
+    data,
+  });
+};
+
