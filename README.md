@@ -86,11 +86,6 @@
 
 - upload image
 
-### header
-
-- case sensitive of search
-- users should be able to search any user
-
 # LHL Node Skeleton
 
 ## Project Setup
