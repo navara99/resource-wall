@@ -198,6 +198,17 @@ module.exports = (db) => {
     }
   });
 
+  router.put("/:id", async (req, res) => {
+    const { user_id } = req.session;
+    const { id } = req.params;
+    
+
+    try {
+    } catch (err) {
+
+    }
+  });
+
   router.post("/:id/like", async (req, res) => {
     const { id } = req.params;
     const { user_id } = req.session;
