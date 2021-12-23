@@ -82,7 +82,7 @@ const myResourcesSetup = (resource, $listContainer) => {
     </div>
   `);
 
-  const $modal = $(`
+  const $deleteModal = $(`
       <div id="${id}-confirm-delete" class="modal">
         <a href="#!" id="close-confirm-delete" class="modal-close  waves-effect waves-light btn-flat">
           <i class="material-icons right">close</i>
@@ -97,9 +97,25 @@ const myResourcesSetup = (resource, $listContainer) => {
     </div>
   `);
 
+  const $editModal = $(`
+  <div id="${id}-edit-modal" class="modal">
+    <a href="#!" id="close-edit" class="modal-close  waves-effect waves-light btn-flat">
+      <i class="material-icons right">close</i>
+    </a>
+    <div id="edit-form-modal" class="modal-content">
+      <h4>Edit ${title}</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" id="edit-submit" class="modal-close  waves-effect waves-light red btn">Confirm</a>
+    </div>
+  </div>
+`);
+
   const noButtons = !isMine ? "invisible" : "";
   const actionButtons = `
-      <a id = "${id}-edit" class="waves-effect waves-light btn ${noButtons}">
+      <a id = "${id}-edit"
+         class="waves-effect waves-light btn modal-trigger ${noButtons}"
+         href="#${id}-edit-modal">
         <i class="material-icons left">
           edit
         </i>
@@ -148,7 +164,11 @@ const myResourcesSetup = (resource, $listContainer) => {
     if (showLiked || showMine) {
       const $collection = $(`<li class="collection-item"></li>`);
 
-      if (isMine) $("body").prepend($modal);
+      if (isMine) {
+        const $body = $("body");
+        $body.prepend($deleteModal);
+        $body.prepend($editModal);
+      };
 
       $collection.prepend($thumbnail, $info, $stats);
       $listContainer.prepend($collection);
