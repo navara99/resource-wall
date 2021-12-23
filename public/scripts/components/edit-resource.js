@@ -9,6 +9,8 @@ const updateEditForm = (title, description, url, is_private, category) => {
   placeInput($("#url-edit"), url);
   placeInput($("#category-edit"), category);
   $("#category-edit").formSelect();
+  if (is_private) $("#edit-private").attr("checked", true);
+  console.log(is_private);
 };
 
 const showEditResourceModal = async (resourceId) => {
@@ -25,9 +27,11 @@ const showEditResourceModal = async (resourceId) => {
 };
 
 const closeEditModal = () => {
+  console.log("Modal closed");
   $("#title-edit").val("");
   $("#description-edit").val("");
   $("#url-edit").val("");
+  $("#edit-private").removeAttr("checked");
   $("#edit-Resource-form").hide();
 };
 
