@@ -6,15 +6,14 @@ const newResourceEventListener = () => {
     try {
       event.preventDefault();
       const formData = new FormData(this);
-      console.log("***********", ...formData, "********");
-      const data = $newResourceForm.serialize();
-      const newResourceDetails = await submitResource(data);
+
+      const newResourceDetails = await submitResource(formData);
       const { id } = newResourceDetails;
 
       updateView("resourceDetails", null, id);
-
       return $newResourceForm.trigger("reset");
     } catch (err) {
+      console.log(err);
       updateError(err);
     }
   });
