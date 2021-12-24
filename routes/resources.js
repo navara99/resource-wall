@@ -202,6 +202,7 @@ module.exports = (db) => {
   router.put("/:id", async (req, res) => {
     const { user_id } = req.session;
     const { id } = req.params;
+    const { url } = req.body;
     const omebedUrl = omebed(url);
     const encodedURI = encodeURIComponent(url);
     let media_url;
