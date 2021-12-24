@@ -3,25 +3,27 @@ const placeInput = (elem, value) => {
   elem.val(value);
 };
 
-const registerSubmitResourceEdit = (resourceId, editForm) => {
-
-  $("#edit-resource-btn").on("click", async (e) => {
-    e.preventDefault();
-    const newInfo = editForm.serialize();
-    await updateResource(resourceId, newInfo);
-    clearEditModalForm();
-    renderMyResources();
-    $(".modal").modal("close");
-  });
-
-};
-
 const editResourceModalGenerator = async () => {
   const $title = $("#title-edit");
   const $description = $("#description-edit");
   const $url = $("#url-edit");
   const $category = $("#category-edit");
-  const $private = ("#edit-private");
+  const $private = $("#edit-private");
+  const $submitEditedResourceBtn = $("#edit-resource-btn");
+
+  const registerSubmitResourceEdit = (resourceId, editForm) => {
+
+    $submitEditedResourceBtn.on("click", async (e) => {
+      e.preventDefault();
+      const newInfo = editForm.serialize();
+      await updateResource(resourceId, newInfo);
+      clearEditModalForm();
+      const updateMyResources = renderMyResourcesFunctionGenerator();
+      updateMyResources();
+      $(".modal").modal("close");
+    });
+
+  };
 
   const updateEditForm = (title, description, url, is_private, category) => {
     placeInput($title, title);
@@ -33,14 +35,13 @@ const editResourceModalGenerator = async () => {
   };
 
   const clearEditModalForm = () => {
-    $("#edit-resource-btn").off("click");
+    $submitEditedResourceBtn.off("click");
     $title.val("");
     $description.val("");
     $url.val("");
     $private.removeAttr("checked");
     $("#edit-Resource-form").hide();
   };
-
 
   return async (resourceId) => {
     console.log(resourceId);
