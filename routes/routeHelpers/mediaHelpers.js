@@ -19,6 +19,9 @@ const omebed = (url) => {
 };
 
 const generateMedia = (omebedUrl, encodedURI, url) => {
+  let media_url;
+  let is_video;
+
   try {
     const videoData = await axios.get(
       `${omebedUrl}?url=${encodedURI}&format=json`
@@ -35,3 +38,5 @@ const generateMedia = (omebedUrl, encodedURI, url) => {
     is_video = false;
   };
 };
+
+module.exports = { generateMedia };
