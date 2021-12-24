@@ -1,4 +1,6 @@
-
+const apiKey = process.env.IFRAME_KEY;
+const providers = require("./json/providers.json");
+const axios = require("axios");
 
 const omebed = (url) => {
   for (const provider of providers) {
