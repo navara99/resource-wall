@@ -44,7 +44,6 @@ const editResourceModalGenerator = async () => {
   };
 
   return async (resourceId) => {
-    console.log(resourceId);
     clearEditModalForm();
     const [resourceDetails] = await getDetailsOfResources(resourceId);
     const { title, url, description, is_private, catergory } = resourceDetails;
