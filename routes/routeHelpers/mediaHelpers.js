@@ -37,6 +37,8 @@ const generateMedia = (omebedUrl, encodedURI, url) => {
     media_url = `https://api.screenshotmachine.com?key=${process.env.APIKEY}&url=${url}&dimension=1024x768&zoom=200`;
     is_video = false;
   };
+
+  return [media_url, is_video];
 };
 
 module.exports = { generateMedia };
