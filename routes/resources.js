@@ -134,7 +134,7 @@ module.exports = (db) => {
     }
   });
 
-  router.post("/", thumbnails.single("thumbnail"), async (req, res) => {
+  router.post("/", upload.single("thumbnail"), async (req, res) => {
     console.log(req.file);
     let { is_private, category, url } = req.body;
     is_private = is_private || false;
