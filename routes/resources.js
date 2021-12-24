@@ -179,7 +179,6 @@ module.exports = (db) => {
       await updateResource(id, { ...req.body, is_video, media_url });
       res.status(200).json({ status: "success" });
     } catch (err) {
-      console.log(err.message);
       res.status(500).json({ error: err.message });
     };
 
