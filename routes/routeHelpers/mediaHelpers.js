@@ -1,4 +1,4 @@
-const providers = require("./json/providers.json");
+const providers = require("../json/providers.json");
 const axios = require("axios");
 
 const omebed = (url) => {
@@ -18,7 +18,7 @@ const omebed = (url) => {
   }
 };
 
-const generateMedia = (omebedUrl, encodedURI, url) => {
+const generateMedia = async (omebedUrl, encodedURI, url) => {
   let media_url;
   let is_video;
 
@@ -37,7 +37,7 @@ const generateMedia = (omebedUrl, encodedURI, url) => {
     media_url = `https://api.screenshotmachine.com?key=${process.env.APIKEY}&url=${url}&dimension=1024x768&zoom=200`;
     is_video = false;
   };
-
+  console.log(media_url, is_video);
   return [media_url, is_video];
 };
 
