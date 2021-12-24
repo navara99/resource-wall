@@ -5,7 +5,7 @@ const axios = require("axios");
 const queryGenerator = require("../db/query-helpers");
 const { generateMedia, omebed } = require("./routeHelpers/mediaHelpers");
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ dest: "uploads/"});
 const apiKey = process.env.IFRAME_KEY;
 
 module.exports = (db) => {
@@ -135,7 +135,6 @@ module.exports = (db) => {
   });
 
   router.post("/", upload.single("thumbnail"), async (req, res) => {
-    console.log(req.file);
     let { is_private, category, url } = req.body;
     is_private = is_private || false;
 
