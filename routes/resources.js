@@ -145,7 +145,7 @@ module.exports = (db) => {
   router.post("/", upload.single("thumbnail"), async (req, res) => {
     let { is_private, category, url } = req.body;
     is_private = is_private || false;
-
+    console.log(req.file);
     const urlIsValid = isUri(url);
     if (!urlIsValid) {
       return res.status(400).json({ error: "This url is not valid." });
@@ -165,6 +165,7 @@ module.exports = (db) => {
         category_id,
         is_video,
         media_url,
+        path: req.file.path
       };
 
       const newResource = await addNewResource(newResourceInput);
