@@ -3,9 +3,8 @@ const router = express.Router();
 const { isUri } = require("valid-url");
 const axios = require("axios");
 const queryGenerator = require("../db/query-helpers");
-const { generateMedia } = require("./routeHelpers/mediaHelpers");
+const { generateMedia, omebed } = require("./routeHelpers/mediaHelpers");
 const apiKey = process.env.IFRAME_KEY;
-const providers = require("./json/providers.json");
 
 module.exports = (db) => {
   const {
