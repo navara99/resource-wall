@@ -18,3 +18,9 @@ const omebed = (url) => {
     }
   }
 };
+
+const generateMedia = () => {
+
+
+
+};
