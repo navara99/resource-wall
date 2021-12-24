@@ -202,17 +202,38 @@ module.exports = (db) => {
   router.put("/:id", async (req, res) => {
     const { user_id } = req.session;
     const { id } = req.params;
+    const omebedUrl = omebed(url);
+    const encodedURI = encodeURIComponent(url);
+    let media_url;
+    let is_video;
+
+    try {
+      const videoData = await axios.get(
+        `${omebedUrl}?url=${encodedURI}&format=json`
+      );
+      const source = videoData.data.html
+        .split(" ")
+        .filter((attribute) => attribute.includes("src"))[0]
+        .slice(4)
+        .replace(`"`, "");
+
+      media_url = source;
+      is_video = true;
+    } catch (e) {
+      media_url = `https://api.screenshotmachine.com?key=${process.env.APIKEY}&url=${url}&dimension=1024x768&zoom=200`;
+      is_video = false;
+    }
 
     try {
       const result = await getAllDetailsOfResource(id);
       const { owner_id } = result[0];
       if (user_id !== owner_id) return res.status(401).json({ status: "fail" });
-      await updateResource(id, req.body);
+      await updateResource(id, { ...req.body, is_video, media_url });
       res.status(200).json({ status: "success" });
     } catch (err) {
       console.log(err.message);
       res.status(500).json({ error: err.message });
-    }
+    };
 
 
   });
