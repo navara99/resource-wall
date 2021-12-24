@@ -165,7 +165,7 @@ module.exports = (db) => {
         category_id,
         is_video,
         media_url,
-        path: req.file.path
+        path: req.file.path ? req.file.path : null
       };
 
       const newResource = await addNewResource(newResourceInput);
