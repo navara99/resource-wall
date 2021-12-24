@@ -73,11 +73,6 @@
 
 - hide nav bar
 
-### edit page
-
-- edit url, description, title, category
-- change public/private
-
 ### home page
 
 - order reources by date
