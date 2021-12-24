@@ -206,7 +206,7 @@ module.exports = (db) => {
     const { url } = req.body;
     const omebedUrl = omebed(url);
     const encodedURI = encodeURIComponent(url);
-    const [media_url, is_video] = generateMedia();
+    const [media_url, is_video] = generateMedia(omebedUrl, encodedURI, url);
 
     try {
       const result = await getAllDetailsOfResource(id);
