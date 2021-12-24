@@ -4,6 +4,8 @@ const { isUri } = require("valid-url");
 const axios = require("axios");
 const queryGenerator = require("../db/query-helpers");
 const { generateMedia, omebed } = require("./routeHelpers/mediaHelpers");
+const multer = require("multer");
+const thumbnails = multer({dest:"/thumbnails/"});
 const apiKey = process.env.IFRAME_KEY;
 
 module.exports = (db) => {
