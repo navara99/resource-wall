@@ -5,7 +5,7 @@ const axios = require("axios");
 const queryGenerator = require("../db/query-helpers");
 const { generateMedia, omebed } = require("./routeHelpers/mediaHelpers");
 const multer = require("multer");
-const thumbnails = multer({dest:"/thumbnails/"});
+const upload = multer({ dest: "uploads/" });
 const apiKey = process.env.IFRAME_KEY;
 
 module.exports = (db) => {
@@ -25,7 +25,7 @@ module.exports = (db) => {
     updateResource
   } = queryGenerator(db);
 
-  router.get("/", async(req, res) => {
+  router.get("/", async (req, res) => {
     const user_id = req.session.user_id;
     try {
       const allResources = await getAllResources(user_id);
@@ -39,7 +39,7 @@ module.exports = (db) => {
     }
   });
 
-  router.get("/category/:catName", async(req, res) => {
+  router.get("/category/:catName", async (req, res) => {
     const { catName } = req.params;
     const { user_id } = req.session;
 
@@ -55,7 +55,7 @@ module.exports = (db) => {
     }
   });
 
-  router.get("/search/:q", async(req, res) => {
+  router.get("/search/:q", async (req, res) => {
     const { q } = req.params;
     const { user_id } = req.session;
 
@@ -71,7 +71,7 @@ module.exports = (db) => {
     }
   });
 
-  router.get("/user/:userId", async(req, res) => {
+  router.get("/user/:userId", async (req, res) => {
     const { userId } = req.params;
     const { user_id } = req.session;
 
@@ -86,7 +86,7 @@ module.exports = (db) => {
     }
   });
 
-  router.get("/:id", async(req, res) => {
+  router.get("/:id", async (req, res) => {
     const { user_id } = req.session;
     const { id } = req.params;
 
@@ -99,7 +99,7 @@ module.exports = (db) => {
     }
   });
 
-  router.delete("/:id", async(req, res) => {
+  router.delete("/:id", async (req, res) => {
     const { user_id } = req.session;
     const { id } = req.params;
 
@@ -116,7 +116,7 @@ module.exports = (db) => {
     }
   });
 
-  router.get("/media/:id", async(req, res) => {
+  router.get("/media/:id", async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -134,7 +134,8 @@ module.exports = (db) => {
     }
   });
 
-  router.post("/", async(req, res) => {
+  router.post("/", thumbnails.single("thumbnail"), async (req, res) => {
+    console.log(req.file);
     let { is_private, category, url } = req.body;
     is_private = is_private || false;
 
@@ -166,7 +167,7 @@ module.exports = (db) => {
     }
   });
 
-  router.put("/:id", async(req, res) => {
+  router.put("/:id", async (req, res) => {
     const { user_id } = req.session;
     const { id } = req.params;
     const { url } = req.body;
@@ -187,7 +188,7 @@ module.exports = (db) => {
 
   });
 
-  router.post("/:id/like", async(req, res) => {
+  router.post("/:id/like", async (req, res) => {
     const { id } = req.params;
     const { user_id } = req.session;
 
@@ -205,7 +206,7 @@ module.exports = (db) => {
     }
   });
 
-  router.post("/:id/comment", async(req, res) => {
+  router.post("/:id/comment", async (req, res) => {
     const { id } = req.params;
     const { user_id } = req.session;
     const { comment } = req.body;
@@ -218,7 +219,7 @@ module.exports = (db) => {
     }
   });
 
-  router.post("/:id/rating", async(req, res) => {
+  router.post("/:id/rating", async (req, res) => {
     const { id } = req.params;
     const { user_id } = req.session;
     const { rating } = req.body;
