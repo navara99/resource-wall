@@ -204,6 +204,9 @@ module.exports = (db) => {
     const { id } = req.params;
 
     try {
+      const result = await getAllDetailsOfResource(id);
+      const { owner_id } = result[0];
+      
       await updateResource(id, req.body);
       res.status(200).json({ status: "success" });
     } catch (err) {
