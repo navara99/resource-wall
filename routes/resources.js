@@ -5,7 +5,15 @@ const axios = require("axios");
 const queryGenerator = require("../db/query-helpers");
 const { generateMedia, omebed } = require("./routeHelpers/mediaHelpers");
 const multer = require("multer");
-const upload = multer({ dest: "uploads/"});
+const storage = multer.diskStorage({
+  destination: function (req, res, cb) {
+    cb(null, "./uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({ storage: storage });
 const apiKey = process.env.IFRAME_KEY;
 
 module.exports = (db) => {
