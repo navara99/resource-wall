@@ -41,4 +41,4 @@ const generateMedia = async (omebedUrl, encodedURI, url) => {
   return [media_url, is_video];
 };
 
-module.exports = { generateMedia };
+module.exports = { generateMedia, omebed };
