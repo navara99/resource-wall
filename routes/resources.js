@@ -206,7 +206,7 @@ module.exports = (db) => {
     try {
       const result = await getAllDetailsOfResource(id);
       const { owner_id } = result[0];
-      
+      if (user_id !== owner_id) return res.status(401).json({ status: "fail" });
       await updateResource(id, req.body);
       res.status(200).json({ status: "success" });
     } catch (err) {
