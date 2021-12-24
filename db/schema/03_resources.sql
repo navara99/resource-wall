@@ -11,5 +11,6 @@ CREATE TABLE resources
   is_video BOOLEAN NOT NULL,
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
   is_private BOOLEAN NOT NULL,
+  thumbnail TEXT,
   created_on TIMESTAMP NOT NULL DEFAULT NOW()
 )
