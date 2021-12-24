@@ -3,7 +3,7 @@ const placeInput = (elem, value) => {
   elem.val(value);
 };
 
-const editResourceModalGenerator = async () => {
+const editResourceModalGenerator = async() => {
   const $title = $("#title-edit");
   const $description = $("#description-edit");
   const $url = $("#url-edit");
@@ -13,7 +13,7 @@ const editResourceModalGenerator = async () => {
 
   const registerSubmitResourceEdit = (resourceId, editForm) => {
 
-    $submitEditedResourceBtn.on("click", async (e) => {
+    $submitEditedResourceBtn.on("click", async(e) => {
       e.preventDefault();
       const newInfo = editForm.serialize();
       await updateResource(resourceId, newInfo);
@@ -43,7 +43,7 @@ const editResourceModalGenerator = async () => {
     $("#edit-Resource-form").hide();
   };
 
-  return async (resourceId) => {
+  return async(resourceId) => {
     clearEditModalForm();
     const [resourceDetails] = await getDetailsOfResources(resourceId);
     const { title, url, description, is_private, catergory } = resourceDetails;
