@@ -117,6 +117,7 @@ const queryGenerator = (db) => {
     category_id,
     media_url,
     is_video,
+    path
   }) => {
     const values = [
       user_id,
@@ -127,11 +128,12 @@ const queryGenerator = (db) => {
       is_video,
       category_id,
       is_private,
+      path
     ];
 
     const queryString = `
-      INSERT INTO resources (user_id, title, description, url, media_url, is_video, category_id, is_private)
-      VALUES($1, $2, $3, $4, $5, $6, $7, $8)
+      INSERT INTO resources (user_id, title, description, url, media_url, is_video, category_id, is_private, thumbnail)
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
       RETURNING *;
     `;
 
