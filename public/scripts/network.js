@@ -53,6 +53,8 @@ const submitResource = (data) => {
   return $.ajax({
     method: "POST",
     url: "/api/resources",
+    config: { headers: {'Content-Type': 'multipart/form-data' }},
+    processData:false,
     data,
   });
 };
