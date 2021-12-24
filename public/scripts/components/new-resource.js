@@ -1,11 +1,13 @@
 const newResourceEventListener = () => {
   const $newResourceForm = $("#new-resource-form");
 
-  $newResourceForm.submit(async (event) => {
+  $newResourceForm.submit(async function (event) {
+
     try {
       event.preventDefault();
+      const formData = new FormData(this);
+      console.log("***********", ...formData, "********");
       const data = $newResourceForm.serialize();
-
       const newResourceDetails = await submitResource(data);
       const { id } = newResourceDetails;
 
