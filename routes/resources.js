@@ -3,6 +3,7 @@ const router = express.Router();
 const { isUri } = require("valid-url");
 const axios = require("axios");
 const queryGenerator = require("../db/query-helpers");
+const { generateMedia } = require("./routeHelpers/mediaHelpers");
 const apiKey = process.env.IFRAME_KEY;
 const providers = require("./json/providers.json");
 
@@ -205,25 +206,7 @@ module.exports = (db) => {
     const { url } = req.body;
     const omebedUrl = omebed(url);
     const encodedURI = encodeURIComponent(url);
-    let media_url;
-    let is_video;
-
-    try {
-      const videoData = await axios.get(
-        `${omebedUrl}?url=${encodedURI}&format=json`
-      );
-      const source = videoData.data.html
-        .split(" ")
-        .filter((attribute) => attribute.includes("src"))[0]
-        .slice(4)
-        .replace(`"`, "");
-
-      media_url = source;
-      is_video = true;
-    } catch (e) {
-      media_url = `https://api.screenshotmachine.com?key=${process.env.APIKEY}&url=${url}&dimension=1024x768&zoom=200`;
-      is_video = false;
-    }
+    const [media_url, is_video] = generateMedia();
 
     try {
       const result = await getAllDetailsOfResource(id);
