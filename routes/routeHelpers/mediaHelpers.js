@@ -1,4 +1,3 @@
-const apiKey = process.env.IFRAME_KEY;
 const providers = require("./json/providers.json");
 const axios = require("axios");
 
@@ -19,8 +18,20 @@ const omebed = (url) => {
   }
 };
 
-const generateMedia = () => {
-
-
-
+const generateMedia = (omebedUrl, encodedURI, url) => {
+  try {
+    const videoData = await axios.get(
+      `${omebedUrl}?url=${encodedURI}&format=json`
+    );
+    const source = videoData.data.html
+      .split(" ")
+      .filter((attribute) => attribute.includes("src"))[0]
+      .slice(4)
+      .replace(`"`, "");
+    media_url = source;
+    is_video = true;
+  } catch (e) {
+    media_url = `https://api.screenshotmachine.com?key=${process.env.APIKEY}&url=${url}&dimension=1024x768&zoom=200`;
+    is_video = false;
+  };
 };
