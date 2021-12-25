@@ -179,7 +179,7 @@ module.exports = (db) => {
   router.put("/:id", upload.single("thumbnail"), async (req, res) => {
     const { user_id } = req.session;
     const { id } = req.params;
-    const { url, keep_thumbnail } = req.body;
+    const { url } = req.body;
     const omebedUrl = omebed(url);
     const encodedURI = encodeURIComponent(url);
 
@@ -188,7 +188,7 @@ module.exports = (db) => {
       const result = await getAllDetailsOfResource(id);
       const { owner_id } = result[0];
       if (user_id !== owner_id) return res.status(401).json({ status: "fail" });
-      await updateResource(id, { ...req.body, is_video, media_url, thumbnail: req.file ? req.file.path : null, keep_thumbnail });
+      await updateResource(id, { ...req.body, is_video, media_url, thumbnail: req.file ? req.file.path : null });
       res.status(200).json({ status: "success" });
     } catch (err) {
       res.status(500).json({ error: err.message });
