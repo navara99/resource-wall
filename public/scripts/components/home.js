@@ -54,7 +54,7 @@ const cardSetup = (resource, currentUserId, $column) => {
     </div>
   `);
 
-  const $resourceMedia = is_video ? createEmbedVideo() : createScreenshot();
+  const $resourceMedia = is_video && !thumbnail ? createEmbedVideo() : createScreenshot();
 
   const $cardAction = $(`
     <div class="card-action">
