@@ -77,10 +77,6 @@
 
 - order reources by date
 
-### new resource
-
-- upload image
-
 # LHL Node Skeleton
 
 ## Project Setup
