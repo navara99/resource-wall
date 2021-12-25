@@ -35,7 +35,7 @@ const editResourceModalGenerator = async () => {
   };
 
   const clearEditModalForm = () => {
-    $editResourceForm.off("click");
+    $editResourceForm.off("submit");
     $title.val("");
     $description.val("");
     $url.val("");
