@@ -2,7 +2,6 @@ $(() => {
   $(".tabs").tabs();
   $("select").formSelect();
 
-  updateUserInfo();
   eventListeners();
   historyManager("resources");
 });
@@ -11,8 +10,8 @@ const History = window.History;
 
 History.Adapter.bind(window, "statechange", function () {
   const { data } = History.getState();
-  const { view } = data;
-  updateView(view);
+  const { view, userInfo } = data;
+  updateView(view, userInfo);
 });
 
 const eventListeners = () => {
@@ -42,19 +41,10 @@ const updateTitleURL = (title, url) => {
   History.pushState(null, null, url);
 };
 
-const updateUserInfo = async (userInfo) => {
-  try {
-    if (!userInfo) userInfo = await getMyDetails();
-    updateHeader(userInfo);
-  } catch (err) {
-    updateHeader({});
-    updateError(err);
-  }
-};
+const historyManager = async (nextView, currentUserInfo) => {
 
-const historyManager = (nextView) => {
-  const newState = { view: nextView };
-
+  const userInfo = currentUserInfo || await getMyDetails();
+  const newState = { userInfo, view: nextView };
   switch (nextView) {
     case "userPage":
       break;
@@ -111,10 +101,8 @@ const updateViewFunctionGenerator = () => {
   };
 
   return (nextView, userInfo, resourceId) => {
-    if (nextView !== "error") {
-      updateUserInfo(userInfo);
-      hideAll();
-    }
+    if (nextView !== "error") hideAll();
+    updateHeader(userInfo);
 
     switch (nextView) {
       case "userPage":
@@ -165,7 +153,6 @@ const updateViewFunctionGenerator = () => {
           //   `${title} - Resource Details`,
           //   `resource/${resourceId}`
           // );
-          updateUserInfo(userInfo);
         });
         break;
       case "error":

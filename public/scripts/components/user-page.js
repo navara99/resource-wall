@@ -7,7 +7,7 @@ const updateUserFunctionGenerator = () => {
   $resources = $("#user-resources");
 
   $editMyProfile.on("click", () => {
-    updateView("updateProfile");
+    historyManager("updateProfile");
   });
 
   const clearResource = () => {
@@ -28,7 +28,7 @@ const updateUserFunctionGenerator = () => {
       $name.text(`${first_name} ${last_name}`);
       $bio.text(bio);
       $("#user-profile-picture").attr("src", profile_picture_url);
-      updateView("userPage");
+      historyManager("userPage");
 
       const userId = id || 0;
       const { resources, id: profileId } = await getUserResources(userId);
