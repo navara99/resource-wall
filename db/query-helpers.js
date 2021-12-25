@@ -444,11 +444,12 @@ const queryGenerator = (db) => {
     }
   };
 
-  const updateResource = async (id, { title, description, url, category, is_private, is_video, media_url, thumbnail }) => {
+  const updateResource = async (id, { title, description, url, category, is_private, is_video, media_url, thumbnail, keep_thumbnail }) => {
     const category_id = await getIdFromCategory(category);
     is_private = is_private || false;
-    const values = [title, description, url, category_id, is_private, is_video, media_url, thumbnail, id];
-    console.log(values);
+    keep_thumbnail = keep_thumbnail || false;
+    const values = [title, description, url, category_id, is_private, is_video, media_url, keep_thumbnail, thumbnail, id];
+
     const queryString = `
       UPDATE resources
       SET title = $1,
@@ -458,8 +459,8 @@ const queryGenerator = (db) => {
         is_private = $5,
         is_video = $6,
         media_url = $7,
-        thumbnail = $8
-      WHERE id = $9;
+        thumbnail = (CASE WHEN $8 = FALSE THEN $9 ELSE thumbnail END)
+      WHERE id = $10;
     `
     try {
       await db.query(queryString, values);
