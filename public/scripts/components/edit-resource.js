@@ -13,7 +13,7 @@ const editResourceModalGenerator = async () => {
 
   const registerSubmitResourceEdit = (resourceId, editForm) => {
 
-    editForm.on("click", async function (e) {
+    editForm.submit(async function (e) {
       e.preventDefault();
       const newInfo = new FormData(this);
       await updateResource(resourceId, newInfo);
