@@ -129,6 +129,8 @@ const updateResource = (id, data) => {
   return $.ajax({
     method: "PUT",
     url: `/api/resources/${id}`,
+    contentType: false,
+    processData: false,
     data,
   });
 };
