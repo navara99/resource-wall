@@ -95,6 +95,7 @@ const updateViewFunctionGenerator = () => {
 
     switch (view) {
       case USER_PAGE:
+        await updateUserDetails(info);
         $userPage.show();
         break;
       case HOME:
