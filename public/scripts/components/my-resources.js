@@ -154,7 +154,7 @@ const myResourcesSetup = (resource, $listContainer) => {
 
   const registerMyResourceDetailsListener = () => {
     $(`#${id}-my-resource`).on("click", function (e) {
-      historyManager("resourceDetails", null, { id });
+      historyManager(RESOURCE_DETAILS, null, id);
     });
   };
 

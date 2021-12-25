@@ -9,7 +9,7 @@ const newResourceEventListener = () => {
       const newResourceDetails = await submitResource(formData);
       const { id } = newResourceDetails;
 
-      historyManager("resourceDetails", null, { id });
+      historyManager(RESOURCE_DETAILS, null, id);
       return $newResourceForm.trigger("reset");
     } catch (err) {
       console.log(err);

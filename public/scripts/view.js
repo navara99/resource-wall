@@ -3,15 +3,14 @@ $(() => {
   $("select").formSelect();
 
   eventListeners();
-  historyManager("resources");
+  historyManager(HOME);
 });
 
 const History = window.History;
 
 History.Adapter.bind(window, "statechange", function () {
   const { data } = History.getState();
-  const { view, userInfo, pageInfo } = data;
-  updateView(view, userInfo, pageInfo);
+  updateView(data);
 });
 
 const eventListeners = () => {
@@ -34,33 +33,19 @@ const partialText = (text, num) => {
   return wordArr.slice(0, num).join(" ") + "...";
 };
 
-const historyManager = async (nextView, currentUserInfo, pageInfo) => {
+const historyManager = async (nextView, currentUserInfo, id) => {
   const userInfo = currentUserInfo || (await getMyDetails());
-  const newState = { userInfo, pageInfo, view: nextView };
+  const newState = { userInfo, id, view: nextView };
   let url = nextView;
 
   switch (nextView) {
-    case "userPage":
+    case USER_PAGE:
       break;
-    case "resources":
+    case HOME:
+      url = "";
       break;
-    case "myResources":
-      break;
-    case "editResource":
-      break;
-    case "changePassword":
-      break;
-    case "updateProfile":
-      break;
-    case "register":
-      break;
-    case "login":
-      break;
-    case "newResource":
-      break;
-    case "resourceDetails":
-      break;
-    case "error":
+    case RESOURCE_DETAILS:
+      url = null;
       break;
   }
 
@@ -94,49 +79,49 @@ const updateViewFunctionGenerator = () => {
     $editResource.hide();
   };
 
-  return (nextView, userInfo, resourceId) => {
-    if (nextView !== "error") hideAll();
+  return ({ view, userInfo, id }) => {
+    if (view !== "error") hideAll();
     updateHeader(userInfo);
 
-    switch (nextView) {
-      case "userPage":
+    switch (view) {
+      case USER_PAGE:
         $userPage.show();
         break;
-      case "resources":
-        if (!resourceId) displayResources();
+      case HOME:
+        if (!id) displayResources();
         $resourcesPage.show();
         $tabs.show();
         break;
-      case "myResources":
+      case MY_RESOURCES:
         renderMyResources();
         showMyResources();
         $myResourcesPage.show();
         break;
-      case "editResource":
+      case EDIT_RESOURCE:
         break;
-      case "changePassword":
+      case CHANGE_PASSWORD:
         showChangePasswordPage();
         $myResourcesPage.show();
         break;
-      case "updateProfile":
+      case UPDATE_PROFILE:
         showUpdateProfilePage();
         $myResourcesPage.show();
         break;
-      case "register":
+      case REGISTER:
         $registerPage.show();
         break;
-      case "login":
+      case LOGIN:
         $loginPage.show();
         break;
-      case "newResource":
+      case NEW_RESOURCE:
         $newResourcePage.show();
         break;
-      case "resourceDetails":
-        updateResourceDetails(resourceId.id).then((title) => {
+      case RESOURCE_DETAILS:
+        updateResourceDetails(id).then((title) => {
           $resourceDetails.show();
         });
         break;
-      case "error":
+      case ERROR:
         $errorPage.show();
         break;
     }

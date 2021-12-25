@@ -127,7 +127,7 @@ const changePasswordEventListener = () => {
 
       $changePasswordForm.trigger("reset");
 
-      historyManager("changePassword");
+      historyManager(CHANGE_PASSWORD);
     } catch (err) {
       updateError(err);
     }

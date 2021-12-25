@@ -1,7 +1,7 @@
 const registerEventListener = () => {
   const $registerForm = $("#register-form");
 
-  $registerForm.submit(async(event) => {
+  $registerForm.submit(async (event) => {
     try {
       event.preventDefault();
 
@@ -9,7 +9,7 @@ const registerEventListener = () => {
 
       const userInfo = await register(data);
 
-      historyManager("resources", userInfo);
+      historyManager(HOME, userInfo);
 
       return $registerForm.trigger("reset");
     } catch (err) {
