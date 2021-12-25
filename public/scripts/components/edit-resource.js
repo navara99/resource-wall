@@ -10,6 +10,8 @@ const editResourceModalGenerator = async () => {
   const $category = $("#category-edit");
   const $private = $("#edit-private");
   const $editResourceForm = $("#edit-resource-form");
+  const $thumbnail = $("#edit-thumbnail");
+  const $thumbnailText = $("#edit-thumbnail-text");
 
   const registerSubmitResourceEdit = (resourceId, editForm) => {
 
@@ -39,7 +41,9 @@ const editResourceModalGenerator = async () => {
     $title.val("");
     $description.val("");
     $url.val("");
+    $thumbnail.val("");
     $private.removeAttr("checked");
+    $thumbnailText.val("");
     $("#edit-Resource-form").hide();
   };
 
