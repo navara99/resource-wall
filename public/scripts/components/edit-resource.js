@@ -3,7 +3,7 @@ const placeInput = (elem, value) => {
   elem.val(value);
 };
 
-const editResourceModalGenerator = async () => {
+const editResourceModalGenerator = async() => {
   const $title = $("#title-edit");
   const $description = $("#description-edit");
   const $url = $("#url-edit");
@@ -29,7 +29,7 @@ const editResourceModalGenerator = async () => {
 
   const registerSubmitResourceEdit = (resourceId, editForm) => {
 
-    editForm.submit(async function (e) {
+    editForm.submit(async function(e) {
       e.preventDefault();
       try {
         const newInfo = new FormData(this);
@@ -41,7 +41,7 @@ const editResourceModalGenerator = async () => {
         $(".modal").modal("close");
       } catch (err) {
         console.log(err.message);
-      };
+      }
     });
 
     $thumbnailToggle.on("change", (e) => {
@@ -60,7 +60,7 @@ const editResourceModalGenerator = async () => {
     $thumbnailToggle.prop("checked", true);
   };
 
-  return async (resourceId) => {
+  return async(resourceId) => {
     try {
       clearEditModalForm();
       const [resourceDetails] = await getDetailsOfResources(resourceId);

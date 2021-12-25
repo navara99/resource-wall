@@ -14,7 +14,7 @@ const updateUserFunctionGenerator = () => {
     $resources.html("");
   };
 
-  return async (id) => {
+  return async(id) => {
     clearResource();
     try {
       const { username, first_name, last_name, profile_picture_url, bio } = id

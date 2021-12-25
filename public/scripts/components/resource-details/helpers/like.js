@@ -21,7 +21,7 @@ const likeSetup = (resourceInfo, domObj) => {
     // clear any previous event listener on the like icon
     $likeIcon.off();
 
-    $likeIcon.on("click", function () {
+    $likeIcon.on("click", function() {
       if (current_username) {
         likeResource(id);
         currentLike = !currentLike;
@@ -36,7 +36,7 @@ const likeSetup = (resourceInfo, domObj) => {
     updateNumOfLikes();
     updateHeart();
     likeIconEventListener();
-  }
+  };
 
   return initSetup;
 };

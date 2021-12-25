@@ -33,7 +33,7 @@ const headerButtonsEventListener = () => {
   const $myProfilebutton = $("#my-profile-button");
   const $searchBar = $(`#search`);
 
-  $searchBar.on("input", async (e) => {
+  $searchBar.on("input", async(e) => {
     const query = e.target.value;
     if (!query) return displayResources();
 
@@ -41,7 +41,7 @@ const headerButtonsEventListener = () => {
     displayResources(allResources);
   });
 
-  $searchBar.on("focus", async (e) => {
+  $searchBar.on("focus", async(e) => {
     updateView("resources", null, true);
   });
 

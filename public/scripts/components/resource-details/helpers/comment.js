@@ -89,7 +89,7 @@ const commentSetup = (
       const commentFormElm = commentForm(my_profile_url);
       $detailsComments.prepend(commentFormElm);
 
-      $("#submit-button").on("click", async () => {
+      $("#submit-button").on("click", async() => {
         if (current_username) {
           const data = $("#new-comment").serialize();
 
@@ -116,8 +116,8 @@ const commentSetup = (
 
   const initSetUp = () => {
     updateNumOfComment();
-      makeComments();
-  }
+    makeComments();
+  };
 
   return initSetUp;
 };

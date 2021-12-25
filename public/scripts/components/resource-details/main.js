@@ -114,7 +114,7 @@ const makeInfoObj = (id, details) => {
   };
 };
 
-const getMedia = async ({ id, is_video, media_url }, $media) => {
+const getMedia = async({ id, is_video, media_url }, $media) => {
   const { createEmbedVideo, createScreenshot } = thumbnailElementGenerator({
     media_url,
   });
@@ -127,7 +127,7 @@ const getMedia = async ({ id, is_video, media_url }, $media) => {
   $media.append($newMedia);
 };
 
-const resourceDetailsSetup = async (id, domObj) => {
+const resourceDetailsSetup = async(id, domObj) => {
   try {
     const resourceComments = await getDetailsOfResources(id);
 

@@ -1,7 +1,7 @@
 const newResourceEventListener = () => {
   const $newResourceForm = $("#new-resource-form");
 
-  $newResourceForm.submit(async function (event) {
+  $newResourceForm.submit(async function(event) {
 
     try {
       event.preventDefault();

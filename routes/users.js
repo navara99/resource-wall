@@ -9,7 +9,7 @@ module.exports = (db) => {
   const { createNewUser, getUserByValue, updatePasswordById, updateUser } =
     queryGenerator(db);
 
-  router.post("/login", async (req, res) => {
+  router.post("/login", async(req, res) => {
     const { email_username, password } = req.body;
 
     try {
@@ -35,7 +35,7 @@ module.exports = (db) => {
     }
   });
 
-  router.post("/edit", async (req, res) => {
+  router.post("/edit", async(req, res) => {
     const userId = req.session.user_id;
     const { username, email } = req.body;
 
@@ -64,7 +64,7 @@ module.exports = (db) => {
     }
   });
 
-  router.post("/password", async (req, res) => {
+  router.post("/password", async(req, res) => {
     const { user_id } = req.session;
     const { current_password, new_password, confirm_new_password } = req.body;
 
@@ -117,7 +117,7 @@ module.exports = (db) => {
     res.json({});
   });
 
-  router.post("/register", async (req, res) => {
+  router.post("/register", async(req, res) => {
     const { email, password, username, confirmed_password } = req.body;
 
     try {
@@ -154,7 +154,7 @@ module.exports = (db) => {
     }
   });
 
-  router.get("/me/:getDefaultPic", async (req, res) => {
+  router.get("/me/:getDefaultPic", async(req, res) => {
     const { getDefaultPic } = req.params;
     const { user_id } = req.session;
     if (!user_id) return res.json({});
@@ -168,7 +168,7 @@ module.exports = (db) => {
     }
   });
 
-  router.get("/:id", async (req, res) => {
+  router.get("/:id", async(req, res) => {
     const { id } = req.params;
 
     try {

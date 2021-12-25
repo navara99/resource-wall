@@ -58,7 +58,7 @@ const ratingSetup = (resourceInfo, domObj) => {
 
   const ratingOnClick = ($elm, id, newRating) => {
     $elm.unbind();
-    $elm.on("click", async () => {
+    $elm.on("click", async() => {
       try {
         if (current_username) {
           const isNewRating = await rateResource(id, `rating=${newRating}`);

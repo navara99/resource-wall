@@ -28,7 +28,7 @@ const myResourcesSetup = (resource, $listContainer) => {
   const registerMyResourceButtonsListeners = () => {
     if (!isMine) return;
 
-    $(`#${id}-delete`).on("click", async function (e) {
+    $(`#${id}-delete`).on("click", async function(e) {
       try {
         await deleteResource(id);
         renderMyResources();
@@ -37,7 +37,7 @@ const myResourcesSetup = (resource, $listContainer) => {
       }
     });
 
-    $(`#${id}-edit`).on("click", async function (e) {
+    $(`#${id}-edit`).on("click", async function(e) {
       const modal = await editResourceModalGenerator();
       modal(id);
     });
@@ -47,9 +47,9 @@ const myResourcesSetup = (resource, $listContainer) => {
   const $info = $(`
     <div class="text">
       <a class="my-resource-title" id=${id}-my-resource >${partialText(
-    title,
-    10
-  )}</a>
+  title,
+  10
+)}</a>
       <div>
         <span>URL: </span>
         <a href="${url}" onclick="event.stopPropagation();" class="paragraph truncate">${url}</a>
@@ -153,7 +153,7 @@ const myResourcesSetup = (resource, $listContainer) => {
   `);
 
   const registerMyResourceDetailsListener = () => {
-    $(`#${id}-my-resource`).on("click", function (e) {
+    $(`#${id}-my-resource`).on("click", function(e) {
       updateView("resourceDetails", null, id);
     });
   };
@@ -166,7 +166,7 @@ const myResourcesSetup = (resource, $listContainer) => {
         const $body = $("body");
         $body.prepend($deleteModal);
         $body.prepend($editModal);
-      };
+      }
 
       $collection.prepend($thumbnail, $info, $stats);
       $listContainer.prepend($collection);
@@ -185,7 +185,7 @@ const renderMyResourcesFunctionGenerator = () => {
     $listContainer.html("");
   };
 
-  return async () => {
+  return async() => {
     clearMyResources();
 
     try {
@@ -213,11 +213,11 @@ const renderMyResourcesFunctionGenerator = () => {
 };
 
 const registerCheckListeners = () => {
-  $("#liked-filter").on("change", function () {
+  $("#liked-filter").on("change", function() {
     renderMyResources();
   });
 
-  $("#mine-filter").on("change", function () {
+  $("#mine-filter").on("change", function() {
     renderMyResources();
   });
 };

@@ -50,7 +50,7 @@ const profileHelperFunctionGenerator = () => {
     $elm.focus();
   };
 
-  const prefillProfileForm = async () => {
+  const prefillProfileForm = async() => {
     try {
       const userInfo = await getMyDetails(1);
       const {
@@ -99,7 +99,7 @@ const profileHelperFunctionGenerator = () => {
 const updateProfileEventListener = () => {
   const $updateProfileForm = $("#update-profile-form");
 
-  $updateProfileForm.submit(async (event) => {
+  $updateProfileForm.submit(async(event) => {
     try {
       event.preventDefault();
 
@@ -117,7 +117,7 @@ const updateProfileEventListener = () => {
 const changePasswordEventListener = () => {
   const $changePasswordForm = $("#change-password-form");
 
-  $changePasswordForm.submit(async (event) => {
+  $changePasswordForm.submit(async(event) => {
     try {
       event.preventDefault();
 
