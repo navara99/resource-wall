@@ -12,6 +12,7 @@ const editResourceModalGenerator = async () => {
   const $editResourceForm = $("#edit-resource-form");
   const $thumbnail = $("#edit-thumbnail");
   const $thumbnailText = $("#edit-thumbnail-text");
+  const $thumbnailToggle = $("#edit-thumbnail-toggle");
 
   const registerSubmitResourceEdit = (resourceId, editForm) => {
 
@@ -23,6 +24,10 @@ const editResourceModalGenerator = async () => {
       const updateMyResources = renderMyResourcesFunctionGenerator();
       updateMyResources();
       $(".modal").modal("close");
+    });
+
+    $thumbnailToggle.on("change", (e) => {
+      console.log(e.target.value);
     });
 
   };
