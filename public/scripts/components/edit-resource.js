@@ -9,11 +9,11 @@ const editResourceModalGenerator = async () => {
   const $url = $("#url-edit");
   const $category = $("#category-edit");
   const $private = $("#edit-private");
-  const $submitEditedResourceBtn = $("#edit-resource-btn");
+  const $editResourceForm = $("#edit-resource-form");
 
   const registerSubmitResourceEdit = (resourceId, editForm) => {
 
-    $submitEditedResourceBtn.on("click", async function (e) {
+    editForm.on("click", async function (e) {
       e.preventDefault();
       const newInfo = new FormData(this);
       await updateResource(resourceId, newInfo);
@@ -35,7 +35,7 @@ const editResourceModalGenerator = async () => {
   };
 
   const clearEditModalForm = () => {
-    $submitEditedResourceBtn.off("click");
+    $editResourceForm.off("click");
     $title.val("");
     $description.val("");
     $url.val("");
@@ -47,7 +47,6 @@ const editResourceModalGenerator = async () => {
     clearEditModalForm();
     const [resourceDetails] = await getDetailsOfResources(resourceId);
     const { title, url, description, is_private, catergory } = resourceDetails;
-    const $editResourceForm = $("#edit-resource-form");
     const $editModalContent = $(`#${resourceId}-edit-form-modal`);
     $editModalContent.append($editResourceForm);
     updateEditForm(title, description, url, is_private, catergory);
