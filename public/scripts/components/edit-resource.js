@@ -13,6 +13,7 @@ const editResourceModalGenerator = async () => {
   const $thumbnail = $("#edit-thumbnail");
   const $thumbnailText = $("#edit-thumbnail-text");
   const $thumbnailToggle = $("#edit-thumbnail-toggle");
+  const $thumbnailUploadWrapper = $("#thumbnail-upload-wrapper");
 
   const registerSubmitResourceEdit = (resourceId, editForm) => {
 
@@ -27,7 +28,7 @@ const editResourceModalGenerator = async () => {
     });
 
     $thumbnailToggle.on("change", (e) => {
-      console.log(e.target.value);
+      $thumbnailUploadWrapper.toggleClass("hidden");
     });
 
   };
