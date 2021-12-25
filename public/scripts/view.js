@@ -10,8 +10,8 @@ const History = window.History;
 
 History.Adapter.bind(window, "statechange", function () {
   const { data } = History.getState();
-  const { view, userInfo } = data;
-  updateView(view, userInfo);
+  const { view, userInfo, pageInfo } = data;
+  updateView(view, userInfo, pageInfo);
 });
 
 const eventListeners = () => {
@@ -34,10 +34,9 @@ const partialText = (text, num) => {
   return wordArr.slice(0, num).join(" ") + "...";
 };
 
-const historyManager = async (nextView, currentUserInfo) => {
-
-  const userInfo = currentUserInfo || await getMyDetails();
-  const newState = { userInfo, view: nextView };
+const historyManager = async (nextView, currentUserInfo, pageInfo) => {
+  const userInfo = currentUserInfo || (await getMyDetails());
+  const newState = { userInfo, pageInfo, view: nextView };
   let url = nextView;
 
   switch (nextView) {
@@ -102,52 +101,39 @@ const updateViewFunctionGenerator = () => {
     switch (nextView) {
       case "userPage":
         $userPage.show();
-        // updateTitleURL("Profile", "profile");
         break;
       case "resources":
         if (!resourceId) displayResources();
         $resourcesPage.show();
         $tabs.show();
-        // updateTitleURL("Home", "home");
         break;
       case "myResources":
         renderMyResources();
         showMyResources();
         $myResourcesPage.show();
-        // updateTitleURL("My Resources", "my-resources");
         break;
       case "editResource":
-        // updateTitleURL("Edit Resource", "edit-resource");
         break;
       case "changePassword":
         showChangePasswordPage();
         $myResourcesPage.show();
-        // updateTitleURL("Change Password", "change-password");
         break;
       case "updateProfile":
         showUpdateProfilePage();
         $myResourcesPage.show();
-        // updateTitleURL("Update Profile", "update-profile");
         break;
       case "register":
         $registerPage.show();
-        // updateTitleURL("Register", "register");
         break;
       case "login":
         $loginPage.show();
-        // updateTitleURL("Login", "login");
         break;
       case "newResource":
         $newResourcePage.show();
-        // updateTitleURL("Create New Resource", "create-resource");
         break;
       case "resourceDetails":
-        updateResourceDetails(resourceId).then((title) => {
+        updateResourceDetails(resourceId.id).then((title) => {
           $resourceDetails.show();
-          // updateTitleURL(
-          //   `${title} - Resource Details`,
-          //   `resource/${resourceId}`
-          // );
         });
         break;
       case "error":
