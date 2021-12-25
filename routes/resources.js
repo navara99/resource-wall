@@ -165,12 +165,13 @@ module.exports = (db) => {
         category_id,
         is_video,
         media_url,
-        path: req.file.path ? req.file.path : null
+        path: req.file ? req.file.path : null
       };
 
       const newResource = await addNewResource(newResourceInput);
       res.json(newResource);
     } catch (err) {
+      console.log(err);
       res.status(500).json({ error: err.message });
     }
   });
