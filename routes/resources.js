@@ -176,12 +176,13 @@ module.exports = (db) => {
     }
   });
 
-  router.put("/:id", async (req, res) => {
+  router.put("/:id", upload.single("thumbnail"), async (req, res) => {
     const { user_id } = req.session;
     const { id } = req.params;
     const { url } = req.body;
     const omebedUrl = omebed(url);
     const encodedURI = encodeURIComponent(url);
+    console.log(req.file);
 
     try {
       const [media_url, is_video] = await generateMedia(omebedUrl, encodedURI, url);
