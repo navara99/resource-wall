@@ -39,6 +39,7 @@ const editResourceModalGenerator = async () => {
     placeInput($category, category);
     $category.formSelect();
     if (is_private) $private.attr("checked", true);
+    $thumbnailToggle.attr("checked", true);
   };
 
   const clearEditModalForm = () => {
