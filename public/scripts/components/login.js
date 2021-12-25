@@ -9,7 +9,7 @@ const loginEventListener = () => {
 
       const userInfo = await login(data);
 
-      updateView("resources", userInfo);
+      historyManager("resources", userInfo);
 
       return $loginForm.trigger("reset");
     } catch (err) {

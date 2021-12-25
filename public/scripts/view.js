@@ -34,17 +34,12 @@ const partialText = (text, num) => {
   return wordArr.slice(0, num).join(" ") + "...";
 };
 
-const updateTitleURL = (title, url) => {
-  const newURL = `http://localhost:8080/${url}`;
-  // window.history.pushState("data", "Title", newURL);
-  // document.title = `${title} - Resource Wall`;
-  History.pushState(null, null, url);
-};
-
 const historyManager = async (nextView, currentUserInfo) => {
 
   const userInfo = currentUserInfo || await getMyDetails();
   const newState = { userInfo, view: nextView };
+  let url = nextView;
+
   switch (nextView) {
     case "userPage":
       break;
@@ -70,7 +65,7 @@ const historyManager = async (nextView, currentUserInfo) => {
       break;
   }
 
-  History.pushState(newState, null, nextView);
+  History.pushState(newState, nextView, url);
 };
 
 const updateViewFunctionGenerator = () => {

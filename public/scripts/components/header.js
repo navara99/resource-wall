@@ -42,7 +42,7 @@ const headerButtonsEventListener = () => {
   });
 
   $searchBar.on("focus", async(e) => {
-    updateView("resources", null, true);
+    historyManager("resources", null, {show: true});
   });
 
   window.onclick = (event) => {
@@ -60,40 +60,40 @@ const headerButtonsEventListener = () => {
   });
 
   $changePasswordButton.on("click", () => {
-    updateView("changePassword");
+    historyManager("changePassword");
   });
 
   $myResourcesButton.on("click", () => {
-    updateView("myResources");
+    historyManager("myResources");
   });
 
   $logoutButton.on("click", () => {
     logout();
-    updateView("resources", {});
+    historyManager("resources", {});
   });
 
   $floatingCreateResourceButton.on("click", () => {
-    updateView("newResource");
+    historyManager("newResource");
   });
 
   $createResourceButton.on("click", () => {
-    updateView("newResource");
+    historyManager("newResource");
   });
 
   $homeButton.on("click", () => {
     $searchBar.val("");
-    updateView("resources");
+    historyManager("resources");
   });
 
   $updateProfileButton.on("click", () => {
-    updateView("updateProfile");
+    historyManager("updateProfile");
   });
 
   $loginButton.on("click", () => {
-    updateView("login");
+    historyManager("login");
   });
 
   $registerButton.on("click", () => {
-    updateView("register");
+    historyManager("register");
   });
 };

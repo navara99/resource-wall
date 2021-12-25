@@ -15,7 +15,7 @@ const myResourcesSetup = (resource, $listContainer) => {
     isMine,
     showLiked,
     showMine,
-    thumbnail
+    thumbnail,
   } = resource;
 
   const videoHeight = 150;
@@ -28,7 +28,7 @@ const myResourcesSetup = (resource, $listContainer) => {
   const registerMyResourceButtonsListeners = () => {
     if (!isMine) return;
 
-    $(`#${id}-delete`).on("click", async function(e) {
+    $(`#${id}-delete`).on("click", async function (e) {
       try {
         await deleteResource(id);
         renderMyResources();
@@ -37,19 +37,18 @@ const myResourcesSetup = (resource, $listContainer) => {
       }
     });
 
-    $(`#${id}-edit`).on("click", async function(e) {
+    $(`#${id}-edit`).on("click", async function (e) {
       const modal = await editResourceModalGenerator();
       modal(id);
     });
-
   };
 
   const $info = $(`
     <div class="text">
       <a class="my-resource-title" id=${id}-my-resource >${partialText(
-  title,
-  10
-)}</a>
+    title,
+    10
+  )}</a>
       <div>
         <span>URL: </span>
         <a href="${url}" onclick="event.stopPropagation();" class="paragraph truncate">${url}</a>
@@ -71,9 +70,10 @@ const myResourcesSetup = (resource, $listContainer) => {
     </div>
   `);
 
-  const media = is_video && !thumbnail
-    ? createEmbedVideo(media_url, videoHeight)
-    : createScreenshot(media_url);
+  const media =
+    is_video && !thumbnail
+      ? createEmbedVideo(media_url, videoHeight)
+      : createScreenshot(media_url);
 
   const $thumbnail = $(`
     <div class="thumbnail-container">
@@ -153,8 +153,8 @@ const myResourcesSetup = (resource, $listContainer) => {
   `);
 
   const registerMyResourceDetailsListener = () => {
-    $(`#${id}-my-resource`).on("click", function(e) {
-      updateView("resourceDetails", null, id);
+    $(`#${id}-my-resource`).on("click", function (e) {
+      historyManager("resourceDetails", null, { id });
     });
   };
 
@@ -185,7 +185,7 @@ const renderMyResourcesFunctionGenerator = () => {
     $listContainer.html("");
   };
 
-  return async() => {
+  return async () => {
     clearMyResources();
 
     try {
@@ -213,11 +213,11 @@ const renderMyResourcesFunctionGenerator = () => {
 };
 
 const registerCheckListeners = () => {
-  $("#liked-filter").on("change", function() {
+  $("#liked-filter").on("change", function () {
     renderMyResources();
   });
 
-  $("#mine-filter").on("change", function() {
+  $("#mine-filter").on("change", function () {
     renderMyResources();
   });
 };
