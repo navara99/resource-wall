@@ -47,7 +47,7 @@ const historyManager = async (view, info) => {
       break;
     case RESOURCE_DETAILS:
     case USER_PAGE:
-      url += `/${id}`;
+      url += `/${info}`;
       break;
   }
 
@@ -88,7 +88,7 @@ const updateViewFunctionGenerator = () => {
   };
 
   return async ({ view, info }) => {
-    if (view !== "error") hideAll();
+    if (view !== ERROR) hideAll();
 
     const userInfo = await getMyDetails();
     updateHeader(userInfo);
@@ -98,7 +98,7 @@ const updateViewFunctionGenerator = () => {
         $userPage.show();
         break;
       case HOME:
-        if (!id) displayResources();
+        if (!info) displayResources();
         $resourcesPage.show();
         $tabs.show();
         break;
@@ -131,7 +131,6 @@ const updateViewFunctionGenerator = () => {
         $resourceDetails.show();
         break;
       case ERROR:
-        updateError(info);
         $errorPage.show();
         break;
     }

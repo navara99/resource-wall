@@ -3,6 +3,6 @@ const updateErrorFunctionGenerator = () => {
   return ({ responseText }) => {
     const msg = responseText.slice(10, -2);
     $errorMsg.text(msg);
-    historyManager(ERROR);
+    updateView({ view: ERROR });
   };
 };

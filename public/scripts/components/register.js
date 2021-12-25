@@ -13,7 +13,7 @@ const registerEventListener = () => {
 
       return $registerForm.trigger("reset");
     } catch (e) {
-      historyManager(ERROR, e);
+      updateError(e);
     }
   });
 };

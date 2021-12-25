@@ -12,7 +12,7 @@ const newResourceEventListener = () => {
       historyManager(RESOURCE_DETAILS, id);
       return $newResourceForm.trigger("reset");
     } catch (e) {
-      historyManager(ERROR, e);
+      updateError(e);
     }
   });
 };

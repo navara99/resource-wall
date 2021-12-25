@@ -1,7 +1,7 @@
 const loginEventListener = () => {
   const $loginForm = $("#login-form");
 
-  $loginForm.submit(async(event) => {
+  $loginForm.submit(async (event) => {
     try {
       event.preventDefault();
 
@@ -13,7 +13,7 @@ const loginEventListener = () => {
 
       return $loginForm.trigger("reset");
     } catch (e) {
-      historyManager(ERROR, e);
+      updateError(e);
     }
   });
 };
