@@ -129,7 +129,6 @@ const displayResourcesFunctionGenerator = () => {
         resources || (await getAllResources()).allResources;
 
       if (!renderedResources.length) return;
-      console.log(renderedResources);
       renderedResources.forEach((resource) =>
         cardSetup(resource, currentUserId, $column)
       );
