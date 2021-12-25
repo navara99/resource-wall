@@ -31,13 +31,17 @@ const editResourceModalGenerator = async () => {
 
     editForm.submit(async function (e) {
       e.preventDefault();
-      const newInfo = new FormData(this);
-      await updateResource(resourceId, newInfo);
-      clearEditModalForm();
-      $editResourceForm.hide();
-      const updateMyResources = renderMyResourcesFunctionGenerator();
-      updateMyResources();
-      $(".modal").modal("close");
+      try {
+        const newInfo = new FormData(this);
+        await updateResource(resourceId, newInfo);
+        clearEditModalForm();
+        $editResourceForm.hide();
+        const updateMyResources = renderMyResourcesFunctionGenerator();
+        updateMyResources();
+        $(".modal").modal("close");
+      } catch (err) {
+        console.log(err.message);
+      };
     });
 
     $thumbnailToggle.on("change", (e) => {
@@ -57,14 +61,19 @@ const editResourceModalGenerator = async () => {
   };
 
   return async (resourceId) => {
-    clearEditModalForm();
-    const [resourceDetails] = await getDetailsOfResources(resourceId);
-    const { title, url, description, is_private, catergory } = resourceDetails;
-    const $editModalContent = $(`#${resourceId}-edit-form-modal`);
-    $editModalContent.append($editResourceForm);
-    $editResourceForm.show();
-    updateEditForm(title, description, url, is_private, catergory);
-    registerSubmitResourceEdit(resourceId, $editResourceForm);
+    try {
+      clearEditModalForm();
+      const [resourceDetails] = await getDetailsOfResources(resourceId);
+      const { title, url, description, is_private, catergory } = resourceDetails;
+      const $editModalContent = $(`#${resourceId}-edit-form-modal`);
+      $editModalContent.append($editResourceForm);
+      $editResourceForm.show();
+      updateEditForm(title, description, url, is_private, catergory);
+      registerSubmitResourceEdit(resourceId, $editResourceForm);
+    } catch (err) {
+      console.log(err.message);
+    }
+
   };
 };
 
