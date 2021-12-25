@@ -46,8 +46,8 @@ const updateUserFunctionGenerator = () => {
 
         myResourcesSetup(allResourceInfo, $resources)();
       });
-    } catch (err) {
-      updateError(err);
+    } catch (er) {
+      historyManager(ERROR, e);
     }
   };
 };

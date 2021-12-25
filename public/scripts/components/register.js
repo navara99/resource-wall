@@ -12,8 +12,8 @@ const registerEventListener = () => {
       historyManager(HOME);
 
       return $registerForm.trigger("reset");
-    } catch (err) {
-      updateError(err);
+    } catch (e) {
+      historyManager(ERROR, e);
     }
   });
 };

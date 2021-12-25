@@ -68,22 +68,22 @@ const profileHelperFunctionGenerator = () => {
       putInValAndFocus($profilePicInput, profile_picture_url);
       putInValAndFocus($firstNameInput, first_name);
       $firstNameInput.blur();
-    } catch (err) {
-      updateError(err);
+    } catch (e) {
+      historyManager(ERROR, e);
     }
   };
 
   const profileButtonsEventListener = () => {
     $myResoucesButton.on("click", () => {
-      showMyResources();
+      historyManager(MY_RESOURCES);
     });
 
     $updateProfileButton.on("click", () => {
-      showUpdateProfilePage();
+      historyManager(UPDATE_PROFILE);
     });
 
     $changePasswordButton.on("click", () => {
-      showChangePasswordPage();
+      historyManager(CHANGE_PASSWORD);
     });
   };
 
@@ -108,8 +108,8 @@ const updateProfileEventListener = () => {
       await updateProfile(data);
       updateUserDetails();
       $updateProfileForm.trigger("reset");
-    } catch (err) {
-      updateError(err);
+    } catch (e) {
+      historyManager(ERROR, e);
     }
   });
 };
@@ -128,8 +128,8 @@ const changePasswordEventListener = () => {
       $changePasswordForm.trigger("reset");
 
       historyManager(CHANGE_PASSWORD);
-    } catch (err) {
-      updateError(err);
+    } catch (e) {
+      historyManager(ERROR, e);
     }
   });
 };

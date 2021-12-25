@@ -32,8 +32,8 @@ const myResourcesSetup = (resource, $listContainer) => {
       try {
         await deleteResource(id);
         renderMyResources();
-      } catch (err) {
-        updateError(err);
+      } catch (e) {
+        historyManager(ERROR, e);
       }
     });
 
@@ -206,8 +206,8 @@ const renderMyResourcesFunctionGenerator = () => {
       });
 
       $(".modal").modal();
-    } catch (err) {
-      updateError(err);
+    } catch (e) {
+      historyManager(ERROR, e);
     }
   };
 };

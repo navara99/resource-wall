@@ -148,8 +148,8 @@ const resourceDetailsSetup = async(id, domObj) => {
     ratingSetup(resourceInfo, domObj)();
 
     return title;
-  } catch (err) {
-    updateError(err);
+  } catch (e) {
+    historyManager(ERROR, e);
   }
 };
 

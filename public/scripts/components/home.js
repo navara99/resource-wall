@@ -135,7 +135,7 @@ const displayResourcesFunctionGenerator = () => {
         cardSetup(resource, currentUserId, $column)
       );
     } catch (e) {
-      updateError(e);
+      historyManager(ERROR, e);
     }
   };
 };

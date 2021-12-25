@@ -33,10 +33,13 @@ const partialText = (text, num) => {
   return wordArr.slice(0, num).join(" ") + "...";
 };
 
-const historyManager = async (view, id) => {
-  const newState = { id, view };
+const historyManager = async (view, info) => {
+  const newState = { info, view };
   let url = "/" + view;
-  let title = view[0].toUpperCase() + view.slice(1).replace("-", " ") + " - Resource Wall";
+  let title =
+    view[0].toUpperCase() +
+    view.slice(1).replace("-", " ") +
+    " - Resource Wall";
 
   switch (view) {
     case HOME:
@@ -46,8 +49,6 @@ const historyManager = async (view, id) => {
     case USER_PAGE:
       url += `/${id}`;
       break;
-    case ERROR:
-      return updateView(ERROR, userInfo, id);
   }
 
   const index = History.getCurrentIndex();
@@ -86,7 +87,7 @@ const updateViewFunctionGenerator = () => {
     $editResource.hide();
   };
 
-  return async ({ view, id }) => {
+  return async ({ view, info }) => {
     if (view !== "error") hideAll();
 
     const userInfo = await getMyDetails();
@@ -126,10 +127,11 @@ const updateViewFunctionGenerator = () => {
         $newResourcePage.show();
         break;
       case RESOURCE_DETAILS:
-        await updateResourceDetails(id);
+        await updateResourceDetails(info);
         $resourceDetails.show();
         break;
       case ERROR:
+        updateError(info);
         $errorPage.show();
         break;
     }

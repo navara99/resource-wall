@@ -12,8 +12,8 @@ const loginEventListener = () => {
       historyManager(HOME);
 
       return $loginForm.trigger("reset");
-    } catch (err) {
-      updateError(err);
+    } catch (e) {
+      historyManager(ERROR, e);
     }
   });
 };
