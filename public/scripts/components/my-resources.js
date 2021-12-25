@@ -14,7 +14,8 @@ const myResourcesSetup = (resource, $listContainer) => {
     media_url,
     isMine,
     showLiked,
-    showMine
+    showMine,
+    thumbnail
   } = resource;
 
   const videoHeight = 150;
@@ -70,7 +71,7 @@ const myResourcesSetup = (resource, $listContainer) => {
     </div>
   `);
 
-  const media = is_video
+  const media = is_video && !thumbnail
     ? createEmbedVideo(media_url, videoHeight)
     : createScreenshot(media_url);
 
