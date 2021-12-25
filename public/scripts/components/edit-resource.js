@@ -15,6 +15,18 @@ const editResourceModalGenerator = async () => {
   const $thumbnailToggle = $("#edit-thumbnail-toggle");
   const $thumbnailUploadWrapper = $("#thumbnail-upload-wrapper");
 
+  const clearEditModalForm = () => {
+    $editResourceForm.off("submit");
+    $thumbnailToggle.off("change");
+    $title.val("");
+    $description.val("");
+    $url.val("");
+    $thumbnail.val("");
+    $private.removeAttr("checked");
+    $thumbnailText.val("");
+    $thumbnailUploadWrapper.addClass("hidden");
+  };
+
   const registerSubmitResourceEdit = (resourceId, editForm) => {
 
     editForm.submit(async function (e) {
@@ -22,6 +34,7 @@ const editResourceModalGenerator = async () => {
       const newInfo = new FormData(this);
       await updateResource(resourceId, newInfo);
       clearEditModalForm();
+      $editResourceForm.hide();
       const updateMyResources = renderMyResourcesFunctionGenerator();
       updateMyResources();
       $(".modal").modal("close");
@@ -39,20 +52,8 @@ const editResourceModalGenerator = async () => {
     placeInput($url, url);
     placeInput($category, category);
     $category.formSelect();
-    if (is_private) $private.attr("checked", true);
-    $thumbnailToggle.attr("checked", true);
-  };
-
-  const clearEditModalForm = () => {
-    $editResourceForm.off("submit");
-    $thumbnailToggle.off("change");
-    $title.val("");
-    $description.val("");
-    $url.val("");
-    $thumbnail.val("");
-    $private.removeAttr("checked");
-    $thumbnailText.val("");
-    $("#edit-Resource-form").hide();
+    is_private ? $private.prop("checked", true) : $private.prop("checked", false);
+    $thumbnailToggle.prop("checked", true);
   };
 
   return async (resourceId) => {
@@ -61,8 +62,8 @@ const editResourceModalGenerator = async () => {
     const { title, url, description, is_private, catergory } = resourceDetails;
     const $editModalContent = $(`#${resourceId}-edit-form-modal`);
     $editModalContent.append($editResourceForm);
-    updateEditForm(title, description, url, is_private, catergory);
     $editResourceForm.show();
+    updateEditForm(title, description, url, is_private, catergory);
     registerSubmitResourceEdit(resourceId, $editResourceForm);
   };
 };
