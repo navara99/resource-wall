@@ -7,9 +7,9 @@ const loginEventListener = () => {
 
       const data = $loginForm.serialize();
 
-      const userInfo = await login(data);
+      await login(data);
 
-      historyManager(HOME, userInfo);
+      historyManager(HOME);
 
       return $loginForm.trigger("reset");
     } catch (err) {

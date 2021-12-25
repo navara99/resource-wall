@@ -7,5 +7,5 @@ const UPDATE_PROFILE = "update-profile";
 const REGISTER = "register";
 const LOGIN = "login";
 const NEW_RESOURCE = "new-resource";
-const RESOURCE_DETAILS = "resourceDetails";
+const RESOURCE_DETAILS = "resource-details";
 const ERROR = "error";

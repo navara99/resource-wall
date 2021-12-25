@@ -7,9 +7,9 @@ const registerEventListener = () => {
 
       const data = $registerForm.serialize();
 
-      const userInfo = await register(data);
+      await register(data);
 
-      historyManager(HOME, userInfo);
+      historyManager(HOME);
 
       return $registerForm.trigger("reset");
     } catch (err) {

@@ -8,7 +8,7 @@ $(() => {
 
 const History = window.History;
 
-History.Adapter.bind(window, "statechange", function () {
+History.Adapter.bind(window, "statechange", () => {
   const { data } = History.getState();
   updateView(data);
 });
@@ -33,23 +33,30 @@ const partialText = (text, num) => {
   return wordArr.slice(0, num).join(" ") + "...";
 };
 
-const historyManager = async (nextView, currentUserInfo, id) => {
-  const userInfo = currentUserInfo || (await getMyDetails());
-  const newState = { userInfo, id, view: nextView };
-  let url = nextView;
+const historyManager = async (view, id) => {
+  const newState = { id, view };
+  let url = "/" + view;
+  let title = view[0].toUpperCase() + view.slice(1).replace("-", " ") + " - Resource Wall";
 
-  switch (nextView) {
-    case USER_PAGE:
-      break;
+  switch (view) {
     case HOME:
-      url = "";
+      url = "/";
       break;
     case RESOURCE_DETAILS:
-      url = null;
+    case USER_PAGE:
+      url += `/${id}`;
       break;
+    case ERROR:
+      return updateView(ERROR, userInfo, id);
   }
 
-  History.pushState(newState, nextView, url);
+  const index = History.getCurrentIndex();
+
+  if (!index && view === HOME) {
+    return History.replaceState(newState, title, url);
+  }
+
+  History.pushState(newState, title, url);
 };
 
 const updateViewFunctionGenerator = () => {
@@ -79,8 +86,10 @@ const updateViewFunctionGenerator = () => {
     $editResource.hide();
   };
 
-  return ({ view, userInfo, id }) => {
+  return async ({ view, id }) => {
     if (view !== "error") hideAll();
+
+    const userInfo = await getMyDetails();
     updateHeader(userInfo);
 
     switch (view) {
@@ -117,9 +126,8 @@ const updateViewFunctionGenerator = () => {
         $newResourcePage.show();
         break;
       case RESOURCE_DETAILS:
-        updateResourceDetails(id).then((title) => {
-          $resourceDetails.show();
-        });
+        await updateResourceDetails(id);
+        $resourceDetails.show();
         break;
       case ERROR:
         $errorPage.show();

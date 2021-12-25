@@ -100,7 +100,7 @@ const cardSetup = (resource, currentUserId, $column) => {
   $item.on("click", async (event) => {
     const tagName = event.target.nodeName;
     if (tagName !== "A" && tagName !== "I") {
-      historyManager(RESOURCE_DETAILS, null, id);
+      historyManager(RESOURCE_DETAILS, id);
     }
   });
 

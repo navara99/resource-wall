@@ -17,7 +17,7 @@ const updateUserFunctionGenerator = () => {
   return async(id) => {
     clearResource();
     try {
-      const { username, first_name, last_name, profile_picture_url, bio } = id
+      const { id: userId, username, first_name, last_name, profile_picture_url, bio } = id
         ? await getUserDetails(id)
         : await getMyDetails();
 
@@ -28,9 +28,8 @@ const updateUserFunctionGenerator = () => {
       $name.text(`${first_name} ${last_name}`);
       $bio.text(bio);
       $("#user-profile-picture").attr("src", profile_picture_url);
-      historyManager(USER_PAGE);
+      historyManager(USER_PAGE, userId);
 
-      const userId = id || 0;
       const { resources, id: profileId } = await getUserResources(userId);
 
       resources.forEach((resource) => {

@@ -42,7 +42,7 @@ const headerButtonsEventListener = () => {
   });
 
   $searchBar.on("focus", async(e) => {
-    historyManager(RESOURCES, null, true);
+    historyManager(HOME, true);
   });
 
   window.onclick = (event) => {
@@ -69,7 +69,7 @@ const headerButtonsEventListener = () => {
 
   $logoutButton.on("click", () => {
     logout();
-    historyManager(HOME, {});
+    historyManager(HOME);
   });
 
   $floatingCreateResourceButton.on("click", () => {
