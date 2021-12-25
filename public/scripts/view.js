@@ -4,7 +4,15 @@ $(() => {
 
   updateUserInfo();
   eventListeners();
-  updateView("resources");
+  historyManager("resources");
+});
+
+const History = window.History;
+
+History.Adapter.bind(window, "statechange", function () {
+  const { data } = History.getState();
+  const { view } = data;
+  updateView(view);
 });
 
 const eventListeners = () => {
@@ -29,8 +37,9 @@ const partialText = (text, num) => {
 
 const updateTitleURL = (title, url) => {
   const newURL = `http://localhost:8080/${url}`;
-  window.history.pushState("data", "Title", newURL);
-  document.title = `${title} - Resource Wall`;
+  // window.history.pushState("data", "Title", newURL);
+  // document.title = `${title} - Resource Wall`;
+  History.pushState(null, null, url);
 };
 
 const updateUserInfo = async (userInfo) => {
@@ -41,6 +50,37 @@ const updateUserInfo = async (userInfo) => {
     updateHeader({});
     updateError(err);
   }
+};
+
+const historyManager = (nextView) => {
+  const newState = { view: nextView };
+
+  switch (nextView) {
+    case "userPage":
+      break;
+    case "resources":
+      break;
+    case "myResources":
+      break;
+    case "editResource":
+      break;
+    case "changePassword":
+      break;
+    case "updateProfile":
+      break;
+    case "register":
+      break;
+    case "login":
+      break;
+    case "newResource":
+      break;
+    case "resourceDetails":
+      break;
+    case "error":
+      break;
+  }
+
+  History.pushState(newState, null, nextView);
 };
 
 const updateViewFunctionGenerator = () => {
@@ -79,52 +119,52 @@ const updateViewFunctionGenerator = () => {
     switch (nextView) {
       case "userPage":
         $userPage.show();
-        updateTitleURL("Profile", "profile");
+        // updateTitleURL("Profile", "profile");
         break;
       case "resources":
         if (!resourceId) displayResources();
         $resourcesPage.show();
         $tabs.show();
-        updateTitleURL("Home", "");
+        // updateTitleURL("Home", "home");
         break;
       case "myResources":
         renderMyResources();
         showMyResources();
         $myResourcesPage.show();
-        updateTitleURL("My Resources", "my-resources");
+        // updateTitleURL("My Resources", "my-resources");
         break;
       case "editResource":
-        updateTitleURL("Edit Resource", "edit-resource");
+        // updateTitleURL("Edit Resource", "edit-resource");
         break;
       case "changePassword":
         showChangePasswordPage();
         $myResourcesPage.show();
-        updateTitleURL("Change Password", "change-password");
+        // updateTitleURL("Change Password", "change-password");
         break;
       case "updateProfile":
         showUpdateProfilePage();
         $myResourcesPage.show();
-        updateTitleURL("Update Profile", "update-profile");
+        // updateTitleURL("Update Profile", "update-profile");
         break;
       case "register":
         $registerPage.show();
-        updateTitleURL("Register", "register");
+        // updateTitleURL("Register", "register");
         break;
       case "login":
         $loginPage.show();
-        updateTitleURL("Login", "login");
+        // updateTitleURL("Login", "login");
         break;
       case "newResource":
         $newResourcePage.show();
-        updateTitleURL("Create New Resource", "create-resource");
+        // updateTitleURL("Create New Resource", "create-resource");
         break;
       case "resourceDetails":
         updateResourceDetails(resourceId).then((title) => {
           $resourceDetails.show();
-          updateTitleURL(
-            `${title} - Resource Details`,
-            `resource/${resourceId}`
-          );
+          // updateTitleURL(
+          //   `${title} - Resource Details`,
+          //   `resource/${resourceId}`
+          // );
           updateUserInfo(userInfo);
         });
         break;
