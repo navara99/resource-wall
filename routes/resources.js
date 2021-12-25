@@ -182,14 +182,13 @@ module.exports = (db) => {
     const { url } = req.body;
     const omebedUrl = omebed(url);
     const encodedURI = encodeURIComponent(url);
-    console.log(req.file);
 
     try {
       const [media_url, is_video] = await generateMedia(omebedUrl, encodedURI, url);
       const result = await getAllDetailsOfResource(id);
       const { owner_id } = result[0];
       if (user_id !== owner_id) return res.status(401).json({ status: "fail" });
-      await updateResource(id, { ...req.body, is_video, media_url });
+      await updateResource(id, { ...req.body, is_video, media_url, thumbnail: req.file ? req.file.path : null });
       res.status(200).json({ status: "success" });
     } catch (err) {
       res.status(500).json({ error: err.message });
