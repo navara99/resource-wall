@@ -4,14 +4,10 @@ $(() => {
 
   eventListeners();
   historyManager(HOME);
+  History.Adapter.trigger(window, "statechange");
 });
 
 const History = window.History;
-
-History.Adapter.bind(window, "statechange", () => {
-  const { data } = History.getState();
-  updateView(data);
-});
 
 const eventListeners = () => {
   registerTabListener();
@@ -23,6 +19,11 @@ const eventListeners = () => {
   changePasswordEventListener();
   updateProfileEventListener();
   profileButtonsEventListener();
+
+  History.Adapter.bind(window, "statechange", () => {
+    const { data } = History.getState();
+    updateView(data);
+  });
 };
 
 const partialText = (text, num) => {
