@@ -90,10 +90,6 @@ This is one of the group project for the Web Development Bootcamp at [Lighthouse
 
 - hide nav bar
 
-### home page
-
-- order reources by date
-
 ## Getting Started
 
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
