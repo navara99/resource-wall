@@ -29,11 +29,15 @@ div.hidden {
 .container {
   border-radius: 32px;
   box-shadow: 0 0 3px #ccc;
+  width: 95%;
+  max-width: none;
+  margin-bottom: 3em;
 }
 
-div.container {
-  width: 90%;
-  margin-bottom: 3em;
+@media (min-width: 1024px) {
+  .container {
+    width: 973px;
+  }
 }
 
 form {
