@@ -1,17 +1,28 @@
-## Features
+# Resource Wall
+
+## Table of Content
+
+- [Live Demo](#live-demo)
+- [Final Product](#final-product)
+- [Dependencies](#dependencies)
+- [Getting Started](#getting-started)
+- [Credit](#credit)
+
+## Live Demo
+
+## Final Product
 
 ### home page
 
-- display all the resources
-- users can like any resource
-- display screenshot/embed video uploaded by the user
-- diplsay title, rating, number of likes, desciption, owner's username, added date
-- users can view resources by catergory
-- only show partial title/description if too long
+- Display all the resources
+- Users can like any resource
+- Display screenshot/embed video uploaded by the user
+- Display resource details such as title, desciption, owner's username, added date, rating, number of likes and comments
+- Users can view resources by catergory
 
 ### login
 
-- users can login with email/username and password
+- Users can login with email/username and password
 
 ### logout
 
@@ -61,13 +72,15 @@
 
 - if there is any errors, it is shown on the top of the page under nav bar
 
+### history
+
+- handle with history.js
+
 ## To do list
 
 ### deploy the server
 
 ### README.md
-
-### history
 
 ### responsive design
 
@@ -76,18 +89,6 @@
 ### home page
 
 - order reources by date
-
-# LHL Node Skeleton
-
-## Project Setup
-
-The following steps are only for _one_ of the group members to perform.
-
-1. Create your own copy of this repo using the `Use This Template` button, ideally using the name of your project. The repo should be marked Public
-2. Verify that the skeleton code now shows up in your repo on GitHub, you should be automatically redirected
-3. Clone your copy of the repo to your dev machine
-4. Add your team members as collaborators to the project so that they can push to this repo
-5. Let your team members know the repo URL so that they use the same repo (they should _not_ create a copy/fork of this repo since that will add additional workflow complexity to the project)
 
 ## Getting Started
 
@@ -124,6 +125,10 @@ The following steps are only for _one_ of the group members to perform.
 - Node 10.x or above
 - NPM 5.x or above
 - PG 6.x
+
+## Credit
+
+## Others
 
 — What each of you did, individually
 
