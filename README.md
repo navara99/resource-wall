@@ -1,6 +1,6 @@
 # Resource Wall
 
-A full-stack single page app that allow learners to save learning resources in a central place that is publicly available to any users.  
+A full-stack single page app that allow learners to save learning resources in a central place that is publicly available to any users.
 
 ## Table of Content
 
@@ -30,13 +30,13 @@ A full-stack single page app that allow learners to save learning resources in a
 
 - Users can logout
 
-### register
+### Register
 
-- users can regsiter with email (unique), password (enter twice) , username (unique)
+- Users can regsiter with email (unique), password (enter twice) , username (unique)
 
-### detail page of a single resource
+### Resource detail page
 
-- Display resource details such as title, desciption, owner's username, added date, rating, number of likes and comments, list of comments
+- Display details such as title, desciption, owner's username, added date, rating, list of comments, number of likes, ratings and comments,
 - Users can comment/rate/like on any resources
 - Users can enter user's page by clicking owner/comment
 
@@ -47,9 +47,9 @@ A full-stack single page app that allow learners to save learning resources in a
 - owner can delete resource
 - only show partial title/description if too long
 
-### update profile
+### Update profile
 
-- users can update their profile (email, username, bio, first name, last name, link for profile picture)
+- Users can update their profile (email, username, bio, first name, last name, link for profile picture)
 
 ### change password
 
