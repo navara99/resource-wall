@@ -172,7 +172,7 @@ const updateResourceDetailsFunctionGenerator = () => {
     $ratingString: $("#details-rating-string"),
     $detailsStars: $("#details-stars"),
     $mediaURL: $("#details-link-on-media"),
-    $ownerSection: $("#owner_profile-picture"),
+    $ownerSection: $("#owner-row"),
     $ownerName: $("#details-owner-name"),
     $createdOn: $("#details-time"),
     $title: $("#details-title"),
