@@ -3,4 +3,3 @@ public/styles
 .env
 *.log
 *.sqlite3
-public/uploads/*
