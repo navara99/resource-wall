@@ -1,5 +1,7 @@
 # Resource Wall
 
+A full-stack single page app that allow learners to save learning resources in a central place that is publicly available to any users.  
+
 ## Table of Content
 
 - [Live Demo](#live-demo)
@@ -12,7 +14,7 @@
 
 ## Final Product
 
-### home page
+### Home page
 
 - Display all the resources
 - Users can like any resource
@@ -20,21 +22,23 @@
 - Display resource details such as title, desciption, owner's username, added date, rating, number of likes and comments
 - Users can view resources by catergory
 
-### login
+### Login
 
 - Users can login with email/username and password
 
-### logout
+### Logout
 
-- users can logout
+- Users can logout
 
 ### register
 
-- users can regsiter with email(unique), password(enter twice) , username(unique)
+- users can regsiter with email (unique), password (enter twice) , username (unique)
 
 ### detail page of a single resource
 
-- users can comment/rate/like on any resources
+- Display resource details such as title, desciption, owner's username, added date, rating, number of likes and comments, list of comments
+- Users can comment/rate/like on any resources
+- Users can enter user's page by clicking owner/comment
 
 ### My resources
 
