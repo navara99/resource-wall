@@ -60,9 +60,8 @@ const cardSetup = (resource, currentUserId, $column) => {
   const $cardAction = $(`
     <div class="card-action">
       <div class="card-summary">
-        <i class="fas fa-star card-icon bright"></i>${
-          Number(rating) ? Number(rating).toFixed(1) : "0"
-        }
+        <i class="fas fa-star card-icon bright"></i>${Number(rating) ? Number(rating).toFixed(1) : "0"
+    }
       </div>
       <div class="card-summary">
         <i class="fas fa-heart card-icon liked"></i>${likes}
@@ -131,7 +130,7 @@ const displayResourcesFunctionGenerator = () => {
         resources || (await getAllResources()).allResources;
 
       if (!renderedResources.length) return;
-      renderedResources.forEach((resource) =>
+      renderedResources.sort(sortByDateCreated).forEach((resource) =>
         cardSetup(resource, currentUserId, $column)
       );
     } catch (e) {
