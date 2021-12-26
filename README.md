@@ -8,6 +8,7 @@ A full-stack single page app that allow learners to save learning resources in a
 - [Final Product](#final-product)
 - [Dependencies](#dependencies)
 - [Getting Started](#getting-started)
+- [ERD Diagram](#erd-diagram)
 - [Credit](#credit)
 
 ## Live Demo
@@ -22,6 +23,33 @@ A full-stack single page app that allow learners to save learning resources in a
 - Display resource details such as title, desciption, owner's username, added date, rating, number of likes and comments
 - Users can view resources by catergory
 
+### Header
+
+- Users can search for already-saved resources created by any user
+- Display logout button / login link
+
+### New resource
+
+- Users can save an external URL along with a title and description
+- Users can make resource public/private
+- Users can categorize resource under a topic
+- Users can upload image as thumbnail
+
+### Resource detail page
+
+- Display details such as title, desciption, owner's username, added date, rating, list of comments, number of likes, ratings and comments,
+- Users can comment/rate/like on any resources
+- Users can enter user's page by clicking owner/comment
+
+### My resources
+
+- Users can view all their own and all liked resources on one page (with filter)
+- Owner can edit/delete resource
+
+### User Page
+
+- Users can view user's details (Profile picture, username, bio, full name, created resources)
+
 ### Login
 
 - Users can login with email/username and password
@@ -34,19 +62,6 @@ A full-stack single page app that allow learners to save learning resources in a
 
 - Users can regsiter with email (unique), password (enter twice) , username (unique)
 
-### Resource detail page
-
-- Display details such as title, desciption, owner's username, added date, rating, list of comments, number of likes, ratings and comments,
-- Users can comment/rate/like on any resources
-- Users can enter user's page by clicking owner/comment
-
-### My resources
-
-- users can view all their own and all liked resources on one page (filter function)
-- users can go to the details page when they click on the resource
-- owner can delete resource
-- only show partial title/description if too long
-
 ### Update profile
 
 - Users can update their profile (email, username, bio, first name, last name, link for profile picture)
@@ -55,24 +70,9 @@ A full-stack single page app that allow learners to save learning resources in a
 
 - Users can change their password
 
-### User Page
-
-- Users can view user's details (Profile picture, username, bio, full name, created resources)
-
-### new resource
-
-- users save an external URL along with a title and description
-- users can make resource public/private
-- users can categorize resource under a topic
-
-### header
-
-- users can search for already-saved resources created by any user
-- display logout button / login link
-
 ### handle error
 
-- if there is any errors, it is shown on the top of the page under nav bar
+- If there is any errors, it is shown on the top of the page under nav bar
 
 ### history
 
@@ -122,6 +122,8 @@ A full-stack single page app that allow learners to save learning resources in a
 - Node 10.x or above
 - NPM 5.x or above
 - PG 6.x
+
+## ERD Diagram
 
 ## Credit
 
