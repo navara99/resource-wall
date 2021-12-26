@@ -51,15 +51,13 @@ A full-stack single page app that allow learners to save learning resources in a
 
 - Users can update their profile (email, username, bio, first name, last name, link for profile picture)
 
-### change password
+### Change Password
 
-- users can change their password
-- can't change password if the old and new password are the same
+- Users can change their password
 
-### user page
+### User Page
 
-- users can view user's info (profile picture, username, bio, full name)
-- view the user's resources
+- Users can view user's details (Profile picture, username, bio, full name, created resources)
 
 ### new resource
 
