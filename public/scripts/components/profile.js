@@ -50,7 +50,7 @@ const profileHelperFunctionGenerator = () => {
     $elm.focus();
   };
 
-  const prefillProfileForm = async() => {
+  const prefillProfileForm = async () => {
     try {
       const userInfo = await getMyDetails(1);
       const {
@@ -68,22 +68,22 @@ const profileHelperFunctionGenerator = () => {
       putInValAndFocus($profilePicInput, profile_picture_url);
       putInValAndFocus($firstNameInput, first_name);
       $firstNameInput.blur();
-    } catch (err) {
-      updateError(err);
+    } catch (e) {
+      updateError(e);
     }
   };
 
   const profileButtonsEventListener = () => {
     $myResoucesButton.on("click", () => {
-      showMyResources();
+      historyManager(MY_RESOURCES);
     });
 
     $updateProfileButton.on("click", () => {
-      showUpdateProfilePage();
+      historyManager(UPDATE_PROFILE);
     });
 
     $changePasswordButton.on("click", () => {
-      showChangePasswordPage();
+      historyManager(CHANGE_PASSWORD);
     });
   };
 
@@ -99,17 +99,17 @@ const profileHelperFunctionGenerator = () => {
 const updateProfileEventListener = () => {
   const $updateProfileForm = $("#update-profile-form");
 
-  $updateProfileForm.submit(async(event) => {
+  $updateProfileForm.submit(async (event) => {
     try {
       event.preventDefault();
 
       const data = $updateProfileForm.serialize();
 
-      await updateProfile(data);
-      updateUserDetails();
+      historyManager(USER_PAGE);
+
       $updateProfileForm.trigger("reset");
-    } catch (err) {
-      updateError(err);
+    } catch (e) {
+      updateError(e);
     }
   });
 };
@@ -117,7 +117,7 @@ const updateProfileEventListener = () => {
 const changePasswordEventListener = () => {
   const $changePasswordForm = $("#change-password-form");
 
-  $changePasswordForm.submit(async(event) => {
+  $changePasswordForm.submit(async (event) => {
     try {
       event.preventDefault();
 
@@ -127,9 +127,9 @@ const changePasswordEventListener = () => {
 
       $changePasswordForm.trigger("reset");
 
-      updateView("changePassword");
-    } catch (err) {
-      updateError(err);
+      historyManager(CHANGE_PASSWORD);
+    } catch (e) {
+      updateError(e);
     }
   });
 };

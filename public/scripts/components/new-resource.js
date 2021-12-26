@@ -1,8 +1,7 @@
 const newResourceEventListener = () => {
   const $newResourceForm = $("#new-resource-form");
 
-  $newResourceForm.submit(async function(event) {
-
+  $newResourceForm.submit(async function (event) {
     try {
       event.preventDefault();
       const formData = new FormData(this);
@@ -10,11 +9,10 @@ const newResourceEventListener = () => {
       const newResourceDetails = await submitResource(formData);
       const { id } = newResourceDetails;
 
-      updateView("resourceDetails", null, id);
+      historyManager(RESOURCE_DETAILS, id);
       return $newResourceForm.trigger("reset");
-    } catch (err) {
-      console.log(err);
-      updateError(err);
+    } catch (e) {
+      updateError(e);
     }
   });
 };

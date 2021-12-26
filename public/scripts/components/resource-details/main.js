@@ -46,7 +46,7 @@ const initDisplay = (resourceInfo, domObj) => {
   $ownerName.text(`${first_name} ${last_name} (@${owner_username})`);
   $ownerSection.unbind();
   $ownerSection.on("click", () => {
-    updateUserDetails(owner_id);
+    historyManager(USER_PAGE, owner_id);
   });
 
   $createdOn.text(timestampToTimeAgo(created_on));
@@ -114,7 +114,7 @@ const makeInfoObj = (id, details) => {
   };
 };
 
-const getMedia = async({ id, is_video, media_url }, $media) => {
+const getMedia = async ({ id, is_video, media_url }, $media) => {
   const { createEmbedVideo, createScreenshot } = thumbnailElementGenerator({
     media_url,
   });
@@ -127,7 +127,7 @@ const getMedia = async({ id, is_video, media_url }, $media) => {
   $media.append($newMedia);
 };
 
-const resourceDetailsSetup = async(id, domObj) => {
+const resourceDetailsSetup = async (id, domObj) => {
   try {
     const resourceComments = await getDetailsOfResources(id);
 
@@ -148,8 +148,8 @@ const resourceDetailsSetup = async(id, domObj) => {
     ratingSetup(resourceInfo, domObj)();
 
     return title;
-  } catch (err) {
-    updateError(err);
+  } catch (e) {
+    updateError(e);
   }
 };
 
@@ -172,7 +172,7 @@ const updateResourceDetailsFunctionGenerator = () => {
     $ratingString: $("#details-rating-string"),
     $detailsStars: $("#details-stars"),
     $mediaURL: $("#details-link-on-media"),
-    $ownerSection: $("#owner_profile-picture"),
+    $ownerSection: $("#owner-row"),
     $ownerName: $("#details-owner-name"),
     $createdOn: $("#details-time"),
     $title: $("#details-title"),

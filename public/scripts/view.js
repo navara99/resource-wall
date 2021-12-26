@@ -2,10 +2,12 @@ $(() => {
   $(".tabs").tabs();
   $("select").formSelect();
 
-  updateUserInfo();
   eventListeners();
-  updateView("resources");
+  historyManager(HOME);
+  History.Adapter.trigger(window, "statechange");
 });
+
+const History = window.History;
 
 const eventListeners = () => {
   registerTabListener();
@@ -17,6 +19,11 @@ const eventListeners = () => {
   changePasswordEventListener();
   updateProfileEventListener();
   profileButtonsEventListener();
+
+  History.Adapter.bind(window, "statechange", () => {
+    const { data } = History.getState();
+    updateView(data);
+  });
 };
 
 const partialText = (text, num) => {
@@ -27,20 +34,31 @@ const partialText = (text, num) => {
   return wordArr.slice(0, num).join(" ") + "...";
 };
 
-const updateTitleURL = (title, url) => {
-  const newURL = `http://localhost:8080/${url}`;
-  window.history.pushState("data", "Title", newURL);
-  document.title = `${title} - Resource Wall`;
-};
+const historyManager = async (view, info) => {
+  const newState = { info, view };
+  let url = "/" + view;
+  let title =
+    view[0].toUpperCase() +
+    view.slice(1).replace("-", " ") +
+    " - Resource Wall";
 
-const updateUserInfo = async (userInfo) => {
-  try {
-    if (!userInfo) userInfo = await getMyDetails();
-    updateHeader(userInfo);
-  } catch (err) {
-    updateHeader({});
-    updateError(err);
+  switch (view) {
+    case HOME:
+      url = "/";
+      break;
+    case RESOURCE_DETAILS:
+    case USER_PAGE:
+      url += `/${info}`;
+      break;
   }
+
+  const index = History.getCurrentIndex();
+
+  if (!index && view === HOME) {
+    return History.replaceState(newState, title, url);
+  }
+
+  History.pushState(newState, title, url);
 };
 
 const updateViewFunctionGenerator = () => {
@@ -70,65 +88,51 @@ const updateViewFunctionGenerator = () => {
     $editResource.hide();
   };
 
-  return (nextView, userInfo, resourceId) => {
-    if (nextView !== "error") {
-      updateUserInfo(userInfo);
-      hideAll();
-    }
+  return async ({ view, info }) => {
+    if (view !== ERROR) hideAll();
 
-    switch (nextView) {
-      case "userPage":
+    const userInfo = await getMyDetails();
+    updateHeader(userInfo);
+
+    switch (view) {
+      case USER_PAGE:
+        await updateUserDetails(info);
         $userPage.show();
-        updateTitleURL("Profile", "profile");
         break;
-      case "resources":
-        if (!resourceId) displayResources();
+      case HOME:
+        if (!info) displayResources();
         $resourcesPage.show();
         $tabs.show();
-        updateTitleURL("Home", "");
         break;
-      case "myResources":
+      case MY_RESOURCES:
         renderMyResources();
         showMyResources();
         $myResourcesPage.show();
-        updateTitleURL("My Resources", "my-resources");
         break;
-      case "editResource":
-        updateTitleURL("Edit Resource", "edit-resource");
+      case EDIT_RESOURCE:
         break;
-      case "changePassword":
+      case CHANGE_PASSWORD:
         showChangePasswordPage();
         $myResourcesPage.show();
-        updateTitleURL("Change Password", "change-password");
         break;
-      case "updateProfile":
+      case UPDATE_PROFILE:
         showUpdateProfilePage();
         $myResourcesPage.show();
-        updateTitleURL("Update Profile", "update-profile");
         break;
-      case "register":
+      case REGISTER:
         $registerPage.show();
-        updateTitleURL("Register", "register");
         break;
-      case "login":
+      case LOGIN:
         $loginPage.show();
-        updateTitleURL("Login", "login");
         break;
-      case "newResource":
+      case NEW_RESOURCE:
         $newResourcePage.show();
-        updateTitleURL("Create New Resource", "create-resource");
         break;
-      case "resourceDetails":
-        updateResourceDetails(resourceId).then((title) => {
-          $resourceDetails.show();
-          updateTitleURL(
-            `${title} - Resource Details`,
-            `resource/${resourceId}`
-          );
-          updateUserInfo(userInfo);
-        });
+      case RESOURCE_DETAILS:
+        await updateResourceDetails(info);
+        $resourceDetails.show();
         break;
-      case "error":
+      case ERROR:
         $errorPage.show();
         break;
     }

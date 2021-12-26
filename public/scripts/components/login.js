@@ -1,19 +1,19 @@
 const loginEventListener = () => {
   const $loginForm = $("#login-form");
 
-  $loginForm.submit(async(event) => {
+  $loginForm.submit(async (event) => {
     try {
       event.preventDefault();
 
       const data = $loginForm.serialize();
 
-      const userInfo = await login(data);
+      await login(data);
 
-      updateView("resources", userInfo);
+      historyManager(HOME);
 
       return $loginForm.trigger("reset");
-    } catch (err) {
-      updateError(err);
+    } catch (e) {
+      updateError(e);
     }
   });
 };

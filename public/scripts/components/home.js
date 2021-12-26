@@ -35,7 +35,7 @@ const cardSetup = (resource, currentUserId, $column) => {
     is_video,
     url,
     is_liked,
-    thumbnail
+    thumbnail,
   } = resource;
 
   const { createScreenshot, createEmbedVideo } =
@@ -54,13 +54,15 @@ const cardSetup = (resource, currentUserId, $column) => {
     </div>
   `);
 
-  const $resourceMedia = is_video && !thumbnail ? createEmbedVideo() : createScreenshot();
+  const $resourceMedia =
+    is_video && !thumbnail ? createEmbedVideo() : createScreenshot();
 
   const $cardAction = $(`
     <div class="card-action">
       <div class="card-summary">
-        <i class="fas fa-star card-icon bright"></i>${Number(rating) ? Number(rating).toFixed(1) : "0"
-}
+        <i class="fas fa-star card-icon bright"></i>${
+          Number(rating) ? Number(rating).toFixed(1) : "0"
+        }
       </div>
       <div class="card-summary">
         <i class="fas fa-heart card-icon liked"></i>${likes}
@@ -95,14 +97,14 @@ const cardSetup = (resource, currentUserId, $column) => {
   const $resourceInfo = $card.prepend($cardImage, $cardContent, $cardAction);
   const $item = $figure.prepend($resourceInfo);
 
-  $item.on("click", async(event) => {
+  $item.on("click", async (event) => {
     const tagName = event.target.nodeName;
     if (tagName !== "A" && tagName !== "I") {
-      updateView("resourceDetails", null, id);
+      historyManager(RESOURCE_DETAILS, id);
     }
   });
 
-  $likeLink.on("click", async function() {
+  $likeLink.on("click", async function () {
     const result = await likeResource(id);
 
     if (result) {
@@ -119,7 +121,7 @@ const displayResourcesFunctionGenerator = () => {
 
   const clearResources = () => $column.html("");
 
-  return async(resources) => {
+  return async (resources) => {
     clearResources();
 
     try {
@@ -140,7 +142,7 @@ const displayResourcesFunctionGenerator = () => {
 
 const registerTabListener = () => {
   const $tab = $(".tab").children("a");
-  $tab.on("click", async function() {
+  $tab.on("click", async function () {
     const filterCategory = $(this).attr("id");
     if (filterCategory === "ALL") return displayResources();
     const filteredResources = await getResourcesByCategory(filterCategory);

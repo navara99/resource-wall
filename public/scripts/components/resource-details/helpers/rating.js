@@ -77,7 +77,7 @@ const ratingSetup = (resourceInfo, domObj) => {
           updateRatingStr();
         }
       } catch (e) {
-        updateError(err);
+        updateError(e);
       }
     });
   };

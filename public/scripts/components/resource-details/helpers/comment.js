@@ -81,7 +81,7 @@ const commentSetup = (
       $detailsComments.prepend($elm);
 
       const { comment_user_id } = commentInfo;
-      $elm.on("click", () => updateUserDetails(comment_user_id));
+      $elm.on("click", () => historyManager(USER_PAGE, comment_user_id));
     });
 
     // show comment form is user is logged in

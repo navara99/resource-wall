@@ -7,17 +7,17 @@ const updateUserFunctionGenerator = () => {
   $resources = $("#user-resources");
 
   $editMyProfile.on("click", () => {
-    updateView("updateProfile");
+    historyManager(UPDATE_PROFILE);
   });
 
   const clearResource = () => {
     $resources.html("");
   };
 
-  return async(id) => {
+  return async (id) => {
     clearResource();
     try {
-      const { username, first_name, last_name, profile_picture_url, bio } = id
+      const { id: userId, username, first_name, last_name, profile_picture_url, bio } = id
         ? await getUserDetails(id)
         : await getMyDetails();
 
@@ -28,9 +28,7 @@ const updateUserFunctionGenerator = () => {
       $name.text(`${first_name} ${last_name}`);
       $bio.text(bio);
       $("#user-profile-picture").attr("src", profile_picture_url);
-      updateView("userPage");
 
-      const userId = id || 0;
       const { resources, id: profileId } = await getUserResources(userId);
 
       resources.forEach((resource) => {
@@ -47,8 +45,8 @@ const updateUserFunctionGenerator = () => {
 
         myResourcesSetup(allResourceInfo, $resources)();
       });
-    } catch (err) {
-      updateError(err);
+    } catch (er) {
+      updateError(e);
     }
   };
 };

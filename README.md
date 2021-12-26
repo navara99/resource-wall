@@ -1,73 +1,90 @@
-## Features
+# Resource Wall
 
-### home page
+A full-stack single page app that allow learners to save learning resources in a central place that is publicly available to any users.  
+This is one of the group project for the Web Development Bootcamp at [Lighthouse Labs](https://www.lighthouselabs.ca/). The group members are [@navara99](https://github.com/navara99) and [@scc416](https://github.com/scc416).
 
-- display all the resources
-- users can like any resource
-- display screenshot/embed video uploaded by the user
-- diplsay title, rating, number of likes, desciption, owner's username, added date
-- users can view resources by catergory
-- only show partial title/description if too long
+## Table of Content
 
-### login
+- [Live Demo](#live-demo)
+- [Final Product](#final-product)
+- [Dependencies](#dependencies)
+- [Getting Started](#getting-started)
+- [Repository Overview](#repository-overview)
+- [ERD Diagram](#erd-diagram)
+- [Credit](#credit)
 
-- users can login with email/username and password
+## Live Demo
 
-### logout
+## Final Product
 
-- users can logout
+### Home page
 
-### register
+- Display all the resources
+- Users can like any resource
+- Display screenshot/embed video uploaded by the user
+- Display resource details such as title, desciption, owner's username, added date, rating, number of likes and comments
+- Users can view resources by catergory
 
-- users can regsiter with email(unique), password(enter twice) , username(unique)
+### Header
 
-### detail page of a single resource
+- Users can search for already-saved resources created by any user
+- Display logout button / login link
 
-- users can comment/rate/like on any resources
+### New resource
+
+- Users can save an external URL along with a title and description
+- Users can make resource public/private
+- Users can categorize resource under a topic
+- Users can upload image as thumbnail
+
+### Resource detail page
+
+- Display details such as title, desciption, owner's username, added date, rating, list of comments, number of likes, ratings and comments,
+- Users can comment/rate/like on any resources
+- Users can enter user's page by clicking owner/comment
 
 ### My resources
 
-- users can view all their own and all liked resources on one page (filter function)
-- users can go to the details page when they click on the resource
-- owner can delete resource
-- only show partial title/description if too long
+- Users can view all their own and all liked resources on one page (with filter)
+- Owner can edit/delete resource
 
-### update profile
+### User Page
 
-- users can update their profile (email, username, bio, first name, last name, link for profile picture)
+- Users can view user's details (Profile picture, username, bio, full name, created resources)
 
-### change password
+### Login
 
-- users can change their password
-- can't change password if the old and new password are the same
+- Users can login with email/username and password
 
-### user page
+### Logout
 
-- users can view user's info (profile picture, username, bio, full name)
-- view the user's resources
+- Users can logout
 
-### new resource
+### Register
 
-- users save an external URL along with a title and description
-- users can make resource public/private
-- users can categorize resource under a topic
+- Users can regsiter with email (unique), password (enter twice) , username (unique)
 
-### header
+### Update profile
 
-- users can search for already-saved resources created by any user
-- display logout button / login link
+- Users can update their profile (email, username, bio, first name, last name, link for profile picture)
 
-### handle error
+### Change Password
 
-- if there is any errors, it is shown on the top of the page under nav bar
+- Users can change their password
+
+### Handle error
+
+- If there is any errors, it is shown on the top of the page under nav bar
+
+### Handle History
+
+- History.js is used to managed the history of this single page app
 
 ## To do list
 
 ### deploy the server
 
 ### README.md
-
-### history
 
 ### responsive design
 
@@ -76,18 +93,6 @@
 ### home page
 
 - order reources by date
-
-# LHL Node Skeleton
-
-## Project Setup
-
-The following steps are only for _one_ of the group members to perform.
-
-1. Create your own copy of this repo using the `Use This Template` button, ideally using the name of your project. The repo should be marked Public
-2. Verify that the skeleton code now shows up in your repo on GitHub, you should be automatically redirected
-3. Clone your copy of the repo to your dev machine
-4. Add your team members as collaborators to the project so that they can push to this repo
-5. Let your team members know the repo URL so that they use the same repo (they should _not_ create a copy/fork of this repo since that will add additional workflow complexity to the project)
 
 ## Getting Started
 
@@ -102,6 +107,11 @@ The following steps are only for _one_ of the group members to perform.
 4. Fix to binaries for sass: `npm rebuild node-sass`
 5. Reset database: `npm run db:reset`
 
+- Use the `npm run db:reset` command each time there is a change to the database schema or seeds.
+
+  - It runs through each of the files, in order, and executes them against the database.
+  - Note: you will lose all newly created (test) data each time this is run, since the schema files will tend to `DROP` the tables and recreate them.
+
 - Check the db folder to see what gets created and seeded in the SDB
 
 7. Run the server: `npm run local`
@@ -110,21 +120,42 @@ The following steps are only for _one_ of the group members to perform.
 
 8. Visit `http://localhost:8080/`
 
-## Warnings & Tips
-
-- Do not edit the `layout.css` file directly, it is auto-generated by `layout.scss`
-- Split routes into their own resource-based file names, as demonstrated with `users.js` and `widgets.js`
-- Split database schema (table definitions) and seeds (inserts) into separate files, one per table. See `db` folder for pre-populated examples.
-- Use the `npm run db:reset` command each time there is a change to the database schema or seeds.
-  - It runs through each of the files, in order, and executes them against the database.
-  - Note: you will lose all newly created (test) data each time this is run, since the schema files will tend to `DROP` the tables and recreate them.
-
 ## Dependencies
 
-- Node 10.x or above
-- NPM 5.x or above
-- PG 6.x
+- [Node](https://nodejs.org/en/) 10.x or above.
+- [NPM](https://www.npmjs.com/) 5.x or above.
 
+### Frontend
+
+- [jQuery](https://jquery.com/): to update element on the web app
+- [history.js](https://github.com/browserstate/history.js/): to manage the history of the browser on the page
+- [Materialize](https://materializecss.com/): CSS library
+- [timeago](https://timeago.yarp.com/): to convert timestamps
+
+### Backend
+
+- [express](http://expressjs.com/)
+- [ejs](https://ejs.co/): embedded JavaScript templates
+- [PG](https://www.postgresql.org/) 6.x: PostgreSQL client for Node.js.
+- [sass](https://sass-lang.com/)
+- [axios](https://www.axios.com/)
+- [bcryptjs](https://github.com/dcodeIO/bcrypt.js)
+- [cookie-session](https://github.com/expressjs/cookie-session)
+- [chalk](https://github.com/chalk/chalk)
+- [dotenv](https://dotenv.org/)
+- [morgan](https://github.com/expressjs/morgan)
+- [multer](https://github.com/expressjs/multer)
+- [valid-url](https://github.com/ogt/valid-url): to check if the url entered by user is a valid url
+
+## Repository Overview
+
+## ERD Diagram
+
+## Credit
+
+- Favicons made by [I Wayan Wika](https://www.flaticon.com/authors/i-wayan-wika) from [www.flaticon.com](https://www.flaticon.com/), modified by [@scc416](https://github.com/scc416).
+
+<!-- 
 — What each of you did, individually
 
 1 homepage plus search (Thar)
@@ -149,4 +180,4 @@ The following steps are only for _one_ of the group members to perform.
 3 learned about merge and we should merge more often
 4 commit more often
 5 googling skill
-6 new async syntax
+6 new async syntax -->
