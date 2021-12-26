@@ -28,7 +28,6 @@ const updateUserFunctionGenerator = () => {
       $name.text(`${first_name} ${last_name}`);
       $bio.text(bio);
       $("#user-profile-picture").attr("src", profile_picture_url);
-      historyManager(USER_PAGE, userId);
 
       const { resources, id: profileId } = await getUserResources(userId);
 
