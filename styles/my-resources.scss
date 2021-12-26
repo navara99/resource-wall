@@ -101,9 +101,12 @@ div.stat {
   .resource-actions {
     padding-top: 1em;
     display: flex;
+    flex-direction: column;
+    align-items: center;
 
     a {
-      margin-right: 1em;
+      margin-top: 1em;
+      width: 60%;
     }
   }
 }
@@ -168,4 +171,22 @@ div.left-navbar {
 
 .settings-container {
   display: flex;
+}
+
+// Media queries
+
+@media only screen and (max-width: 1024px) {
+
+}
+
+@media only screen and (max-width: 768px) {
+
+}
+
+@media only screen and (max-width: 425px) {
+
+}
+
+@media only screen and (max-width: 375px) {
+
 }
