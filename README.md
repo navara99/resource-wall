@@ -128,6 +128,8 @@
 
 ## Credit
 
+- Favicons made by [I Wayan Wika](https://www.flaticon.com/authors/i-wayan-wika) from [www.flaticon.com](https://www.flaticon.com/), modified by @scc416
+
 ## Others
 
 — What each of you did, individually
