@@ -177,6 +177,12 @@ const myResourcesSetup = (resource, $listContainer) => {
   };
 };
 
+const sortByDateCreated = (a, b) => {
+  const dateA = new Date(a.created_on);
+  const dateB = new Date(b.created_on);
+  return dateA.getTime() - dateB.getTime();
+};
+
 // top-level function
 const renderMyResourcesFunctionGenerator = () => {
   const $listContainer = $("#my-resource-list");
@@ -190,10 +196,9 @@ const renderMyResourcesFunctionGenerator = () => {
 
     try {
       const { id, resources } = await getUserResources(0);
-
+      resources.sort(sortByDateCreated);
       resources.forEach((resource) => {
         const { user_id, is_liked } = resource;
-
         const isMine = user_id === id;
         const showLiked =
           $("#liked-filter:checked").val() &&
@@ -207,6 +212,7 @@ const renderMyResourcesFunctionGenerator = () => {
 
       $(".modal").modal();
     } catch (e) {
+      console.log(e);
       updateError(e);
     }
   };
