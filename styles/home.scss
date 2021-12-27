@@ -127,3 +127,11 @@ div.col.s12.nav-colour {
     }
   }
 }
+
+//Media-queries
+
+@media only screen and (max-width: 768px) {
+  .tabs {
+    display: none;
+  }
+}
