@@ -175,10 +175,7 @@ div.left-navbar {
   .content-container {
     flex-direction: column;
     .left-navbar {
-      flex-direction: row;
-      justify-content: center;
-      margin-right: 0;
-      padding-bottom: 2em;
+      display: none;
     }
   }
 }
