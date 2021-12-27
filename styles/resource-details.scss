@@ -5,7 +5,16 @@ div.resource-details-container.container {
   margin-top: 3em;
   display: flex;
   align-items: flex-start;
+  flex-direction: column;
+  position: relative;
+  max-width: 100%;
 }
+
+
+div.resource-details-container.container * {
+  box-sizing: border-box;
+}
+
 
 // MEDIA ON THE LEFT
 
@@ -19,7 +28,7 @@ div.resource-details-container.container {
 
 .media {
   margin: 1.5em;
-  width: 50%;
+  width: 100%;
   overflow: hidden;
   border-radius: 16px;
   position: relative;
@@ -33,13 +42,14 @@ div.resource-details-container.container {
 // DETAILS ON THE RIGHT
 
 .details {
-  width: 50%;
-  margin: 2em;
+  max-width: 100%;
+  width: 100%;
+  padding: 2em;
 }
 
 .details-media {
-  margin: 1.5em;
-  width: 50%;
+  padding: 1.5em;
+  width: 100%;
   overflow: hidden;
   border-radius: 16px;
   position: relative;
@@ -248,4 +258,18 @@ li textarea.materialize-textarea {
 
 #details-rating-string {
   padding-left: 0.3em;
+}
+
+@media (min-width: 768px) {
+  div.resource-details-container.container {
+    flex-direction: row;
+  }
+
+  .media {
+    width: 50%;
+  }
+
+  .details {
+    width: 50%;
+  }
 }
