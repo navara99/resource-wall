@@ -176,7 +176,7 @@ const updateResourceDetailsFunctionGenerator = () => {
     $ownerName: $("#details-owner-name"),
     $createdOn: $("#details-time"),
     $title: $("#details-title"),
-    $ownerProfilePicture: $("#owner_profile-picture"),
+    $ownerProfilePicture: $("#owner-profile-picture"),
     $mediaDisplayedURL: $("#details-display-link-on-media"),
     $descriptions: $("#details-desciption"),
     $link: $("#details-link"),

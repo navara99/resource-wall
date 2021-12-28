@@ -254,6 +254,10 @@ li textarea.materialize-textarea {
   padding-left: 0.3em;
 }
 
+#owner-profile-picture {
+  width: 3em;
+}
+
 @media (min-width: 768px) {
   div.resource-details-container.container {
     flex-direction: row;
