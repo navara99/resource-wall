@@ -6,10 +6,15 @@
   width: 100%;
   z-index: 3;
   color: #fff;
+  font-size: 0.8em;
+
+  input[type="search"] {
+    font-size: 0.8em;
+  }
 
   .nav {
-    font-size: 1.5em;
     max-height: 3.5em;
+    height: auto;
     display: flex;
     align-items: center;
     padding: 0.3em 0.5em;
@@ -17,7 +22,8 @@
     .search {
       position: relative;
       top: 0.1em;
-      max-height: 1.4em;
+      height: 5vw;
+      max-height: 1.7em;
       padding: 0;
       margin: 0;
       border-radius: 200px;
@@ -25,15 +31,24 @@
       display: flex;
       justify-content: center;
       overflow: hidden;
+      font-size: inherit;
+
+      i {
+        margin-left: 0.3em;
+        font-size: 0.7em;
+      }
+
+
 
       input {
-        width: 100%;
+        max-width: 100%;
         border: none;
         margin: 0;
       }
     }
 
     i {
+      font-size: inherit;
       padding: 0 0.5em;
     }
 
@@ -115,4 +130,36 @@ div.dropdown a i.fas.fa-heart {
 
 div#dropdown {
   margin: 0;
+}
+
+@media (min-width: 425px) {
+  .header {
+    font-size: 1.3em;
+    input[type="search"] {
+      font-size: 0.9em;
+    }
+    .nav {
+      .search {
+        i {
+          font-size: 1em;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .header {
+    font-size: 1.5em;
+    input[type="search"] {
+      font-size: 1em;
+    }
+    .nav {
+      .search {
+        i {
+          font-size: 1.2em;
+        }
+      }
+    }
+  }
 }
