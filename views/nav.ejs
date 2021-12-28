@@ -1,47 +1,44 @@
-<div class="nav-wrapper">
-  <div class="logo"><img src="../public/images/favicons.png" />Resource Wall</div>
-  <ul>
-    <li id="home-button">
-      <a><i class="fas fa-home"></i></a>
-    </li>
-  </ul>
-  <div class="input-field search-bar">
-    <input id="search" type="search" autofocus />
-    <label class="label-icon" for="search"><i class="fas fa-search"></i></label>
+<div class="nav">
+  <div id="home-button">
+    <img src="../public/images/favicons.png" />
+    <span>Resource&nbsp;Wall</span>
+    <div class="link"><i class="fas fa-home"></i></div>
   </div>
-  <ul id="user-buttons" class="hidden">
-    <li id="create-resource-button">
-      <a><i class="fas fa-plus-circle"></i></a>
-    </li>
-    <li id="profile-button" class="profile-picture profile-dropdown">
-      <a class="profile profile-picture profile-dropdown">
-        <div class="profile profile-picture profile-dropdown">
-          <img
-            alt=""
-            id="profile-picture"
-            class="circle profile profile-picture profile-dropdown"
-          />
-        </div>
-      </a>
-      <div class="hidden dropdown" id="dropdown">
-        <a id="my-resources-button">My Resources</a>
-        <a class="divider"></a>
-        <a id="my-profile-button">My profile</a>
-        <a class="divider"></a>
-        <a id="update-profile-button">Update Profile</a>
-        <a class="divider"></a>
-        <a id="change-password-button">Change Password</a>
-        <a class="divider"></a>
-        <a id="logout-button">Logout</a>
-      </div>
-    </li>
-  </ul>
-  <ul id="no-user-buttons">
-    <li id="login-button">
-      <a>LOGIN</a>
-    </li>
-    <li id="register-button">
-      <a>REGISTER</a>
-    </li>
-  </ul>
+  <div class="search-container">
+    <div class="search">
+      <label for="search"><i class="fas fa-search"></i></label>
+      <input id="search" type="search" autofocus />
+    </div>
+  </div>
+
+  <div id="user-buttons" class="hidden">
+    <div id="create-resource-button" class="link">
+      <i class="fas fa-plus-circle"></i>
+    </div>
+    <div id="profile-button" class="link profile-picture profile-dropdown">
+      <img
+        alt=""
+        id="profile-picture"
+        class="circle profile profile-picture profile-dropdown"
+      />
+    </div>
+  </div>
+  <div id="no-user-buttons">
+    <span id="login-button"> LOGIN </span>
+    <span id="register-button"> REGISTER </span>
+  </div>
+</div>
+
+<div class="hidden" id="dropdown">
+  <div class="dropdown">
+    <div id="my-resources-button">My Resources</div>
+    <div class="divider"></div>
+    <div id="my-profile-button">My profile</div>
+    <div class="divider"></div>
+    <div id="update-profile-button">Update Profile</div>
+    <div class="divider"></div>
+    <div id="change-password-button">Change Password</div>
+    <div class="divider"></div>
+    <div id="logout-button">Logout</div>
+  </div>
 </div>

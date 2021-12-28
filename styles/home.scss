@@ -1,11 +1,11 @@
 // LAYOUT
 
 #resources-page {
-  margin-top: 48px;
+  margin-top: 4em;
 }
 
 #columns {
-  column-count: 4;
+  column-count: 1;
   column-gap: 0.5em;
   margin: 25px auto;
   width: 90%;
@@ -128,10 +128,48 @@ div.col.s12.nav-colour {
   }
 }
 
-//Media-queries
+.tabs {
+  height: 23px;
+  .tab {
+    line-height: 23px;
+    a {
+      font-size: 0.8em;
+    }
+  }
+}
 
-@media only screen and (max-width: 768px) {
+@media (min-width: 425px) {
   .tabs {
-    display: none;
+    height: 40px;
+    .tab {
+      line-height: 40px;
+      a {
+        font-size: 0.65em;
+      }
+    }
+  }
+  #columns {
+    column-count: 2;
+  }
+  #resources-page {
+    margin-top: 5.8em;
+  }
+}
+
+@media (min-width: 768px) {
+  .tabs .tab a {
+    font-size: 0.6em;
+  }
+  #columns {
+    column-count: 3;
+  }
+  #resources-page {
+    margin-top: 7em;
+  }
+}
+
+@media (min-width: 1024px) {
+  #columns {
+    column-count: 4;
   }
 }
