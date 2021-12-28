@@ -56,6 +56,8 @@ module.exports = (db) => {
 
       const newUserInfo = { userId, ...req.body };
 
+      console.log(newUserInfo);
+
       const updatedInfo = await updateUser(newUserInfo);
 
       res.json(updatedInfo);
@@ -161,7 +163,7 @@ module.exports = (db) => {
 
     try {
       const userInfo = await getUserByValue("id", user_id, getDefaultPic);
-
+      userInfo.isMyProfile = true;
       res.json(userInfo);
     } catch (err) {
       res.status(500).json({ error: err.message });
@@ -170,9 +172,11 @@ module.exports = (db) => {
 
   router.get("/:id", async(req, res) => {
     const { id } = req.params;
+    const { user_id } = req.session;
 
     try {
       const userInfo = await getUserByValue("id", id);
+      userInfo.isMyProfile = user_id === id;
 
       res.json(userInfo);
     } catch (err) {

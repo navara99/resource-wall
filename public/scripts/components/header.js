@@ -56,7 +56,7 @@ const headerButtonsEventListener = () => {
   };
 
   $myProfilebutton.on("click", () => {
-    historyManager(USER_PAGE);
+    historyManager(USER_PAGE, "me");
   });
 
   $changePasswordButton.on("click", () => {

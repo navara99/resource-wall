@@ -17,12 +17,18 @@ const updateUserFunctionGenerator = () => {
   return async (id) => {
     clearResource();
     try {
-      const { id: userId, username, first_name, last_name, profile_picture_url, bio } = id
-        ? await getUserDetails(id)
-        : await getMyDetails();
+      const {
+        id: userId,
+        username,
+        first_name,
+        last_name,
+        profile_picture_url,
+        bio,
+        isMyProfile,
+      } = id === "me" ? await getMyDetails() : await getUserDetails(id);
 
-      if (id) $editMyProfile.hide();
-      if (!id) $editMyProfile.show();
+      if (isMyProfile) $editMyProfile.show();
+      if (!isMyProfile) $editMyProfile.hide();
 
       $username.text(`@${username}`);
       $name.text(`${first_name} ${last_name}`);
