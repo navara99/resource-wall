@@ -20,6 +20,7 @@
 
     * * {
       padding: 0.18em 0;
+      height: 100%;
     }
 
     .search {
@@ -31,14 +32,8 @@
       border-radius: 200px;
       background-color: #fff;
       display: flex;
-      justify-content: center;
       overflow: hidden;
       font-size: inherit;
-
-      i {
-        margin-left: 0.3em;
-        font-size: 0.7em;
-      }
 
       input {
         max-width: 100%;
@@ -48,6 +43,9 @@
     }
 
     i {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-size: inherit;
       padding: 0 0.5em;
     }
