@@ -56,8 +56,6 @@ module.exports = (db) => {
 
       const newUserInfo = { userId, ...req.body };
 
-      console.log(newUserInfo);
-
       const updatedInfo = await updateUser(newUserInfo);
 
       res.json(updatedInfo);

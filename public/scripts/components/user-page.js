@@ -49,7 +49,7 @@ const updateUserFunctionGenerator = () => {
           showLiked: false,
         };
 
-        myResourcesSetup(allResourceInfo, $resources)();
+        myResourcesSetup(allResourceInfo, $resources, true)();
       });
     } catch (er) {
       updateError(e);

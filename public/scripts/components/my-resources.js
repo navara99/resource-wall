@@ -1,4 +1,4 @@
-const myResourcesSetup = (resource, $listContainer) => {
+const myResourcesSetup = (resource, $listContainer, isUserPage) => {
   const {
     title,
     url,
@@ -18,6 +18,8 @@ const myResourcesSetup = (resource, $listContainer) => {
     thumbnail,
   } = resource;
 
+  const elmId = isUserPage ? id + "-pp" : id;
+
   const videoHeight = 150;
 
   const { createEmbedVideo, createScreenshot } = thumbnailElementGenerator(
@@ -28,7 +30,7 @@ const myResourcesSetup = (resource, $listContainer) => {
   const registerMyResourceButtonsListeners = () => {
     if (!isMine) return;
 
-    $(`#${id}-delete`).on("click", async function (e) {
+    $(`#${elmId}-delete`).on("click", async function (e) {
       try {
         await deleteResource(id);
         renderMyResources();
@@ -37,15 +39,15 @@ const myResourcesSetup = (resource, $listContainer) => {
       }
     });
 
-    $(`#${id}-edit`).on("click", async function (e) {
+    $(`#${elmId}-edit`).on("click", async function (e) {
       const modal = await editResourceModalGenerator();
-      modal(id);
+      modal(elmId);
     });
   };
 
   const $info = $(`
     <div class="text">
-      <a class="my-resource-title" id=${id}-my-resource >${partialText(
+      <a class="my-resource-title" id=${elmId}-my-resource >${partialText(
     title,
     10
   )}</a>
@@ -84,7 +86,7 @@ const myResourcesSetup = (resource, $listContainer) => {
   `);
 
   const $deleteModal = $(`
-      <div id="${id}-confirm-delete" class="modal">
+      <div id="${elmId}-confirm-delete" class="modal">
         <a href="#!" id="close-confirm-delete" class="modal-close  waves-effect waves-light btn-flat">
           <i class="material-icons right">close</i>
         </a>
@@ -93,17 +95,17 @@ const myResourcesSetup = (resource, $listContainer) => {
           <p>Are you sure you want to delete ${title}?</p>
         </div>
         <div class="modal-footer">
-          <a href="#!" id="${id}-delete" class="modal-close  waves-effect waves-light red btn">Confirm</a>
+          <a href="#!" id="${elmId}-delete" class="modal-close  waves-effect waves-light red btn">Confirm</a>
       </div>
     </div>
   `);
 
   const $editModal = $(`
-  <div id="${id}-edit-modal" class="modal">
+  <div id="${elmId}-edit-modal" class="modal">
     <a href="#!" id="close-edit" class="modal-close  waves-effect waves-light btn-flat">
       <i class="material-icons right">close</i>
     </a>
-    <div id="${id}-edit-form-modal" class="modal-content">
+    <div id="${elmId}-edit-form-modal" class="modal-content">
       <h4>Edit ${title}</h4>
     </div>
   </div>
@@ -111,7 +113,7 @@ const myResourcesSetup = (resource, $listContainer) => {
 
   const noButtons = !isMine ? "invisible" : "";
   const actionButtons = `
-      <a id = "${id}-edit"
+      <a id = "${elmId}-edit"
          class="waves-effect waves-light btn modal-trigger ${noButtons}"
          href="#${id}-edit-modal">
         <i class="material-icons left">
@@ -119,9 +121,9 @@ const myResourcesSetup = (resource, $listContainer) => {
         </i>
         Edit
       </a>
-      <a id="${id}-delete"
+      <a id="${elmId}-delete"
         class="waves-effect waves-light btn modal-trigger ${noButtons} red"
-        href="#${id}-confirm-delete"
+        href="#${elmId}-confirm-delete"
         >
         <i class="material-icons left">
           delete
@@ -153,7 +155,10 @@ const myResourcesSetup = (resource, $listContainer) => {
   `);
 
   const registerMyResourceDetailsListener = () => {
-    $(`#${id}-my-resource`).on("click", function (e) {
+
+    $(`#${elmId}-my-resource`).unbind();
+    $(`#${elmId}-my-resource`).on("click", function (e) {
+      console.log("CLICK");
       historyManager(RESOURCE_DETAILS, id);
     });
   };
