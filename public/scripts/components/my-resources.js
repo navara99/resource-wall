@@ -47,7 +47,7 @@ const myResourcesSetup = (resource, $listContainer, isUserPage) => {
 
   const $info = $(`
     <div class="text">
-      <a class="my-resource-title" id=${elmId}-my-resource >${partialText(
+      <a class="my-resource-title">${partialText(
     title,
     10
   )}</a>
@@ -155,17 +155,19 @@ const myResourcesSetup = (resource, $listContainer, isUserPage) => {
   `);
 
   const registerMyResourceDetailsListener = () => {
-
     $(`#${elmId}-my-resource`).unbind();
-    $(`#${elmId}-my-resource`).on("click", function (e) {
-      console.log("CLICK");
-      historyManager(RESOURCE_DETAILS, id);
+    $(`#${elmId}-my-resource`).on("click", function ({ target }) {
+      console.log(target);
+      console.log(target.id);
+      if (target.nodeName !== "A" && target.nodeName !== "I") {
+        historyManager(RESOURCE_DETAILS, id);
+      }
     });
   };
 
   return () => {
     if (showLiked || showMine) {
-      const $collection = $(`<li class="collection-item"></li>`);
+      const $collection = $(`<li class="collection-item" id="${elmId}-my-resource"></li>`);
 
       if (isMine) {
         const $body = $("body");

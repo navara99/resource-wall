@@ -38,6 +38,10 @@ li.collection.collection-item {
   background-color: transparent;
 }
 
+li.collection-item:hover {
+  cursor: pointer;
+}
+
 div.stat {
   display: flex;
   margin: 0;
