@@ -27,6 +27,8 @@ const updateUserFunctionGenerator = () => {
         isMyProfile,
       } = id === "me" ? await getMyDetails() : await getUserDetails(id);
 
+      console.log(id, userId);
+      console.log(isMyProfile);
       if (isMyProfile) $editMyProfile.show();
       if (!isMyProfile) $editMyProfile.hide();
 

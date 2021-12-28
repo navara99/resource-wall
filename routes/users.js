@@ -174,7 +174,7 @@ module.exports = (db) => {
 
     try {
       const userInfo = await getUserByValue("id", id);
-      userInfo.isMyProfile = user_id === id;
+      userInfo.isMyProfile = user_id == id;
 
       res.json(userInfo);
     } catch (err) {
