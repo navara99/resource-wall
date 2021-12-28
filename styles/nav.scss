@@ -9,7 +9,7 @@
   font-size: 0.8em;
 
   input[type="search"] {
-    font-size: 0.8em;
+    font-size: 0.6em;
   }
 
   .nav {
@@ -22,8 +22,7 @@
     .search {
       position: relative;
       top: 0.1em;
-      height: 5vw;
-      max-height: 1.7em;
+      height: 1.2em;
       padding: 0;
       margin: 0;
       border-radius: 200px;
@@ -37,8 +36,6 @@
         margin-left: 0.3em;
         font-size: 0.7em;
       }
-
-
 
       input {
         max-width: 100%;
@@ -137,10 +134,11 @@ div#dropdown {
   .header {
     font-size: 1.3em;
     input[type="search"] {
-      font-size: 0.9em;
+      font-size: 0.7em;
     }
     .nav {
       .search {
+        height: 1.4em;
         i {
           font-size: 1em;
         }
@@ -152,11 +150,9 @@ div#dropdown {
 @media (min-width: 768px) {
   .header {
     font-size: 1.5em;
-    input[type="search"] {
-      font-size: 1em;
-    }
     .nav {
       .search {
+        height: 1.5em;
         i {
           font-size: 1.2em;
         }
