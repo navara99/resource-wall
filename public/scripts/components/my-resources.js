@@ -53,7 +53,7 @@ const myResourcesSetup = (resource, $listContainer, isUserPage) => {
   )}</a>
       <div>
         <span>URL: </span>
-        <a href="${url}" onclick="event.stopPropagation();" class="paragraph truncate">${url}</a>
+        <a href="${url}" target="_blank" onclick="event.stopPropagation();" class="paragraph truncate">${url}</a>
       </div>
       <div>
         <span>Description: </span> ${partialText(description, 35)}
