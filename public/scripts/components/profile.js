@@ -105,7 +105,6 @@ const updateProfileEventListener = () => {
 
       const data = $updateProfileForm.serialize();
 
-      console.log(data);
       await updateProfile(data);
 
       historyManager(USER_PAGE, "me");

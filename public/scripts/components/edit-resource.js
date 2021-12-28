@@ -39,8 +39,8 @@ const editResourceModalGenerator = async() => {
         const updateMyResources = renderMyResourcesFunctionGenerator();
         updateMyResources();
         $(".modal").modal("close");
-      } catch (err) {
-        console.log(err.message);
+      } catch (e) {
+        updateError(e);
       }
     });
 
@@ -70,8 +70,8 @@ const editResourceModalGenerator = async() => {
       $editResourceForm.show();
       updateEditForm(title, description, url, is_private, catergory);
       registerSubmitResourceEdit(resourceId, $editResourceForm);
-    } catch (err) {
-      console.log(err.message);
+    } catch (e) {
+      updateError(e);
     }
 
   };

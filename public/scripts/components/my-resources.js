@@ -157,8 +157,7 @@ const myResourcesSetup = (resource, $listContainer, isUserPage) => {
   const registerMyResourceDetailsListener = () => {
     $(`#${elmId}-my-resource`).unbind();
     $(`#${elmId}-my-resource`).on("click", function ({ target }) {
-      console.log(target);
-      console.log(target.id);
+
       if (target.nodeName !== "A" && target.nodeName !== "I") {
         historyManager(RESOURCE_DETAILS, id);
       }
@@ -219,7 +218,6 @@ const renderMyResourcesFunctionGenerator = () => {
 
       $(".modal").modal();
     } catch (e) {
-      console.log(e);
       updateError(e);
     }
   };
