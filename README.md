@@ -32,7 +32,7 @@ This is one of the group project for the Web Development Bootcamp at [Lighthouse
 - Users can search for already-saved resources created by any user
 - Display logout button / login link
 
-![Search functionality]()
+![Search functionality](https://github.com/navara99/resourceWall/blob/master/docs/search-functionality.gif)
 
 ### New resource
 
