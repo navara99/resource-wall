@@ -4,7 +4,10 @@ const updateHeaderFunctionGenerator = () => {
   const $floatingCreateResourceButton = $("#floating-create-resource-button");
   const $profilePicture = $("#profile-picture");
 
-  return ({ id, profile_picture_url }) => {
+  return async () => {
+    const { id, profile_picture_url } = await getMyDetails();
+
+    console.log("id", id);
     if (!id) {
       $userButtons.hide();
       $floatingCreateResourceButton.hide();
@@ -33,7 +36,7 @@ const headerButtonsEventListener = () => {
   const $myProfilebutton = $("#my-profile-button");
   const $searchBar = $(`#search`);
 
-  $searchBar.on("input", async(e) => {
+  $searchBar.on("input", async (e) => {
     const query = e.target.value;
     if (!query) return displayResources();
 
@@ -41,7 +44,7 @@ const headerButtonsEventListener = () => {
     displayResources(allResources);
   });
 
-  $searchBar.on("focus", async(e) => {
+  $searchBar.on("focus", async (e) => {
     historyManager(HOME, true);
   });
 
@@ -67,9 +70,13 @@ const headerButtonsEventListener = () => {
     historyManager(MY_RESOURCES);
   });
 
-  $logoutButton.on("click", () => {
-    logout();
-    historyManager(HOME);
+  $logoutButton.on("click", async () => {
+    try {
+      await logout();
+      historyManager(HOME);
+    } catch (e) {
+      updateError(e);
+    }
   });
 
   $floatingCreateResourceButton.on("click", () => {
