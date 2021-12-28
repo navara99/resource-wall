@@ -5,7 +5,7 @@
 }
 
 #columns {
-  column-count: 4;
+  column-count: 1;
   column-gap: 0.5em;
   margin: 25px auto;
   width: 90%;
@@ -148,10 +148,23 @@ div.col.s12.nav-colour {
       }
     }
   }
+  #columns {
+    column-count: 2;
+  }
 }
 
 @media (min-width: 768px) {
   .tabs .tab a {
     font-size: 0.6em;
+  }
+  #columns {
+    column-count: 3;
+  }
+}
+
+
+@media (min-width: 1024px) {
+  #columns {
+    column-count: 4;
   }
 }

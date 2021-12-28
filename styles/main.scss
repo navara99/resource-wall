@@ -77,20 +77,4 @@ h3.title {
   background-color: #ffd60a;
 }
 
-@media (max-width: 800px) {
-  #columns {
-    column-count: 3;
-  }
-}
 
-@media (max-width: 600px) {
-  #columns {
-    column-count: 2;
-  }
-}
-
-@media (max-width: 500px) {
-  #columns {
-    column-count: 1;
-  }
-}
