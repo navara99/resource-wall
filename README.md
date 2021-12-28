@@ -23,12 +23,16 @@ This is one of the group project for the Web Development Bootcamp at [Lighthouse
 - Users can like any resource
 - Display screenshot/embed video uploaded by the user
 - Display resource details such as title, desciption, owner's username, added date, rating, number of likes and comments
-- Users can view resources by catergory
+- Users can view resources by category
+
+![Home Page](https://github.com/navara99/resourceWall/blob/master/docs/home-page.gif)
 
 ### Header
 
 - Users can search for already-saved resources created by any user
 - Display logout button / login link
+
+![Search functionality]()
 
 ### New resource
 
@@ -37,11 +41,15 @@ This is one of the group project for the Web Development Bootcamp at [Lighthouse
 - Users can categorize resource under a topic
 - Users can upload image as thumbnail
 
+![Creating a new resource]()
+
 ### Resource detail page
 
 - Display details such as title, desciption, owner's username, added date, rating, list of comments, number of likes, ratings and comments,
 - Users can comment/rate/like on any resources
 - Users can enter user's page by clicking owner/comment
+
+![Resource Details page]()
 
 ### My resources
 
