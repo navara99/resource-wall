@@ -34,6 +34,11 @@
       display: flex;
       overflow: hidden;
       font-size: inherit;
+      flex: 1 1 auto;
+
+      i {
+        font-size: 0.7em;
+      }
 
       input {
         max-width: 100%;
@@ -48,10 +53,6 @@
       align-items: center;
       font-size: inherit;
       padding: 0 0.5em;
-    }
-
-    .search {
-      flex: 1 1 auto;
     }
 
     div {
