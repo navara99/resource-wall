@@ -15,6 +15,10 @@ body {
   display: none;
 }
 
+div.hidden {
+  margin-top: 6em;
+}
+
 .invisible {
   visibility: hidden;
 }
@@ -26,7 +30,7 @@ body {
   box-shadow: 0 0 3px #ccc;
   width: 95%;
   max-width: none;
-  margin-bottom: 5em 0 3em 0;
+  margin-bottom: 3em;
 }
 
 @media (min-width: 1024px) {
