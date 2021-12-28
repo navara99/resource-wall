@@ -22,7 +22,7 @@ This is one of the group project for the Web Development Bootcamp at [Lighthouse
 - Display all the resources
 - Users can like any resource
 - Display screenshot/embed video uploaded by the user
-- Display resource details such as title, desciption, owner's username, added date, rating, number of likes and comments
+- Display resource details such as title, description, owner's username, date added, rating, number of likes and comments
 - Users can view resources by category
 
 ![Home Page](https://github.com/navara99/resourceWall/blob/master/docs/home-page.gif)
@@ -30,7 +30,6 @@ This is one of the group project for the Web Development Bootcamp at [Lighthouse
 ### Header
 
 - Users can search for already-saved resources created by any user
-- Display logout button / login link
 
 ![Search functionality](https://github.com/navara99/resourceWall/blob/master/docs/search-functionality.gif)
 
@@ -41,7 +40,7 @@ This is one of the group project for the Web Development Bootcamp at [Lighthouse
 - Users can categorize resource under a topic
 - Users can upload image as thumbnail
 
-![Creating a new resource]()
+![Creating a new resource](https://github.com/navara99/resourceWall/blob/master/docs/create-new-resource.gif)
 
 ### Resource detail page
 
