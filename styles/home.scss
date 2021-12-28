@@ -127,3 +127,31 @@ div.col.s12.nav-colour {
     }
   }
 }
+
+.tabs {
+  height: 26px;
+  .tab {
+    line-height: 26px;
+    a {
+      font-size: 0.8em;
+    }
+  }
+}
+
+@media (min-width: 425px) {
+  .tabs {
+    height: 48px;
+    .tab {
+      line-height: 48px;
+      a {
+        font-size: 0.65em;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .tabs .tab a {
+    font-size: 0.6em;
+  }
+}
