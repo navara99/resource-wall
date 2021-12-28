@@ -19,11 +19,6 @@ body {
   visibility: hidden;
 }
 
-div.hidden {
-  display: none;
-  margin-top: 3em;
-}
-
 // PAGE CONTAINER
 
 .container {
@@ -31,7 +26,7 @@ div.hidden {
   box-shadow: 0 0 3px #ccc;
   width: 95%;
   max-width: none;
-  margin-bottom: 3em;
+  margin-bottom: 5em 0 3em 0;
 }
 
 @media (min-width: 1024px) {

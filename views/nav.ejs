@@ -1,28 +1,24 @@
-<div class="nav-wrapper">
-  <div class="logo"><img src="../public/images/favicons.png" />Resource Wall</div>
-  <ul>
-    <li id="home-button">
-      <a><i class="fas fa-home"></i></a>
-    </li>
-  </ul>
-  <div class="input-field search-bar">
-    <input id="search" type="search" autofocus />
-    <label class="label-icon" for="search"><i class="fas fa-search"></i></label>
+<div class="nav">
+  <div id="home-button">
+    <img src="../public/images/favicons.png" />Resource Wall
+    <i class="fas fa-home"></i>
   </div>
-  <ul id="user-buttons" class="hidden">
-    <li id="create-resource-button">
-      <a><i class="fas fa-plus-circle"></i></a>
-    </li>
-    <li id="profile-button" class="profile-picture profile-dropdown">
-      <a class="profile profile-picture profile-dropdown">
-        <div class="profile profile-picture profile-dropdown">
-          <img
-            alt=""
-            id="profile-picture"
-            class="circle profile profile-picture profile-dropdown"
-          />
-        </div>
-      </a>
+  <div class="search">
+    <input id="search" type="search" autofocus />
+  </div>
+  <div id="user-buttons" class="hidden">
+    <span id="create-resource-button">
+      <i class="fas fa-plus-circle"></i>
+    </span>
+    <span id="profile-button" class="profile-picture profile-dropdown">
+      <!-- class="profile profile-picture profile-dropdown"> -->
+      <!-- class="profile profile-picture profile-dropdown"> -->
+      <img
+        alt=""
+        id="profile-picture"
+        class="circle profile profile-picture profile-dropdown"
+      /> </span
+    ><!--
       <div class="hidden dropdown" id="dropdown">
         <a id="my-resources-button">My Resources</a>
         <a class="divider"></a>
@@ -34,14 +30,10 @@
         <a class="divider"></a>
         <a id="logout-button">Logout</a>
       </div>
-    </li>
-  </ul>
-  <ul id="no-user-buttons">
-    <li id="login-button">
-      <a>LOGIN</a>
-    </li>
-    <li id="register-button">
-      <a>REGISTER</a>
-    </li>
-  </ul>
+    </span>-->
+  </div>
+  <div id="no-user-buttons">
+    <span id="login-button"> LOGIN </span>
+    <span id="register-button"> REGISTER </span>
+  </div>
 </div>

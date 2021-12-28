@@ -1,55 +1,101 @@
-header.navbar-fixed {
-  nav {
-    background-color: #003566;
-    box-shadow: none;
+.header {
+  position: fixed;
+  background-color: #003566;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  color: #fff;
+  .nav {
+    max-height: 3em;
+    display: flex;
+    align-items: center;
+    .search {
+      flex: 1 1 auto;
+    }
+    div {
+      display: flex;
+      align-items: center;
+      margin: 0.4em;
+    }
   }
-}
 
-.logo {
-  font-family: "Lobster", cursive;
-  font-size: 2em;
-  margin: 0 0.7em;
   img {
-    height: 1em;
-    padding-top: 0.2em;
-    padding-right: 0.2em;
+    max-height: 2em;
+  }
+
+  #user-buttons {
+    display: flex;
+  }
+
+  #tabs {
+    ul {
+      background-color: #003566;
+    }
   }
 }
 
-.search-bar {
-  flex: 1;
-  display: flex;
-  align-items: center;
+.header:hover {
+  cursor: pointer;
 }
 
-#search {
-  background-color: white;
-  border-radius: 200px;
-  height: 70%;
-  position: relative;
-  top: 4px;
-}
+// header.navbar-fixed {
+//   position: fixed;
+//   background-color: #003566;
+//   width: 100%;
+//   top: 0;
+//   left: 0;ƒ
+//   * {
+//     background-color: #003566;
+//     box-shadow: none;
+//   }
+// }
 
-a.profile {
-  height: 68px;
-}
+// .logo {
+//   font-family: "Lobster", cursive;
+//   font-size: 2em;
+//   margin: 0 0.7em;
+//   img {
+//     height: 1em;
+//     padding-top: 0.2em;
+//     padding-right: 0.2em;
+//   }
+// }
 
-div.profile {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
+// .search-bar {
+//   flex: 1;
+//   display: flex;
+//   align-items: center;
+// }
 
-img.profile {
-  height: 2.5em;
-}
+// #search {
+//   background-color: white;
+//   border-radius: 200px;
+//   height: 70%;
+//   position: relative;
+//   top: 4px;
+// }
 
-.nav-wrapper {
-  display: flex;
-  flex-wrap: no-wrap;
-  align-items: center;
-  justify-content: space-between;
-}
+// a.profile {
+//   height: 68px;
+// }
+
+// div.profile {
+//   display: flex;
+//   align-items: center;
+//   height: 100%;
+// }
+
+// img.profile {
+//   height: 2.5em;
+// }
+
+// .nav-wrapper {
+//   display: flex;
+//   flex-wrap: no-wrap;
+//   align-items: center;
+//   justify-content: space-between;
+// }
 
 div#dropdown.dropdown {
   background-color: white;
@@ -62,12 +108,12 @@ div#dropdown.dropdown {
   z-index: 2;
 }
 
-div#dropdown.hidden.dropdown a {
-  color: #111111;
-  text-align: center;
-}
+// div#dropdown.hidden.dropdown a {
+//   color: #111111;
+//   text-align: center;
+// }
 
-div.dropdown a i.fas.fa-heart {
-  position: relative;
-  top: 0.15em;
-}
+// div.dropdown a i.fas.fa-heart {
+//   position: relative;
+//   top: 0.15em;
+// }
