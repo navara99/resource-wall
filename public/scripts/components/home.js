@@ -60,14 +60,14 @@ const cardSetup = (resource, currentUserId, $column) => {
   const $cardAction = $(`
     <div class="card-action">
       <div class="card-summary">
-        <i class="fas fa-star card-icon bright"></i>${Number(rating) ? Number(rating).toFixed(1) : "0"
+        <span class="fas fa-star card-icon bright"></span>${Number(rating) ? Number(rating).toFixed(1) : "0"
     }
       </div>
       <div class="card-summary">
-        <i class="fas fa-heart card-icon liked"></i>${likes}
+        <span class="fas fa-heart card-icon liked"></span>${likes}
       </div>
       <div class="card-summary">
-        <i class="fas fa-comment-alt card-icon"></i>${number_of_comment}
+        <span class="fas fa-comment-alt card-icon"></span>${number_of_comment}
       </div>
     </div>
     `);
