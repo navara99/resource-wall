@@ -405,6 +405,7 @@ const queryGenerator = (db) => {
       resources.user_id,
       users.username,
       media_url,
+      thumbnail,
       categories.type AS category,
       category_id,
       (SELECT AVG(rating) FROM ratings WHERE resources.id = ratings.resource_id) AS rating,
