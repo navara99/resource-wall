@@ -63,6 +63,8 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 
 - Users can view user's details (Profile picture, username, bio, full name, created resources)
 
+![User page](./docs/user-page.gif)
+
 ### Login
 
 - Users can login with email/username and password
@@ -97,19 +99,11 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 
 ### README.md
 
-### responsive design
-
-- hide nav bar
 
 ## Getting Started
 
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
 2. Update the .env file with your correct local information
-
-- username: `labber`
-- password: `labber`
-- database: `midterm`
-
 3. Install dependencies: `npm i`
 4. Fix to binaries for sass: `npm rebuild node-sass`
 5. Reset database: `npm run db:reset`
@@ -129,8 +123,8 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 
 ## Dependencies
 
-- [Node](https://nodejs.org/en/) 10.x or above.
-- [NPM](https://www.npmjs.com/) 5.x or above.
+- [Node](https://nodejs.org/en/): 10.x or above.
+- [NPM](https://www.npmjs.com/): 5.x or above.
 
 ### Frontend
 
@@ -143,7 +137,7 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 
 - [express](http://expressjs.com/): Provide server side logic
 - [ejs](https://ejs.co/): Embedded JavaScript (EJS) templating language
-- [PG 6.x](https://www.postgresql.org/): PostgreSQL client for Node.js.
+- [PG 6.x](https://www.postgresql.org/): PostgreSQL client for Node.js
 - [sass](https://sass-lang.com/): Preprocessor scripting language that compiles into CSS
 - [axios](https://www.axios.com/): To make API requests to the back-end
 - [bcryptjs](https://github.com/dcodeIO/bcrypt.js): A library to help hash passwords
@@ -151,7 +145,7 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 - [chalk](https://github.com/chalk/chalk): Used to style string in the terminal
 - [dotenv](https://dotenv.org/): Used to load variables from .env files
 - [morgan](https://github.com/expressjs/morgan): HTTP request logger middleware for node.js
-- [multer](https://github.com/expressjs/multer): Used to allow users to upload thumbnails and profile picture
+- [multer](https://github.com/expressjs/multer): Used to allow users to upload thumbnails
 - [valid-url](https://github.com/ogt/valid-url): To check if the url entered by user is a valid url
 
 ## Repository Overview
@@ -160,31 +154,4 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 
 ## Credits
 
-- Favicons made by [I Wayan Wika](https://www.flaticon.com/authors/i-wayan-wika) from [www.flaticon.com](https://www.flaticon.com/), modified by [@scc416](https://github.com/scc416).
-
-<!-- 
-— What each of you did, individually
-
-1 homepage plus search (Thar)
-2 details page - gist (Siu)
-
-- rating, like (also on homepage), comment, go to my page/other user page
-  3 make new resources (Both)
-- screenshot
-- video (dailymotion, Getty Images, codepen, instagram)
-- private/public
-  4 my resources (Thar)
-- filtering
-  5 update profile (Both)
-  6 login/logout/register (both)
-
-— Show us what you built (demo)
-
-— What you learned and/or what you’ll do differently in final projects
-
-1 divide HTML into smaller ejs files
-2 use React
-3 learned about merge and we should merge more often
-4 commit more often
-5 googling skill
-6 new async syntax -->
+- Favicons made by [I Wayan Wika](https://www.flaticon.com/authors/i-wayan-wika) from [www.flaticon.com](https://www.flaticon.com/), modified by [@scc416](https://github.com/scc416)
