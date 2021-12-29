@@ -87,6 +87,8 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 
 - Users can update their profile (email, username, bio, first name, last name, link for profile picture)
 
+![Update Profile](./docs/update-profile.png)
+
 ### Change Password
 
 - Users can change their password
@@ -102,6 +104,8 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 ### Handle History
 
 - History.js is used to managed the history of this single page app
+
+![History](./docs/history.gif)
 
 ## Getting Started
 
@@ -152,6 +156,112 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 - [valid-url](https://github.com/ogt/valid-url): To check if the url entered by user is a valid url
 
 ## Repository Overview
+
+<pre>
+📦midterm
+ ┣ 📂.git
+ ┣ 📂db
+ ┃ ┣ 📂schema
+ ┃ ┃ ┣ 📜01_users.sql
+ ┃ ┃ ┣ 📜02_categories.sql
+ ┃ ┃ ┣ 📜03_resources.sql
+ ┃ ┃ ┣ 📜04_likes.sql
+ ┃ ┃ ┣ 📜05_comments.sql
+ ┃ ┃ ┗ 📜06_ratings.sql
+ ┃ ┣ 📂seeds
+ ┃ ┃ ┣ 📜01_users.sql
+ ┃ ┃ ┣ 📜02_categories.sql
+ ┃ ┃ ┣ 📜03_resources.sql
+ ┃ ┃ ┣ 📜04_likes.sql
+ ┃ ┃ ┣ 📜05_comments.sql
+ ┃ ┃ ┗ 📜06_ratings.sql
+ ┃ ┗ 📜query-helpers.js
+ ┣ 📂docs
+ ┣ 📂lib
+ ┃ ┣ 📜db.js
+ ┃ ┗ 📜sass-middleware.js
+ ┣ 📂public
+ ┃ ┣ 📂images
+ ┃ ┃ ┗ 📜favicons.png
+ ┃ ┣ 📂scripts
+ ┃ ┃ ┣ 📂components
+ ┃ ┃ ┃ ┣ 📂resource-details
+ ┃ ┃ ┃ ┃ ┣ 📂helpers
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜comment.js
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜like.js
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜rating.js
+ ┃ ┃ ┃ ┃ ┗ 📜main.js
+ ┃ ┃ ┃ ┣ 📜edit-resource.js
+ ┃ ┃ ┃ ┣ 📜error.js
+ ┃ ┃ ┃ ┣ 📜header.js
+ ┃ ┃ ┃ ┣ 📜home.js
+ ┃ ┃ ┃ ┣ 📜login.js
+ ┃ ┃ ┃ ┣ 📜my-resources.js
+ ┃ ┃ ┃ ┣ 📜new-resource.js
+ ┃ ┃ ┃ ┣ 📜profile.js
+ ┃ ┃ ┃ ┣ 📜register.js
+ ┃ ┃ ┃ ┗ 📜user-page.js
+ ┃ ┃ ┣ 📜constants.js
+ ┃ ┃ ┣ 📜network.js
+ ┃ ┃ ┗ 📜view.js
+ ┃ ┣ 📂styles
+ ┃ ┃ ┣ 📜.gitkeep
+ ┃ ┃ ┣ 📜layout.css
+ ┃ ┃ ┗ 📜main.css
+ ┃ ┣ 📂uploads
+ ┃ ┃ ┣ 📜.DS_Store
+ ┃ ┃ ┣ 📜.gitkeep
+ ┃ ┃ ┗ 📜1640719260091_BG1.png
+ ┃ ┗ 📂vendor
+ ┃ ┃ ┣ 📜border-box.css
+ ┃ ┃ ┣ 📜jquery-3.0.0.js
+ ┃ ┃ ┗ 📜normalize-4.1.1.css
+ ┣ 📂routes
+ ┃ ┣ 📂json
+ ┃ ┃ ┗ 📜providers.json
+ ┃ ┣ 📂routeHelpers
+ ┃ ┃ ┗ 📜mediaHelpers.js
+ ┃ ┣ 📜resources.js
+ ┃ ┗ 📜users.js
+ ┣ 📂styles
+ ┃ ┣ 📜error.scss
+ ┃ ┣ 📜home.scss
+ ┃ ┣ 📜layout.scss
+ ┃ ┣ 📜main.scss
+ ┃ ┣ 📜my-resources.scss
+ ┃ ┣ 📜nav.scss
+ ┃ ┣ 📜new-resource.scss
+ ┃ ┣ 📜resource-details.scss
+ ┃ ┗ 📜user-page.scss
+ ┣ 📂views
+ ┃ ┣ 📂my-resources
+ ┃ ┃ ┣ 📜change-password.ejs
+ ┃ ┃ ┣ 📜edit-resource.ejs
+ ┃ ┃ ┣ 📜main.ejs
+ ┃ ┃ ┣ 📜my-resources.ejs
+ ┃ ┃ ┗ 📜update-profile.ejs
+ ┃ ┣ 📜error.ejs
+ ┃ ┣ 📜index.ejs
+ ┃ ┣ 📜login.ejs
+ ┃ ┣ 📜nav.ejs
+ ┃ ┣ 📜new-resource.ejs
+ ┃ ┣ 📜register.ejs
+ ┃ ┣ 📜resource-details.ejs
+ ┃ ┣ 📜resources.ejs
+ ┃ ┣ 📜scripts.ejs
+ ┃ ┣ 📜stylesheet.ejs
+ ┃ ┣ 📜tabs.ejs
+ ┃ ┗ 📜user-page.ejs
+ ┣ 📜.editorconfig
+ ┣ 📜.env
+ ┣ 📜.env.example
+ ┣ 📜.eslintrc.json
+ ┣ 📜.gitignore
+ ┣ 📜README.md
+ ┣ 📜package-lock.json
+ ┣ 📜package.json
+ ┗ 📜server.js
+</pre>
 
 ## ERD Diagram
 
