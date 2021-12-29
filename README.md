@@ -88,11 +88,12 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 ### Change Password
 
 - Users can change their password
-![Change Password](./docs/change-password.png)
+  ![Change Password](./docs/change-password.png)
 
 ### Handle error
 
 - If there is any errors, it is shown on the top of the page under nav bar
+  ![Error](./docs/error.gif)
 
 ### Handle History
 
@@ -103,7 +104,6 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 ### deploy the server
 
 ### README.md
-
 
 ## Getting Started
 
