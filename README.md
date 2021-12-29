@@ -110,7 +110,8 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 ## Getting Started
 
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
-2. Update the .env file with your correct local information
+2. Update the .env file with your correct local information  
+   The file has to include your own `IFRAME_KEY` (from [Iframely](https://iframely.com/)) and `APIKEY` (from [Screenshot Machine](https://www.screenshotmachine.com/)). Both of them are free.
 3. Install dependencies: `npm i`
 4. Fix to binaries for sass: `npm rebuild node-sass`
 5. Reset database: `npm run db:reset`
@@ -162,19 +163,7 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
  ┣ 📂.git
  ┣ 📂db
  ┃ ┣ 📂schema
- ┃ ┃ ┣ 📜01_users.sql
- ┃ ┃ ┣ 📜02_categories.sql
- ┃ ┃ ┣ 📜03_resources.sql
- ┃ ┃ ┣ 📜04_likes.sql
- ┃ ┃ ┣ 📜05_comments.sql
- ┃ ┃ ┗ 📜06_ratings.sql
  ┃ ┣ 📂seeds
- ┃ ┃ ┣ 📜01_users.sql
- ┃ ┃ ┣ 📜02_categories.sql
- ┃ ┃ ┣ 📜03_resources.sql
- ┃ ┃ ┣ 📜04_likes.sql
- ┃ ┃ ┣ 📜05_comments.sql
- ┃ ┃ ┗ 📜06_ratings.sql
  ┃ ┗ 📜query-helpers.js
  ┣ 📂docs
  ┣ 📂lib
@@ -259,9 +248,96 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
  ┗ 📜server.js
 </pre>
 
+### 📂db
+
+#### 📂schema
+
+Contain sql files that created tables.
+
+#### 📂seeds
+
+Contain sql files with dumb data.
+
+#### 📜query-helpers.js
+
+Contains the functions that interact with the database.
+
+#### 📂docs
+
+Contain images for `README.md`.
+
+### 📂public
+
+#### 📂images
+
+Contains the favicons.
+
+#### 📂scripts
+
+Contains the javascript files for manipulating the front end.
+
+#### 📂styles
+
+Contains the css files that is compiled from the scss files.
+
+#### 📂uploads
+
+Contains only a file `.gitkeep`. This folder is where the uploaded thumbnails will be saved.
+
+### 📂routes
+
+#### 📂json
+
+Contains a file `providers.json`, which includes the oembed details for generating resources' `media_url`.
+
+#### 📂routeHelpers
+
+Contains `mediaHelpers.js`. The file has functions that generate `media_url` from `providers.json` and API of [Screenshot Machine](https://www.screenshotmachine.com/).
+
+#### 📜resources.js
+
+Contains route of the servers that interact with the `resources`, `likes`, `comments` and `ratings` tables in the database.
+
+#### 📜users.js
+
+Contains route of the servers that interact with the `users` table in the database.
+
+### 📂styles
+
+Contains scss files that are compiled into css files.
+
+#### 📂views
+
+Contains the ejs files.
+
+#### 📜.env.example
+
+Reference for creating `.env`.
+
+#### 📜.gitignore
+
+Contains files that are ignored by `git`.
+
+#### 📜README.md
+
+The document that you are reading.
+
+#### 📜package.json
+
+This file contains:
+
+- dependencies: node libraries that the code needs
+- dev-dependencies: node libraries only needed by development tools
+- scripts: Define the in-project shortcut commands
+
+#### 📜server.js
+
+The main file where the server is defined.
+
 ## ERD Diagram
 
 The database consists of 6 tables:
+
 - users
 - resources
 - categories
