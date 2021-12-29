@@ -55,6 +55,8 @@ This is one of the group project for the Web Development Bootcamp at [Lighthouse
 - Users can view all their own and all liked resources on one page (with filter)
 - Owner can edit/delete resource
 
+![My resources page](https://github.com/navara99/resourceWall/blob/master/docs/my-resources.gif)
+
 ### User Page
 
 - Users can view user's details (Profile picture, username, bio, full name, created resources)
