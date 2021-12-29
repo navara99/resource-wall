@@ -73,6 +73,8 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 
 - Users can logout
 
+![Logout](./docs/logout.gif)
+
 ### Register
 
 - Users can regsiter with email (unique), password (enter twice) , username (unique)
