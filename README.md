@@ -1,7 +1,8 @@
 # Resource Wall
 
-A full-stack single page app that allow learners to save learning resources in a central place that is publicly available to any users.  
-This is one of the group project for the Web Development Bootcamp at [Lighthouse Labs](https://www.lighthouselabs.ca/). The group members are [@navara99](https://github.com/navara99) and [@scc416](https://github.com/scc416).
+A full-stack single page application that allows learners to save learning resources in a central place that is publicly available to any user. This application was built using jQuery, NodeJS, Express, and PostgreSQL database.
+
+This is one of the group projects for the Web Development Bootcamp at [Lighthouse Labs](https://www.lighthouselabs.ca/). The group members are [@navara99](https://github.com/navara99) and [@scc416](https://github.com/scc416).
 
 ## Table of Content
 
@@ -11,7 +12,7 @@ This is one of the group project for the Web Development Bootcamp at [Lighthouse
 - [Getting Started](#getting-started)
 - [Repository Overview](#repository-overview)
 - [ERD Diagram](#erd-diagram)
-- [Credit](#credit)
+- [Credits](#credits)
 
 ## Live Demo
 
@@ -27,22 +28,23 @@ This is one of the group project for the Web Development Bootcamp at [Lighthouse
 
 ![Home Page](https://github.com/navara99/resourceWall/blob/master/docs/home-page.gif)
 
-### Header
+### Search
 
 - Users can search for already-saved resources created by any user
 
 ![Search functionality](https://github.com/navara99/resourceWall/blob/master/docs/search-functionality.gif)
 
-### New resource
+### Create New Resource
 
 - Users can save an external URL along with a title and description
 - Users can make resource public/private
 - Users can categorize resource under a topic
-- Users can upload image as thumbnail
+- Users can upload an image as thumbnail
+- If there the user does not upload a thumbnail, a screenshot of the website will be used
 
 ![Creating a new resource](https://github.com/navara99/resourceWall/blob/master/docs/create-new-resource.gif)
 
-### Resource detail page
+### Resource Details Page
 
 - Display details such as title, desciption, owner's username, added date, rating, list of comments, number of likes, ratings and comments,
 - Users can comment/rate/like on any resources
@@ -50,7 +52,7 @@ This is one of the group project for the Web Development Bootcamp at [Lighthouse
 
 ![Resource Details page](https://github.com/navara99/resourceWall/blob/master/docs/resource-details.gif)
 
-### My resources
+### My Resources (Edit/Delete)
 
 - Users can view all their own and all liked resources on one page (with filter)
 - Owner can edit/delete resource
@@ -132,31 +134,31 @@ This is one of the group project for the Web Development Bootcamp at [Lighthouse
 
 ### Frontend
 
-- [jQuery](https://jquery.com/): to update element on the web app
-- [history.js](https://github.com/browserstate/history.js/): to manage the history of the browser on the page
-- [Materialize](https://materializecss.com/): CSS library
-- [timeago](https://timeago.yarp.com/): to convert timestamps
+- [jQuery](https://jquery.com/): Used for DOM manipulation
+- [history.js](https://github.com/browserstate/history.js/): To manage browser history
+- [Materialize](https://materializecss.com/): A front-end library based on Google's [material design](https://en.wikipedia.org/wiki/Material_Design)
+- [timeago](https://timeago.yarp.com/): To convert javascript timestamps to a user friendly format
 
 ### Backend
 
-- [express](http://expressjs.com/)
-- [ejs](https://ejs.co/): embedded JavaScript templates
-- [PG](https://www.postgresql.org/) 6.x: PostgreSQL client for Node.js.
-- [sass](https://sass-lang.com/)
-- [axios](https://www.axios.com/)
-- [bcryptjs](https://github.com/dcodeIO/bcrypt.js)
-- [cookie-session](https://github.com/expressjs/cookie-session)
-- [chalk](https://github.com/chalk/chalk)
-- [dotenv](https://dotenv.org/)
-- [morgan](https://github.com/expressjs/morgan)
-- [multer](https://github.com/expressjs/multer)
-- [valid-url](https://github.com/ogt/valid-url): to check if the url entered by user is a valid url
+- [express](http://expressjs.com/): Provide server side logic
+- [ejs](https://ejs.co/): Embedded JavaScript (EJS) templating language
+- [PG 6.x](https://www.postgresql.org/): PostgreSQL client for Node.js.
+- [sass](https://sass-lang.com/): Preprocessor scripting language that compiles into CSS
+- [axios](https://www.axios.com/): To make API requests to the back-end
+- [bcryptjs](https://github.com/dcodeIO/bcrypt.js): A library to help hash passwords
+- [cookie-session](https://github.com/expressjs/cookie-session): Used to save the user session
+- [chalk](https://github.com/chalk/chalk): Used to style string in the terminal
+- [dotenv](https://dotenv.org/): Used to load variables from .env files
+- [morgan](https://github.com/expressjs/morgan): HTTP request logger middleware for node.js
+- [multer](https://github.com/expressjs/multer): Used to allow users to upload thumbnails and profile picture
+- [valid-url](https://github.com/ogt/valid-url): To check if the url entered by user is a valid url
 
 ## Repository Overview
 
 ## ERD Diagram
 
-## Credit
+## Credits
 
 - Favicons made by [I Wayan Wika](https://www.flaticon.com/authors/i-wayan-wika) from [www.flaticon.com](https://www.flaticon.com/), modified by [@scc416](https://github.com/scc416).
 
