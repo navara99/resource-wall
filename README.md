@@ -81,6 +81,8 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 
 - Users can regsiter with email (unique), password (enter twice) , username (unique)
 
+![Register](./docs/register.png)
+
 ### Update profile
 
 - Users can update their profile (email, username, bio, first name, last name, link for profile picture)
@@ -88,22 +90,18 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 ### Change Password
 
 - Users can change their password
-  ![Change Password](./docs/change-password.png)
+
+![Change Password](./docs/change-password.png)
 
 ### Handle error
 
 - If there is any errors, it is shown on the top of the page under nav bar
-  ![Error](./docs/error.gif)
+
+![Error](./docs/error.gif)
 
 ### Handle History
 
 - History.js is used to managed the history of this single page app
-
-## To do list
-
-### deploy the server
-
-### README.md
 
 ## Getting Started
 
