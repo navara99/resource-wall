@@ -26,13 +26,13 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 - Display resource details such as title, description, owner's username, date added, rating, number of likes and comments
 - Users can view resources by category
 
-![Home Page](https://github.com/navara99/resourceWall/blob/master/docs/home-page.gif)
+![Home Page](./docs/home-page.gif)
 
 ### Search
 
 - Users can search for already-saved resources created by any user
 
-![Search functionality](https://github.com/navara99/resourceWall/blob/master/docs/search-functionality.gif)
+![Search functionality](./docs/search-functionality.gif)
 
 ### Create New Resource
 
@@ -42,7 +42,7 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 - Users can upload an image as thumbnail
 - If there the user does not upload a thumbnail, a screenshot of the website will be used
 
-![Creating a new resource](https://github.com/navara99/resourceWall/blob/master/docs/create-new-resource.gif)
+![Creating a new resource](./docs/create-new-resource.gif)
 
 ### Resource Details Page
 
@@ -50,14 +50,14 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 - Users can comment/rate/like on any resources
 - Users can enter user's page by clicking owner/comment
 
-![Resource Details page](https://github.com/navara99/resourceWall/blob/master/docs/resource-details.gif)
+![Resource Details page](./docs/resource-details.gif)
 
 ### My Resources (Edit/Delete)
 
 - Users can view all their own and all liked resources on one page (with filter)
 - Owner can edit/delete resource
 
-![My resources page](https://github.com/navara99/resourceWall/blob/master/docs/my-resources.gif)
+![My resources page](./docs/my-resources.gif)
 
 ### User Page
 
