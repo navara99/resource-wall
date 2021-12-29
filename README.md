@@ -158,7 +158,7 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 ## Repository Overview
 
 <pre>
-📦midterm
+📦resource-wall
  ┣ 📂.git
  ┣ 📂db
  ┃ ┣ 📂schema
@@ -205,13 +205,10 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
  ┃ ┃ ┣ 📜network.js
  ┃ ┃ ┗ 📜view.js
  ┃ ┣ 📂styles
- ┃ ┃ ┣ 📜.gitkeep
  ┃ ┃ ┣ 📜layout.css
  ┃ ┃ ┗ 📜main.css
  ┃ ┣ 📂uploads
- ┃ ┃ ┣ 📜.DS_Store
- ┃ ┃ ┣ 📜.gitkeep
- ┃ ┃ ┗ 📜1640719260091_BG1.png
+ ┃ ┃ ┗ 📜.gitkeep
  ┃ ┗ 📂vendor
  ┃ ┃ ┣ 📜border-box.css
  ┃ ┃ ┣ 📜jquery-3.0.0.js
@@ -253,7 +250,6 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
  ┃ ┣ 📜tabs.ejs
  ┃ ┗ 📜user-page.ejs
  ┣ 📜.editorconfig
- ┣ 📜.env
  ┣ 📜.env.example
  ┣ 📜.eslintrc.json
  ┣ 📜.gitignore
@@ -264,6 +260,16 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 </pre>
 
 ## ERD Diagram
+
+The database consists of 6 tables:
+- users
+- resources
+- categories
+- likes
+- comments
+- ratings
+
+![ERD](./docs/erd.png)
 
 ## Credits
 
