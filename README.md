@@ -69,6 +69,8 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 
 - Users can login with email/username and password
 
+![Login](./docs/login.gif)
+
 ### Logout
 
 - Users can logout
@@ -86,6 +88,7 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 ### Change Password
 
 - Users can change their password
+![Change Password](./docs/change-password.png)
 
 ### Handle error
 
