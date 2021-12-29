@@ -87,7 +87,7 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 
 - Users can update their profile (email, username, bio, first name, last name, link for profile picture)
 
-![Update Profile](./docs/update-profile.png)
+![Update Profile](./docs/update-profile.gif)
 
 ### Change Password
 
