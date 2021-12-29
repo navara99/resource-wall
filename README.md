@@ -48,7 +48,7 @@ This is one of the group project for the Web Development Bootcamp at [Lighthouse
 - Users can comment/rate/like on any resources
 - Users can enter user's page by clicking owner/comment
 
-![Resource Details page]()
+![Resource Details page](https://github.com/navara99/resourceWall/blob/master/docs/resource-details.gif)
 
 ### My resources
 
