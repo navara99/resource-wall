@@ -19,6 +19,8 @@ This is one of the group projects for the Web Development Bootcamp at [Lighthous
 This project is deployed to [Heroku](https://heroku.com):  
 https://the-resource-wall.herokuapp.com/
 
+It might take some time to load up the server.
+
 ## Final Product
 
 ### Home page
